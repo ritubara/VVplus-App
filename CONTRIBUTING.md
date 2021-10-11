@@ -1,0 +1,2 @@
+- [Use semantic commit messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716)
+- Push to an appropriate branch, then send a pull request when the entire task is complete
