@@ -1,8 +1,9 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/components/colors.dart';
+import '../progress page/progress_page.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
-import '../customer_care_page.dart';
+import '../Customercare page/customer_care_page.dart';
 
 
 class Background extends StatelessWidget {
@@ -91,7 +92,10 @@ class Background extends StatelessWidget {
             top: 320,
             child: RoundedButton1(
               text: "Progress",
-              press: () {},
+              press: () {
+                Navigator.push( context, MaterialPageRoute(
+                    builder: (context) => ProgressPage()));
+              },
             ),
           ),
           Positioned(

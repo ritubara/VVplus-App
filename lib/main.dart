@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/components/colors.dart';
-import 'package:vvplus_app/screens/login_page.dart';
+import 'package:vvplus_app/screens/Login%20page/login_page.dart';
+import 'package:vvplus_app/screens/NewComplaint%20page/new_complaint_page.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: PrimaryColor1,
           scaffoldBackgroundColor: PrimaryColor3),
-      home: const LoginPage(),
+      home: ComplaintPage(),
     );
   }
 }
