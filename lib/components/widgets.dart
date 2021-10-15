@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/components/colors.dart';
 
@@ -40,5 +42,40 @@ BoxDecoration decoration1() {
     borderRadius: BorderRadius.circular(12),
   );
 }
+
+BoxDecoration decoration2(){                                                       //Boxdecoration for containers
+  return BoxDecoration(borderRadius: BorderRadius.circular(5.0),
+    color: PrimaryColor3,
+    boxShadow: [
+      BoxShadow(
+        color: PrimaryColor5,
+        offset: Offset(0.0, 1.0), //(x,y)
+        blurRadius: 6.0,
+      ),
+    ],
+  );
+}
+
+TextStyle ContainerHeading1() {
+  return TextStyle(
+    color: TextColor2, fontSize: 18, fontWeight: FontWeight.bold,);
+}
+TextStyle ContainerHeading2() {
+  return TextStyle(
+    color: TextColor3, fontSize: 18, fontWeight: FontWeight.bold,);
+}
+
+
+TextStyle ContainerText2() {
+  return TextStyle(
+    color: TextColor4, fontSize: 12);
+}
+
+
+TextStyle ContainerText2Bold() {
+  return TextStyle(
+      color: TextColor4, fontSize: 12,fontWeight: FontWeight.bold);
+}
+
 
 
