@@ -1,7 +1,6 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/components/colors.dart';
-import 'package:vvplus_app/screens/view%20house%20page/view_house.dart';
 import '../progress page/progress_page.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
 import '../Customercare page/customer_care_page.dart';
@@ -120,10 +119,7 @@ class Background extends StatelessWidget {
             top: 530,
             child: RoundedButton1(
               text: "View House",
-              press: () {
-                Navigator.push( context, MaterialPageRoute(
-                    builder: (context) => ViewHouse()));
-              },
+              press: () {},
             ),
           ),
           Positioned(

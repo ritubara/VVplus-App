@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
              Text(
               "Login",
-              style: simpleTextStyle(24),
+              style: H1Style(),
             ),
             const SizedBox(height: 10,),
             const Text(

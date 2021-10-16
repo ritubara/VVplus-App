@@ -3,7 +3,13 @@ import 'package:vvplus_app/components/colors.dart';
 import 'package:vvplus_app/screens/progress%20page/progress_body.dart';
 import 'package:vvplus_app/utilities/bottom_navbar.dart';
 
-class ProgressPage extends StatelessWidget{
+
+class ProgressPage extends StatefulWidget{
+  @override
+  ProgressPageState createState() => ProgressPageState();
+}
+
+class ProgressPageState extends State<ProgressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

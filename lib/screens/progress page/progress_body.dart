@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/components/colors.dart';
 import 'package:vvplus_app/components/widgets.dart';
 
 class ProgressBody extends StatefulWidget {
@@ -7,8 +6,9 @@ class ProgressBody extends StatefulWidget {
   ProgressBodyState createState() => ProgressBodyState();
 }
 
+
 class ProgressBodyState extends State<ProgressBody> {
-  /*int current_step = 0;
+  int current_step = 0;
   List<Step> steps = [
     Step(
       title: Text('Step 1'),
@@ -26,7 +26,8 @@ class ProgressBodyState extends State<ProgressBody> {
       state: StepState.complete,
       isActive: true,
     ),
-  ];*/
+  ];
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -78,8 +79,9 @@ class ProgressBodyState extends State<ProgressBody> {
                 ),
               ),
             ),
-
-    /*Positioned(
+                
+                  
+             Positioned(
               child: Container(
                 child: Stepper(
                   currentStep: this.current_step,
@@ -110,12 +112,13 @@ class ProgressBodyState extends State<ProgressBody> {
                   },
                 ),
               ),
-            ),*/
+            ),
           ],
         ),
-
-
-      ],
+          ],
     );
   }
 }
+        
+      
+       
