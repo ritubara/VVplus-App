@@ -12,3 +12,4 @@ const TextColor2= Colors.green;
 const TextColor3= Colors.red;
 const TextColor4= Colors.black;
 
+const StepperColor= Colors.purple;
