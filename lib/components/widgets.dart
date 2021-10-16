@@ -38,6 +38,16 @@ TextStyle simpleTextStyle2() {
 TextStyle simpleTextStyle3() {
   return TextStyle(color: PrimaryColor2, fontSize: 12 ,fontWeight: FontWeight.bold,);
 }
+TextStyle simpleTextStyle4() {
+  return TextStyle(fontSize: 12);
+}
+TextStyle simpleTextStyle5() {
+  return TextStyle(color: PrimaryColor2, fontSize: 18 ,fontWeight: FontWeight.bold,);
+}
+TextStyle simpleTextStyle6() {
+  return TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PrimaryColor1);
+}
+
 
 BoxDecoration decoration1() {
   return BoxDecoration(
@@ -59,6 +69,7 @@ BoxDecoration decoration2(){                                                    
   );
 }
 
+
 TextStyle ContainerHeading1() {
   return TextStyle(
     color: TextColor2, fontSize: 18, fontWeight: FontWeight.bold,);
@@ -68,12 +79,10 @@ TextStyle ContainerHeading2() {
     color: TextColor3, fontSize: 18, fontWeight: FontWeight.bold,);
 }
 
-
 TextStyle ContainerText2() {
   return TextStyle(
     color: TextColor4, fontSize: 12);
 }
-
 
 TextStyle ContainerText2Bold() {
   return TextStyle(
