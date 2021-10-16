@@ -13,6 +13,14 @@ final String text5 = "Send OTP";
 final String hintText1 = "Enter Mobile Number";
 final String hintText2 = "Enter OTP";
 
+
+//progress page texts
+final String Boxheading1="Construction on hold";
+final String BoxText1="Amount paid to comapny: 21.5lakhs";
+final String BoxText2="Amount dues: 8 lakhs";
+final String BoxText3="Please pay the dues to resume construction";
+final String BoxLink="Call Customer Care?";
+
 // for home page
 
 final String text6 = "Notification";

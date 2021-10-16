@@ -46,7 +46,7 @@ class _ComplaintPageState extends State<ComplaintPage>{
                   child: Center(
                     child:TextFormField(
                       keyboardType: TextInputType.number,
-                      style: simpleTextStyle(18),
+                      style: simpleTextStyle(),
                       decoration: textFieldInputDecoration("Name"),
                     ),
                   ),
@@ -58,7 +58,7 @@ class _ComplaintPageState extends State<ComplaintPage>{
                   child: Center(
                     child:TextFormField(
                       keyboardType: TextInputType.number,
-                      style: simpleTextStyle(18),
+                      style: simpleTextStyle(),
                       decoration: textFieldInputDecoration("Branch and City  "),
                     ),
                   ),
@@ -70,7 +70,7 @@ class _ComplaintPageState extends State<ComplaintPage>{
                   child: Center(
                     child:TextFormField(
                       keyboardType: TextInputType.number,
-                      style: simpleTextStyle(18),
+                      style: simpleTextStyle(),
                       decoration: textFieldInputDecoration("Unit Number"),
                     ),
                   ),
@@ -82,7 +82,7 @@ class _ComplaintPageState extends State<ComplaintPage>{
                   child: Center(
                     child:TextFormField(
                       keyboardType: TextInputType.number,
-                      style: simpleTextStyle(18),
+                      style: simpleTextStyle(),
                       decoration: textFieldInputDecoration("Write a detailed summary of your problem or you may upload a photo of a hand written letter"),
                     ),
                   ),
