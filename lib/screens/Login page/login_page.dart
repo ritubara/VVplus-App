@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.topCenter,
                 child: Container(
                     alignment: Alignment.topCenter,
-                    child: image1,
+                    child: Image.asset(image1),
                 ),
               ),
               Positioned(
@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                 right: .01,
                 child: SizedBox(
                   width: width * .3,
-                  child: image2,
+                  child: Image.asset(image2),
                 ),
               ),
               _buildBottomPart(context),
