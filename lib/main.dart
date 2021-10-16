@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/components/colors.dart';
-import 'package:vvplus_app/screens/Login%20page/login_page.dart';
-
+import 'components/colors.dart';
+import 'screens/Login page/login_page.dart';
 
 void main() {
   runApp(MyApp());
