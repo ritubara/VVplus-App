@@ -1,5 +1,3 @@
-
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/components/colors.dart';
 
@@ -80,5 +78,4 @@ TextStyle ContainerText2Bold() {
 TextStyle H1Style() {
   return simpleTextStyle(24);
 }
-
 
