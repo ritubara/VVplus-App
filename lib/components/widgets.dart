@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/components/colors.dart';
 
-Widget appBarMain(BuildContext context) {
+AppBar appBarMain(String appBarText) {
   return AppBar(
+    centerTitle: true,
+    title: Text(
+      appBarText,
+      style: TextStyle(fontSize: 34.0, fontWeight: FontWeight.w600),
+      textAlign: TextAlign.center,
+    ),
+    toolbarHeight: 107,
+    titleTextStyle: TextStyle(color: PrimaryColor3),
+    backgroundColor: PrimaryColor1,
   );
 }
 
