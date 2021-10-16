@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/components/colors.dart';
+
 import 'package:vvplus_app/components/text_feild.dart';
 import 'package:vvplus_app/components/widgets.dart';
 
@@ -16,12 +18,18 @@ class ProgressBodyState extends State<ProgressBody> {
       isActive: true,
     ),
     Step(
-      title: Text('Step 2'),
+      title: Text('Construction Start'),
       content: Text('World!'),
       isActive: true,
     ),
     Step(
-      title: Text('Step 3'),
+      title: Text('Plinth Level'),
+      content: Text('Hello World!'),
+      state: StepState.complete,
+      isActive: true,
+    ),
+    Step(
+      title: Text('Ground Floor Roof Level'),
       content: Text('Hello World!'),
       state: StepState.complete,
       isActive: true,
@@ -31,8 +39,8 @@ class ProgressBodyState extends State<ProgressBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      child:Container (
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -91,8 +99,33 @@ class ProgressBodyState extends State<ProgressBody> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container(
-                  child: Stepper(
+                    child: Theme(
+                      data: ThemeData(
+                          accentColor: Colors.orange,
+                          primarySwatch: Colors.orange,
+                          colorScheme: ColorScheme.light(
+                              primary: StepperColor,
+
+                          )
+                      ),
+                      child: Stepper(
                     currentStep: this.current_step,
+                   /* onStepContinue:(){
+                      if(currentStep!=1){
+                        go(1);
+                      }
+                    },
+                        onStepCancel: (){
+                      if(currentStep!=0){
+                        go(-1);
+                      }
+                        },
+                        controlsBuilder: (BuildContext context,
+                        {VoidCallback onStepContinue, VoidCallbackonStepCancel}){
+                      return Container(
+
+                      );
+                        },*/
                     steps: steps,
                     type: StepperType.vertical,
                     onStepTapped: (step) {
@@ -120,6 +153,7 @@ class ProgressBodyState extends State<ProgressBody> {
                     },
                   ),
                 ),
+                  ),
       ],
               ),
             ),
