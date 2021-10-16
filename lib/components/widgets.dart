@@ -90,11 +90,11 @@ TextStyle ContainerHeading2() {
 
 TextStyle ContainerText2() {
   return TextStyle(
-    color: TextColor4, fontSize: 12);
+    color: TextColor4, fontSize: 14);
 }
 
 TextStyle ContainerText2Bold() {
   return TextStyle(
-      color: TextColor4, fontSize: 12,fontWeight: FontWeight.bold);
+      color: TextColor4, fontSize: 14,fontWeight: FontWeight.bold);
 }
 

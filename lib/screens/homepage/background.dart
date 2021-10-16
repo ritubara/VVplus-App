@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/components/assets.dart';
 import 'package:vvplus_app/components/colors.dart';
-import 'package:vvplus_app/components/size.dart';
-import 'package:vvplus_app/components/text_feild.dart';
-import 'package:vvplus_app/components/widgets.dart';
 import '../progress page/progress_page.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
 import '../Customercare page/customer_care_page.dart';
@@ -19,7 +15,7 @@ class Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = SizeConfig.getSize(context);
+    Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,7 +32,7 @@ class Background extends StatelessWidget {
                     top: 39,
                   ),
                   child: Image.asset(
-                    image1,
+                    "assets/images/4feyuv9I 1.png",
                     scale: 1.5,
                     height: 241,
                     width: 286,
@@ -48,7 +44,7 @@ class Background extends StatelessWidget {
                     top: 25,
                   ),
                   child: Image.asset(
-                    image2,
+                    "assets/images/+.png",
                     scale: 1.5,
                     height: 134,
                     width: 68,
@@ -77,20 +73,23 @@ class Background extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    text6,
-                    style: simpleTextStyle5(),
+                    "Notification",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   Text(
-                    text7,
-                    style: simpleTextStyle4(),
+                    "Please check your latest house progress",
+                    style: TextStyle(fontSize: 12),
                   ),
                   Text(
-                    text8,
-                    style: simpleTextStyle4(),
+                    "updated by Eng. Devanand.",
+                    style: TextStyle(fontSize: 12),
                   ),
                   Text(
-                    text9,
-                    style: simpleTextStyle6(),
+                    "Verify Construction Status",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: PrimaryColor1),
                   ),
                 ]
       ),
@@ -100,29 +99,29 @@ class Background extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
            RoundedButton1(
-              text: text10,
+              text: "Progress",
               press: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ProgressPage()));
               },
             ),
            RoundedButton1(
-              text: text11,
+              text: "Customer Care",
               press: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => CustomerCarePage()));
               },
             ),
               RoundedButton1(
-              text: text12,
+              text: "Edit Profile",
               press: () {},
             ),
            RoundedButton1(
-              text: text13,
+              text: "View House",
               press: () {},
             ),
           RoundedButton1(
-              text: text14,
+              text: "Maintanance",
               press: () {},
             ),
 

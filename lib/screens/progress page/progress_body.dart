@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/components/text_feild.dart';
 import 'package:vvplus_app/components/widgets.dart';
 
 class ProgressBody extends StatefulWidget {
@@ -6,12 +7,11 @@ class ProgressBody extends StatefulWidget {
   ProgressBodyState createState() => ProgressBodyState();
 }
 
-
 class ProgressBodyState extends State<ProgressBody> {
   int current_step = 0;
   List<Step> steps = [
     Step(
-      title: Text('Step 1'),
+      title: Text("Booking amount"),
       content: Text('Hello!'),
       isActive: true,
     ),
@@ -31,13 +31,13 @@ class ProgressBodyState extends State<ProgressBody> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Column(
-      children: <Widget>[
-        Stack(
-          alignment: Alignment.center,
+    return Container(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Positioned(
-              top: 50,
+            Padding(
+              padding: EdgeInsets.all(20),
               child: Container(
                 height: 160,
                 width: 320,
@@ -45,80 +45,90 @@ class ProgressBodyState extends State<ProgressBody> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
-                    Positioned(
-                      top: 30,
-                      child: Text("Construction on hold",
-                        style: ContainerHeading2(),
-                      ),
-                    ),
-                    Positioned(
-                      top: 60,
-                      child: Text("Amount paid to company: 21.5 lakhs",
-                        style: ContainerText2(),
-                      ),
-                    ),
-                    Positioned(
-                      top: 80,
-                      child: Text("Amount dues: 8 lakhs",
-                        style: ContainerText2Bold(),
-                      ),
-                    ),
-                    Positioned(
-                      top: 100,
-                      child: Text("Please pay the dues to resume construction",
-                        style: ContainerText2(),
-                      ),
-                    ),
-                    Positioned(
-                      top: 130,
-                      child: Text("Call Customer Care?",
-                        style: ContainerHeading1(),
-                      ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            Boxheading1,
+                            style: ContainerHeading2(),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 5),
+                          child: Text(
+                            BoxText1,
+                            style: ContainerText2(),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 5),
+                          child: Text(
+                            BoxText2,
+                            style: ContainerText2Bold(),
+                          ),
+                        ),
+                        Text(
+                          BoxText3,
+                          style: ContainerText2(),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: Text(
+                            BoxLink,
+                            style: ContainerHeading1(),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
             ),
-                
-                  
-             Positioned(
-              child: Container(
-                child: Stepper(
-                  currentStep: this.current_step,
-                  steps: steps,
-                  type: StepperType.vertical,
-                  onStepTapped: (step) {
-                    setState(() {
-                      current_step = step;
-                    });
-                  },
-                  onStepContinue: () {
-                    setState(() {
-                      if (current_step < steps.length - 1) {
-                        current_step = current_step + 1;
-                      } else {
-                        current_step = 0;
-                      }
-                    });
-                  },
-                  onStepCancel: () {
-                    setState(() {
-                      if (current_step > 0) {
-                        current_step = current_step - 1;
-                      } else {
-                        current_step = 0;
-                      }
-                    });
-                  },
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                  child: Stepper(
+                    currentStep: this.current_step,
+                    steps: steps,
+                    type: StepperType.vertical,
+                    onStepTapped: (step) {
+                      setState(() {
+                        current_step = step;
+                      });
+                    },
+                    onStepContinue: () {
+                      setState(() {
+                        if (current_step < steps.length - 1) {
+                          current_step = current_step + 1;
+                        } else {
+                          current_step = 0;
+                        }
+                      });
+                    },
+                    onStepCancel: () {
+                      setState(() {
+                        if (current_step > 0) {
+                          current_step = current_step - 1;
+                        } else {
+                          current_step = 0;
+                        }
+                      });
+                    },
+                  ),
                 ),
+      ],
               ),
             ),
           ],
         ),
-          ],
+      ),
     );
   }
 }
-        
-      
-       
+
+
+
