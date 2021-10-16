@@ -21,10 +21,11 @@ class Background extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          Positioned(
-            top: 39,
-            left: 70,
-            child: Image.asset("assets/images/4feyuv9I 1.png", scale: 1.2),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+             children:<Widget>
+             [ Image.asset("assets/images/4feyuv9I 1.png", scale: 1.2),
+             ],
           ),
           Positioned(
             top: 70,
