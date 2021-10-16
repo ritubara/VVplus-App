@@ -8,4 +8,8 @@ class SizeConfig {
   static getWidth(context) {
     return MediaQuery.of(context).size.width;
   }
+
+  static getSize(context) {
+    return MediaQuery.of(context).size;
+  }
 }
