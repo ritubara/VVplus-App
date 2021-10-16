@@ -26,12 +26,17 @@ InputDecoration textFieldInputDecoration(String hintText) {
   );
 }
 
-TextStyle simpleTextStyle(final double size1) {
-  return TextStyle(color: PrimaryColor2, fontSize: size1 ,fontWeight: FontWeight.bold,);
+TextStyle simpleTextStyle() {
+  return TextStyle(color: PrimaryColor2, fontSize: 24 ,fontWeight: FontWeight.bold,);
 }
-
-TextStyle simpleTextStyle1(final double size1) {
-  return TextStyle(color: PrimaryColor3, fontSize: size1 ,fontWeight: FontWeight.bold,);
+TextStyle simpleTextStyle1() {
+  return TextStyle(color: PrimaryColor3, fontSize: 18 ,fontWeight: FontWeight.bold,);
+}
+TextStyle simpleTextStyle2() {
+  return TextStyle(color: PrimaryColor2, fontSize: 18 );
+}
+TextStyle simpleTextStyle3() {
+  return TextStyle(color: PrimaryColor2, fontSize: 12 ,fontWeight: FontWeight.bold,);
 }
 
 BoxDecoration decoration1() {
@@ -73,9 +78,5 @@ TextStyle ContainerText2() {
 TextStyle ContainerText2Bold() {
   return TextStyle(
       color: TextColor4, fontSize: 12,fontWeight: FontWeight.bold);
-}
-
-TextStyle H1Style() {
-  return simpleTextStyle(24);
 }
 

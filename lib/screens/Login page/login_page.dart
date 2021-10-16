@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 10,),
              Text(
               text2,
-              style: simpleTextStyle3(),
+              style: simpleTextStyle2(),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20,),
@@ -88,23 +88,27 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20,),
             Text(
               text3,
-              style: simpleTextStyle2(),
+              style: simpleTextStyle3(),
               textAlign: TextAlign.center,
             ),
             Text(
               text4,
-              style: simpleTextStyle2(),
+              style: simpleTextStyle3(),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 17,),
-            Align(
-              alignment: Alignment.center,
-              child: Text(
-                  text5,
-                  textAlign: TextAlign.center,
-                  style: simpleTextStyle3(),
-                ),
-            ),
+             Row(
+               children: [
+               Padding(
+               padding: EdgeInsets.symmetric(horizontal: 125),
+               child: Text(
+                 text5,
+                 textAlign: TextAlign.center,
+                 style: simpleTextStyle2(),
+               ),
+             ),
+               ],
+             ),
 
             const SizedBox(height: 25),
             Container(
@@ -138,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                   children:  <Widget>[
                     Text(
                       "Sign In",
-                      style: simpleTextStyle5(),
+                      style: simpleTextStyle1(),
                     ),
                   ],
                 ),
