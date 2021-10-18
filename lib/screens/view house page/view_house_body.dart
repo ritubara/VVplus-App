@@ -91,7 +91,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: Row(
                   children: [
                     Text("Plot area: 777sqrt", style: simpleTextStyle10()),
