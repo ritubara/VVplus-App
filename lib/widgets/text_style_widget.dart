@@ -35,7 +35,7 @@ TextStyle simpleTextStyle10() {
 }
 TextStyle simpleTextStyle11() {
   return TextStyle(
-      color: Colors.black45, fontSize: 12, fontWeight: FontWeight.bold);
+      color: Colors.black45, fontSize: 14, fontWeight: FontWeight.bold);
 }
   TextStyle simpleTextStyle12() {
     return TextStyle(color: Colors.black45, fontSize:18,fontWeight: FontWeight.bold);
