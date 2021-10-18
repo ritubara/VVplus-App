@@ -1,51 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/colors.dart';
 
-TextStyle simpleTextStyle() {
-  return const TextStyle(color: PrimaryColor2, fontSize: 24 ,fontWeight: FontWeight.bold,);
+TextStyle simpleTextStyle(var color1 , double size1) {
+  return TextStyle(color: color1, fontSize: size1 ,fontWeight: FontWeight.bold,);
 }
-TextStyle simpleTextStyle1() {
-  return const TextStyle(color: PrimaryColor3, fontSize: 18 ,fontWeight: FontWeight.bold,);
-}
-TextStyle simpleTextStyle2() {
-  return const TextStyle(color: PrimaryColor2, fontSize: 18 );
-}
-TextStyle simpleTextStyle3() {
-  return const TextStyle(color: PrimaryColor2, fontSize: 12 ,fontWeight: FontWeight.bold,);
+TextStyle simpleTextStyle9(var color1,double size1) {
+  return TextStyle(color: color1, fontSize: size1 );
 }
 TextStyle simpleTextStyle4() {
   return const TextStyle(fontSize: 12);
 }
+
+TextStyle t1Style() {
+  return simpleTextStyle(PrimaryColor2,18);
+}
+TextStyle t2Style() {
+  return simpleTextStyle(PrimaryColor2,12);
+}
+TextStyle simpleTextStyle1() {
+  return simpleTextStyle(PrimaryColor3,18);
+}
 TextStyle simpleTextStyle5() {
-  return const TextStyle(color: PrimaryColor2, fontSize: 18 ,fontWeight: FontWeight.bold,);
+  return simpleTextStyle(PrimaryColor2,18);
 }
 TextStyle simpleTextStyle6() {
-  return const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: PrimaryColor1);
+  return simpleTextStyle(PrimaryColor1,18);
 }
 TextStyle simpleTextStyle7() {
-  return const TextStyle(color: PrimaryColor2, fontSize: 16 ,fontWeight: FontWeight.bold,);
+  return simpleTextStyle(PrimaryColor2,16);
 }
-
-
-
-
-
-
 TextStyle ContainerHeading1() {
-  return const TextStyle(
-    color: TextColor2, fontSize: 18, fontWeight: FontWeight.bold,);
+  return simpleTextStyle(TextColor2,18);
 }
 TextStyle ContainerHeading2() {
-  return const TextStyle(
-    color: TextColor3, fontSize: 18, fontWeight: FontWeight.bold,);
+  return simpleTextStyle(TextColor3,18);
 }
-
 TextStyle ContainerText2() {
   return const TextStyle(
       color: TextColor4, fontSize: 14);
 }
-
 TextStyle ContainerText2Bold() {
-  return const TextStyle(
-      color: TextColor4, fontSize: 14,fontWeight: FontWeight.bold);
+  return simpleTextStyle(TextColor4,14);
+}
+TextStyle simpleTextStyle2() {
+  return simpleTextStyle9(PrimaryColor2,18 );
+}
+TextStyle simpleTextStyle10() {
+  return simpleTextStyle9(PrimaryColor2,11 );
 }
