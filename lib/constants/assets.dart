@@ -7,3 +7,15 @@ const String image1 = "assets/images/4feyuv9I 1.png";  //  app logo
 
 const String image3 = "assets/images/Arrow 1.png";
 const String image4 = "assets/images/Rectangle 7.png";
+
+// for viewpage carousel slider
+const String image5 = "assets/images/kisspng-villa-house-3d-computer-graphics-3d-modeling-renti-csaldi-hz-ltvnytervezs-ptshez-t-5d3bd5d2f15e94 1 (1).png";
+const String image6 = "assets/images/yamuna ground floor (1).png";
+const String image7 = "assets/images/1st floor (1).png";
+const String image8 = "assets/images/yamuna--big-old-first--floor (1).png";
+
+// for viewpage icons
+const String icon1 = "assets/icons/Shape.png";
+const String icon2 = "assets/icons/Vector (1).png";
+const String icon3 = "assets/icons/Vector.png";
+const String icon4 = "assets/icons/stairs.png";
