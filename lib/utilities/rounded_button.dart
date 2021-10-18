@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/components/colors.dart';
+import 'package:vvplus_app/constants/colors.dart';
 
 class RoundedButton1 extends StatelessWidget {
   final String text;
@@ -41,7 +41,7 @@ class RoundedButton1 extends StatelessWidget {
       onPressed: press,
       style: ElevatedButton.styleFrom(
           primary: color,
-          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
           textStyle: TextStyle(
               color: textColor, fontSize: 14, fontWeight: FontWeight.bold)),
     );
@@ -86,7 +86,7 @@ class RoundedButton2 extends StatelessWidget {
       onPressed: press,
       style: ElevatedButton.styleFrom(
           primary: color,
-          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 23),
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 23),
           textStyle: TextStyle(
               color: textColor, fontSize: 28, fontWeight: FontWeight.bold)),
     );

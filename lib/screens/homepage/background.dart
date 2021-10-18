@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/components/colors.dart';
+import 'package:vvplus_app/constants/colors.dart';
+import 'package:vvplus_app/screens/view%20house%20page/view_house.dart';
 import '../progress page/progress_page.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
 import '../Customercare page/customer_care_page.dart';
@@ -61,7 +62,7 @@ class Background extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
               color: PrimaryColor3,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: PrimaryColor5,
                   offset: Offset(0.0, 1.0), //(x,y)
@@ -71,7 +72,7 @@ class Background extends StatelessWidget {
             ),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: const <Widget>[
                   Text(
                     "Notification",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
@@ -102,14 +103,14 @@ class Background extends StatelessWidget {
               text: "Progress",
               press: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProgressPage()));
+                    MaterialPageRoute(builder: (context) => const ProgressPage()));
               },
             ),
            RoundedButton1(
               text: "Customer Care",
               press: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CustomerCarePage()));
+                    MaterialPageRoute(builder: (context) => const CustomerCarePage()));
               },
             ),
               RoundedButton1(
@@ -118,7 +119,10 @@ class Background extends StatelessWidget {
             ),
            RoundedButton1(
               text: "View House",
-              press: () {},
+              press: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const ViewHouse()));
+              },
             ),
           RoundedButton1(
               text: "Maintanance",

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/components/assets.dart';
-import 'package:vvplus_app/components/colors.dart';
-import 'package:vvplus_app/components/size.dart';
-import 'package:vvplus_app/components/text_feild.dart';
-import 'package:vvplus_app/components/widgets.dart';
+import 'package:vvplus_app/constants/assets.dart';
+import 'package:vvplus_app/constants/colors.dart';
+import 'package:vvplus_app/constants/size.dart';
+import 'package:vvplus_app/constants/text_feild.dart';
+import 'package:vvplus_app/widgets/decoration_widget.dart';
+import 'package:vvplus_app/widgets/text_style_widget.dart';
 import 'package:vvplus_app/screens/homepage/home_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           child: Stack(
             children: <Widget>[
-              SizedBox(height: 20,width: 20,),
+              const SizedBox(height: 20,width: 20,),
               Align(
                 alignment: Alignment.topCenter,
                 child: Container(
@@ -100,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
              Row(
                children: [
                Padding(
-               padding: EdgeInsets.symmetric(horizontal: 125),
+               padding: const EdgeInsets.symmetric(horizontal: 125),
                child: Text(
                  text5,
                  textAlign: TextAlign.center,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/components/size.dart';
+import 'package:vvplus_app/constants/size.dart';
 import 'package:vvplus_app/screens/homepage/background.dart';
 
 class Body extends StatelessWidget {
@@ -10,6 +10,6 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = SizeConfig.getSize(context);
-    return Background();
+    return const Background();
   }
 }
