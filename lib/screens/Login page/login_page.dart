@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Text(
               text1,
-              style: simpleTextStyle(),
+              style: t1Style(),
             ),
             const SizedBox(height: 10,),
              Text(
@@ -76,12 +76,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20,),
             Container(
-              padding: const EdgeInsets.only(left: 1,right: 48),
+              padding: padding2,
               decoration: decoration1(),
               child: Center(
                 child:TextFormField(
                   keyboardType: TextInputType.number,
-                  style: simpleTextStyle1(),
+                  style: t1Style(),
                   decoration: textFieldInputDecoration(hintText1),
                 ),
               ),
@@ -89,19 +89,19 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20,),
             Text(
               text3,
-              style: simpleTextStyle3(),
+              style: t2Style(),
               textAlign: TextAlign.center,
             ),
             Text(
               text4,
-              style: simpleTextStyle3(),
+              style: t2Style(),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 17,),
              Row(
                children: [
                Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 125),
+               padding: padding3,
                child: Text(
                  text5,
                  textAlign: TextAlign.center,
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
 
             const SizedBox(height: 25),
             Container(
-              padding: const EdgeInsets.only(left: 1,right: 48),
+              padding: padding2,
               decoration: decoration1(),
               child: Center(
                 child:TextFormField(

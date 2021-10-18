@@ -1,7 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/constants/assets.dart';
 import 'package:vvplus_app/constants/colors.dart';
+import 'package:vvplus_app/constants/size.dart';
 import 'package:vvplus_app/constants/text_feild.dart';
+import 'package:vvplus_app/screens/NewComplaint%20page/drop_down_menu_items.dart';
 import 'package:vvplus_app/widgets/decoration_widget.dart';
 import 'package:vvplus_app/widgets/text_style_widget.dart';
 import 'package:vvplus_app/widgets/appbar_widget.dart';
@@ -15,10 +18,6 @@ class ComplaintPage extends StatefulWidget{
 }
 class _ComplaintPageState extends State<ComplaintPage>{
 
-  String valueChoose;
-  List listItem = [
-    "Selection","Item2","Item3"
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +25,8 @@ class _ComplaintPageState extends State<ComplaintPage>{
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
+            width: SizeConfig.getWidth(context),
+            height: SizeConfig.getHeight(context),
             decoration: const BoxDecoration(
               color: PrimaryColor3,
             ),
@@ -39,69 +38,69 @@ class _ComplaintPageState extends State<ComplaintPage>{
                   const SizedBox(height: 19),
                   Container(
                     height: 50,
-                    padding: const EdgeInsets.only(left: 35,right: 36),
+                    padding: padding1,
                     decoration: decoration1(),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       style: simpleTextStyle7(),
-                      decoration: textFieldInputDecoration("Name"),
+                      decoration: textFieldInputDecoration(text18),
                     ),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 50,
-                    padding: const EdgeInsets.only(left: 35,right: 36),
+                    padding: padding1,
                     decoration: decoration1(),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       style: simpleTextStyle7(),
-                      decoration: textFieldInputDecoration("Branch and City  "),
+                      decoration: textFieldInputDecoration(text19),
                     ),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 50,
-                    padding: const EdgeInsets.only(left: 35,right: 36),
+                    padding: padding1,
                     decoration: decoration1(),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       style: simpleTextStyle7(),
-                      decoration: textFieldInputDecoration("Unit Number"),
+                      decoration: textFieldInputDecoration(text20),
                     ),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 97,
-                    padding: const EdgeInsets.only(left: 35,right: 36),
+                    padding: padding1,
                     decoration: decoration1(),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       style: simpleTextStyle7(),
-                      decoration: textFieldInputDecoration("Write a detailed summary "),
+                      decoration: textFieldInputDecoration(text21),
                     ),
                   ),
                  const SizedBox(height: 1,),
                   Padding(
                     padding: const EdgeInsets.only(left: 35),
                     child: Text(
-                      "Choose the type of complaint",
+                      text25,
                       style: simpleTextStyle7(),
                     ),
                   ),
                   const SizedBox(height: 1),
                   Padding(
-                    padding: const EdgeInsets.only(left: 35,right: 36),
+                    padding: padding1,
                     child: Center(
                       child: Container(
                         decoration: decoration3(),
                         child: DropdownButton(
-                          hint: const Text("Selection"),
-                          dropdownColor: Colors.white,
+                          hint: const Text(text22),
+                          dropdownColor: PrimaryColor3,
                           icon: const Icon(Icons.arrow_drop_down),
                           iconSize: 40,
                           isExpanded: true,
-                          iconEnabledColor: Colors.red,
-                          style: const TextStyle(color: Colors.black,fontSize: 20),
+                          iconEnabledColor: TextColor3,
+                          style: const TextStyle(color: PrimaryColor2,fontSize: 20),
                           value: valueChoose,
                           onChanged: (newValue){
                             setState(() {
@@ -119,29 +118,41 @@ class _ComplaintPageState extends State<ComplaintPage>{
                     ),
                   ),
                   const SizedBox(height: 3,),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(left: 35),
                     child: Text(
-                      "Constrcution? Poor Quality work? Legal matter? Cancelation?    Speed of work is slow? Land registry? ",
-                      style: TextStyle(color: PrimaryColor2, fontSize: 11),
+                      text26,
+                      style: simpleTextStyle10(),
                     ),
                   ),
                   const SizedBox(height: 10,),
                   Padding(
-                      padding: const EdgeInsets.only(left: 35,right: 36),
+                      padding: padding1,
                       child: DottedBorder(
-                        color: Colors.black,
+                        color: PrimaryColor2,
                         strokeWidth: 1.5,
                         dashPattern: const [10,6],
                         child: Container(
-                          child: const Padding(
-                            padding: EdgeInsets.only(left: 50,right: 36,top: 84),
-                            child: Text(
-                              "Browse to upload photo of house or photo of letter",
-                              style: TextStyle(fontSize: 18),
-                            ),
+                          child: Column(
+                            children:  [
+                              Padding(
+                                  padding: padding5,
+                                  child: Image.asset(image3)
+                              ),
+                              Padding(
+                                  padding: padding6,
+                                  child: Image.asset(image4)
+                              ),
+                                Padding(
+                                padding: padding7,
+                                child: const Text(
+                                  text23,
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ],
                           ),
-                          height:140,
+                          height:120,
                           width: double.infinity,
                           color:PrimaryColor3,
                         ),
@@ -162,18 +173,14 @@ class _ComplaintPageState extends State<ComplaintPage>{
                             Radius.circular(50),
                           ),
                         ),
-                        width: MediaQuery.of(context).size.width * .83,
+                        width: SizeConfig.getWidth(context) * .83,
                         height: 50,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Text(
-                              "Upload Complaint",
-                              style: TextStyle(
-                                color: PrimaryColor3,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                              text24,
+                              style: simpleTextStyle1(),
                             ),
                           ],
                         ),
