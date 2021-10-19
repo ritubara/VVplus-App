@@ -1,18 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/colors.dart';
+import 'package:vvplus_app/constants/size.dart';
 
-class RoundedButton1 extends StatelessWidget {
+class RoundedButtonInput extends StatelessWidget {
   final String text;
   final Function() press;
   final Color color, textColor;
+  final double size1;
+  final double horizontal1;
+  final double vertical1;
+  final double fontsize1;
 
-  const RoundedButton1({
+  const RoundedButtonInput({
     Key key,
     this.text,
     this.press,
     this.color = PrimaryColor1,
     this.textColor = PrimaryColor3,
+    this.size1,
+    this.horizontal1, this.vertical1,
+    this.fontsize1,
   }) : super(key: key);
 
   @override
@@ -20,7 +28,7 @@ class RoundedButton1 extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
-      width: size.width * 0.8,
+      width: size.width * size1,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(29),
         child: newElevatedButton(),
@@ -41,54 +49,45 @@ class RoundedButton1 extends StatelessWidget {
       onPressed: press,
       style: ElevatedButton.styleFrom(
           primary: color,
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: horizontal1, vertical: vertical1),
           textStyle: TextStyle(
-              color: textColor, fontSize: 14, fontWeight: FontWeight.bold)),
+              color: textColor, fontSize: fontsize1, fontWeight: FontWeight.bold)),
     );
   }
 }
-class RoundedButton2 extends StatelessWidget {
-  final String text;
-  final Function() press;
-  final Color color, textColor;
 
-  const RoundedButton2({
-    Key key,
-    this.text,
-    this.press,
-    this.color = PrimaryColor1,
-    this.textColor = PrimaryColor3,
-  }) : super(key: key);
+// use for login button
+RoundedButtonInput RoundedButton1(String text1,var press1) {
+  return RoundedButtonInput(
+    text: text1,
+    press: press1,
+    fontsize1: 14,
+    size1: 0.8,
+    horizontal1: 40,
+    vertical1: 20,
+  );
+}
 
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      width: size.width * 0.8,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(29),
-        child: newElevatedButton(),
-      ),
-    );
-  }
+// use in home page
+RoundedButtonInput RoundedButton2(String text1,var press1) {
+  return RoundedButtonInput(
+    text: text1,
+    press: press1,
+    fontsize1: 28,
+    size1: 0.8,
+    horizontal1: 40,
+    vertical1: 23,
+  );
+}
 
-  Widget newElevatedButton() {
-    return ElevatedButton(
-      child: Align(
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: textColor),
-        ),
-      ),
-      onPressed: press,
-      style: ElevatedButton.styleFrom(
-          primary: color,
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 23),
-          textStyle: TextStyle(
-              color: textColor, fontSize: 28, fontWeight: FontWeight.bold)),
-    );
-  }
+// use for next and skip button
+RoundedButtonInput RoundedButton3(String text1,var press1) {
+  return RoundedButtonInput(
+    text: text1,
+    press: press1,
+    fontsize1: 14,
+    size1: 0.35,
+    horizontal1: 40,
+    vertical1: 20,
+  );
 }
