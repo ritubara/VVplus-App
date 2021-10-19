@@ -51,3 +51,17 @@ const String text23 = "Browse to upload photo of house or photo of letter";
 const String text24 = "Upload Complaint";
 const String text25 = "Choose the type of complaint";
 const String text26 = "Constrcution? Poor Quality work? Legal matter? Cancelation?    Speed of work is slow? Land registry? ";
+
+
+// use in progress page Stepper Widget
+
+const String text27 = "Booking amount";
+const String text28 = '3 Lakhs Paid (6% of unit cost) ';
+const String text29 = 'Construction Start';
+const String text30 = '17 Lakhs Paid (34% of unit cost) ';
+const String text31 = 'Plinth Level';
+const String text32 = '9.5 Lakhs is not Paid (19% of unit cost)';
+const String text33 = "Report a problem with quality of work done?";
+const String text34 = "Open latest house photo to verify house work?";
+const String text35 = 'Ground Floor Roof Level';
+const String text36 = " ";
