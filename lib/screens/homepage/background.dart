@@ -101,33 +101,32 @@ class Background extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
            RoundedButton1(
-              text: "Progress",
-              press: () {
+              "Progress", () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const ProgressPage()));
               },
             ),
            RoundedButton1(
-              text: "Customer Care",
-              press: () {
+              "Customer Care",
+              () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const CustomerCarePage()));
               },
             ),
               RoundedButton1(
-              text: "Edit Profile",
-              press: () {},
+              "Edit Profile",
+              () {},
             ),
            RoundedButton1(
-              text: "View House",
-              press: () {
+              "View House",
+              () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const ViewHouse()));
               },
             ),
           RoundedButton1(
-              text: "Maintanance",
-              press: () {},
+              "Maintanance",
+              () {},
             ),
 
       ],

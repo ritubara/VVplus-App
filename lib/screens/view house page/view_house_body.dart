@@ -175,8 +175,8 @@ class ViewHouseState extends State<ViewHouseBody> {
                     Padding(
     padding: EdgeInsets.symmetric(horizontal:30,vertical: 10),
                     child: RoundedButton1(
-                      text: "View Technical Specs of House",
-                      press: () {},
+                      "View Technical Specs of House",
+                      () {},
                     ),
     ),
 

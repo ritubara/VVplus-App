@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/constants/size.dart';
 import 'package:vvplus_app/constants/text_feild.dart';
 import 'package:vvplus_app/screens/NewComplaint%20page/new_complaint_page.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
@@ -21,26 +22,25 @@ class _CustomerCarePageState extends State<CustomerCarePage>{
           alignment: Alignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: padding4,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RoundedButton2(
-                      text: text15,
-                      press: () {
+                      text15,
+                      () {
                         Navigator.push( context, MaterialPageRoute(
                             builder: (context) => ComplaintPage()));
                       },
                     ),
 
                   RoundedButton2(
-                      text: text16,
-                      press: () {
-                      },
+                      text16,
+                       () {},
                     ),
                    RoundedButton2(
-                      text: text17,
-                      press: () {},
+                      text17,
+                       () {},
                     ),
                 ],
               ),

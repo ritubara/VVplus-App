@@ -30,20 +30,28 @@ class _LoginPageState extends State<LoginPage> {
           ),
           child: Stack(
             children: <Widget>[
-              const SizedBox(height: 20,width: 20,),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                    alignment: Alignment.topCenter,
-                    child: Image.asset(image1),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 47,
+                  top: 39,
+                ),
+                child: Image.asset(
+                  "assets/images/4feyuv9I 1.png",
+                  scale: 1.5,
+                  height: 241,
+                  width: 286,
                 ),
               ),
-              Positioned(
-                top: height * .01,
-                right: .01,
-                child: SizedBox(
-                  width: width * .3,
-                  child: Image.asset(image2),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 240,
+                  top: 25,
+                ),
+                child: Image.asset(
+                  "assets/images/+.png",
+                  scale: 1.5,
+                  height: 134,
+                  width: 68,
                 ),
               ),
               _buildBottomPart(context),
