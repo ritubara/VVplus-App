@@ -29,6 +29,24 @@ TextStyle simpleTextStyle6() {
 TextStyle simpleTextStyle7() {
   return simpleTextStyle(PrimaryColor2,16);
 }
+
+TextStyle simpleTextStyle10() {
+  return TextStyle(color: Colors.black45, fontSize:14,fontWeight: FontWeight.bold);
+}
+TextStyle simpleTextStyle11() {
+  return TextStyle(
+      color: Colors.black45, fontSize: 14, fontWeight: FontWeight.bold);
+}
+  TextStyle simpleTextStyle12() {
+    return TextStyle(color: Colors.black45, fontSize:18,fontWeight: FontWeight.bold);
+  }
+TextStyle simpleTextStyle13() {
+  return TextStyle(color: Colors.green, fontSize:14,fontWeight: FontWeight.bold);
+}
+TextStyle simpleTextStyle14() {
+  return TextStyle(color: Colors.blueAccent, fontSize:14,fontWeight: FontWeight.bold);
+}
+
 TextStyle ContainerHeading1() {
   return simpleTextStyle(TextColor2,18);
 }
@@ -44,7 +62,4 @@ TextStyle ContainerText2Bold() {
 }
 TextStyle simpleTextStyle2() {
   return simpleTextStyle9(PrimaryColor2,18 );
-}
-TextStyle simpleTextStyle10() {
-  return simpleTextStyle9(PrimaryColor2,11 );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/constants/assets.dart';
 import 'package:vvplus_app/constants/colors.dart';
 import 'package:vvplus_app/screens/view%20house%20page/view_house.dart';
 import '../progress page/progress_page.dart';
@@ -23,7 +24,7 @@ class Background extends StatelessWidget {
         children: <Widget>[
           Container(
             alignment: Alignment.center,
-      height: 200,
+            height: 200,
 
             child: Stack(
               children: <Widget>[
@@ -33,7 +34,7 @@ class Background extends StatelessWidget {
                     top: 39,
                   ),
                   child: Image.asset(
-                    "assets/images/4feyuv9I 1.png",
+                    image1,
                     scale: 1.5,
                     height: 241,
                     width: 286,
@@ -45,7 +46,7 @@ class Background extends StatelessWidget {
                     top: 25,
                   ),
                   child: Image.asset(
-                    "assets/images/+.png",
+                    image2,
                     scale: 1.5,
                     height: 134,
                     width: 68,
