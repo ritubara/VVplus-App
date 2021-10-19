@@ -13,6 +13,21 @@ class ViewHouseBody extends StatefulWidget {
 }
 
 class ViewHouseState extends State<ViewHouseBody> {
+  bool _canShowButton = true;
+  bool viewVisible = true ;
+
+
+  void showWidget(){
+    setState(() {
+      viewVisible = true ;
+    });
+  }
+
+  void hideWidget(){
+    setState(() {
+      viewVisible = false ;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -120,11 +135,11 @@ class ViewHouseState extends State<ViewHouseBody> {
                       child: Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.local_hospital),
+                            icon: Icon(Icons.local_hospital,color: Colors.black),
                           ),
                           Text("Emergency", style: simpleTextStyle10()),
                           Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 60)),
+                              padding: EdgeInsets.symmetric(horizontal: 65)),
                           Text("3 Km Away", style: simpleTextStyle13())
                         ],
                       ),
@@ -137,11 +152,11 @@ class ViewHouseState extends State<ViewHouseBody> {
                       child: Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.apartment_sharp),
+                            icon: Icon(Icons.apartment_sharp,color: Colors.black),
                           ),
                           Text("Schools", style: simpleTextStyle10()),
                           Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 70)),
+                              padding: EdgeInsets.symmetric(horizontal: 77)),
                           Text("2 Km Away", style: simpleTextStyle13())
                         ],
                       ),
@@ -154,7 +169,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                       child: Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.school),
+                            icon: Icon(Icons.school,color: Colors.black),
                           ),
                           Text("Colleges", style: simpleTextStyle10()),
                           Padding(
@@ -163,18 +178,188 @@ class ViewHouseState extends State<ViewHouseBody> {
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("More",
-                          style: simpleTextStyle14(),
+                        RaisedButton(
+                          onPressed: showWidget,
+                          color: Colors.white,
+                          elevation: 0,
+                          child:
+                          Text("More",
+                            style: simpleTextStyle14(),
+                          ),
                         ),
                       ],
                     ),
+
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Visibility(
+                       visible: viewVisible,
+                      child: Column(
+                        children:[
+
+                          Container(
+                          height: 59,
+                          width: 359,
+                          decoration: decoration2(),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.directions_bus,color: Colors.black),
+                              ),
+                              Text("Bus Stations", style: simpleTextStyle10()),
+                              Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 57)),
+                              Text("0.5 Km Away", style: simpleTextStyle13())
+                            ],
+                          ),
+                           ),
+
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Container(
+                      height: 59,
+                      width: 359,
+                      decoration: decoration2(),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.directions_railway,color: Colors.black),
+                          ),
+                          Text("Railway Stations", style: simpleTextStyle10()),
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 45)),
+                          Text("0.2 Km Away", style: simpleTextStyle13())
+                        ],
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Container(
+                      height: 59,
+                      width: 359,
+                      decoration: decoration2(),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.shopping_bag_outlined,color: Colors.black),
+                          ),
+                          Text("Shopping Hub", style: simpleTextStyle10()),
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 52)),
+                          Text("0.2 Km Away", style: simpleTextStyle13())
+                        ],
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Container(
+                      height: 59,
+                      width: 359,
+                      decoration: decoration2(),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Image.asset(
+                              icon10,
+                              scale: 0.7,
+                            ),
+                          ),
+
+                          Text("Petrol Station", style: simpleTextStyle10()),
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 53)),
+                          Text("0.2 Km Away", style: simpleTextStyle13())
+                        ],
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Container(
+                      height: 59,
+                      width: 359,
+                      decoration: decoration2(),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Image.asset(
+                              icon12,
+                              scale: 0.8,
+                            ),
+                          ),
+
+                          Text("LPG Station", style: simpleTextStyle10()),
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 60)),
+                          Text("0.2 Km Away", style: simpleTextStyle13())
+                        ],
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Container(
+                      height: 59,
+                      width: 359,
+                      decoration: decoration2(),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Image.asset(
+                              icon13,
+                              scale: 0.8,
+                            ),
+                          ),
+
+                          Text("Post Office", style: simpleTextStyle10()),
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 63)),
+                          Text("0.2 Km Away", style: simpleTextStyle13())
+                        ],
+                      ),
+                    ),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Container(
+                      height: 59,
+                      width: 359,
+                      decoration: decoration2(),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Image.asset(
+                              icon14,
+                              scale: 0.8,
+                            ),
+                          ),
+
+                          Text("Police Station", style: simpleTextStyle10()),
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 55)),
+                          Text("0.2 Km Away", style: simpleTextStyle13())
+                        ],
+                      ),
+                    ),
+
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              RaisedButton(
+                                onPressed: hideWidget,
+                                color: Colors.white,
+                                elevation: 0,
+                                child:
+                                Text("Less",
+                                  style: simpleTextStyle14(),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+
+
+
                     Padding(
-    padding: EdgeInsets.symmetric(horizontal:30,vertical: 10),
-                    child: RoundedButton1(
+                      padding: EdgeInsets.symmetric(horizontal:30,vertical: 10),
+                      child: RoundedButton1(
                       "View Technical Specs of House",
                       () {},
                     ),
