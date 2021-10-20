@@ -53,3 +53,7 @@ TextStyle ContainerText2Bold() {
 TextStyle simpleTextStyle2() {
   return simpleTextStyle9(PrimaryColor2,18 );
 }
+
+TextStyle Stepperstyle() {
+  return simpleTextStyle(TextColor3, 15);
+}
