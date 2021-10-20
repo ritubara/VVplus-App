@@ -10,7 +10,7 @@ TextStyle t1Style() {
   return simpleTextStyle(PrimaryColor2,18);
 }
 TextStyle t2Style() {
-  return simpleTextStyle(PrimaryColor2,12);
+  return simpleTextStyle(PrimaryColor2,11);
 }
 TextStyle simpleTextStyle1() {
   return simpleTextStyle(PrimaryColor3,18);
