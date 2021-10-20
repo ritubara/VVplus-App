@@ -7,7 +7,7 @@ CONTENTS OF THE FILE
 
 2.Pages
 
-3.Dependencies
+3.Prerequisites
 
 
 Introduction
@@ -69,16 +69,13 @@ Pages
 
 
 
-Dependencies
+Prerequisites
 ---
 
-1.sdk:  Version:2.11.0
+1.Flutter sdk  Version:2.11.0  
+2.dart         Version:2.5.2  
 
-2.carousel_slider  Version:2.3.1
 
-3.dotted_border    Version:2.0.0+1
-
-4.readmore         Version:2.1.0
 
 
 
