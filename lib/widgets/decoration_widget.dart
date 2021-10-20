@@ -1,4 +1,4 @@
-import 'package:country_code_picker/country_code_picker.dart';
+
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/colors.dart';
 import 'package:vvplus_app/constants/text_feild.dart';
@@ -55,9 +55,13 @@ InputDecoration textFieldInputDecorationWithCountryCode(){
     prefix: const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8),
     ),
-
+    hintText: "Enter OTP",
+    hintStyle: const TextStyle(
+      color: PrimaryColor2,
+    ),
   );
 }
+
 
 class OTPInputDecoration extends StatefulWidget{
   @override
@@ -133,5 +137,20 @@ BoxDecoration decoration3() {
     color: PrimaryColor3,
     borderRadius: BorderRadius.circular(5),
     border: Border.all(color: PrimaryColor2,width: 1),
+  );
+}
+
+BoxDecoration decoration4(var colorof){                                                       //Boxdecoration for containers
+  return BoxDecoration(
+      border: Border.all(color: Colors.white),
+    borderRadius: BorderRadius.circular(50.0),
+    color: colorof,
+    boxShadow: [
+      BoxShadow(
+        color: PrimaryColor5,
+        offset: Offset(0.0, 1.0), //(x,y)
+        blurRadius: 6.0,
+      ),
+    ],
   );
 }
