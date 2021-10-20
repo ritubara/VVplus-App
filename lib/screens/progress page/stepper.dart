@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/colors.dart';
 import 'package:vvplus_app/constants/text_feild.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
+import 'package:vvplus_app/widgets/decoration_widget.dart';
+import 'package:vvplus_app/widgets/text_style_widget.dart';
 
 class StepperBody extends StatefulWidget {
   const StepperBody({Key key}) : super(key: key);
@@ -11,31 +13,69 @@ class StepperBody extends StatefulWidget {
 
 class StepperBodyState extends State<StepperBody> {
 
-  int current_step = 0;
+  int current_step = 2;
   List<Step> steps = [
     Step(
-      title: Text(text27),
+      title: Text(text27,style: TextStyle(color: Colors.black45),),
       content: Container(
           alignment: Alignment.centerLeft,
-          child: Text(text28)),
+         ),
       // isActive: true,
     ),
     Step(
-      title: Text(text29),
+      title: Text(text29,style: TextStyle(color: Colors.black45),),
       content: Container(
           alignment: Alignment.centerLeft,
-          child: Text(text30)),
+          ),
       // isActive: true,
     ),
     Step(
       title: Text(text31),
       content: Column(
           children: [
-            Container(
-                alignment: Alignment.centerLeft,
-                child: Text(text32,style: TextStyle(color: TextColor3),)),
-            RoundedButton4(text33,(){}),
-            RoundedButton5(text34,(){}),
+                  Text(
+                    text32,
+                    style: Stepperstyle(),
+                  ),
+            Text(
+              text37,
+            ),
+
+
+            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+            GestureDetector(
+              onTap: (){
+                                                                                      // directing page
+              },
+              child: Container(
+                height: 84,
+                width: 250,
+                decoration: decoration4(Colors.red),
+                alignment: Alignment.center,
+                child: Text(text33,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: PrimaryColor3,fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+
+            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            GestureDetector(
+              onTap: (){
+                // directing page
+              },
+              child: Container(
+                height: 84,
+                width: 250,
+                decoration: decoration4(PrimaryColor7),
+                alignment: Alignment.center,
+                child: Text(text34,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: PrimaryColor3,fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
           ],
       ),
       //state: StepState.complete,
