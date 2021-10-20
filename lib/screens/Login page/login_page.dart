@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                 keyboardType: TextInputType.phone,
                 style:const TextStyle(
                   color: TextColor4,
-                  decorationColor: decorationColor1,
+                  //decorationColor: decorationColor1,
                 ),
                 decoration: textFieldInputDecorationWithCountryCode(),
               ),
