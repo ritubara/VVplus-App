@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/assets.dart';
 import 'package:vvplus_app/constants/colors.dart';
+import 'package:vvplus_app/screens/house_information/house_information.dart';
 import 'package:vvplus_app/screens/view%20house%20page/view_house.dart';
 import '../progress page/progress_page.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
@@ -24,13 +25,13 @@ class Background extends StatelessWidget {
         children: <Widget>[
           Container(
             alignment: Alignment.center,
-            height: 200,
+            height: 190,
 
             child: Stack(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(
-                    left: 30,
+                    left: 20,
                     top: 39,
                   ),
                   child: Image.asset(
@@ -42,8 +43,8 @@ class Background extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    left: 240,
-                    top: 25,
+                    left: 220,
+                    top: 20,
                   ),
                   child: Image.asset(
                     image2,
@@ -58,7 +59,7 @@ class Background extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.center,
-            height: 93,
+            height: 120,
             width: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
@@ -72,7 +73,7 @@ class Background extends StatelessWidget {
               ],
             ),
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: const <Widget>[
                   Text(
                     "Notification",
@@ -100,6 +101,7 @@ class Background extends StatelessWidget {
          Column(
       mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Padding(padding: EdgeInsets.symmetric(vertical: 5)),
            RoundedButton1(
               "Progress", () {
                 Navigator.push(context,
@@ -126,7 +128,10 @@ class Background extends StatelessWidget {
             ),
           RoundedButton1(
               "Maintanance",
-              () {},
+              () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HouseInformation()));
+              },
             ),
 
       ],
