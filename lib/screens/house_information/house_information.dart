@@ -49,8 +49,8 @@ class _HouseInformationState extends State<HouseInformation> {
     ),
             Padding(
               padding: const EdgeInsets.only(
-                left: 240,
-                top: 5,
+                left: 255,
+                top: 25,
               ),
               child: Image.asset(
                 image2,
