@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/colors.dart';
-import 'package:vvplus_app/constants/size.dart';
 
 class RoundedButtonInput extends StatelessWidget {
   final String text;
@@ -90,7 +89,7 @@ RoundedButtonInput RoundedButton3(String text1,var press1) {
     text: text1,
     press: press1,
     fontsize1: 14,
-    size1: 0.3,
+    size1: 0.34,
     horizontal1: 30,
     vertical1: 20,
     color1: PrimaryColor1,
