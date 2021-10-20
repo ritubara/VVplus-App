@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
                   top: 39,
                 ),
                 child: Image.asset(
-                  "assets/images/4feyuv9I 1.png",
+                  image1,
                   scale: 1.5,
                   height: 241,
                   width: 286,
@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                   top: 25,
                 ),
                 child: Image.asset(
-                  "assets/images/+.png",
+                  image2,
                   scale: 1.5,
                   height: 134,
                   width: 68,
