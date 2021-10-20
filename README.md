@@ -3,8 +3,8 @@
 CONTENTS OF THE FILE
 ---
 1.Introduction
-
 2.Pages
+3.Dependencies
 
 
 Introduction
@@ -64,6 +64,13 @@ Pages
 7.Technical Specs
 ![Image](https://github.com/TechnocultureResearch/VVplus-App/blob/5a9c2e3d95dafbf9ff94606f277d283d62e0b36a/assets/Screenshots/technical%20specs.JPG)
 
+
+
+Dependencies
+1.sdk:  Version:2.11.0
+2.carousel_slider  Version:2.3.1
+3.dotted_border    Version:2.0.0+1
+4.readmore         Version:2.1.0
 
 
 
