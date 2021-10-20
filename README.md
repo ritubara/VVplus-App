@@ -2,8 +2,11 @@
 
 CONTENTS OF THE FILE
 ---
+
 1.Introduction
+
 2.Pages
+
 3.Dependencies
 
 
@@ -67,9 +70,13 @@ Pages
 
 
 Dependencies
+
 1.sdk:  Version:2.11.0
+
 2.carousel_slider  Version:2.3.1
+
 3.dotted_border    Version:2.0.0+1
+
 4.readmore         Version:2.1.0
 
 
