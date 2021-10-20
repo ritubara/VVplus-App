@@ -13,7 +13,6 @@ class ViewHouseBody extends StatefulWidget {
 }
 
 class ViewHouseState extends State<ViewHouseBody> {
-  bool _canShowButton = true;
   bool viewVisible = true ;
 
 
@@ -45,7 +44,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "House Detail",
-                  style: simpleTextStyle11(),
+                  style: simpleTextStyle10(Colors.black45),
                 ),
               ),
               Padding(
@@ -60,7 +59,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                       color: Colors.grey,
                       onPressed: () {},
                     ),
-                    Text("3 Bedrooms", style: simpleTextStyle10()),
+                    Text("3 Bedrooms", style: simpleTextStyle10(Colors.black45)),
                     Padding(padding: EdgeInsets.symmetric(horizontal: 20)),
                     IconButton(
                       icon: Image.asset(
@@ -70,7 +69,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                       color: Colors.grey,
                       onPressed: () {},
                     ),
-                    Text("3 Bathrooms", style: simpleTextStyle10()),
+                    Text("3 Bathrooms", style: simpleTextStyle10(Colors.black45)),
                   ],
                 ),
               ),
@@ -84,11 +83,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                         scale: 0.8,
                       ),
                       color: Colors.grey,
-                      onPressed: () {},
                     ),
                     Text(
                       "1 Parking",
-                      style: simpleTextStyle10(),
+                      style: simpleTextStyle10(Colors.black45),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 28),
@@ -101,7 +99,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                       color: Colors.grey,
                       onPressed: () {},
                     ),
-                    Text("2 Floors", style: simpleTextStyle10()),
+                    Text("2 Floors", style: simpleTextStyle10(Colors.black45)),
                   ],
                 ),
               ),
@@ -109,9 +107,9 @@ class ViewHouseState extends State<ViewHouseBody> {
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: Row(
                   children: [
-                    Text("Plot area: 777sqrt", style: simpleTextStyle10()),
+                    Text("Plot area: 777sqrt", style: simpleTextStyle10(Colors.black45)),
                     Padding(padding: EdgeInsets.symmetric(horizontal: 25)),
-                    Text("Carpet area: 739sqrt", style: simpleTextStyle10()),
+                    Text("Carpet area: 739sqrt", style: simpleTextStyle10(Colors.black45)),
                   ],
                 ),
               ),
@@ -124,7 +122,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
                         "Closest Utilities",
-                        style: simpleTextStyle12(),
+                        style: simpleTextStyle10(Colors.black45),
                       ),
                     ),
                     Padding(padding: EdgeInsets.all(10)),
@@ -137,10 +135,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                           IconButton(
                             icon: Icon(Icons.local_hospital,color: Colors.black),
                           ),
-                          Text("Emergency", style: simpleTextStyle10()),
+                          Text("Emergency", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 65)),
-                          Text("3 Km Away", style: simpleTextStyle13())
+                          Text("3 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
@@ -154,10 +152,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                           IconButton(
                             icon: Icon(Icons.apartment_sharp,color: Colors.black),
                           ),
-                          Text("Schools", style: simpleTextStyle10()),
+                          Text("Schools", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 77)),
-                          Text("2 Km Away", style: simpleTextStyle13())
+                          Text("2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
@@ -171,31 +169,17 @@ class ViewHouseState extends State<ViewHouseBody> {
                           IconButton(
                             icon: Icon(Icons.school,color: Colors.black),
                           ),
-                          Text("Colleges", style: simpleTextStyle10()),
+                          Text("Colleges", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 70)),
-                          Text("1.7 Km Away", style: simpleTextStyle13())
+                          Text("1.7 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
 
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        RaisedButton(
-                          onPressed: showWidget,
-                          color: Colors.white,
-                          elevation: 0,
-                          child:
-                          Text("More",
-                            style: simpleTextStyle14(),
-                          ),
-                        ),
-                      ],
-                    ),
-
                     Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+
                     Visibility(
                        visible: viewVisible,
                       child: Column(
@@ -210,10 +194,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                               IconButton(
                                 icon: Icon(Icons.directions_bus,color: Colors.black),
                               ),
-                              Text("Bus Stations", style: simpleTextStyle10()),
+                              Text("Bus Stations", style: simpleTextStyle10(Colors.black45)),
                               Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 57)),
-                              Text("0.5 Km Away", style: simpleTextStyle13())
+                              Text("0.5 Km Away", style: simpleTextStyle10(Colors.green))
                             ],
                           ),
                            ),
@@ -228,10 +212,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                           IconButton(
                             icon: Icon(Icons.directions_railway,color: Colors.black),
                           ),
-                          Text("Railway Stations", style: simpleTextStyle10()),
+                          Text("Railway Stations", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 45)),
-                          Text("0.2 Km Away", style: simpleTextStyle13())
+                          Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
@@ -245,10 +229,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                           IconButton(
                             icon: Icon(Icons.shopping_bag_outlined,color: Colors.black),
                           ),
-                          Text("Shopping Hub", style: simpleTextStyle10()),
+                          Text("Shopping Hub", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 52)),
-                          Text("0.2 Km Away", style: simpleTextStyle13())
+                          Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
@@ -266,10 +250,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                             ),
                           ),
 
-                          Text("Petrol Station", style: simpleTextStyle10()),
+                          Text("Petrol Station", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 53)),
-                          Text("0.2 Km Away", style: simpleTextStyle13())
+                          Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
@@ -287,10 +271,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                             ),
                           ),
 
-                          Text("LPG Station", style: simpleTextStyle10()),
+                          Text("LPG Station", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 60)),
-                          Text("0.2 Km Away", style: simpleTextStyle13())
+                          Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
@@ -308,10 +292,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                             ),
                           ),
 
-                          Text("Post Office", style: simpleTextStyle10()),
+                          Text("Post Office", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 63)),
-                          Text("0.2 Km Away", style: simpleTextStyle13())
+                          Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
@@ -329,33 +313,45 @@ class ViewHouseState extends State<ViewHouseBody> {
                             ),
                           ),
 
-                          Text("Police Station", style: simpleTextStyle10()),
+                          Text("Police Station", style: simpleTextStyle10(Colors.black45)),
                           Padding(
                               padding: EdgeInsets.symmetric(horizontal: 55)),
-                          Text("0.2 Km Away", style: simpleTextStyle13())
+                          Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+
+                        ],
+                      ),
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        RaisedButton(
+                          onPressed: hideWidget,
+                          color: Colors.white,
+                          elevation: 0,
+                          child:Column(
                             children: [
-                              RaisedButton(
-                                onPressed: hideWidget,
-                                color: Colors.white,
-                                elevation: 0,
-                                child:
-                                Text("Less",
-                                  style: simpleTextStyle14(),
-                                ),
-                              ),
+                              if (viewVisible) Text('Less',style: simpleTextStyle10(Colors.blueAccent),)
+                              else
+                                    RaisedButton(
+                                      onPressed: showWidget,
+                                      color: Colors.white,
+                                      elevation: 0,
+                                      child:
+                                      Text("More",
+                                        style: simpleTextStyle10(Colors.blueAccent),
+                                      ),
+                                    ),
+
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-
-
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal:30,vertical: 10),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/constants/colors.dart';
 import 'package:vvplus_app/constants/text_feild.dart';
+import 'package:vvplus_app/screens/Customercare%20page/customer_care_page.dart';
 import 'package:vvplus_app/screens/progress%20page/stepper.dart';
 import 'package:vvplus_app/widgets/decoration_widget.dart';
 import 'package:vvplus_app/widgets/text_style_widget.dart';
@@ -60,9 +60,14 @@ class ProgressBodyState extends State<ProgressBody> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Text(
-                          BoxLink,
-                          style: ContainerHeading1(),
+                        child: GestureDetector(
+                          onTap: (){
+                                                                                   //call customer care
+                          },
+                          child: Text(
+                            BoxLink,
+                            style: ContainerHeading1(),
+                          ),
                         ),
                       ),
                     ],
@@ -78,6 +83,3 @@ class ProgressBodyState extends State<ProgressBody> {
     );
   }
 }
-
-
-

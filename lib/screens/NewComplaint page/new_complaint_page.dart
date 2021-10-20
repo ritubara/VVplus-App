@@ -122,7 +122,9 @@ class _ComplaintPageState extends State<ComplaintPage>{
                     padding: EdgeInsets.only(left: 35),
                     child: Text(
                       text26,
-                      style: simpleTextStyle10(),
+                      style: simpleTextStyle10(
+                        Colors.black45,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10,),
