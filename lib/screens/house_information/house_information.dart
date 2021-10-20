@@ -39,7 +39,7 @@ class _HouseInformationState extends State<HouseInformation> {
           top: 10,
         ),
         child: Image.asset(
-          "assets/images/4feyuv9I 1.png",
+           image1,
           scale: 1.5,
           height: 241,
           width: 286,
@@ -51,7 +51,7 @@ class _HouseInformationState extends State<HouseInformation> {
                 top: 5,
               ),
               child: Image.asset(
-                "assets/images/+.png",
+                image2,
                 scale: 1.5,
                 height: 134,
                 width: 68,
