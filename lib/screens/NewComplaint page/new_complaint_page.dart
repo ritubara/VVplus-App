@@ -1,4 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/assets.dart';
 import 'package:vvplus_app/constants/colors.dart';
@@ -12,7 +13,6 @@ import 'package:vvplus_app/screens/homepage/home_page.dart';
 
 class ComplaintPage extends StatefulWidget{
   const ComplaintPage({Key key}) : super(key: key);
-
   @override
   _ComplaintPageState createState() => _ComplaintPageState();
 }
@@ -147,22 +147,23 @@ class _ComplaintPageState extends State<ComplaintPage>{
                                 padding: padding7,
                                 child: const Text(
                                   text23,
-                                  style: TextStyle(fontSize: 18),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 16),
                                 ),
                               ),
                             ],
                           ),
-                          height:120,
+                          height:140,
                           width: double.infinity,
                           color:PrimaryColor3,
                         ),
                       )
                   ),
                   const SizedBox(height: 12),
-                  GestureDetector(
+                  GestureDetector(                                                   //Onpressed
                     onTap: () {
-                      Navigator.push( context, MaterialPageRoute(
-                          builder: (context) => HomePage()));
+
+
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 35),
