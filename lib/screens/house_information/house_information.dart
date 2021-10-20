@@ -25,13 +25,15 @@ class _HouseInformationState extends State<HouseInformation> {
     return Scaffold(
       body: SafeArea(
       child: SingleChildScrollView(
-        child: Container(
-        width: width,
-        height: height,
-        decoration: const BoxDecoration(
-          color: PrimaryColor3,
-        ),
-        child: Stack(
+        child: Column(
+
+        //width: width,
+        //height: height,
+        //decoration: const BoxDecoration(
+          //color: PrimaryColor3,
+       // ),
+        children:[
+          Stack(
           children: <Widget>[
         Padding(
         padding: const EdgeInsets.only(
@@ -95,18 +97,21 @@ class _HouseInformationState extends State<HouseInformation> {
                     moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: Colors.green),
                   ),
                 ),
-                    Row(
-                      children: [
-                        RoundedButton3("Next",(){}),
-                        SizedBox(width: 35,),
-                        RoundedButton3("Skip",(){}),
-                      ],
+                    Container(
+                      child: Row(
+                        children: [
+                          RoundedButton3("Next",(){}),
+                          SizedBox(width: 35,),
+                          RoundedButton3("Skip",(){}),
+                        ],
+                      ),
                     ),
                   ],
               ),
             ),
           ],
         ),
+          ],
     ),
       ),
     ),

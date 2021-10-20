@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/assets.dart';
+import 'package:vvplus_app/screens/house_information/house_information.dart';
 import 'package:vvplus_app/screens/view%20house%20page/caruosel_slider.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
 import 'package:vvplus_app/widgets/decoration_widget.dart';
@@ -357,7 +358,10 @@ class ViewHouseState extends State<ViewHouseBody> {
                       padding: EdgeInsets.symmetric(horizontal:30,vertical: 10),
                       child: RoundedButton1(
                       "View Technical Specs of House",
-                      () {},
+                      () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const HouseInformation()));
+                      },
                     ),
     ),
 
