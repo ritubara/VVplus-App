@@ -14,8 +14,14 @@ Pages
 ---
 1.Login Page
 
+
+
+
 ##2.Home page
 ![Image](https://github.com/TechnocultureResearch/VVplus-App/blob/5a9c2e3d95dafbf9ff94606f277d283d62e0b36a/assets/Screenshots/Homepage.JPG)
+
+
+
 
 
 ##3.Progress Page
@@ -25,13 +31,22 @@ Pages
 
 
 
+
+
+
 ##4.Customer Care
 ![Image](https://github.com/TechnocultureResearch/VVplus-App/blob/5a9c2e3d95dafbf9ff94606f277d283d62e0b36a/assets/Screenshots/customercare.JPG)
 
 
 
+
+
+
 ##5.New Complaint
 ![Image](https://github.com/TechnocultureResearch/VVplus-App/blob/5a9c2e3d95dafbf9ff94606f277d283d62e0b36a/assets/Screenshots/new%20complaint.JPG)
+
+
+
 
 
 
@@ -46,7 +61,6 @@ Pages
 
 
 ##7.Technical Specs
----
 ![Image](https://github.com/TechnocultureResearch/VVplus-App/blob/5a9c2e3d95dafbf9ff94606f277d283d62e0b36a/assets/Screenshots/technical%20specs.JPG)
 
 
