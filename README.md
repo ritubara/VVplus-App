@@ -69,8 +69,12 @@ Pages
 
 
 
-7.Technical Specs  
-![Image](https://github.com/TechnocultureResearch/VVplus-App/blob/5a9c2e3d95dafbf9ff94606f277d283d62e0b36a/assets/Screenshots/technical%20specs.JPG)  
+7.House vastu    
+![Image](https://github.com/TechnocultureResearch/VVplus-App/blob/5a9c2e3d95dafbf9ff94606f277d283d62e0b36a/assets/Screenshots/technical%20specs.JPG)   
+
+8.Technical Specs   
+![Image](https://github.com/TechnocultureResearch/VVplus-App/blob/c65f978be7b761cb6a5be4ba425053db10c8e939/assets/Screenshots/technical%20specs(2).JPG)      
+ 
 
 
 
