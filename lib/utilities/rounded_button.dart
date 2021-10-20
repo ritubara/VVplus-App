@@ -63,7 +63,7 @@ RoundedButtonInput RoundedButton1(String text1,var press1) {
     fontsize1: 14,
     size1: 0.8,
     horizontal1: 40,
-    vertical1: 20,
+    vertical1: 15,
     color1: PrimaryColor1,
     textColor1: PrimaryColor3,
   );
