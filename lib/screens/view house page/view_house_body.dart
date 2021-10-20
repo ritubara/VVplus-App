@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/constants/assets.dart';
+import 'package:vvplus_app/screens/Technical%20specs/technical_specs.dart';
 import 'package:vvplus_app/screens/house_information/house_information.dart';
 import 'package:vvplus_app/screens/view%20house%20page/caruosel_slider.dart';
 import 'package:vvplus_app/utilities/rounded_button.dart';
@@ -360,7 +361,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                       "View Technical Specs of House",
                       () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const HouseInformation()));
+                            MaterialPageRoute(builder: (context) => TechnicalSpecs()));
                       },
                     ),
     ),
