@@ -16,3 +16,5 @@ const TextColor4= Colors.black;
 
 const StepperColor= Colors.purple;
 const StepperColor1 = Colors.orange;
+
+const decorationColor1 = Colors.white;
