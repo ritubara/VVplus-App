@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Pages/Customer%20UI/screens/homepage/home_page.dart';
+import 'package:vvplus_app/Pages/Customer%20UI/widgets/decoration_widget.dart';
+import 'package:vvplus_app/Pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/constants/assets.dart';
 import 'package:vvplus_app/constants/colors.dart';
 import 'package:vvplus_app/constants/size.dart';
 import 'package:vvplus_app/constants/text_feild.dart';
-import 'package:vvplus_app/widgets/decoration_widget.dart';
-import 'package:vvplus_app/widgets/text_style_widget.dart';
-import 'package:vvplus_app/screens/homepage/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
