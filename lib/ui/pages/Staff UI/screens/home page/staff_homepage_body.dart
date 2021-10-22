@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/purchase.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class HomeBody extends StatelessWidget{
   final Widget child;
@@ -14,7 +16,7 @@ class HomeBody extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = SizeConfig.getSize(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,10 +60,10 @@ class HomeBody extends StatelessWidget{
               RoundedButtonHome(
                 "Purchase",
                     () {
-                  /*Navigator.push(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const ProgressPage()));*/
+                          builder: (context) => PurchasePage()));
                 },
               ),
               RoundedButtonHome(
