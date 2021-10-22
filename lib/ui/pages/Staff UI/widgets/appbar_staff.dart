@@ -5,9 +5,10 @@ import 'dart:math'as math;
 AppBar AppBarSatff(String appBarText) {
   return AppBar(
     centerTitle: true,
+    toolbarHeight: 100,
     title: Text(
       appBarText,
-      style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
+      style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600),
       textAlign: TextAlign.center,
     ),
     actions: <Widget>[
