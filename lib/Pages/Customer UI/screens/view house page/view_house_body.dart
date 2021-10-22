@@ -3,8 +3,8 @@ import 'package:vvplus_app/Pages/Customer%20UI/screens/Technical%20specs/technic
 import 'package:vvplus_app/Pages/Customer%20UI/screens/view%20house%20page/caruosel_slider.dart';
 import 'package:vvplus_app/Pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/Pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/Utilities/rounded_button.dart';
 import 'package:vvplus_app/constants/assets.dart';
-import 'package:vvplus_app/utilities/rounded_button.dart';
 
 
 class ViewHouseBody extends StatefulWidget {

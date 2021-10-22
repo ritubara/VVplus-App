@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Utilities/rounded_button.dart';
 import 'package:vvplus_app/constants/assets.dart';
 import 'package:vvplus_app/constants/colors.dart';
 import 'package:vvplus_app/constants/size.dart';
 import 'package:vvplus_app/constants/text_feild.dart';
 import 'package:readmore/readmore.dart';
-import 'package:vvplus_app/utilities/rounded_button.dart';
+
 
 class HouseInformation extends StatefulWidget {
   const HouseInformation({Key key}) : super(key: key);
