@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/Pages/Login%20page/login_page.dart';
-import 'package:vvplus_app/constants/colors.dart';
+import 'package:vvplus_app/ui/Pages/Login%20page/login_page.dart';
+import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 
 
 void main() {
