@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/Pages/Customer%20UI/screens/homepage/body.dart';
-import 'package:vvplus_app/Pages/Customer%20UI/utilities/bottom_navbar.dart';
+import '../../widgets/bottom_navbar.dart';
 
 class HomePage extends StatefulWidget{
   HomePage({

@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/Pages/Customer%20UI/screens/house_information/house_information.dart';
 import 'package:vvplus_app/Pages/Customer%20UI/screens/view%20house%20page/view_house.dart';
-import 'package:vvplus_app/Pages/Customer%20UI/utilities/rounded_button.dart';
 import 'package:vvplus_app/constants/assets.dart';
 import 'package:vvplus_app/constants/colors.dart';
+import 'package:vvplus_app/utilities/rounded_button.dart';
 
 import '../progress page/progress_page.dart';
 

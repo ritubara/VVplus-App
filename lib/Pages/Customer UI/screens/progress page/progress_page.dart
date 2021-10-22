@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/Pages/Customer%20UI/screens/progress%20page/progress_body.dart';
-import 'package:vvplus_app/Pages/Customer%20UI/utilities/bottom_navbar.dart';
+import '../../widgets/bottom_navbar.dart';
 import 'package:vvplus_app/constants/colors.dart';
 
 
