@@ -83,6 +83,19 @@ RoundedButtonInput RoundedButtonHome(String text1,var press1) {
   );
 }
 
+RoundedButtonInput RoundedButtonHome2(String text1,var press1) {
+  return RoundedButtonInput(
+    text: text1,
+    press: press1,
+    fontsize1: 13,
+    size1: 0.8,
+    horizontal1: 40,
+    vertical1: 15,
+    color1: PrimaryColor1,
+    textColor1: PrimaryColor3,
+  );
+}
+
 RoundedButtonInput RoundedButtonComplaint(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,

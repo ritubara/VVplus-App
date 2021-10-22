@@ -95,7 +95,7 @@ class HomeBody extends StatelessWidget{
                           builder: (context) => HouseInformation()));*/
                 },
               ),
-              RoundedButtonHome(
+              RoundedButtonHome2(
                 "Marketing To Eng. not on Dataman",
                     () {
                   /*Navigator.push(
@@ -104,7 +104,7 @@ class HomeBody extends StatelessWidget{
                           builder: (context) => HouseInformation()));*/
                 },
               ),
-              RoundedButtonHome(
+              RoundedButtonHome2(
                 "Approval and Request not a Dataman",
                     () {
                   /*Navigator.push(
