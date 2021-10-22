@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/homepage/home_page.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/home%20page/staff_homepage.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
@@ -159,7 +160,11 @@ class _LoginPageState extends State<LoginPage> {
                               builder: (context) => HomePage()));}
                           ),
                   SizedBox(width: 20,),
-                  RoundedButton3("Sign In Staff",(){}),
+                  RoundedButton3("Sign In Staff",(){
+                    Navigator.push( context, MaterialPageRoute(
+                        builder: (context) => HomePageStaff()));
+
+                  }),
                 ],
               ),
             ),
