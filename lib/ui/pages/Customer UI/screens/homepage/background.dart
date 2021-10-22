@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/house_information/house_information.dart';
 import 'package:vvplus_app/ui/pages/Customer UI/screens/view house page/view_house.dart';
+import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
@@ -23,38 +24,7 @@ class Background extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(
-            alignment: Alignment.center,
-            height: 190,
-            child: Stack(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    top: 39,
-                  ),
-                  child: Image.asset(
-                    image1,
-                    scale: 1.5,
-                    height: 241,
-                    width: 286,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 220,
-                    top: 20,
-                  ),
-                  child: Image.asset(
-                    image2,
-                    scale: 1.5,
-                    height: 134,
-                    width: 68,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          HomePageLogo(),
           Container(
             alignment: Alignment.center,
             height: 120,
