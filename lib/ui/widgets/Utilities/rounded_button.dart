@@ -56,7 +56,7 @@ class RoundedButtonInput extends StatelessWidget {
 }
 
 // use for login button
-RoundedButtonInput RoundedButton1(String text1,var press1) {
+RoundedButtonInput RoundedButtonLogin(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -70,7 +70,20 @@ RoundedButtonInput RoundedButton1(String text1,var press1) {
 }
 
 // use in home page
-RoundedButtonInput RoundedButton2(String text1,var press1) {
+RoundedButtonInput RoundedButtonHome(String text1,var press1) {
+  return RoundedButtonInput(
+    text: text1,
+    press: press1,
+    fontsize1: 16,
+    size1: 0.8,
+    horizontal1: 40,
+    vertical1: 15,
+    color1: PrimaryColor1,
+    textColor1: PrimaryColor3,
+  );
+}
+
+RoundedButtonInput RoundedButtonComplaint(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -118,6 +131,19 @@ RoundedButtonInput RoundedButton5(String text1,var press1) {
     horizontal1: 30,
     vertical1: 10,
     color1: PrimaryColor7,
+    textColor1: TextColor1,
+  );
+}
+// for staff homepage container
+RoundedButtonInput RoundedButton6(String text1,var press1) {
+  return RoundedButtonInput(
+    text: text1,
+    press: press1,
+    fontsize1: 12,
+    size1: 0.6,
+    horizontal1: 30,
+    vertical1: 10,
+    color1: PrimaryColor1,
     textColor1: TextColor1,
   );
 }

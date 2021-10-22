@@ -68,7 +68,7 @@ class Background extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButton1(
+              RoundedButtonHome(
                 "Progress",
                 () {
                   Navigator.push(
@@ -77,7 +77,7 @@ class Background extends StatelessWidget {
                           builder: (context) => const ProgressPage()));
                 },
               ),
-              RoundedButton1(
+              RoundedButtonHome(
                 "Customer Care",
                 () {
                   Navigator.push(
@@ -86,11 +86,11 @@ class Background extends StatelessWidget {
                           builder: (context) => const CustomerCarePage()));
                 },
               ),
-              RoundedButton1(
+              RoundedButtonHome(
                 "Edit Profile",
                 () {},
               ),
-              RoundedButton1(
+              RoundedButtonHome(
                 "View House",
                 () {
                   Navigator.push(
@@ -99,7 +99,7 @@ class Background extends StatelessWidget {
                           builder: (context) => const ViewHouse()));
                 },
               ),
-              RoundedButton1(
+              RoundedButtonHome(
                 "Maintanance",
                 () {
                   Navigator.push(
