@@ -27,16 +27,20 @@ class _MyBottomNavbarStaff extends State<BottomNavBarStaff>{
       elevation: 10,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home,color: PrimaryColor3,),
+            activeIcon: Icon(Icons.home,color: PrimaryColor5,),
             title: Text('', style: TextStyle(color: PrimaryColor2))),
         BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
+            icon: Icon(Icons.notifications,color: PrimaryColor3,),
+            activeIcon: Icon(Icons.home,color: PrimaryColor5,),
             title: Text('', style: TextStyle(color: PrimaryColor2))),
         BottomNavigationBarItem(
-            icon: Icon(Icons.check,size: 30,),
+            icon: Icon(Icons.check,size: 30,color: PrimaryColor3,),
+            activeIcon: Icon(Icons.home,color: PrimaryColor5,),
             title: Text('', style: TextStyle(color: PrimaryColor2))),
         BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
+            icon: Icon(Icons.account_circle,color: PrimaryColor3,),
+            activeIcon: Icon(Icons.home,color: PrimaryColor5,),
             title: Text('', style: TextStyle(color: PrimaryColor2))),
       ],
       currentIndex: _selectedIndex,
