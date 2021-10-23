@@ -104,7 +104,7 @@ class HomeBody extends StatelessWidget{
                       context,
                       MaterialPageRoute(
                           builder: (context) => HouseInformation()));*/
-                },
+                },roundedButtonHomeColor1
               ),
               RoundedButtonHome2(
                 "Approval and Request not a Dataman",
@@ -113,7 +113,7 @@ class HomeBody extends StatelessWidget{
                       context,
                       MaterialPageRoute(
                           builder: (context) => HouseInformation()));*/
-                },
+                },roundedButtonHomeColor1
               ),
             ],
           ),
