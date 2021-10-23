@@ -8,18 +8,21 @@ AppBar AppBarSatff(String appBarText) {
     toolbarHeight: 100,
     title: Text(
       appBarText,
-      style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.w600),
+      style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
       textAlign: TextAlign.center,
     ),
     actions: <Widget>[
-      Transform(
-        transform: Matrix4.rotationY(math.pi),
-        child: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.call,
-            color: Colors.white,
-          ),
+      Container(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.call,
+                color: Colors.white,
+              ),
+            ),
+
         ),
       ),
     ],
