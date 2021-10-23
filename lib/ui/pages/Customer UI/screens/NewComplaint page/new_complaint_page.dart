@@ -41,7 +41,7 @@ class _ComplaintPageState extends State<ComplaintPage>{
                     padding: padding1,
                     decoration: decoration1(),
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.text,
                       style: simpleTextStyle7(),
                       decoration: textFieldInputDecoration(text18),
                     ),
@@ -52,7 +52,7 @@ class _ComplaintPageState extends State<ComplaintPage>{
                     padding: padding1,
                     decoration: decoration1(),
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.text,
                       style: simpleTextStyle7(),
                       decoration: textFieldInputDecoration(text19),
                     ),
@@ -74,7 +74,7 @@ class _ComplaintPageState extends State<ComplaintPage>{
                     padding: padding1,
                     decoration: decoration1(),
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.multiline,
                       style: simpleTextStyle7(),
                       decoration: textFieldInputDecoration(text21),
                     ),
@@ -93,26 +93,28 @@ class _ComplaintPageState extends State<ComplaintPage>{
                     child: Center(
                       child: Container(
                         decoration: decoration3(),
-                        child: DropdownButton(
-                          hint: const Text(text22),
-                          dropdownColor: PrimaryColor3,
-                          icon: const Icon(Icons.arrow_drop_down),
-                          iconSize: 40,
-                          isExpanded: true,
-                          iconEnabledColor: TextColor3,
-                          style: const TextStyle(color: PrimaryColor2,fontSize: 20),
-                          value: valueChoose,
-                          onChanged: (newValue){
-                            setState(() {
-                              valueChoose = newValue;
-                            });
-                          },
-                          items: listItem.map((valueItem){
-                            return DropdownMenuItem(
-                              value: valueItem,
-                              child: Text(valueItem),
-                            );
-                          }).toList(),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton(
+                            hint: const Text(text22),
+                            dropdownColor: PrimaryColor3,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            iconSize: 40,
+                            isExpanded: true,
+                            iconEnabledColor: TextColor3,
+                            style: const TextStyle(color: PrimaryColor2,fontSize: 20),
+                            value: valueChoose,
+                            onChanged: (newValue){
+                              setState(() {
+                                valueChoose = newValue;
+                              });
+                            },
+                            items: listItem.map((valueItem){
+                              return DropdownMenuItem(
+                                value: valueItem,
+                                child: Text(valueItem),
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ),
                     ),
