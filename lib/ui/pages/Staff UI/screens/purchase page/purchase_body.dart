@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/material_request_approval/material_request_approval.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/Material%20Request%20Entry/material_req_entry.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
@@ -58,10 +58,15 @@ class PurchaseBody extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButtonHome("Material Request Entry", () {}),
-              RoundedButtonHome("Material Request Approval",
-                      () {Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => MaterialRequestApproval()));}),
+              RoundedButtonHome("Material Request Entry", () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MaterialReqEntry()));
+              }),
+              RoundedButtonHome("Material Request Approval", () {
+
+              }),
               RoundedButtonHome("Place Purchase Order", () {}),
               RoundedButtonHome("Goods Recepit Entry", () {}),
             ],
