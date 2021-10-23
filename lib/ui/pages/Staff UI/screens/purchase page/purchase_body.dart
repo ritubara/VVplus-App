@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/Material%20Request%20Entry/material_req_entry.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/place%20purchase%20order/place_purchase_order.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
+
+import 'material_request_approval/material_request_approval.dart';
 
 class PurchaseBody extends StatelessWidget{
   final Widget child;
@@ -64,10 +67,17 @@ class PurchaseBody extends StatelessWidget{
                     MaterialPageRoute(
                         builder: (context) => MaterialReqEntry()));
               }),
-              RoundedButtonHome("Material Request Approval", () {
 
+              RoundedButtonHome("Material Request Approval", () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MaterialRequestApproval()));
               }),
-              RoundedButtonHome("Place Purchase Order", () {}),
+              RoundedButtonHome("Place Purchase Order", () {Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PlacePurchaseOrder()));}),
               RoundedButtonHome("Goods Recepit Entry", () {}),
             ],
           ),

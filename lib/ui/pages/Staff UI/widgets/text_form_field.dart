@@ -19,14 +19,14 @@ class _DateTextFormFieldState extends State<DateTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: padding1,
-    height:100,
+        padding:EdgeInsets.symmetric(horizontal: 35),
+    height:48,
     child:Center(
     child:TextFormField(
     controller: dateinput,
     decoration: const InputDecoration(
       filled: true,
-      focusColor: boxDecorationColor1,
+      focusColor: boxDecorationColor2,
         suffixIcon: Icon(Icons.calendar_today,color: iconColor1,),
         //hintText: "Enter Date",
         enabledBorder: OutlineInputBorder(

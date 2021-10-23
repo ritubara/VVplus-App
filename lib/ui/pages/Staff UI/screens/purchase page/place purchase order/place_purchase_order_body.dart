@@ -8,10 +8,10 @@ import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
-class MaterialRequestApprovalBody extends StatelessWidget{
+class PlacePurchaseOrderBody extends StatelessWidget{
   final Widget child;
 
-  const MaterialRequestApprovalBody({
+  const PlacePurchaseOrderBody({
     Key key,
     this.child,
   }) : super(key: key);
@@ -26,25 +26,37 @@ class MaterialRequestApprovalBody extends StatelessWidget{
         children: [
           SizedBox(height: 15,),
 
-          FormsHeadText("Indant Date"),
+          FormsHeadText("Voucher No:"),
+
+          SizedBox(height: 15,),
+
+          FormsHeadText("Voucher Type"),
+
+          DropdownForm(),
+
+          SizedBox(height: 15,),
+
+          FormsHeadText("Date"),
 
           DateTextFormField(),
 
           SizedBox(height: 15,),
 
-          FormsHeadText("Indant Selection"),
+          FormsHeadText("Supplier"),
 
           DropdownForm(),
 
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: RoundedButtonHome2("Approve",(){},roundedButtonHomeColor1)),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: RoundedButtonHome2("Deny",(){},roundedButtonHomeColor2)),
-          Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: RoundedButtonHome2("Wait",(){},roundedButtonHomeColor3)),
+          SizedBox(height: 15,),
+
+          FormsHeadText("Indent Selection"),
+
+          DropdownForm(),
+
+          SizedBox(height: 15,),
+
+          FormsHeadText("PO Valid Date"),
+
+          DateTextFormField(),
 
         ],
       ),

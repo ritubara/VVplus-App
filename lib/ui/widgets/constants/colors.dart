@@ -24,3 +24,8 @@ const decorationColor1 = Colors.white;
 const iconColor1 = Colors.black;
 const iconColor2 = Colors.black45;
 const boxDecorationColor1 = Colors.grey;
+const boxDecorationColor2 = Color(0xFFECEFF1);
+
+const roundedButtonHomeColor1 = Colors.green;
+const roundedButtonHomeColor2 = Colors.red;
+const roundedButtonHomeColor3 = Colors.black45;
