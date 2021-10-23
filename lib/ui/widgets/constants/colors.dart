@@ -18,3 +18,7 @@ const StepperColor= Colors.purple;
 const StepperColor1 = Colors.orange;
 
 const decorationColor1 = Colors.white;
+
+const iconColor1 = Colors.black;
+const iconColor2 = Colors.black45;
+const boxDecorationColor1 = Colors.grey;
