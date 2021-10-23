@@ -8,8 +8,8 @@ const PrimaryColor4 = Colors.black45;   // black45
 const PrimaryColor5 = Colors.grey;
 const PrimaryColor6 = Colors.red;
 const PrimaryColor7 = Colors.lightGreen;
-const PrimaryColor8 = Color(0xFFECEFF1);   // form background
-const PrimaryColor9 = Color(0xFFCFD8DC);   // form border
+const PrimaryColor8 = Color(0xFFECEFF1);
+const PrimaryColor9 = Color(0xFFCFD8DC);
 
 const TextColor1= Colors.white;
 const TextColor2= Colors.green;
