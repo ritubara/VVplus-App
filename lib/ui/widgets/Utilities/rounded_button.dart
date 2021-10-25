@@ -160,3 +160,16 @@ RoundedButtonInput RoundedButton6(String text1,var press1) {
     textColor1: TextColor1,
   );
 }
+
+RoundedButtonInput ButtonStaffContainer(String text1,var press1){
+  return RoundedButtonInput(
+    text: text1,
+    press: press1,
+    fontsize1: 12,
+    size1: 0.5,
+    horizontal1: 30,
+    vertical1: 10,
+    color1: Colors.orange,
+    textColor1: TextColor1,
+  );
+}
