@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_decorations.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
@@ -57,6 +58,18 @@ class PlacePurchaseOrderBody extends StatelessWidget{
           FormsHeadText("PO Valid Date"),
 
           DateTextFormField(),
+
+          InformationBoxContainer2(),
+
+          SizedBox(height: 15,),
+
+          FormsHeadText("Remarks:"),
+
+          SizedBox(height: 15,),
+
+          Padding(
+              padding: padding4,
+              child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
 
         ],
       ),
