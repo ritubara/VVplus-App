@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_decorations.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
@@ -36,14 +37,24 @@ class MaterialRequestApprovalBody extends StatelessWidget{
 
           DropdownForm(),
 
+          //SizedBox(height: 10,),
+
+          InformationBoxContainer1(),
+
+          //SizedBox(height: 10,),
+
+          InformationBoxContainer1(),
+
+          SizedBox(height: 15,),
+
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: padding4,
               child: RoundedButtonHome2("Approve",(){},roundedButtonHomeColor1)),
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: padding4,
               child: RoundedButtonHome2("Deny",(){},roundedButtonHomeColor2)),
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: padding4,
               child: RoundedButtonHome2("Wait",(){},roundedButtonHomeColor3)),
 
         ],
