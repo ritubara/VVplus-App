@@ -29,3 +29,6 @@ const boxDecorationColor2 = Color(0xFFECEFF1);
 const roundedButtonHomeColor1 = Colors.green;
 const roundedButtonHomeColor2 = Colors.red;
 const roundedButtonHomeColor3 = Colors.black45;
+
+const boxDecorationTextColor1 = Colors.black;
+const boxDecorationTextColor2 = Colors.green;
