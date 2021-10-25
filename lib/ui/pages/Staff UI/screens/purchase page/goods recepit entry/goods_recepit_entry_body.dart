@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_decorations.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
@@ -69,17 +68,6 @@ class GoodsRecepitEntryBody extends StatelessWidget{
           FormsHeadText("Vehicle No."),
 
           DropdownForm(),
-
-          InformationBoxContainer2(),
-          InformationBoxContainer2(),
-          InformationBoxContainer2(),
-          InformationBoxContainer2(),
-
-          SizedBox(height: 30,),
-
-          Padding(
-              padding: EdgeInsets.only(left: 30),
-              child: FormsHeadText("Total Bill Value:       29,278.20")),
 
           SizedBox(height: 15,),
 
