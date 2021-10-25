@@ -8,6 +8,7 @@ import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
+import 'goods recepit entry/goods_recepit_entry.dart';
 import 'material_request_approval/material_request_approval.dart';
 
 class PurchaseBody extends StatelessWidget{
@@ -78,7 +79,12 @@ class PurchaseBody extends StatelessWidget{
                   context,
                   MaterialPageRoute(
                       builder: (context) => PlacePurchaseOrder()));}),
-              RoundedButtonHome("Goods Recepit Entry", () {}),
+              RoundedButtonHome("Goods Recepit Entry", () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GoodsRecepitEntryPage()));
+              }),
             ],
           ),
         ],
