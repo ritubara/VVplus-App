@@ -119,3 +119,124 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
     );
   }
 }
+
+
+class InformationBoxContainer2 extends StatefulWidget{
+  @override
+  _InformationBoxContainer2State createState() => _InformationBoxContainer2State();
+}
+
+class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 32),
+      child: Container(
+        alignment: Alignment.center,
+        height: 108,
+        width: SizeConfig.getWidth(context),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0),
+          color: PrimaryColor3,
+          boxShadow: const [
+            BoxShadow(
+              color: PrimaryColor5,
+              offset: Offset(0.0, 1.0), //(x,y)
+              blurRadius: 6.0,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 16,top: 10),
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Ball Valve UPVC\n3/4’’",
+                    style: containerTextStyle1(),
+                  ),
+                  const SizedBox(height: 13,),
+                  Text(
+                    "GHSN/SAC: 7307",
+                    style: containerTextStyle4(),
+                  ),
+                  const SizedBox(height: 2,),
+            Text(
+            "Order no.: AA 16/GORD",
+              style: containerTextStyle3(),
+            ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 30,top: 13),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Order Qty.:\nReceive Qty.:\nRate:\nAmount:",
+                          style: containerTextStyle2(),
+                        ),
+                        Text(
+                          "Remarks:",
+                          style: containerTextStyle4(),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 26,top: 15),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "50 Pc\n50 Pc\n150\n7500",
+                              style: containerTextStyle2(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 26,top: 10),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Image.asset(icon15),
+                            const SizedBox(height: 15.5,),
+                            Text(
+                              "Edit",
+                              style: containerTextStyle5(),
+                            ),
+                            const SizedBox(height: 7,),
+                            Text(
+                              "Inc.Tax",
+                              style: containerTextStyle3(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
