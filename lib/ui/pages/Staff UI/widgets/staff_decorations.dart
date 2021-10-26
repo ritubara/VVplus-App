@@ -272,9 +272,9 @@ class MyFormsContainer extends State<FormsContainer>{
     padding: EdgeInsets.all(10),
     child: Container(
       height: 378,
-      width: 340,
+      width: SizeConfig.getWidth(context),
       decoration: BoxDecoration(
-        color: Color(0xFFDFEBE7),
+        color: Colors.grey[300],
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
