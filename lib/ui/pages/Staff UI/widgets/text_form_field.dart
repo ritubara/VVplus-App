@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
+import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_decorations.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
@@ -184,6 +186,36 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class NormalTextFormField extends StatefulWidget {
+  @override
+  State<NormalTextFormField> createState() => MyNormalTextFormField();
+}
+class MyNormalTextFormField extends State<NormalTextFormField> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      padding: padding1,
+      decoration: decoration1(),
+      child: SizedBox(
+        width: 320,
+        child: TextFormField(
+          decoration: InputDecoration(
+            enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: PrimaryColor4),
+                borderRadius: BorderRadius.circular(10)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: PrimaryColor4),
+                borderRadius: BorderRadius.circular(10)),
+          ),
+          keyboardType: TextInputType.text,
+          style: simpleTextStyle7(),
+        ),
+      ),
     );
   }
 }
