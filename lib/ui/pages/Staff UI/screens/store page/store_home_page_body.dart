@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/Branch%20to%20Branch%20Receive/branch_to_branch_receive_home.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/Branch%20to%20Branch%20Send/branch_to_branch_send_home.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/Phase%20to%20Phase%20Transfer/phase_to_phase_transfer_home.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/stock%20issue%20entry/store_issue_entry_home.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/stock%20receive%20entry/stock_receive_entry_home.dart';
@@ -67,8 +69,12 @@ class StorePageBody extends StatelessWidget{
               RoundedButtonHome("Phase to Phase Transfer",
                       () {Navigator.push(context, MaterialPageRoute(
                           builder: (context) => PhaseToPhaseTransferPage()));}),
-              RoundedButtonHome("Branch to Branch Send", () {}),
-              RoundedButtonHome("Branch to Branch Recieve", () {}),
+              RoundedButtonHome("Branch to Branch Send",
+                      () {Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => BranchtoBranchSendPage()));}),
+              RoundedButtonHome("Branch to Branch Recieve",
+                      () {Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => BranchtoBranchReceivePage()));}),
             ],
           ),
         ],
