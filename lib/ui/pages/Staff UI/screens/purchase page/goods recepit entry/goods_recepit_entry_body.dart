@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
+import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
@@ -21,9 +22,20 @@ class GoodsRecepitEntryBody extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 15,),
-
-          SizedBox(height: 15,),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                RaisedButton(
+                  onPressed: () {},
+                  elevation: 0.0,
+                  color: Colors.white,
+                  child: RaisedButtonText("Clear all"),
+                ),
+              ],
+            ),
+          ),
 
           FormsHeadText("Voucher Type"),
 
