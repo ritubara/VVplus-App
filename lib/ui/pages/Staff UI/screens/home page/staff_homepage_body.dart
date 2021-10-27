@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/purchase.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/sales_home_page.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/store_home.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
-import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
@@ -78,7 +78,10 @@ class HomeBody extends StatelessWidget{
               ),
               RoundedButtonHome(
                 "Sales",
-                    () {},
+                    () {Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SalesPage()));},
               ),
               RoundedButtonHome(
                 "Contractors",

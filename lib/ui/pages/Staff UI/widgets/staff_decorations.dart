@@ -258,6 +258,151 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
   }
 }
 
+class InformationBoxContainer3 extends StatefulWidget{
+  @override
+  _InformationBoxContainer3State createState() => _InformationBoxContainer3State();
+}
+
+class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.only(top: 32,left: 15),
+    child: Container(
+    alignment: Alignment.center,
+    height: 134,
+    width: SizeConfig.getWidth(context) * .93,
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(5.0),
+    color: PrimaryColor3,
+    boxShadow: const [
+    BoxShadow(
+    color: PrimaryColor5,
+    offset: Offset(0.0, 1.0), //(x,y)
+    blurRadius: 6.0,
+    ),
+    ],
+    ),
+    child: Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: <Widget>[
+    Padding(
+    padding: EdgeInsets.only(left: 16,top: 10),
+    child: Column(
+    //mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Text(
+        "Name: Chandra Shekhar",
+        style: containerTextStyle6(),
+      ),
+      const SizedBox(height: 16,),
+      Row(
+        children: [
+          Column(
+            children: [
+              Text(
+                "Booking ID: 229/\nUBOOK/PN/12",
+                style: containerTextStyle3(),
+              ),
+              const SizedBox(height: 8,),
+              Text(
+                "Unit: GA-105(C),\nPH-06",
+                style: containerTextStyle3(),
+              ),
+            ],
+          ),
+          SizedBox(width: 41,),
+          Text(
+            "Booking Date:   22/Sept/2012\nUnit Category:  Appt 2Bhk(661sqft)\nFloor:                  First FloorProject\nName:   AIIMS-01(06)/C/GA/66Tax\nStructure:   GST 01 PER",
+            style: containerTextStyle2(),
+          ),
+        ],
+      ),
+    ],
+    ),
+    ),
+      ],
+    ),
+    ),
+    );
+  }
+}
+
+
+class InformationBoxContainer4 extends StatefulWidget{
+  @override
+  _InformationBoxContainer4State createState() => _InformationBoxContainer4State();
+}
+
+class _InformationBoxContainer4State extends State<InformationBoxContainer4> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 32,left: 15),
+      child: Container(
+        alignment: Alignment.center,
+        height: 134,
+        width: SizeConfig.getWidth(context) * .93,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0),
+          color: PrimaryColor3,
+          boxShadow: const [
+            BoxShadow(
+              color: PrimaryColor5,
+              offset: Offset(0.0, 1.0), //(x,y)
+              blurRadius: 6.0,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: 16,top: 10),
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Name: Tripurari Jha ",
+                    style: containerTextStyle6(),
+                  ),
+                  const SizedBox(height: 16,),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            "Booking ID: 101/\nUBOOK/PN/13",
+                            style: containerTextStyle3(),
+                          ),
+                          const SizedBox(height: 8,),
+                          Text(
+                            "Unit: AD-202(D),\nPH-03",
+                            style: containerTextStyle3(),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 35,),
+                      Text(
+                        "Booking Date:    06/Nov/2013\nUnit Category:   Appt 2Bhk(750sqft)\nFloor:                   Second Floor\nPhase:                 Patna PH-03/RR\nUnit Area:           1150\nNet Unit Cost:    16,37,000",
+                        style: containerTextStyle2(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 // forms container
 class FormsContainer extends StatefulWidget{

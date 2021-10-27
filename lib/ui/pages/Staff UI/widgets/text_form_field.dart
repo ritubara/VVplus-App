@@ -36,11 +36,11 @@ class _DateTextFormFieldState extends State<DateTextFormField> {
             //hintText: "Enter Date",
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
-                borderSide: BorderSide(color: TextColor4)
+                borderSide: BorderSide(color: TextColor5)
             ),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                borderSide: BorderSide(color: TextColor4)
+                borderSide: BorderSide(color: TextColor5)
             ),
 
             //prefixIcon: Icon(Icons.calendar_today),
@@ -205,6 +205,8 @@ class MyNormalTextFormField extends State<NormalTextFormField> {
         width: 320,
         child: TextFormField(
           decoration: InputDecoration(
+            filled: true,
+            fillColor: PrimaryColor8,
             enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: PrimaryColor4),
                 borderRadius: BorderRadius.circular(10)),
