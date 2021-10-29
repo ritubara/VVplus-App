@@ -36,7 +36,7 @@ class ProgressBodyState extends State<ProgressBody> {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Text(
                           boxheading1,
-                          style: ContainerHeading2(),
+                          style: containerHeading2(),
                         ),
                       ),
                       Padding(
