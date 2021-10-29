@@ -17,7 +17,6 @@ class ProgressBodyState extends State<ProgressBody> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child:Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,26 +35,26 @@ class ProgressBodyState extends State<ProgressBody> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Text(
-                          Boxheading1,
+                          boxheading1,
                           style: ContainerHeading2(),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          BoxText1,
+                          boxText1,
                           style: ContainerText2(),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Text(
-                          BoxText2,
+                          boxText2,
                           style: ContainerText2Bold(),
                         ),
                       ),
                       Text(
-                        BoxText3,
+                        boxText3,
                         style: ContainerText2(),
                       ),
                       Padding(
@@ -65,7 +64,7 @@ class ProgressBodyState extends State<ProgressBody> {
                                                                                    //call customer care
                           },
                           child: Text(
-                            BoxLink,
+                            boxLink,
                             style: ContainerHeading1(),
                           ),
                         ),
@@ -76,7 +75,7 @@ class ProgressBodyState extends State<ProgressBody> {
               ),
             ),
           ),
-          StepperBody(),
+          const StepperBody(),
 
         ],
       ),

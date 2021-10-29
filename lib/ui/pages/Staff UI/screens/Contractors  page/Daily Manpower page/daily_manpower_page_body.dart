@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_decorations.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 
 class DailyManpowerBody extends StatefulWidget {
+  const DailyManpowerBody({Key key}) : super(key: key);
+
   @override
   State<DailyManpowerBody> createState() => myDailyManpowerBody();
 }
@@ -23,7 +24,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -39,42 +40,42 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
 
           FormsHeadText("Date"),
 
-          DateTextFormField(),
+          const DateTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Party Name"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Phase (cost center)"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Resource Type"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Qty."),
 
-          NormalTextFormField(),
+          const NormalTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Remarks"),
 
-          NormalTextFormField(),
+          const NormalTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
 
               child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
 

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
-import 'package:vvplus_app/ui/widgets/constants/colors.dart';
-import 'package:vvplus_app/ui/widgets/constants/size.dart';
-import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
 import 'package:readmore/readmore.dart';
 
 
@@ -18,8 +15,6 @@ class _HouseInformationState extends State<HouseInformation> {
 
   @override
   Widget build(BuildContext context) {
-    var height = SizeConfig.getHeight(context);
-    var width = SizeConfig.getWidth(context);
     return Scaffold(
       body: SafeArea(
       child: SingleChildScrollView(
@@ -95,14 +90,12 @@ class _HouseInformationState extends State<HouseInformation> {
                     moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: Colors.green),
                   ),
                 ),
-                    Container(
-                      child: Row(
-                        children: [
-                          RoundedButton3("Next",(){}),
-                          SizedBox(width: 35,),
-                          RoundedButton3("Skip",(){}),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        RoundedButton3("Next",(){}),
+                        const SizedBox(width: 35,),
+                        RoundedButton3("Skip",(){}),
+                      ],
                     ),
                   ],
               ),

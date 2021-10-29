@@ -8,6 +8,8 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 
 class ExtraWorkEntryBody extends StatefulWidget {
+  const ExtraWorkEntryBody({Key key}) : super(key: key);
+
   @override
   State<ExtraWorkEntryBody> createState() => myExtraWorkEntryBody();
 }
@@ -23,7 +25,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -39,58 +41,58 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
 
           FormsHeadText("Voucher Type"),
 
-          NormalTextFormField(),
+          const NormalTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Booking Id"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
-          InformationBoxContainer3(),
+          const InformationBoxContainer3(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Stage (purpose? extra work? extra land?)"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Overhead"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Date of Estimate"),
 
-          DateTextFormField(),
+          const DateTextFormField(),
 
-          SizedBox(height: 30,),
+          const SizedBox(height: 30,),
 
           FormsHeadText("Base Amount"),
 
-          NormalTextFormField(),
+          const NormalTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Tax:"),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Net Amount:"),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Remarks"),
 
-          NormalTextFormField(),
+          const NormalTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
 
               child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
 

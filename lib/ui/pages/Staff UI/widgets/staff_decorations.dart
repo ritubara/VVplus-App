@@ -30,6 +30,8 @@ BoxDecoration ContainerDecorationForms() {
 }
 
 class InformationBoxContainer1 extends StatefulWidget{
+  const InformationBoxContainer1({Key key}) : super(key: key);
+
   @override
   _InformationBoxContainer1State createState() => _InformationBoxContainer1State();
 }
@@ -38,7 +40,7 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 32),
+      padding: const EdgeInsets.only(top: 32),
       child: Container(
         alignment: Alignment.center,
         height: 92,
@@ -58,7 +60,7 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 16,top: 10),
+              padding: const EdgeInsets.only(left: 16,top: 10),
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +79,7 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
                         style: containerTextStyle2(),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 40),
+                        padding: const EdgeInsets.only(left: 40),
                         child: Text(
                           "20 Pc",
                           style: containerTextStyle2(),
@@ -89,7 +91,7 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 50,top: 13),
+              padding: const EdgeInsets.only(left: 50,top: 13),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -104,22 +106,22 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
                             style: containerTextStyle3(),
                           ),
                           Padding(
-                              padding: EdgeInsets.only(left: 100),
+                              padding: const EdgeInsets.only(left: 100),
                               child: Image.asset(icon15)),
                         ],
                       ),
 
-                      SizedBox(height: 2,),
+                      const SizedBox(height: 2,),
                       Text(
                         "Req Date: 27 Sept, 2021",
                         style: containerTextStyle2(),
                       ),
-                      SizedBox(height: 2,),
+                      const SizedBox(height: 2,),
                       Text(
                         "Req Date: 27 Sept, 2021",
                         style: containerTextStyle2(),
                       ),
-                      SizedBox(height: 2,),
+                      const SizedBox(height: 2,),
                       Text(
                         "Indent No.: 203",
                         style: containerTextStyle2(),
@@ -139,6 +141,8 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
 
 
 class InformationBoxContainer2 extends StatefulWidget{
+  const InformationBoxContainer2({Key key}) : super(key: key);
+
   @override
   _InformationBoxContainer2State createState() => _InformationBoxContainer2State();
 }
@@ -147,7 +151,7 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 32),
+      padding: const EdgeInsets.only(top: 32),
       child: Container(
         alignment: Alignment.center,
         height: 108,
@@ -167,7 +171,7 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 16,top: 10),
+              padding: const EdgeInsets.only(left: 16,top: 10),
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -190,12 +194,12 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 30,top: 13),
+              padding: const EdgeInsets.only(left: 30,top: 13),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 15),
+                    padding: const EdgeInsets.only(top: 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -212,7 +216,7 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 26,top: 15),
+                    padding: const EdgeInsets.only(left: 26,top: 15),
                     child: Row(
                       children: [
                         Column(
@@ -227,7 +231,7 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 26,top: 10),
+                    padding: const EdgeInsets.only(left: 26,top: 10),
                     child: Row(
                       children: [
                         Column(
@@ -259,6 +263,8 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
 }
 
 class InformationBoxContainer3 extends StatefulWidget{
+  const InformationBoxContainer3({Key key}) : super(key: key);
+
   @override
   _InformationBoxContainer3State createState() => _InformationBoxContainer3State();
 }
@@ -267,7 +273,7 @@ class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(top: 32,left: 15),
+        padding: const EdgeInsets.only(top: 32,left: 15),
     child: Container(
     alignment: Alignment.center,
     height: 134,
@@ -287,7 +293,7 @@ class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
     Padding(
-    padding: EdgeInsets.only(left: 16,top: 10),
+    padding: const EdgeInsets.only(left: 16,top: 10),
     child: Column(
     //mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -312,7 +318,7 @@ class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
               ),
             ],
           ),
-          SizedBox(width: 41,),
+          const SizedBox(width: 41,),
           Text(
             "Booking Date:   22/Sept/2012\nUnit Category:  Appt 2Bhk(661sqft)\nFloor:                  First FloorProject\nName:   AIIMS-01(06)/C/GA/66Tax\nStructure:   GST 01 PER",
             style: containerTextStyle2(),
@@ -331,6 +337,8 @@ class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
 
 
 class InformationBoxContainer4 extends StatefulWidget{
+  const InformationBoxContainer4({Key key}) : super(key: key);
+
   @override
   _InformationBoxContainer4State createState() => _InformationBoxContainer4State();
 }
@@ -339,7 +347,7 @@ class _InformationBoxContainer4State extends State<InformationBoxContainer4> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 32,left: 15),
+      padding: const EdgeInsets.only(top: 32,left: 15),
       child: Container(
         alignment: Alignment.center,
         height: 134,
@@ -359,7 +367,7 @@ class _InformationBoxContainer4State extends State<InformationBoxContainer4> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 16,top: 10),
+              padding: const EdgeInsets.only(left: 16,top: 10),
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -384,7 +392,7 @@ class _InformationBoxContainer4State extends State<InformationBoxContainer4> {
                           ),
                         ],
                       ),
-                      SizedBox(width: 35,),
+                      const SizedBox(width: 35,),
                       Text(
                         "Booking Date:    06/Nov/2013\nUnit Category:   Appt 2Bhk(750sqft)\nFloor:                   Second Floor\nPhase:                 Patna PH-03/RR\nUnit Area:           1150\nNet Unit Cost:    16,37,000",
                         style: containerTextStyle2(),
@@ -406,6 +414,8 @@ class _InformationBoxContainer4State extends State<InformationBoxContainer4> {
 
 // forms container
 class FormsContainer extends StatefulWidget{
+  const FormsContainer({Key key}) : super(key: key);
+
   @override
   State<FormsContainer> createState() => MyFormsContainer();
   }
@@ -414,7 +424,7 @@ class MyFormsContainer extends State<FormsContainer>{
   @override
   Widget build(BuildContext context) {
   return  Padding(
-    padding: EdgeInsets.all(10),
+    padding: const EdgeInsets.all(10),
     child: Container(
       height: 378,
       width: SizeConfig.getWidth(context),
@@ -425,15 +435,15 @@ class MyFormsContainer extends State<FormsContainer>{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(padding: EdgeInsets.all(10)),
+          const Padding(padding: EdgeInsets.all(10)),
           FormsHeadText("Item "),
-          DropdownFormCont(),
-          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          const DropdownFormCont(),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
           FormsHeadText("Request Qty. "),
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Container(
                   height: 50,
                   padding: padding1,
@@ -441,7 +451,7 @@ class MyFormsContainer extends State<FormsContainer>{
                   child: SizedBox(
                     width: 130,
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
 
                       ),
                       keyboardType: TextInputType.number,
@@ -458,7 +468,7 @@ class MyFormsContainer extends State<FormsContainer>{
                       borderRadius: BorderRadius.circular(5)),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton(
-                      hint: Text(" "),
+                      hint: const Text(" "),
                       dropdownColor: PrimaryColor3,
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       iconSize: 20,
@@ -467,13 +477,13 @@ class MyFormsContainer extends State<FormsContainer>{
                       style: const TextStyle(
                           color: PrimaryColor2, fontSize: 12),
                       value: valueChoose,
-                      items: <DropdownMenuItem<int>>[
-                        new DropdownMenuItem(
-                          child: new Text('\tTon'),
+                      items: const <DropdownMenuItem<int>>[
+                        DropdownMenuItem(
+                          child: Text('\tTon'),
                           value: 0,
                         ),
-                        new DropdownMenuItem(
-                          child: new Text('\tKG'),
+                        DropdownMenuItem(
+                          child: Text('\tKG'),
                           value: 4,
                         ),
                       ],
@@ -488,18 +498,18 @@ class MyFormsContainer extends State<FormsContainer>{
               ),
             ],
           ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
           Row(
             children: [
               FormsHeadText("Rate"),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
               FormsHeadText("Amount:"),
             ],
           ),
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Container(
                   height: 50,
                   padding: padding1,
@@ -515,15 +525,15 @@ class MyFormsContainer extends State<FormsContainer>{
               ),
             ],
           ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 
           Row(
             children: [
-              Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
               RaisedButton(
                 onPressed: () {},
                 elevation: 0.0,
-                color: Color(0xFFDFEBE7),
+                color: const Color(0xFFDFEBE7),
                 child: RaisedButtonText("Clear This Item"),
               ),
 

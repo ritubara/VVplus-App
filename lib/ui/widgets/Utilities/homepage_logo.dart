@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 
 class HomePageLogo extends StatelessWidget{
+  const HomePageLogo({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

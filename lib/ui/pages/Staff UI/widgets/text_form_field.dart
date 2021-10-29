@@ -8,6 +8,8 @@ import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class DateTextFormField extends StatefulWidget {
+  const DateTextFormField({Key key}) : super(key: key);
+
   @override
   _DateTextFormFieldState createState() => _DateTextFormFieldState();
 }
@@ -24,7 +26,7 @@ class _DateTextFormFieldState extends State<DateTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 35),
+      padding: const EdgeInsets.symmetric(horizontal: 35),
       height: 48,
       child: Center(
         child: TextFormField(
@@ -56,16 +58,16 @@ class _DateTextFormFieldState extends State<DateTextFormField> {
             );
 
             if (pickedDate != null) {
-              print(pickedDate);
+              //print(pickedDate);
               String formattedDate = DateFormat('yyyy-MM-dd').format(
                   pickedDate);
-              print(formattedDate);
+             // print(formattedDate);
 
               setState(() {
                 dateinput.text = formattedDate;
               });
             } else {
-              print("Date is not selected");
+              //print("Date is not selected");
             }
           },
         ),
@@ -77,6 +79,8 @@ class _DateTextFormFieldState extends State<DateTextFormField> {
 
 // for dropdown form
 class DropdownForm extends StatefulWidget {
+  const DropdownForm({Key key}) : super(key: key);
+
   @override
   State<DropdownForm> createState() => MyDropdownForm();
 }
@@ -96,9 +100,9 @@ class MyDropdownForm extends State<DropdownForm> {
                   hint: Row(
                     children: [
                       IconButton(
-                        icon: Icon(Icons.search),
+                        icon: const Icon(Icons.search), onPressed: () {  },
                       ),
-                      Text("Search here"),
+                      const Text("Search here"),
                     ],
                   ),
                   dropdownColor: PrimaryColor3,
@@ -131,6 +135,8 @@ class MyDropdownForm extends State<DropdownForm> {
 
 //dropdown form for container
 class DropdownFormCont extends StatefulWidget {
+  const DropdownFormCont({Key key}) : super(key: key);
+
   @override
   State<DropdownFormCont> createState() => MyDropdownFormCont();
 }
@@ -150,9 +156,9 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
                   hint: Row(
                     children: [
                       IconButton(
-                        icon: Icon(Icons.search),
+                        icon: const Icon(Icons.search), onPressed: () {  },
                       ),
-                      Text("Search here"),
+                      const Text("Search here"),
                     ],
                   ),
                   dropdownColor: PrimaryColor3,
@@ -162,13 +168,13 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
                   iconEnabledColor: PrimaryColor4,
                   style: const TextStyle(color: PrimaryColor2, fontSize: 16),
                   value: valueChoose,
-                  items: <DropdownMenuItem<int>>[
-                    new DropdownMenuItem(
-                      child: new Text('\tValue 1'),
+                  items: const <DropdownMenuItem<int>>[
+                    DropdownMenuItem(
+                      child: Text('\tValue 1'),
                       value: 0,
                     ),
-                    new DropdownMenuItem(
-                      child: new Text('\tValue 2'),
+                    DropdownMenuItem(
+                      child: Text('\tValue 2'),
                       value: 42,
                     ),
                   ],
@@ -188,6 +194,8 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
 }
 
 class NormalTextFormField extends StatefulWidget {
+  const NormalTextFormField({Key key}) : super(key: key);
+
   @override
   State<NormalTextFormField> createState() => MyNormalTextFormField();
 }

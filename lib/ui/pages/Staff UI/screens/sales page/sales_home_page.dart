@@ -4,6 +4,8 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_bottomnavbar.dart';
 
 class SalesPage extends StatefulWidget{
+  const SalesPage({Key key}) : super(key: key);
+
   @override
   _SalesPageState createState() => _SalesPageState();
 }
@@ -13,8 +15,8 @@ class _SalesPageState extends State<SalesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarSatff("Sales"),
-      body: SalesBody(),
-      bottomNavigationBar: BottomNavBarStaff(),
+      body: const SalesBody(),
+      bottomNavigationBar: const BottomNavBarStaff(),
     );
   }
 }

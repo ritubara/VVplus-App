@@ -34,7 +34,7 @@ class ViewHouseState extends State<ViewHouseBody> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
+          const SizedBox(
             height: 313,
             width: 410,
             child: ViewCarouselSlider(),
@@ -43,14 +43,14 @@ class ViewHouseState extends State<ViewHouseBody> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "House Detail",
                   style: simpleTextStyle10(Colors.black45),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Row(
                   children: <Widget>[
                     IconButton(
@@ -62,7 +62,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                       onPressed: () {},
                     ),
                     Text("3 Bedrooms", style: simpleTextStyle10(Colors.black45)),
-                    Padding(padding: EdgeInsets.symmetric(horizontal: 20)),
+                    const Padding(padding: EdgeInsets.symmetric(horizontal: 20)),
                     IconButton(
                       icon: Image.asset(
                         icon2,
@@ -76,7 +76,7 @@ class ViewHouseState extends State<ViewHouseBody> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 child: Row(
                   children: <Widget>[
                     IconButton(
@@ -84,13 +84,13 @@ class ViewHouseState extends State<ViewHouseBody> {
                         icon3,
                         scale: 0.8,
                       ),
-                      color: Colors.grey,
+                      color: Colors.grey, onPressed: () {  },
                     ),
                     Text(
                       "1 Parking",
                       style: simpleTextStyle10(Colors.black45),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 28),
                     ),
                     IconButton(
@@ -106,28 +106,28 @@ class ViewHouseState extends State<ViewHouseBody> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 child: Row(
                   children: [
                     Text("Plot area: 777sqrt", style: simpleTextStyle10(Colors.black45)),
-                    Padding(padding: EdgeInsets.symmetric(horizontal: 25)),
+                    const Padding(padding: EdgeInsets.symmetric(horizontal: 25)),
                     Text("Carpet area: 739sqrt", style: simpleTextStyle10(Colors.black45)),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
                         "Closest Utilities",
                         style: simpleTextStyle10(Colors.black45),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.all(10)),
+                    const Padding(padding: EdgeInsets.all(10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -135,16 +135,16 @@ class ViewHouseState extends State<ViewHouseBody> {
                       child: Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.local_hospital,color: Colors.black),
+                            icon: const Icon(Icons.local_hospital,color: Colors.black), onPressed: () {  },
                           ),
                           Text("Emergency", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 65)),
                           Text("3 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -152,16 +152,16 @@ class ViewHouseState extends State<ViewHouseBody> {
                       child: Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.apartment_sharp,color: Colors.black),
+                            icon: const Icon(Icons.apartment_sharp,color: Colors.black), onPressed: () {  },
                           ),
                           Text("Schools", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 77)),
                           Text("2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -169,17 +169,17 @@ class ViewHouseState extends State<ViewHouseBody> {
                       child: Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.school,color: Colors.black),
+                            icon: const Icon(Icons.school,color: Colors.black), onPressed: () {  },
                           ),
                           Text("Colleges", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 70)),
                           Text("1.7 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
 
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 
 
                     Visibility(
@@ -194,17 +194,17 @@ class ViewHouseState extends State<ViewHouseBody> {
                           child: Row(
                             children: [
                               IconButton(
-                                icon: Icon(Icons.directions_bus,color: Colors.black),
+                                icon: const Icon(Icons.directions_bus,color: Colors.black), onPressed: () {  },
                               ),
                               Text("Bus Stations", style: simpleTextStyle10(Colors.black45)),
-                              Padding(
+                              const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 57)),
                               Text("0.5 Km Away", style: simpleTextStyle10(Colors.green))
                             ],
                           ),
                            ),
 
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -212,16 +212,16 @@ class ViewHouseState extends State<ViewHouseBody> {
                       child: Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.directions_railway,color: Colors.black),
+                            icon: const Icon(Icons.directions_railway,color: Colors.black), onPressed: () {  },
                           ),
                           Text("Railway Stations", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 45)),
                           Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -229,16 +229,16 @@ class ViewHouseState extends State<ViewHouseBody> {
                       child: Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.shopping_bag_outlined,color: Colors.black),
+                            icon: const Icon(Icons.shopping_bag_outlined,color: Colors.black), onPressed: () {  },
                           ),
                           Text("Shopping Hub", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 52)),
                           Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -249,17 +249,17 @@ class ViewHouseState extends State<ViewHouseBody> {
                             icon: Image.asset(
                               icon10,
                               scale: 0.7,
-                            ),
+                            ), onPressed: () {  },
                           ),
 
                           Text("Petrol Station", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 53)),
                           Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -270,17 +270,17 @@ class ViewHouseState extends State<ViewHouseBody> {
                             icon: Image.asset(
                               icon12,
                               scale: 0.8,
-                            ),
+                            ), onPressed: () {  },
                           ),
 
                           Text("LPG Station", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 60)),
                           Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -291,17 +291,17 @@ class ViewHouseState extends State<ViewHouseBody> {
                             icon: Image.asset(
                               icon13,
                               scale: 0.8,
-                            ),
+                            ), onPressed: () {  },
                           ),
 
                           Text("Post Office", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 63)),
                           Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
                       ),
                     ),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Container(
                       height: 59,
                       width: 359,
@@ -312,11 +312,11 @@ class ViewHouseState extends State<ViewHouseBody> {
                             icon: Image.asset(
                               icon14,
                               scale: 0.8,
-                            ),
+                            ), onPressed: () {  },
                           ),
 
                           Text("Police Station", style: simpleTextStyle10(Colors.black45)),
-                          Padding(
+                          const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 55)),
                           Text("0.2 Km Away", style: simpleTextStyle10(Colors.green))
                         ],
@@ -356,12 +356,12 @@ class ViewHouseState extends State<ViewHouseBody> {
                     ),
 
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal:30,vertical: 10),
-                      child: RoundedButtonLogin(
+                      padding: const EdgeInsets.symmetric(horizontal:30,vertical: 10),
+                      child: roundedButtonLogin(
                       "View Technical Specs of House",
                       () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => TechnicalSpecs()));
+                            MaterialPageRoute(builder: (context) => const TechnicalSpecs()));
                       },
                     ),
     ),

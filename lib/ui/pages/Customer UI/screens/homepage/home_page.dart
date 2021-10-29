@@ -3,7 +3,7 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/screens/homepage/body.dart';
 import '../../widgets/bottom_navbar.dart';
 
 class HomePage extends StatefulWidget{
-  HomePage({
+  const HomePage({
     Key key
   }): super(key:key);
   @override
@@ -11,12 +11,6 @@ class HomePage extends StatefulWidget{
 }
 
 class MyHomePage extends State<HomePage> {
-  int _selectedIndex=1;
-  void _onItemTapped(int index){
-    setState((){
-      _selectedIndex=index;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

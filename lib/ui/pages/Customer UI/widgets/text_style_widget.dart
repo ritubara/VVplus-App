@@ -40,7 +40,7 @@ TextStyle simpleTextStyle10(var colorof) {
 TextStyle ContainerHeading1() {
   return simpleTextStyle(TextColor2,18);
 }
-TextStyle ContainerHeading2() {
+TextStyle containerHeading2() {
   return simpleTextStyle(TextColor3,18);
 }
 TextStyle ContainerText2() {

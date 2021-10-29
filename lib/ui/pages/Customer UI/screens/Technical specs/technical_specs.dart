@@ -5,6 +5,8 @@ import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 
 
 class TechnicalSpecs extends StatelessWidget {
+  const TechnicalSpecs({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,14 +15,14 @@ class TechnicalSpecs extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Text(
               "House Detail",
               style: simpleTextStyle10(Colors.black45),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Row(
               children: <Widget>[
                 IconButton(
@@ -32,7 +34,7 @@ class TechnicalSpecs extends StatelessWidget {
                   onPressed: () {},
                 ),
                 Text("3 Bedrooms", style: simpleTextStyle10(Colors.black45)),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 20)),
+                const Padding(padding: EdgeInsets.symmetric(horizontal: 20)),
                 IconButton(
                   icon: Image.asset(
                     icon2,
@@ -46,7 +48,7 @@ class TechnicalSpecs extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
             child: Row(
               children: <Widget>[
                 IconButton(
@@ -54,13 +56,13 @@ class TechnicalSpecs extends StatelessWidget {
                     icon3,
                     scale: 0.8,
                   ),
-                  color: Colors.grey,
+                  color: Colors.grey, onPressed: () {  },
                 ),
                 Text(
                   "1 Parking",
                   style: simpleTextStyle10(Colors.black45),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 28),
                 ),
                 IconButton(
@@ -76,12 +78,12 @@ class TechnicalSpecs extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Row(
               children: [
                 Text("Plot area: 777sqrt",
                     style: simpleTextStyle10(Colors.black45)),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 25)),
+                const Padding(padding: EdgeInsets.symmetric(horizontal: 25)),
                 Text("Carpet area: 739sqrt",
                     style: simpleTextStyle10(Colors.black45)),
               ],

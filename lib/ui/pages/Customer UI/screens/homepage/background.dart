@@ -4,7 +4,6 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/screens/house_information/hous
 import 'package:vvplus_app/ui/pages/Customer UI/screens/view house page/view_house.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
-import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import '../progress page/progress_page.dart';
 import '../Customercare page/customer_care_page.dart';
@@ -19,12 +18,11 @@ class Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          HomePageLogo(),
+          const HomePageLogo(),
           Container(
             alignment: Alignment.center,
             height: 120,
@@ -67,7 +65,7 @@ class Background extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+              const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
               RoundedButtonHome(
                 "Progress",
                 () {
@@ -105,7 +103,7 @@ class Background extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => HouseInformation()));
+                          builder: (context) => const HouseInformation()));
                 },
               ),
             ],

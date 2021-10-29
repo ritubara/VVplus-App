@@ -56,7 +56,7 @@ class RoundedButtonInput extends StatelessWidget {
 }
 
 // use for login button
-RoundedButtonInput RoundedButtonLogin(String text1,var press1) {
+RoundedButtonInput roundedButtonLogin(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,

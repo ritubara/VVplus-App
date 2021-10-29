@@ -8,6 +8,8 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 
 class UnitCancellationBody extends StatefulWidget {
+  const UnitCancellationBody({Key key}) : super(key: key);
+
   @override
   State<UnitCancellationBody> createState() => myUnitCancellationBody();
 }
@@ -23,7 +25,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -39,48 +41,48 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
 
           FormsHeadText("Cancellation Date"),
 
-          DateTextFormField(),
+          const DateTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Booking Id"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
-          InformationBoxContainer4(),
+          const InformationBoxContainer4(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Change Applicable"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Due Date"),
 
-          DateTextFormField(),
+          const DateTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Base Amount (deduction amount)"),
 
-          NormalTextFormField(),
+          const NormalTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Tax:"),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           FormsHeadText("Remarks"),
 
-          NormalTextFormField(),
+          const NormalTextFormField(),
 
-          SizedBox(height: 15,),
+          const SizedBox(height: 15,),
 
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
 
               child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
 
