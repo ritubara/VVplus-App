@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
-import 'dart:math'as math;
 
 AppBar AppBarSatff(String appBarText) {
   return AppBar(
@@ -12,18 +11,16 @@ AppBar AppBarSatff(String appBarText) {
       textAlign: TextAlign.center,
     ),
     actions: <Widget>[
-      Container(
-        child: Padding(
-          padding: EdgeInsets.all(10),
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.call,
-                color: Colors.white,
-              ),
+      Padding(
+        padding: const EdgeInsets.all(10),
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.call,
+              color: Colors.white,
             ),
+          ),
 
-        ),
       ),
     ],
     titleTextStyle: const TextStyle(color: PrimaryColor3),

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 
 class ViewCarouselSlider extends StatelessWidget{
+  const ViewCarouselSlider({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
    return CarouselSlider(

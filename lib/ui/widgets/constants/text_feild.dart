@@ -16,11 +16,11 @@ const String hintText2 = "Enter OTP";
 
 
 //progress page texts
-const String Boxheading1="Construction on hold";
-const String BoxText1="Amount paid to comapny: 21.5lakhs";
-const String BoxText2="Amount dues: 8 lakhs";
-const String BoxText3="Please pay the dues to resume construction";
-const String BoxLink="Call Customer Care?";
+const String boxheading1="Construction on hold";
+const String boxText1="Amount paid to comapny: 21.5lakhs";
+const String boxText2="Amount dues: 8 lakhs";
+const String boxText3="Please pay the dues to resume construction";
+const String boxLink="Call Customer Care?";
 
 // for home screen
 

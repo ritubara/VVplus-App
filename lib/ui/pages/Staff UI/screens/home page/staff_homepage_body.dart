@@ -6,7 +6,6 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/store_home.d
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
-import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class HomeBody extends StatelessWidget{
   final Widget child;
@@ -18,12 +17,11 @@ class HomeBody extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    Size size = SizeConfig.getSize(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          HomePageLogo(),
+          const HomePageLogo(),
           Container(
             alignment: Alignment.center,
             height: 130,
@@ -42,8 +40,8 @@ class HomeBody extends StatelessWidget{
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                Padding(padding: EdgeInsets.all(10)),
-                  Text(
+                  const Padding(padding: EdgeInsets.all(10)),
+                  const Text(
                     "You have 3 approval \nrequests.",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),
@@ -58,14 +56,14 @@ class HomeBody extends StatelessWidget{
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+              const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
               RoundedButtonHome(
                 "Purchase",
                     () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PurchasePage()));
+                          builder: (context) => const PurchasePage()));
                 },
               ),
               RoundedButtonHome(
@@ -74,7 +72,7 @@ class HomeBody extends StatelessWidget{
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => StorePage()));
+                          builder: (context) => const StorePage()));
                 },
               ),
               RoundedButtonHome(
@@ -82,13 +80,13 @@ class HomeBody extends StatelessWidget{
                     () {Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SalesPage()));},
+                            builder: (context) => const SalesPage()));},
               ),
               RoundedButtonHome(
                 "Contractors",
                     () {
                  Navigator.push(context, MaterialPageRoute(
-                          builder: (context) =>  ContractorsPage()));
+                          builder: (context) =>  const ContractorsPage()));
                 },
               ),
               RoundedButtonHome(

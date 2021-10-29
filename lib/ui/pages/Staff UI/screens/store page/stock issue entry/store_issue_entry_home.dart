@@ -4,6 +4,8 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_bottomnavbar.dart';
 
 class StockIssueEntryPage extends StatefulWidget{
+  const StockIssueEntryPage({Key key}) : super(key: key);
+
   @override
   _StockIssueEntryPageState createState() => _StockIssueEntryPageState();
 }

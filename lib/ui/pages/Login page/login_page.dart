@@ -152,21 +152,19 @@ class _LoginPageState extends State<LoginPage> {
 
             const SizedBox(height: 46,),
 
-            Container(
-              child: Row(
-                children: [
-                  RoundedButton3("Sign In",
-                          (){Navigator.push( context, MaterialPageRoute(
-                              builder: (context) => HomePage()));}
-                          ),
-                  SizedBox(width: 20,),
-                  RoundedButton3("Sign In Staff",(){
-                    Navigator.push( context, MaterialPageRoute(
-                        builder: (context) => HomePageStaff()));
+            Row(
+              children: [
+                RoundedButton3("Sign In",
+                        (){Navigator.push( context, MaterialPageRoute(
+                            builder: (context) => const HomePage()));}
+                        ),
+                const SizedBox(width: 20,),
+                RoundedButton3("Sign In Staff",(){
+                  Navigator.push( context, MaterialPageRoute(
+                      builder: (context) => const HomePageStaff()));
 
-                  }),
-                ],
-              ),
+                }),
+              ],
             ),
           ],
         ),

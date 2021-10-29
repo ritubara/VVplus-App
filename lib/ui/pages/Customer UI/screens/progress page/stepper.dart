@@ -16,33 +16,33 @@ class StepperBodyState extends State<StepperBody> {
   int current_step = 2;
   List<Step> steps = [
     Step(
-      title: Text(text27,style: TextStyle(color: Colors.black45),),
+      title: const Text(text27,style: TextStyle(color: Colors.black45),),
       content: Container(
           alignment: Alignment.centerLeft,
          ),
       // isActive: true,
     ),
     Step(
-      title: Text(text29,style: TextStyle(color: Colors.black45),),
+      title: const Text(text29,style: TextStyle(color: Colors.black45),),
       content: Container(
           alignment: Alignment.centerLeft,
           ),
       // isActive: true,
     ),
     Step(
-      title: Text(text31),
+      title: const Text(text31),
       content: Column(
           children: [
                   Text(
                     text32,
                     style: Stepperstyle(),
                   ),
-            Text(
+            const Text(
               text37,
             ),
 
 
-            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 
             GestureDetector(
               onTap: (){
@@ -53,14 +53,14 @@ class StepperBodyState extends State<StepperBody> {
                 width: 250,
                 decoration: decoration4(Colors.red),
                 alignment: Alignment.center,
-                child: Text(text33,
+                child: const Text(text33,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: PrimaryColor3,fontWeight: FontWeight.bold),
                 ),
               ),
             ),
 
-            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
             GestureDetector(
               onTap: (){
                 // directing page
@@ -70,7 +70,7 @@ class StepperBodyState extends State<StepperBody> {
                 width: 250,
                 decoration: decoration4(PrimaryColor7),
                 alignment: Alignment.center,
-                child: Text(text34,
+                child: const Text(text34,
                   textAlign: TextAlign.center,
                   style: TextStyle(color: PrimaryColor3,fontWeight: FontWeight.bold),
                 ),
@@ -82,10 +82,10 @@ class StepperBodyState extends State<StepperBody> {
       isActive: true,
     ),
     Step(
-      title: Text(text35),
+      title: const Text(text35),
       content: Container(
           alignment: Alignment.centerLeft,
-          child: Text(text36)),
+          child: const Text(text36)),
       // state: StepState.complete,
       isActive: true,
     ),
@@ -93,9 +93,6 @@ class StepperBodyState extends State<StepperBody> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery
-        .of(context)
-        .size;
     return  Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
@@ -122,7 +119,7 @@ class StepperBodyState extends State<StepperBody> {
                       ]
                   );
                 },
-                currentStep: this.current_step,
+                currentStep: current_step,
                 steps: steps,
                 type: StepperType.vertical,
                 onStepTapped: (step) {

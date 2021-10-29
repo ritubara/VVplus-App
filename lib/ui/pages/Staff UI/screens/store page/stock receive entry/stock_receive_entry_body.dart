@@ -38,29 +38,29 @@ class StockReceiveEntryBody extends StatelessWidget{
 
           FormsHeadText("Voucher Type"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
           const SizedBox(height: 15,),
 
           FormsHeadText("Received By"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
           const SizedBox(height: 15,),
 
           FormsHeadText("Godown"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
           const SizedBox(height: 15,),
 
           FormsHeadText("Choose your phase (Cost Centre)"),
 
-          DropdownForm(),
+          const DropdownForm(),
 
           const SizedBox(height: 15,),
 
-          FormsContainer(),
+          const FormsContainer(),
 
           const SizedBox(height: 15,),
 

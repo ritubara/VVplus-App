@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/Contractors%20%20page/Daily%20Manpower%20page/daily_manpower_page.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Extra%20Work%20Entry/extra_work_entry_home.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Unit%20Cancellation/unit_cancellation_home_page.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
-import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class ContractorsBody extends StatelessWidget{
   final Widget child;
@@ -16,13 +13,12 @@ class ContractorsBody extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    Size size = SizeConfig.getSize(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 32,left: 45,right: 35),
+            padding: const EdgeInsets.only(top: 32,left: 45,right: 35),
             child: Container(
               alignment: Alignment.center,
               height: 130,
@@ -61,7 +57,7 @@ class ContractorsBody extends StatelessWidget{
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DailyManpowerPage()));
+                        builder: (context) => const DailyManpowerPage()));
               }),
             ],
           ),

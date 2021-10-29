@@ -33,24 +33,24 @@ InputDecoration textFieldInputDecoration2(String hintText) {
 
 InputDecoration textFieldInputDecorationWithCountryCode(){
   return InputDecoration(
-    contentPadding: EdgeInsets.symmetric(vertical: 2),
+    contentPadding: const EdgeInsets.symmetric(vertical: 2),
     prefixIcon: CountryCodePicker(
       initialSelection: '+91',
-      favorite: ['+91', 'IN'],
-      textStyle: TextStyle(color: TextColor4),
+      favorite: const ['+91', 'IN'],
+      textStyle: const TextStyle(color: TextColor4),
       showFlag: true,
     ),
 
     labelText: "Enter Mobile Number",
     focusColor: TextColor4,
-    labelStyle: TextStyle(fontSize: 14.0, color: TextColor4),
+    labelStyle: const TextStyle(fontSize: 14.0, color: TextColor4),
     enabledBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
         borderSide: BorderSide(color: TextColor4)
     ),
     focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
-        borderSide: const BorderSide(color: TextColor4)
+        borderSide: BorderSide(color: TextColor4)
     ), //floatingLabelBehavior: FloatingLabelBehavior.never,
     prefix: const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8),
@@ -64,6 +64,8 @@ InputDecoration textFieldInputDecorationWithCountryCode(){
 
 
 class OTPInputDecoration extends StatefulWidget{
+  const OTPInputDecoration({Key key}) : super(key: key);
+
   @override
   _OTPInputDecorationState createState() => _OTPInputDecorationState();
 
@@ -145,7 +147,7 @@ BoxDecoration decoration4(var colorof){                                         
       border: Border.all(color: Colors.white),
     borderRadius: BorderRadius.circular(50.0),
     color: colorof,
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         color: PrimaryColor5,
         offset: Offset(0.0, 1.0), //(x,y)

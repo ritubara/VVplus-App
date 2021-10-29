@@ -6,7 +6,6 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/stock%20issu
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/stock%20receive%20entry/stock_receive_entry_home.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
-import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class StorePageBody extends StatelessWidget{
   final Widget child;
@@ -18,13 +17,12 @@ class StorePageBody extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    Size size = SizeConfig.getSize(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 32,left: 45,right: 35),
+            padding: const EdgeInsets.only(top: 32,left: 45,right: 35),
             child: Container(
               alignment: Alignment.center,
               height: 130,
@@ -61,20 +59,20 @@ class StorePageBody extends StatelessWidget{
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
               RoundedButtonHome("Stock Recieve Entry",
                       () {Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => StockReceiveEntryPage()));
+                                builder: (context) => const StockReceiveEntryPage()));
                       }),
               RoundedButtonHome("Stock Issue Entry",
                       () {Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => StockIssueEntryPage()));}),
+                          builder: (context) => const StockIssueEntryPage()));}),
               RoundedButtonHome("Phase to Phase Transfer",
                       () {Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => PhaseToPhaseTransferPage()));}),
+                          builder: (context) => const PhaseToPhaseTransferPage()));}),
               RoundedButtonHome("Branch to Branch Send",
                       () {Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => BranchtoBranchSendPage()));}),
+                          builder: (context) => const BranchtoBranchSendPage()));}),
               RoundedButtonHome("Branch to Branch Recieve",
                       () {Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => BranchtoBranchReceivePage()));}),
+                          builder: (context) => const BranchtoBranchReceivePage()));}),
             ],
           ),
         ],

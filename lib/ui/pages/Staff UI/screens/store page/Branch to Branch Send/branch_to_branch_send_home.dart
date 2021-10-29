@@ -4,6 +4,8 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_bottomnavbar.dart';
 
 class BranchtoBranchSendPage extends StatefulWidget{
+  const BranchtoBranchSendPage({Key key}) : super(key: key);
+
   @override
   _BranchtoBranchSendPageState createState() => _BranchtoBranchSendPageState();
 }
