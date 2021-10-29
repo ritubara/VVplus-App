@@ -26,7 +26,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: paddingForms,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -52,7 +52,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
           FormsHeadText("Choose Phase (Cost Center)"),
           DropdownForm(),
 
-          Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+          Padding(padding: paddingForms),
 
           FormsHeadText("Req. Date"),
           DateTextFormField(),

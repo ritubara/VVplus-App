@@ -16,22 +16,22 @@ return SingleChildScrollView(
       FormsHeadText("Voucher Type"),
       NormalTextFormField(),
 
-      Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+      Padding(padding:paddingForms),
 
       FormsHeadText("Cheque Receiving Date"),
       DateTextFormField(),
 
-      Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+      Padding(padding: paddingForms),
 
       FormsHeadText("Payment Type"),
       DropdownForm(),
 
-      Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+      Padding(padding: paddingForms),
 
       FormsHeadText("Credit Account (customer name)"),
       DateTextFormField(),
 
-      Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+      Padding(padding:paddingForms),
 
       FormsHeadText("Debit Account (company):"),
 
