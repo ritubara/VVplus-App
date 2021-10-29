@@ -31,3 +31,6 @@ var padding3 = const EdgeInsets.symmetric(horizontal: 125);
 // padding4 is used in customerCare screen
 
 var padding4 = const EdgeInsets.symmetric(horizontal: 40);
+
+//forms padding
+var paddingForms = const EdgeInsets.symmetric(vertical: 10);
