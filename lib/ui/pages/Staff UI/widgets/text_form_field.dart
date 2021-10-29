@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/dropdown_button_item_list.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_decorations.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
@@ -80,7 +81,7 @@ class DropdownForm extends StatefulWidget {
   State<DropdownForm> createState() => MyDropdownForm();
 }
 class MyDropdownForm extends State<DropdownForm> {
-  int valueChoose = 42;
+  //int valueChoose = 42;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -107,21 +108,17 @@ class MyDropdownForm extends State<DropdownForm> {
                   iconEnabledColor: PrimaryColor4,
                   style: const TextStyle(color: PrimaryColor2, fontSize: 16),
                   value: valueChoose,
-                  items: <DropdownMenuItem<int>>[
-                    new DropdownMenuItem(
-                      child: new Text('\tValue 1'),
-                      value: 0,
-                    ),
-                    new DropdownMenuItem(
-                      child: new Text('\tValue 2'),
-                      value: 42,
-                    ),
-                  ],
-                  onChanged: (Value) {
+                  onChanged: (newValue){
                     setState(() {
-                      valueChoose = Value;
+                      valueChoose = newValue;
                     });
                   },
+                  items: listItem.map((valueItem){
+                    return DropdownMenuItem(
+                      value: valueItem,
+                      child: Text(valueItem),
+                    );
+                  }).toList(),
                 ),
               ),
             ),
