@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Discount%20Approval%20page/discount_approval_home_page.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/Contractors%20%20page/Daily%20Manpower%20page/daily_manpower_page.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Extra%20Work%20Entry/extra_work_entry_home.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Unit%20Cancellation/unit_cancellation_home_page.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
-class SalesBody extends StatelessWidget{
+class ContractorsBody extends StatelessWidget{
   final Widget child;
 
-  const SalesBody({
+  const ContractorsBody({
     Key key,
     this.child,
   }) : super(key: key);
@@ -57,32 +57,11 @@ class SalesBody extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButtonHome("Extra Work Entry", () {
+              RoundedButtonHome("Daily Manpower", () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ExtraWorkEntryPage()));
-              }),
-
-              RoundedButtonHome("Unit Cancelation", () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => UnitCancellationPage()));
-              }),
-              RoundedButtonHome("Cheque Entry/Update", () {
-                /*
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PlacePurchaseOrder()));
-
-                 */
-                      }),
-
-              RoundedButtonHome("Discount Approval Not on dataman", () {
-                Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => DiscountApprovalPage()));
+                        builder: (context) => DailyManpowerPage()));
               }),
             ],
           ),

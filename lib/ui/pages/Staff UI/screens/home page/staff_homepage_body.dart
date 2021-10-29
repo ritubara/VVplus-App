@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/Contractors%20%20page/contractors_home_page.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/purchase.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/sales_home_page.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/store_home.dart';
@@ -86,10 +87,8 @@ class HomeBody extends StatelessWidget{
               RoundedButtonHome(
                 "Contractors",
                     () {
-                /*  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ViewHouse()));*/
+                 Navigator.push(context, MaterialPageRoute(
+                          builder: (context) =>  ContractorsPage()));
                 },
               ),
               RoundedButtonHome(
