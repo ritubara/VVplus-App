@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Discount%20Approval%20page/discount_approval_home_page.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Extra%20Work%20Entry/extra_work_entry_home.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Unit%20Cancellation/unit_cancellation_home_page.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/cheque_entry.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 
@@ -68,7 +69,12 @@ class SalesBody extends StatelessWidget{
                     MaterialPageRoute(
                         builder: (context) => const UnitCancellationPage()));
               }),
-              RoundedButtonHome("Cheque Entry/Update", () {}),
+              RoundedButtonHome("Cheque Entry/Update", () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) => const ChequeEntry()));
+              }),
 
               RoundedButtonHome("Discount Approval Not on dataman", () {
                 Navigator.push(context, MaterialPageRoute(
