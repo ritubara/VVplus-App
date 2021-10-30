@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/check%20entry/check_entry_body.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/cheque_entry_body.dart';
+
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_bottomnavbar.dart';
 
-class CheckEntry extends StatefulWidget{
+class ChequeEntry extends StatefulWidget{
+  const ChequeEntry({Key key}) : super(key: key);
   @override
-  State<StatefulWidget> createState()=> MyCheckEntry();
+  State<StatefulWidget> createState()=> MyChequeEntry();
 }
 
-class MyCheckEntry extends State<CheckEntry> {
+class MyChequeEntry extends State<ChequeEntry> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
      appBar: AppBarSatff("Cheque Entry/Update"),
-     body: CheckEntryBody(),
+     body: ChequeEntryBody(),
      bottomNavigationBar: BottomNavBarStaff(),
    );
   }
