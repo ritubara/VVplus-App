@@ -3,17 +3,17 @@ import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 
 Padding FormsHeadText(String text){
   return Padding(
-    padding:EdgeInsets.symmetric(horizontal:40),
+    padding:const EdgeInsets.symmetric(horizontal:40),
     child: Text(
       text,
-      style: TextStyle(fontWeight: FontWeight.w600,fontSize: 16),
+      style: const TextStyle(fontWeight: FontWeight.w600,fontSize: 16),
     ),
   );
 }
 
 Padding ClearButton() {
   return Padding(
-    padding: EdgeInsets.symmetric(vertical: 10),
+    padding: const EdgeInsets.symmetric(vertical: 10),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [

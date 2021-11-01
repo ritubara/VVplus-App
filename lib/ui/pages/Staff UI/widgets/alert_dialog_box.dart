@@ -22,7 +22,7 @@ showAlertDialog(BuildContext context) {
         borderRadius: BorderRadius.all(Radius.circular(10.0))
     ),
     //title: Image.asset(icon16),
-    content: Container(
+    content: SizedBox(
       height: SizeConfig.getHeight(context) * 0.5,
         width: SizeConfig.getWidth(context) * 0.5,
         child: Column(

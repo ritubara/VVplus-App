@@ -5,6 +5,8 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class ChequeEntryBody extends StatelessWidget {
+  const ChequeEntryBody({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -13,31 +15,31 @@ class ChequeEntryBody extends StatelessWidget {
         children: <Widget>[
           ClearButton(),
           FormsHeadText("Voucher Type"),
-          NormalTextFormField(),
+          const NormalTextFormField(),
           Padding(padding: paddingForms),
           FormsHeadText("Cheque Receiving Date"),
-          DateTextFormField(),
+          const DateTextFormField(),
           Padding(padding: paddingForms),
           FormsHeadText("Payment Type"),
-          DropdownForm(),
+          const DropdownForm(),
           Padding(padding: paddingForms),
           FormsHeadText("Credit Account (customer name)"),
-          DateTextFormField(),
+          const DateTextFormField(),
           Padding(padding: paddingForms),
           FormsHeadText("Debit Account (company):"),
           Padding(padding: paddingForms),
           FormsHeadText("Drawn Bank"),
-          DropdownForm(),
+          const DropdownForm(),
           Padding(padding: paddingForms),
           FormsHeadText("Customer Info:"),
           Padding(padding: paddingForms),
           FormsHeadText("Cheque No."),
-          NormalTextFormField(),
+          const NormalTextFormField(),
           Padding(padding: paddingForms),
           FormsHeadText("Amount"),
-          NormalTextFormField(),
+          const NormalTextFormField(),
           Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
               child: RoundedButtonHome("Submit", () {})),
         ],
       ),

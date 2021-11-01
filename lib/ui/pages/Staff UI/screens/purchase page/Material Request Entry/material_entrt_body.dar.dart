@@ -1,17 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/ui/pages/Customer%20UI/screens/NewComplaint%20page/drop_down_menu_items.dart';
-import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
-import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_decorations.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
-import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class MaterialEntryBody extends StatefulWidget {
+  const MaterialEntryBody({Key key}) : super(key: key);
+
   @override
   State<MaterialEntryBody> createState() => myMaterialEntryBody();
 }
@@ -40,25 +38,25 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             ),
           ),
           FormsHeadText("Indent Type"),
-          DropdownForm(),
+          const DropdownForm(),
 
-          Padding(padding: EdgeInsets.all(10)),
+          const Padding(padding: EdgeInsets.all(10)),
 
           FormsHeadText("Indent Date"),
-          DateTextFormField(),
+          const DateTextFormField(),
 
-          FormsContainer(),
+          const FormsContainer(),
 
           FormsHeadText("Choose Phase (Cost Center)"),
-          DropdownForm(),
+          const DropdownForm(),
 
           Padding(padding: paddingForms),
 
           FormsHeadText("Req. Date"),
-          DateTextFormField(),
+          const DateTextFormField(),
 
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40,vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
               child: RoundedButtonHome("Submit", (){})
           ),
         ],

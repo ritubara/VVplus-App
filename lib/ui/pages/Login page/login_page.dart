@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
               width: 500,
               padding: padding2,
               decoration: decoration1(),
-              child: Center(
+              child: const Center(
                 child: OTPInputDecoration(),
               ),
             ),
