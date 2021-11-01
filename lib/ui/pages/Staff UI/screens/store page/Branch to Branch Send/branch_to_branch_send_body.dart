@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/alert_dialog_box.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_decorations.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -96,14 +97,12 @@ class BranchtoBranchSendBody extends StatelessWidget{
 
           const SizedBox(height: 15,),
 
-          const FormsContainer(),
-
-          const SizedBox(height: 15,),
-
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
 
-              child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
+              child: RoundedButtonHome2("Submit",
+                      (){showAlertDialog(context);},
+                  roundedButtonHomeColor1)),
 
         ],
       ),

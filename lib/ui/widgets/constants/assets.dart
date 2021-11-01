@@ -30,3 +30,4 @@ const String icon12 = "assets/icons/gas station.png";
 const String icon13 = "assets/icons/post ofiice.png";
 const String icon14 = "assets/icons/police station.png";
 const String icon15 = "assets/icons/info-circle.png";
+const String icon16 = "assets/icons/correct_circle.png";
