@@ -5,6 +5,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class DailyManpowerBody extends StatefulWidget {
   const DailyManpowerBody({Key key}) : super(key: key);
@@ -24,7 +25,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: paddingForms2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -42,40 +43,40 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
 
           const DateTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Party Name"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Phase (cost center)"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Resource Type"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Qty."),
 
           const NormalTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Remarks"),
 
           const NormalTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: padding4,
 
               child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
 

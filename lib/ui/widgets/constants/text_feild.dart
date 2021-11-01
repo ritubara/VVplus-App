@@ -1,3 +1,5 @@
+// login page
+
 // for App Bar Text
 
 const String appText1 = "Customer Care";
@@ -64,3 +66,40 @@ const String text33 = "Report a problem with quality of work done?";
 const String text34 = "Open latest house photo to verify house work?";
 const String text35 = 'Ground Floor Roof Level';
 const String text36 = " ";
+
+// Staff Page
+
+// use in Staff Home page
+
+const String text52 = "Purchase";
+const String text53 = "Store";
+const String text54 = "Sales";
+const String text55 = "Contractors";
+const String text56 = "Payroll not on Dataman";
+const String text57 = "Marketing To Eng. not on Dataman";
+
+// use in purchase page
+
+const String text38 = "Material Request Entry";
+const String text39 = "Material Request Approval";
+const String text40 = "Place Purchase Order";
+const String text41 = "Goods Recepit Entry";
+
+// use in Store page
+
+const String text42 = "Stock Recieve Entry";
+const String text43 = "Stock Issue Entry";
+const String text44 = "Phase to Phase Transfer";
+const String text45 = "Branch to Branch Send";
+const String text46 = "Branch to Branch Recieve";
+
+// use in Store page
+
+const String text47 = "Extra Work Entry";
+const String text48 = "Unit Cancelation";
+const String text49 = "Cheque Entry/Update";
+const String text50 = "Discount Approval Not on dataman";
+
+// use in Contractors page
+
+const String text51 = "Daily Manpower";

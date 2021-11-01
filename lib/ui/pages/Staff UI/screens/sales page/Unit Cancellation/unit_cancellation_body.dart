@@ -6,6 +6,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class UnitCancellationBody extends StatefulWidget {
   const UnitCancellationBody({Key key}) : super(key: key);
@@ -25,7 +26,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: paddingForms2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -43,7 +44,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
 
           const DateTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Booking Id"),
 
@@ -51,38 +52,38 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
 
           const InformationBoxContainer4(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Change Applicable"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Due Date"),
 
           const DateTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Base Amount (deduction amount)"),
 
           const NormalTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Tax:"),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Remarks"),
 
           const NormalTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: padding4,
 
               child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
 

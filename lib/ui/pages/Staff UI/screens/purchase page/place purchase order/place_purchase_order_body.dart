@@ -21,35 +21,35 @@ class PlacePurchaseOrderBody extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Voucher No:"),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Voucher Type"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Date"),
 
           const DateTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Supplier"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Indent Selection"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("PO Valid Date"),
 
@@ -57,11 +57,11 @@ class PlacePurchaseOrderBody extends StatelessWidget{
 
           const InformationBoxContainer2(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Remarks:"),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           Padding(
               padding: padding4,

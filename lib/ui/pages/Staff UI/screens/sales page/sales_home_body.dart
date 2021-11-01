@@ -5,6 +5,8 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Unit%20Cance
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/cheque_entry.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
 
 class SalesBody extends StatelessWidget{
   final Widget child;
@@ -21,7 +23,7 @@ class SalesBody extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 32,left: 45,right: 35),
+            padding: paddingForms3,
             child: Container(
               alignment: Alignment.center,
               height: 130,
@@ -55,28 +57,28 @@ class SalesBody extends StatelessWidget{
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButtonHome("Extra Work Entry", () {
+              Padding(padding: paddingForms2),
+              RoundedButtonHome(text47, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const ExtraWorkEntryPage()));
               }),
 
-              RoundedButtonHome("Unit Cancelation", () {
+              RoundedButtonHome(text48, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const UnitCancellationPage()));
               }),
-              RoundedButtonHome("Cheque Entry/Update", () {
+              RoundedButtonHome(text49, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                     builder: (context) => const ChequeEntry()));
               }),
 
-              RoundedButtonHome("Discount Approval Not on dataman", () {
+              RoundedButtonHome(text50, () {
                 Navigator.push(context, MaterialPageRoute(
                         builder: (context) => const DiscountApprovalPage()));
               }),

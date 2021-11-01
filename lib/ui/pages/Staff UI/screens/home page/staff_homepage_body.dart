@@ -6,6 +6,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/store_home.d
 import 'package:vvplus_app/ui/widgets/Utilities/homepage_logo.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
 
 class HomeBody extends StatelessWidget{
   final Widget child;
@@ -58,7 +59,7 @@ class HomeBody extends StatelessWidget{
             children: <Widget>[
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
               RoundedButtonHome(
-                "Purchase",
+                text52,
                     () {
                   Navigator.push(
                       context,
@@ -67,7 +68,7 @@ class HomeBody extends StatelessWidget{
                 },
               ),
               RoundedButtonHome(
-                "Store",
+                text53,
                     () {
                   Navigator.push(
                       context,
@@ -76,21 +77,21 @@ class HomeBody extends StatelessWidget{
                 },
               ),
               RoundedButtonHome(
-                "Sales",
+                text54,
                     () {Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const SalesPage()));},
               ),
               RoundedButtonHome(
-                "Contractors",
+                text55,
                     () {
                  Navigator.push(context, MaterialPageRoute(
                           builder: (context) =>  const ContractorsPage()));
                 },
               ),
               RoundedButtonHome(
-                "Payroll not on Dataman",
+                text56,
                     () {
                   /*Navigator.push(
                       context,
@@ -99,7 +100,7 @@ class HomeBody extends StatelessWidget{
                 },
               ),
               RoundedButtonHome2(
-                "Marketing To Eng. not on Dataman",
+                text57,
                     () {
                   /*Navigator.push(
                       context,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/Contractors%20%20page/Daily%20Manpower%20page/daily_manpower_page.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
 
 class ContractorsBody extends StatelessWidget{
   final Widget child;
@@ -18,7 +20,7 @@ class ContractorsBody extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 32,left: 45,right: 35),
+            padding: paddingForms3,
             child: Container(
               alignment: Alignment.center,
               height: 130,
@@ -52,8 +54,8 @@ class ContractorsBody extends StatelessWidget{
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButtonHome("Daily Manpower", () {
+              Padding(padding: paddingForms2),
+              RoundedButtonHome(text51, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(

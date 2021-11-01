@@ -5,6 +5,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class PhaseToPhaseTransferBody extends StatelessWidget{
   final Widget child;
@@ -22,7 +23,7 @@ class PhaseToPhaseTransferBody extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: paddingForms2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -40,60 +41,60 @@ class PhaseToPhaseTransferBody extends StatelessWidget{
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Date"),
 
           const DateTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Issue To Which Staff"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("From Which Phase"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Location [From]"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("To Phase"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Location [To]"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           const FormsContainer(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Total Amount:"),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Remarks"),
 
           const NormalTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: padding4,
 
               child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
 

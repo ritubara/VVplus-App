@@ -3,6 +3,8 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/Material%
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/place%20purchase%20order/place_purchase_order.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
 import 'goods recepit entry/goods_recepit_entry.dart';
 import 'material_request_approval/material_request_approval.dart';
 
@@ -21,7 +23,7 @@ class PurchaseBody extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
         Padding(
-          padding: const EdgeInsets.only(top: 32,left: 45,right: 35),
+          padding: paddingForms3,
           child: Container(
           alignment: Alignment.center,
           height: 130,
@@ -56,24 +58,24 @@ class PurchaseBody extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButtonHome("Material Request Entry", () {
+              RoundedButtonHome(text38, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const MaterialReqEntry()));
               }),
 
-              RoundedButtonHome("Material Request Approval", () {
+              RoundedButtonHome(text39, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const MaterialRequestApproval()));
               }),
-              RoundedButtonHome("Place Purchase Order", () {Navigator.push(
+              RoundedButtonHome(text40, () {Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const PlacePurchaseOrder()));}),
-              RoundedButtonHome("Goods Recepit Entry", () {
+              RoundedButtonHome(text41, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(

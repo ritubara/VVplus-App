@@ -21,13 +21,13 @@ class MaterialRequestApprovalBody extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Indant Date"),
 
           const DateTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Indant Selection"),
 
@@ -41,7 +41,7 @@ class MaterialRequestApprovalBody extends StatelessWidget{
 
           const InformationBoxContainer1(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           Padding(
               padding: padding4,

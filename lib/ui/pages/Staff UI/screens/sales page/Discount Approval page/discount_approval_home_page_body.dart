@@ -6,6 +6,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class DiscountApprovalBody extends StatefulWidget {
   const DiscountApprovalBody({Key key}) : super(key: key);
@@ -25,7 +26,7 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: paddingForms2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -43,37 +44,37 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
 
           const DateTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Branch and Phase"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Requested By"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Reason for Discount"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Remarks"),
 
           const NormalTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Customer Name"),
 
           const DropdownForm(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Customer Contact No."),
 
@@ -91,20 +92,20 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
             ),
           ),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("For Unit No.:"),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           FormsHeadText("Percentage Discount"),
 
           const NormalTextFormField(),
 
-          const SizedBox(height: 15,),
+          sizedbox1,
 
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: padding4,
 
               child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
 

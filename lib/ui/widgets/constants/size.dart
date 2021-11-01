@@ -34,3 +34,7 @@ var padding4 = const EdgeInsets.symmetric(horizontal: 40);
 
 //forms padding
 var paddingForms = const EdgeInsets.symmetric(vertical: 10);
+var paddingForms2 = const EdgeInsets.symmetric(vertical: 5);
+var paddingForms3 = const EdgeInsets.only(top: 32,left: 45,right: 35);
+
+var sizedbox1 = const SizedBox(height: 15,);
