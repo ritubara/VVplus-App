@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/domain/exceptions/validation.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
@@ -41,7 +42,7 @@ InputDecoration textFieldInputDecorationWithCountryCode(){
       showFlag: true,
     ),
 
-    labelText: "Enter Mobile Number",
+    //labelText: "Enter Mobile Number",
     focusColor: TextColor4,
     labelStyle: const TextStyle(fontSize: 14.0, color: TextColor4),
     enabledBorder: const OutlineInputBorder(
@@ -55,7 +56,7 @@ InputDecoration textFieldInputDecorationWithCountryCode(){
     prefix: const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8),
     ),
-    hintText: "Enter OTP",
+    hintText: "Enter Mobile Number",
     hintStyle: const TextStyle(
       color: PrimaryColor2,
     ),
@@ -72,24 +73,37 @@ class OTPInputDecoration extends StatefulWidget{
 }
 
 class _OTPInputDecorationState extends State<OTPInputDecoration> {
+
+  final TextEditingController _otp = TextEditingController();
+  bool _obscureText;
+
+  @override
+  void initState() {
+    _obscureText = false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool _obscureText = true;
+
     return TextFormField(
-      obscureText: _obscureText,
+      controller: _otp,
+      obscureText: !_obscureText,
       keyboardType: TextInputType.number,
       style: simpleTextStyle5(),
+      validator: validateOTP,
       decoration: InputDecoration(
-        suffixIcon: GestureDetector(
-          onTap: () {
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+            color: Colors.black45,
+          ),
+          onPressed: () {
             setState(() {
               _obscureText = !_obscureText;
             });
           },
-          child:
-          Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
         ),
-        labelText: "Enter OTP",
+        //labelText: "Enter OTP",
         labelStyle: const TextStyle(
           color: PrimaryColor4,
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/domain/exceptions/validation.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/homepage/home_page.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/text_style_widget.dart';
@@ -18,11 +19,31 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey2 = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _phoneNumber = TextEditingController();
+
+  signInCheckDetail() {
+    final _form1 = _formKey.currentState;
+    final _form2 = _formKey2.currentState;
+    if (_form1.validate() && _form2.validate()) {
+      _performLogin();
+    }
+  }
+  void _performLogin() {
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => const HomePage()));
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     var height = SizeConfig.getHeight(context);
     var width = SizeConfig.getWidth(context);
     return Scaffold(
+      key: _scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -98,13 +119,19 @@ class _LoginPageState extends State<LoginPage> {
               color: PrimaryColor3,
               height: 51.0,
 
-              child: TextFormField(
-                keyboardType: TextInputType.phone,
-                style:const TextStyle(
-                  color: TextColor4,
-                  decorationColor: decorationColor1,
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  controller: _phoneNumber,
+                  keyboardType: TextInputType.phone,
+                  style:const TextStyle(
+                    color: TextColor4,
+                    decorationColor: decorationColor1,
+                  ),
+                  decoration: textFieldInputDecorationWithCountryCode(),
+                  validator: validateMobile,
+
                 ),
-                decoration: textFieldInputDecorationWithCountryCode(),
               ),
             ),
 
@@ -145,8 +172,10 @@ class _LoginPageState extends State<LoginPage> {
               width: 500,
               padding: padding2,
               decoration: decoration1(),
-              child: const Center(
-                child: OTPInputDecoration(),
+              child: Center(
+                child: Form(
+                  key: _formKey2,
+                    child: const OTPInputDecoration()),
               ),
             ),
 
@@ -155,8 +184,7 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               children: [
                 RoundedButton3("Sign In",
-                        (){Navigator.push( context, MaterialPageRoute(
-                            builder: (context) => const HomePage()));}
+                        (){signInCheckDetail();}
                         ),
                 const SizedBox(width: 20,),
                 RoundedButton3("Sign In Staff",(){
