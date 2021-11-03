@@ -18,7 +18,7 @@ InputDecoration textFieldDecoration(String hintText,double borderRadiusValue) {
     prefix: const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8),
     ),
-    hintText: hintText,
+    //hintText: hintText,
     hintStyle: const TextStyle(
       color: PrimaryColor4,
     ),
@@ -34,7 +34,7 @@ InputDecoration textFieldInputDecoration2(String hintText) {
 
 InputDecoration textFieldInputDecorationWithCountryCode(){
   return InputDecoration(
-    contentPadding: const EdgeInsets.symmetric(vertical: 2),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 2,vertical: 16),
     prefixIcon: CountryCodePicker(
       initialSelection: '+91',
       favorite: const ['+91', 'IN'],
@@ -44,7 +44,7 @@ InputDecoration textFieldInputDecorationWithCountryCode(){
 
     //labelText: "Enter Mobile Number",
     focusColor: TextColor4,
-    labelStyle: const TextStyle(fontSize: 14.0, color: TextColor4),
+    //labelStyle: const TextStyle(fontSize: 14.0, color: TextColor4),
     enabledBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
         borderSide: BorderSide(color: TextColor4)
