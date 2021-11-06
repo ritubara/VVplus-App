@@ -429,7 +429,7 @@ class MyFormsContainer extends State<FormsContainer>{
       height: 378,
       width: SizeConfig.getWidth(context),
       decoration: BoxDecoration(
-        color: PrimaryColor8,
+        color: StoreContainerColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -533,7 +533,7 @@ class MyFormsContainer extends State<FormsContainer>{
               RaisedButton(
                 onPressed: () {},
                 elevation: 0.0,
-                color: PrimaryColor8,
+                color: StoreContainerColor,
                 child: RaisedButtonText("Clear This Item"),
               ),
 
