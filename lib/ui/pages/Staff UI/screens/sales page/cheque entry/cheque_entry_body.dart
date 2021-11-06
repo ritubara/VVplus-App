@@ -18,7 +18,7 @@ class ChequeEntryBody extends StatelessWidget {
           DefaultTabController(
             length: 3,
             initialIndex: 0,
-            child: Container(
+            child: SizedBox(
               height: 1000,
               child: Stack(
                 children: [
@@ -123,7 +123,7 @@ class ChequeEntryBody extends StatelessWidget {
                   ],
                   ),
 
-                     Padding(
+                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30,vertical: 60),
                       child: CustomTabBar(),
                     ),

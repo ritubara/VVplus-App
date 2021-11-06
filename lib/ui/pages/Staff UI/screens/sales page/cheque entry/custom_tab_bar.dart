@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 
 class CustomTabBar extends StatelessWidget{
+  const CustomTabBar({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -11,12 +13,12 @@ class CustomTabBar extends StatelessWidget{
         height: 53,
         color: PrimaryColor8,
         child: TabBar(
-          tabs: [
+          tabs: const [
             Tab(text: 'Receive',),
             Tab(text: 'Deposit'),
             Tab(text: 'Cleared'),
           ],
-          labelPadding: EdgeInsets.symmetric(vertical: 4),
+          labelPadding: const EdgeInsets.symmetric(vertical: 4),
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             border: Border.all(color:PrimaryColor8),
@@ -24,8 +26,8 @@ class CustomTabBar extends StatelessWidget{
           ),
           labelColor: PrimaryColor1,
           unselectedLabelColor: PrimaryColor9,
-          labelStyle: TextStyle(fontSize:15,fontWeight: FontWeight.bold),
-          unselectedLabelStyle: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
+          labelStyle: const TextStyle(fontSize:15,fontWeight: FontWeight.bold),
+          unselectedLabelStyle: const TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
         ),
       ),
     );
