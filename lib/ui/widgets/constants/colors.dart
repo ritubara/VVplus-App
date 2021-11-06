@@ -8,7 +8,7 @@ const PrimaryColor4 = Colors.black45;   // black45
 const PrimaryColor5 = Colors.grey;
 const PrimaryColor6 = Colors.red;
 const PrimaryColor7 = Colors.lightGreen;
-const PrimaryColor8 = Color(0xFFECEFF1);
+const PrimaryColor8 = Color(0xFFF6F6F6);
 const PrimaryColor9 = Color(0xFFCFD8DC);
 
 const TextColor1= Colors.white;
