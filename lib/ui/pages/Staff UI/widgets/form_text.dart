@@ -6,7 +6,17 @@ Padding FormsHeadText(String text){
     padding:const EdgeInsets.symmetric(horizontal:40),
     child: Text(
       text,
-      style: const TextStyle(fontWeight: FontWeight.w600,fontSize: 16),
+      style: const TextStyle(fontWeight: FontWeight.w500,fontSize: 16),
+    ),
+  );
+}
+
+Padding FormsDetailText(String text){
+  return Padding(
+    padding:const EdgeInsets.symmetric(horizontal:40),
+    child: Text(
+      text,
+      style: const TextStyle(fontWeight: FontWeight.w700,fontSize: 18),
     ),
   );
 }
