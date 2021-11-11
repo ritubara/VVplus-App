@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Purchase%20bloc/material%20req%20bloc/material_provider.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
@@ -9,7 +10,7 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
-import 'package:vvplus_app/domain/value_objects/staff bloc/Purchase bloc/material req bloc/material_provider.dart';
+
 
 
 BoxDecoration DecorationForms() {
