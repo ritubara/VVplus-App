@@ -136,12 +136,15 @@ class MyDropdownForm extends State<DropdownForm> {
 //dropdown form for container
 class DropdownFormCont extends StatefulWidget {
   const DropdownFormCont({Key key}) : super(key: key);
-
   @override
   State<DropdownFormCont> createState() => MyDropdownFormCont();
 }
 class MyDropdownFormCont extends State<DropdownFormCont> {
-  int valueChoose = 42;
+  final _formKey = GlobalKey<FormState>();
+  bool _autovalidate = false;
+  String selectedSalutation;
+  String name;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -167,22 +170,18 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
                   isExpanded: true,
                   iconEnabledColor: PrimaryColor4,
                   style: const TextStyle(color: PrimaryColor2, fontSize: 16),
-                  value: valueChoose,
-                  items: const <DropdownMenuItem<int>>[
-                    DropdownMenuItem(
-                      child: Text('\tValue 1'),
-                      value: 0,
-                    ),
-                    DropdownMenuItem(
-                      child: Text('\tValue 2'),
-                      value: 42,
-                    ),
-                  ],
-                  onChanged: (Value) {
+                  value: ItemContainer,
+                  onChanged: (newValue){
                     setState(() {
-                      valueChoose = Value;
+                      ItemContainer = newValue;
                     });
                   },
+                  items: ItemList.map((valueItem){
+                    return DropdownMenuItem(
+                      value: valueItem,
+                      child: Text(valueItem),
+                    );
+                  }).toList(),
                 ),
               ),
             ),
