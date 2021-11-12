@@ -1,36 +1,68 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Application/Bloc/Customer_Bloc/NewComplaint_Bloc/new_complaint_bloc.dart';
 import 'package:vvplus_app/domain/value_objects/Validators/login_validators.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
-InputDecoration textFieldDecoration(String hintText,double borderRadiusValue) {
-  return InputDecoration(
-    fillColor: PrimaryColor3,
-    filled: true,
-    enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: PrimaryColor2),
-        borderRadius: BorderRadius.circular(borderRadiusValue)),
-    focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: PrimaryColor2),
-        borderRadius: BorderRadius.circular(borderRadiusValue)),
-    prefix: const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8),
-    ),
-    hintText: hintText,
-    hintStyle: const TextStyle(
-      color: PrimaryColor4,
-    ),
-  );
+class textFieldDecoration extends StatefulWidget {
+  //final String hintText;
+  //final double borderRadiusValue;
+  //const textFieldDecoration({this.hintText, this.borderRadiusValue});
+  const textFieldDecoration({Key key}) : super(key: key);
+
+  @override
+  _textFieldDecorationState createState() => _textFieldDecorationState();
+}
+class _textFieldDecorationState extends State<textFieldDecoration>{
+  final bloc = TextFieldBloc();
+  @override
+  Widget build(BuildContext context) {
+    //String hintText;
+    //double borderRadiusValue;
+    return StreamBuilder<String>(
+        stream: bloc.textField,
+        builder: (context, snapshot) {
+          return TextFormField(
+            keyboardType: TextInputType.emailAddress,
+            onChanged: bloc.textFieldChanged,
+            style: simpleTextStyle7(),
+            decoration:InputDecoration(
+              fillColor: PrimaryColor3,
+              filled: true,
+              enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: PrimaryColor2),
+                  borderRadius: BorderRadius.circular(10)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: PrimaryColor2),
+                  borderRadius: BorderRadius.circular(10)),
+              prefix: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+              ),
+              hintText: "Enter Field",
+              hintStyle: const TextStyle(
+                color: PrimaryColor4,
+              ),
+              errorText: snapshot.error,
+            ),
+          );
+        }
+    );
 }
 
-InputDecoration textFieldInputDecoration(String hintText) {
+}
+/*
+TextFormField textFieldInputDecoration(String hintText) {
   return textFieldDecoration(hintText,10);
 }
-InputDecoration textFieldInputDecoration2(String hintText) {
+TextFormField textFieldInputDecoration2(String hintText) {
   return textFieldDecoration(hintText,5);
 }
+
+ */
 
 CountryCodePicker phoneTextFieldPicker(){
   return CountryCodePicker(
