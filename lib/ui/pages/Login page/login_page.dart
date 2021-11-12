@@ -32,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
     var width = SizeConfig.getWidth(context);
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
           child: Container(
             width: width,
             height: height,
@@ -69,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-        ),
+
       ),
     );
   }
