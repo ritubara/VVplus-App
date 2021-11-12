@@ -57,3 +57,6 @@ TextStyle simpleTextStyle2() {
 TextStyle Stepperstyle() {
   return simpleTextStyle(TextColor3, 15);
 }
+TextStyle phoneTextStyle(){
+  return TextStyle(color: TextColor4, decorationColor: decorationColor1,);
+}

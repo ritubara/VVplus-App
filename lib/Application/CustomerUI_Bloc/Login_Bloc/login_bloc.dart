@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:vvplus_app/domain/value_objects/validation.dart';
+import 'package:vvplus_app/domain/value_objects/Validators/login_validators.dart';
 import 'package:rxdart/rxdart.dart';
 
 class Bloc extends Object with Validators implements BaseBloc {
@@ -16,7 +16,6 @@ class Bloc extends Object with Validators implements BaseBloc {
       Rx.combineLatest2(phone, otp, (p, o) => true);
 
   submit() {
-    print("correct detail");
   }
 
   @override
