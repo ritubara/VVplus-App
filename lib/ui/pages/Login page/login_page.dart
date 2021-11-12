@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/Application/CustomerUI_Bloc/Login_Bloc/login_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/Login_Bloc/login_bloc.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/homepage/home_page.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/Application/CustomerUI_Bloc/Stepper_bloc/stepper_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/Customer_Bloc/Stepper_bloc/stepper_bloc.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';

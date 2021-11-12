@@ -88,7 +88,16 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
                 color: TextColor4,
                 decorationColor: decorationColor1,
               ),
-              decoration: textFieldInputDecorationWithCountryCode(),
+              decoration: InputDecoration(
+                  contentPadding: phoneTextFieldPadding,
+                  prefixIcon: phoneTextFieldPicker(),
+                  focusColor: TextColor4,
+                  enabledBorder: outlineBorder(),
+                  focusedBorder: outlineBorder(),//floatingLabelBehavior: FloatingLabelBehavior.never,
+                  prefix: Padding(padding: phoneTextFieldPadding1),
+                  hintText: "Enter Mobile Number",
+                  hintStyle: const TextStyle(color: PrimaryColor2,),
+              ),
             ),
           ),
 
