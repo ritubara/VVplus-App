@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/NewComplaint%20page/drop_down_menu_items.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/appbar_widget.dart';
-import 'package:vvplus_app/ui//Pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
@@ -40,44 +40,28 @@ class _ComplaintPageState extends State<ComplaintPage>{
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: simpleTextStyle7(),
-                      decoration: textFieldInputDecoration(text18),
-                    ),
+                    child: textFieldDecoration(),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: TextFormField(
-                      keyboardType: TextInputType.text,
-                      style: simpleTextStyle7(),
-                      decoration: textFieldInputDecoration(text19),
-                    ),
+                    child: textFieldDecoration(),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      style: simpleTextStyle7(),
-                      decoration: textFieldInputDecoration(text20),
-                    ),
+                    child: textFieldDecoration(),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 97,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: TextFormField(
-                      keyboardType: TextInputType.multiline,
-                      style: simpleTextStyle7(),
-                      decoration: textFieldInputDecoration(text21),
-                    ),
+                    child: textFieldDecoration(),
                   ),
                  const SizedBox(height: 1,),
                   Padding(
