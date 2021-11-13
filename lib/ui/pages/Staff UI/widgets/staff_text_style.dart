@@ -23,3 +23,13 @@ TextStyle containerTextStyle5() {
 TextStyle containerTextStyle6() {
   return textStyle1(boxDecorationTextColor2,20,FontWeight.w500);
 }
+TextStyle containerTextStyle7() {
+  return textStyle1(boxDecorationTextColor2,12,FontWeight.w500);
+}
+TextStyle containerTextStyle8() {
+  return textStyle1(boxDecorationTextColor5,12,FontWeight.w500);
+}
+TextStyle containerTextStyle9() {
+  return textStyle1(boxDecorationTextColor6,12,FontWeight.w500);
+}
+

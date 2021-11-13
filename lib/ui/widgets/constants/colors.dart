@@ -35,5 +35,7 @@ const boxDecorationTextColor1 = Colors.black;
 const boxDecorationTextColor2 = Colors.green;
 const boxDecorationTextColor3 = Colors.grey;
 const boxDecorationTextColor4 = Colors.blue;
+const boxDecorationTextColor5 = Color(0xFF000AFF);
+const boxDecorationTextColor6 = Colors.grey;
 
 const StoreContainerColor = Color(0xFFEBE7E7);
