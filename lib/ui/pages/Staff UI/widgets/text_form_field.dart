@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/dropdown_button_item_list.dart';
@@ -88,6 +89,7 @@ class MyDropdownForm extends State<DropdownForm> {
   //int valueChoose = 42;
   @override
   Widget build(BuildContext context) {
+    final bloc = MaterialProvider.of(context);
     return Column(
       children: <Widget>[
         Padding(
@@ -96,33 +98,34 @@ class MyDropdownForm extends State<DropdownForm> {
             child: Container(
               decoration: DecorationForms(),
               child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  hint: Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.search), onPressed: () {  },
-                      ),
-                      const Text("Search here"),
-                    ],
-                  ),
-                  dropdownColor: PrimaryColor3,
-                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                  iconSize: 20,
-                  isExpanded: true,
-                  iconEnabledColor: PrimaryColor4,
-                  style: const TextStyle(color: PrimaryColor2, fontSize: 16),
-                  value: valueChoose,
-                  onChanged: (newValue){
-                    setState(() {
-                      valueChoose = newValue;
-                    });
-                  },
-                  items: listItem.map((valueItem){
-                    return DropdownMenuItem(
-                      value: valueItem,
-                      child: Text(valueItem),
-                    );
-                  }).toList(),
+                child: StreamBuilder(
+              stream: bloc.outDropField1,
+                    builder: (context, snapshot) {
+                      return DropdownButton<String>(
+                        hint: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.search), onPressed: () {  },
+                            ),
+                            const Text("Search here"),
+                          ],
+                        ),
+                        dropdownColor: PrimaryColor3,
+                        icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                        iconSize: 20,
+                        isExpanded: true,
+                        iconEnabledColor: PrimaryColor4,
+                        style: const TextStyle(color: PrimaryColor2, fontSize: 16),
+                        value: snapshot.data,
+                        onChanged: bloc.inDropField1,
+                        items: bloc.names.map((item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: Text(item),
+                          );
+                        }).toList(),
+                      );
+                    }
                 ),
               ),
             ),
@@ -147,6 +150,7 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = MaterialProvider.of(context);
     return Column(
       children: <Widget>[
         Padding(
@@ -155,34 +159,35 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
             child: Container(
               decoration: ContainerDecorationForms(),
               child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  hint: Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.search), onPressed: () {  },
+              child: StreamBuilder(
+              stream: bloc.outDropField2,
+                  builder: (context, snapshot) {
+                    return DropdownButton<String>(
+                      hint: Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.search), onPressed: () {  },
+                          ),
+                          const Text("Search here"),
+                        ],
                       ),
-                      const Text("Search here"),
-                    ],
-                  ),
-                  dropdownColor: PrimaryColor3,
-                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                  iconSize: 20,
-                  isExpanded: true,
-                  iconEnabledColor: PrimaryColor4,
-                  style: const TextStyle(color: PrimaryColor2, fontSize: 16),
-                  value: ItemContainer,
-                  onChanged: (newValue){
-                    setState(() {
-                      ItemContainer = newValue;
-                    });
-                  },
-                  items: ItemList.map((valueItem){
-                    return DropdownMenuItem(
-                      value: valueItem,
-                      child: Text(valueItem),
+                      dropdownColor: PrimaryColor3,
+                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                      iconSize: 20,
+                      isExpanded: true,
+                      iconEnabledColor: PrimaryColor4,
+                      style: const TextStyle(color: PrimaryColor2, fontSize: 16),
+                      value: snapshot.data,
+                      onChanged: bloc.inDropField2,
+                      items: bloc.names.map((item) {
+                        return DropdownMenuItem(
+                          value: item,
+                          child: Text(item),
+                        );
+                      }).toList(),
                     );
-                  }).toList(),
-                ),
+                  }
+              ),
               ),
             ),
           ),
@@ -201,25 +206,31 @@ class NormalTextFormField extends StatefulWidget {
 class MyNormalTextFormField extends State<NormalTextFormField> {
   @override
   Widget build(BuildContext context) {
+    final bloc = MaterialProvider.of(context);
     return Container(
       height: 50,
       padding: padding1,
       decoration: decoration1(),
       child: SizedBox(
         width: 320,
-        child: TextFormField(
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: PrimaryColor8,
-            enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: PrimaryColor9),
-                borderRadius: BorderRadius.circular(10)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: PrimaryColor9),
-                borderRadius: BorderRadius.circular(10)),
+        child: StreamBuilder<String>(
+          stream: bloc.outtextField,
+          builder: (context, snapshot) => TextFormField(
+            onChanged: bloc.intextField,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: PrimaryColor8,
+              enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: PrimaryColor9),
+                  borderRadius: BorderRadius.circular(10)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: PrimaryColor9),
+                  borderRadius: BorderRadius.circular(10)),
+                errorText: snapshot.error
+            ),
+            keyboardType: TextInputType.text,
+            style: simpleTextStyle7(),
           ),
-          keyboardType: TextInputType.text,
-          style: simpleTextStyle7(),
         ),
       ),
     );
