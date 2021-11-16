@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/cheque_entry_body.dart';
 
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
@@ -13,10 +14,12 @@ class ChequeEntry extends StatefulWidget{
 class MyChequeEntry extends State<ChequeEntry> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-     appBar: AppBarSatff("Cheque Entry/Update"),
-     body: const ChequeEntryBody(),
-     bottomNavigationBar: const BottomNavBarStaff(),
+   return MaterialProvider(
+     child: Scaffold(
+       appBar: AppBarSatff("Cheque Entry/Update"),
+       body: const ChequeEntryBody(),
+       bottomNavigationBar: const BottomNavBarStaff(),
+     ),
    );
   }
 }

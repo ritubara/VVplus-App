@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/place%20purchase%20order/place_purchase_order_body.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_bottomnavbar.dart';
@@ -13,10 +14,12 @@ class PlacePurchaseOrder extends StatefulWidget{
 class _PlacePurchaseOrderState extends State<PlacePurchaseOrder> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarSatff("Place Purchase Order"),
-      body: const PlacePurchaseOrderBody(),
-      bottomNavigationBar: const BottomNavBarStaff(),
+    return MaterialProvider(
+      child: Scaffold(
+        appBar: AppBarSatff("Place Purchase Order"),
+        body: const PlacePurchaseOrderBody(),
+        bottomNavigationBar: const BottomNavBarStaff(),
+      ),
     );
   }
 }

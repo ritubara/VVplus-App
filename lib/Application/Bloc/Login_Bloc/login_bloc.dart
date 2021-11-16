@@ -16,6 +16,7 @@ class Bloc extends Object with Validators implements BaseBloc {
       Rx.combineLatest2(phone, otp, (p, o) => true);
 
   submit() {
+
   }
 
   @override
