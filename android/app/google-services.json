@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "326075722105",
+    "project_id": "vvplus-app",
+    "storage_bucket": "vvplus-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326075722105:android:fb39c4989bbe5f1a1f27a8",
+        "android_client_info": {
+          "package_name": "com.TechnoCulture.vvplus_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326075722105-vkgl9l5scst81hfmv12agl1u0q9d92s5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB475TslDqL6V1p9iVlsBNXJuqx3NH2Ygo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326075722105-vkgl9l5scst81hfmv12agl1u0q9d92s5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
