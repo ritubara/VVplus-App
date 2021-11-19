@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
@@ -30,7 +31,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = MaterialProvider.of(context);
+    final bloc = ContractorProvider.of(context);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -124,7 +125,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
               decoration: DecorationForms(),
               child: DropdownButtonHideUnderline(
                 child: StreamBuilder(
-                    stream: bloc.outDropField1,
+                    stream: bloc.outDropField2,
                     builder: (context, snapshot) {
                       return DropdownButton<String>(
                         hint: Row(
@@ -143,7 +144,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                         iconEnabledColor: PrimaryColor4,
                         style: dropDownFieldStyle,
                         value: snapshot.data,
-                        onChanged: bloc.inDropField1,
+                        onChanged: bloc.inDropField2,
                         items: bloc.names.map((item) {
                           return DropdownMenuItem(
                             value: item,
@@ -164,7 +165,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
               decoration: DecorationForms(),
               child: DropdownButtonHideUnderline(
                 child: StreamBuilder(
-                    stream: bloc.outDropField1,
+                    stream: bloc.outDropField3,
                     builder: (context, snapshot) {
                       return DropdownButton<String>(
                         hint: Row(
@@ -183,7 +184,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                         iconEnabledColor: PrimaryColor4,
                         style: dropDownFieldStyle,
                         value: snapshot.data,
-                        onChanged: bloc.inDropField1,
+                        onChanged: bloc.inDropField3,
                         items: bloc.names.map((item) {
                           return DropdownMenuItem(
                             value: item,
@@ -205,9 +206,9 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField,
+                stream: bloc.outtextField1,
                 builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField,
+                  onChanged: bloc.intextField1,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: PrimaryColor8,
@@ -230,9 +231,9 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField,
+                stream: bloc.outtextField2,
                 builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField,
+                  onChanged: bloc.intextField2,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: PrimaryColor8,

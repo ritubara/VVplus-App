@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/Contractors%20%20page/Daily%20Manpower%20page/daily_manpower_page_body.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
@@ -9,7 +10,7 @@ class DailyManpowerPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialProvider(
+    return ContractorProvider(
       child: Scaffold(
         appBar: AppBarSatff("Daily Manpower"),
         body: const DailyManpowerBody(),
