@@ -136,7 +136,7 @@ class MyDropdownForm extends State<DropdownForm> {
           child: StreamBuilder(
         stream: bloc.outDropField1,
               builder: (context, snapshot) {
-                return DropdownButton<String>(
+                return DropdownButtonFormField<String>(
                   hint: Row(
                     children: [
                       IconButton(
@@ -151,6 +151,8 @@ class MyDropdownForm extends State<DropdownForm> {
                   isExpanded: true,
                   iconEnabledColor: PrimaryColor4,
                   style: const TextStyle(color: PrimaryColor2, fontSize: 16),
+                  validator: (value) => value == null
+                      ? 'Field required' : null,
                   value: snapshot.data,
                   onChanged: bloc.inDropField1,
                   items: bloc.names.map((item) {
