@@ -8,6 +8,44 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
+// date text form field
+var dateFieldPadding = const EdgeInsets.symmetric(horizontal: 35);
+double dateFieldHeight = 48;
+InputDecoration dateFieldDecoration(){
+  return const InputDecoration(
+    filled: true,
+    fillColor: PrimaryColor8,
+    focusColor: boxDecorationColor2,
+    suffixIcon: Icon(Icons.calendar_today, color: iconColor1,),
+    //hintText: "Enter Date",
+    enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        borderSide: BorderSide(color: PrimaryColor9)
+    ),
+    focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        borderSide: BorderSide(color: PrimaryColor9)
+    ),
+    //prefixIcon: Icon(Icons.calendar_today),
+    //labelText: "Enter Date"
+  );
+}
+
+// drop down form field
+var dropDownFieldIcon1 = const Icon(Icons.search);
+String dropDownFieldText = "Search here";
+var dropDownFieldIcon2 = const Icon(Icons.keyboard_arrow_down_sharp);
+var dropDownFieldStyle = const TextStyle(color: PrimaryColor2, fontSize: 16);
+
+// normal text input field
+
+OutlineInputBorder textFieldBorder(){
+  return OutlineInputBorder(
+      borderSide: const BorderSide(color: PrimaryColor9),
+      borderRadius: BorderRadius.circular(10));
+}
+
+
 class DateTextFormField extends StatefulWidget {
   const DateTextFormField({Key key}) : super(key: key);
 
@@ -90,48 +128,42 @@ class MyDropdownForm extends State<DropdownForm> {
   @override
   Widget build(BuildContext context) {
     final bloc = MaterialProvider.of(context);
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: padding1,
-          child: Center(
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-              stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.search), onPressed: () {  },
-                            ),
-                            const Text("Search here"),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: const TextStyle(color: PrimaryColor2, fontSize: 16),
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+    return Padding(
+      padding: padding1,
+      child: Container(
+        decoration: DecorationForms(),
+        child: DropdownButtonHideUnderline(
+          child: StreamBuilder(
+        stream: bloc.outDropField1,
+              builder: (context, snapshot) {
+                return DropdownButton<String>(
+                  hint: Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.search), onPressed: () {  },
+                      ),
+                      const Text("Search here"),
+                    ],
+                  ),
+                  dropdownColor: PrimaryColor3,
+                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                  iconSize: 20,
+                  isExpanded: true,
+                  iconEnabledColor: PrimaryColor4,
+                  style: const TextStyle(color: PrimaryColor2, fontSize: 16),
+                  value: snapshot.data,
+                  onChanged: bloc.inDropField1,
+                  items: bloc.names.map((item) {
+                    return DropdownMenuItem(
+                      value: item,
+                      child: Text(item),
+                    );
+                  }).toList(),
+                );
+              }
           ),
         ),
-      ],
+      ),
     );
   }
 }
