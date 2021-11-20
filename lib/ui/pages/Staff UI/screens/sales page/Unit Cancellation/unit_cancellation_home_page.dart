@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Sales_page_bloc/unit_cancellation_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Unit%20Cancellation/unit_cancellation_body.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
@@ -9,7 +10,7 @@ class UnitCancellationPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialProvider(
+    return UnitCancellationProvider(
       child: Scaffold(
         appBar: AppBarSatff("Unit Cancellation"),
         body: const UnitCancellationBody(),

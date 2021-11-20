@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Sales_page_bloc/extra_work_entry_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
@@ -28,7 +29,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = MaterialProvider.of(context);
+    final bloc = SalesExtraWorkEntryProvider.of(context);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -56,9 +57,9 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField,
+                stream: bloc.outtextField1,
                 builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField,
+                  onChanged: bloc.intextField1,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: PrimaryColor8,
@@ -121,7 +122,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
               decoration: DecorationForms(),
               child: DropdownButtonHideUnderline(
                 child: StreamBuilder(
-                    stream: bloc.outDropField1,
+                    stream: bloc.outDropField2,
                     builder: (context, snapshot) {
                       return DropdownButton<String>(
                         hint: Row(
@@ -140,7 +141,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
                         iconEnabledColor: PrimaryColor4,
                         style: dropDownFieldStyle,
                         value: snapshot.data,
-                        onChanged: bloc.inDropField1,
+                        onChanged: bloc.inDropField2,
                         items: bloc.names.map((item) {
                           return DropdownMenuItem(
                             value: item,
@@ -161,7 +162,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
               decoration: DecorationForms(),
               child: DropdownButtonHideUnderline(
                 child: StreamBuilder(
-                    stream: bloc.outDropField1,
+                    stream: bloc.outDropField3,
                     builder: (context, snapshot) {
                       return DropdownButton<String>(
                         hint: Row(
@@ -180,7 +181,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
                         iconEnabledColor: PrimaryColor4,
                         style: dropDownFieldStyle,
                         value: snapshot.data,
-                        onChanged: bloc.inDropField1,
+                        onChanged: bloc.inDropField3,
                         items: bloc.names.map((item) {
                           return DropdownMenuItem(
                             value: item,
@@ -229,9 +230,9 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField,
+                stream: bloc.outtextField2,
                 builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField,
+                  onChanged: bloc.intextField2,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: PrimaryColor8,
@@ -258,9 +259,9 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField,
+                stream: bloc.outtextField3,
                 builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField,
+                  onChanged: bloc.intextField3,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: PrimaryColor8,

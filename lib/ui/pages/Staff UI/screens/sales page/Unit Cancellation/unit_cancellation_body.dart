@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Sales_page_bloc/unit_cancellation_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
@@ -28,7 +29,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = MaterialProvider.of(context);
+    final bloc = UnitCancellationProvider.of(context);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -123,7 +124,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
               decoration: DecorationForms(),
               child: DropdownButtonHideUnderline(
                 child: StreamBuilder(
-                    stream: bloc.outDropField1,
+                    stream: bloc.outDropField2,
                     builder: (context, snapshot) {
                       return DropdownButton<String>(
                         hint: Row(
@@ -142,7 +143,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
                         iconEnabledColor: PrimaryColor4,
                         style: dropDownFieldStyle,
                         value: snapshot.data,
-                        onChanged: bloc.inDropField1,
+                        onChanged: bloc.inDropField2,
                         items: bloc.names.map((item) {
                           return DropdownMenuItem(
                             value: item,
@@ -191,9 +192,9 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField,
+                stream: bloc.outtextField1,
                 builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField,
+                  onChanged: bloc.intextField1,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: PrimaryColor8,
@@ -218,9 +219,9 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField,
+                stream: bloc.outtextField2,
                 builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField,
+                  onChanged: bloc.intextField2,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: PrimaryColor8,

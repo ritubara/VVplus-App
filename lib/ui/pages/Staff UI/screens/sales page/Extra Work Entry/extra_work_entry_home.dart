@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Sales_page_bloc/extra_work_entry_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Extra%20Work%20Entry/extra_work_entry_body.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
@@ -9,7 +10,7 @@ class ExtraWorkEntryPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialProvider(
+    return SalesExtraWorkEntryProvider(
       child: Scaffold(
         appBar: AppBarSatff("Extra Work Entry"),
         body: const ExtraWorkEntryBody(),
