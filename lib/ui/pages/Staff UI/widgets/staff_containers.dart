@@ -423,6 +423,11 @@ class FormsContainer extends StatefulWidget {
 }
 
 class MyFormsContainer extends State<FormsContainer> {
+
+  TextEditingController ReqQty = TextEditingController();
+  TextEditingController rate = TextEditingController();
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
   int valueChoose = 4;
 
   @override
@@ -559,7 +564,10 @@ class MyFormsContainer extends State<FormsContainer> {
               children: [
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                     ReqQty.clear();
+                    rate.clear();
+                  },
                   elevation: 0.0,
                   color: StoreContainerColor,
                   child: RaisedButtonText("Clear This Item"),
