@@ -35,7 +35,9 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    dateinput.clear();
+                  },
                   elevation: 0.0,
                   color: Colors.white,
                   child: RaisedButtonText("Clear all"),
