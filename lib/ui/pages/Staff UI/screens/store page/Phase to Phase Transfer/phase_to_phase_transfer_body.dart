@@ -19,6 +19,7 @@ class PhaseToPhaseTransferBody extends StatefulWidget{
 class myPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
 
   TextEditingController dateinput = TextEditingController();
+  TextEditingController remarks = TextEditingController();
 
   @override
   void initState() {
@@ -39,7 +40,10 @@ class myPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    dateinput.clear();
+                    remarks.clear();
+                  },
                   elevation: 0.0,
                   color: Colors.white,
                   child: RaisedButtonText("Clear all"),
@@ -328,6 +332,7 @@ class myPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
               child: StreamBuilder<String>(
                 stream: bloc.outtextField,
                 builder: (context, snapshot) => TextFormField(
+                  controller: remarks,
                   onChanged: bloc.intextField,
                   decoration: InputDecoration(
                       filled: true,
