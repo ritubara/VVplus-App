@@ -468,6 +468,7 @@ class MyFormsContainer extends State<FormsContainer> {
                           stream: bloc.requestQty,
                           builder: (context, snapshot) {
                             return TextFormField(
+                              controller: ReqQty,
                               decoration: InputDecoration(
                                 errorText: snapshot.error,
                               ),
@@ -544,6 +545,7 @@ class MyFormsContainer extends State<FormsContainer> {
                           stream: bloc.ratefield,
                           builder: (context, snapshot) {
                             return TextFormField(
+                              controller: rate,
                               decoration: InputDecoration(
                                 errorText: snapshot.error,
                               ),
