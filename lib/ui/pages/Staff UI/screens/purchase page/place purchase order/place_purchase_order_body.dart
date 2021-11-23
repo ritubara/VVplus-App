@@ -33,42 +33,8 @@ class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
           sizedbox1,
           FormsHeadText("Voucher Type"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Date"),
@@ -100,82 +66,14 @@ class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
           sizedbox1,
           FormsHeadText("Supplier"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Indent Selection"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("PO Valid Date"),
