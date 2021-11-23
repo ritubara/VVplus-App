@@ -60,41 +60,7 @@ class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
           FormsHeadText("Indant Selection"),
           Padding(
             padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            child: SearchDropDown(),
           ),
           //SizedBox(height: 10,),
           const InformationBoxContainer1(),
