@@ -59,7 +59,7 @@ class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
           sizedbox1,
           FormsHeadText("Indant Selection"),
           Padding(
-            padding: padding1,
+            padding: paddingForms,
             child: SearchDropDown(),
           ),
           //SizedBox(height: 10,),
