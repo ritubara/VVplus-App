@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
@@ -266,6 +267,38 @@ class MyNormalTextFormField extends State<NormalTextFormField> {
             ),
             keyboardType: TextInputType.text,
             style: simpleTextStyle7(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+class SearchDropdown extends StatefulWidget {
+  const SearchDropdown({Key key}) : super(key: key);
+
+  @override
+  State<SearchDropdown> createState() => MySearchDropdown();
+}
+class MySearchDropdown extends State<SearchDropdown> {
+  @override
+  Widget build(BuildContext context) {
+    //final bloc = MaterialProvider.of(context);
+    return Padding(
+      padding: padding1,
+      child: Container(
+        height: 50,
+        decoration: DecorationForms(),
+        child: StreamBuilder(
+          //stream: bloc.outDropField3,
+          builder: (context, snapshot) => DropdownSearch<String>(
+            mode: Mode.DIALOG,
+            showSearchBox: true,
+            showSelectedItems: true,
+            //selectedItem: "India",
+            //label: "Country",
+            items: itemsNames,
+            //onChanged: bloc.inDropField3,
+            hint: "Search",
           ),
         ),
       ),
