@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/Model/fetch_data.dart';
+import 'package:vvplus_app/Services/post_data.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/dropdown_button_item_list.dart';
@@ -24,7 +26,18 @@ class MaterialEntryBody extends StatefulWidget {
 
 class myMaterialEntryBody extends State<MaterialEntryBody> {
 
+  //final Future<FetchData> post;
+  //myMaterialEntryBody({Key key, this.post}) :super(key: key);
+
   TextEditingController dateinput = TextEditingController();
+  TextEditingController indentType = TextEditingController();
+  TextEditingController item = TextEditingController();
+  TextEditingController ReqQty = TextEditingController();
+  TextEditingController rate = TextEditingController();
+  TextEditingController costCenter = TextEditingController();
+  TextEditingController Remarks = TextEditingController();
+
+
   String dropdownValue = 'Choose an option';
 
 
@@ -62,7 +75,10 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    dateinput.clear();
+                    Remarks.clear();
+                  },
                   elevation: 0.0,
                   color: Colors.white,
                   child: RaisedButtonText("Clear all"),
@@ -71,54 +87,14 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             ),
           ),
           FormsHeadText("Indent Type"),
+
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: DropdownButtonHideUnderline(
-                      child: StreamBuilder(
-                          stream: bloc.outDropField1,
-                          builder: (context, snapshot) {
-                            return ButtonTheme(
-                              alignedDropdown: true,
-                              child:DropdownButton<String>(
-                              hint: Row(
-                                children: [
-                                  IconButton(
-                                    icon: dropDownFieldIcon1,
-                                    onPressed: () {  },
-                                  ),
-                                  Text(dropDownFieldText),
-                                ],
-                              ),
-                              dropdownColor: PrimaryColor3,
-                              icon: dropDownFieldIcon2,
-                              iconSize: 20,
-                              isExpanded: true,
-                              iconEnabledColor: PrimaryColor4,
-                              style: dropDownFieldStyle,
-                              value: snapshot.data,
-                              onChanged: bloc.inDropField1,
-                              items: bloc.names.map((item) {
-                                return DropdownMenuItem(
-                                  value: item,
-                                  child: Text(item),
-                                );
-                              }).toList(),
-                            ),
-                            );
-                          }
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
+
           const Padding(padding: EdgeInsets.all(10)),
+
           FormsHeadText("Indent Date"),
           Container(
             padding: dateFieldPadding,
@@ -163,10 +139,11 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                 children: [
                   const Padding(padding: EdgeInsets.all(10)),
                   FormsHeadText("Item "),
+                  ContainerSearchDropDown(),
 
                   //const DropdownFormCont(),
                   //==================================== dropdown form
-              Padding(
+             /* Padding(
                 padding: padding1,
                 child: Container(
                   decoration: DecorationForms(),
@@ -206,7 +183,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                     ),
                   ),
                 ),
-              ),
+              ),*/
 
                   //====================================
 
@@ -231,6 +208,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                                 stream: bloc.requestQty,
                                 builder: (context, snapshot) {
                                   return TextFormField(
+                                    controller: ReqQty,
                                     decoration: InputDecoration(
                                       errorText: snapshot.error,
                                     ),
@@ -312,6 +290,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                                 stream: bloc.ratefield,
                                 builder: (context, snapshot) {
                                   return TextFormField(
+                                    controller: rate,
                                     decoration: InputDecoration(
                                       errorText: snapshot.error,
                                     ),
@@ -336,7 +315,12 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                     children: [
                       const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                       RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          ReqQty.clear();
+                          rate.clear();
+
+
+                        },
                         elevation: 0.0,
                         color: StoreContainerColor,
                         child: RaisedButtonText("Clear This Item"),
@@ -491,44 +475,28 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
           ) : SizedBox(),
 
           const Padding(padding: EdgeInsets.all(10)),
+          
+          //***************************************** api fetching
+          /*Container(
+            child: FutureBuilder<FetchData>(
+              //future: post,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(snapshot.data.strFilter);
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+
+                // By default, show a loading spinner
+                return CircularProgressIndicator();
+              },
+            ),
+          ),*/
+          //******************************************
           FormsHeadText("Choose Phase (Cost Center)"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           Padding(padding: paddingForms),
           FormsHeadText("Req. Date"),
@@ -568,6 +536,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               child: StreamBuilder<String>(
                 stream: bloc.outtextField,
                 builder: (context, snapshot) => TextFormField(
+                  controller: Remarks,
                   onChanged: bloc.intextField,
                   decoration: InputDecoration(
                       filled: true,
@@ -584,7 +553,13 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
-              child: RoundedButtonHome("Submit", (){})
+              child: RoundedButtonHome(
+                  "Submit",
+                      (){
+                        postData();
+
+
+                      })
           ),
         ],
       ),
