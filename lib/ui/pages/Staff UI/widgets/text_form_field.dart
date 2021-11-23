@@ -273,13 +273,13 @@ class MyNormalTextFormField extends State<NormalTextFormField> {
     );
   }
 }
-class SearchDropdown extends StatefulWidget {
-  const SearchDropdown({Key key}) : super(key: key);
+class SearchDropDown extends StatefulWidget {
+  const SearchDropDown({Key key}) : super(key: key);
 
   @override
-  State<SearchDropdown> createState() => MySearchDropdown();
+  State<SearchDropDown> createState() => MySearchDropdown();
 }
-class MySearchDropdown extends State<SearchDropdown> {
+class MySearchDropdown extends State<SearchDropDown> {
   @override
   Widget build(BuildContext context) {
     //final bloc = MaterialProvider.of(context);
@@ -287,6 +287,7 @@ class MySearchDropdown extends State<SearchDropdown> {
       padding: padding1,
       child: Container(
         height: 50,
+        width: 343,
         decoration: DecorationForms(),
         child: StreamBuilder(
           //stream: bloc.outDropField3,
@@ -305,3 +306,39 @@ class MySearchDropdown extends State<SearchDropdown> {
     );
   }
 }
+
+class ContainerSearchDropDown extends StatefulWidget {
+  const ContainerSearchDropDown({Key key}) : super(key: key);
+
+  @override
+  State<ContainerSearchDropDown> createState() => MyContainerSearchDropdown();
+}
+class MyContainerSearchDropdown extends State<ContainerSearchDropDown> {
+  @override
+  Widget build(BuildContext context) {
+    //final bloc = MaterialProvider.of(context);
+    return Padding(
+      padding: padding1,
+      child: Container(
+        height: 50,
+        width: 343,
+        decoration: ContainerDecorationForms(),
+        child: StreamBuilder(
+          //stream: bloc.outDropField3,
+          builder: (context, snapshot) => DropdownSearch<String>(
+            mode: Mode.DIALOG,
+            showSearchBox: true,
+            showSelectedItems: true,
+            //selectedItem: "India",
+            //label: "Country",
+            items: itemsNames,
+            //onChanged: bloc.inDropField3,
+            hint: "Search",
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
