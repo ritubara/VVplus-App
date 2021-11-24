@@ -47,42 +47,8 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           ),
           FormsHeadText("Voucher Type"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Date"),
@@ -116,42 +82,8 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           sizedbox1,
           FormsHeadText("Party Bill No"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Party Bill Date"),
@@ -183,122 +115,24 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           sizedbox1,
           FormsHeadText("Supplier"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Purchase Order Select"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Vehicle No."),
+          NormalTextFormField(),
+          sizedbox1,
+
+          FormsHeadText("Godown"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: SearchDropDown(),
           ),
           sizedbox1,
           Padding(
