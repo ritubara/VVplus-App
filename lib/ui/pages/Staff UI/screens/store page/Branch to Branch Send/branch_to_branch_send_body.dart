@@ -48,42 +48,8 @@ class myBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
           ),
           FormsHeadText("Voucher Type"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Voucher No. Date"),
@@ -115,123 +81,21 @@ class myBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
           sizedbox1,
           FormsHeadText("From Branch"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("From Phase"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("From Godown"),
 
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
 
           sizedbox1,
@@ -239,202 +103,32 @@ class myBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
           FormsHeadText("To Branch"),
 
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("To Phase"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("To Godown"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Vehicle No."),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const NormalTextFormField(),
           ),
           sizedbox1,
           FormsHeadText("Indent Selection"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           Padding(
