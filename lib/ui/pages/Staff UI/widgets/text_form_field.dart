@@ -1,7 +1,11 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:search_choices/search_choices.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/infrastructure/Repository/dropdown_bloc.dart';
+import 'package:vvplus_app/infrastructure/Repository/state_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/dropdown_button_item_list.dart';
@@ -341,4 +345,45 @@ class MyContainerSearchDropdown extends State<ContainerSearchDropDown> {
   }
 }
 
+class SearchChoiceDropdown extends StatefulWidget {
+  SearchChoiceDropdown({Key key}) : super(key: key);
+
+  @override
+  _SearchChoiceDropdownState createState() => _SearchChoiceDropdownState();
+}
+
+class _SearchChoiceDropdownState extends State<SearchChoiceDropdown> {
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = ContractorProvider.of(context);
+    return Padding(
+            padding: padding1,
+            child: Container(
+              height: 68,
+              width: 343,
+              decoration: DecorationForms(),
+              child: StreamBuilder(
+                  stream: bloc.outDropField1,
+                  builder: (context, snapshot) {
+                    return SearchChoices.single(
+                            //menuConstraints: BoxConstraints.tight(Size.fromHeight(350)),
+                            underline: "",
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: snapshot.data,
+                            onChanged: bloc.inDropField1,
+                            items: bloc.names.map((item) {
+                              return DropdownMenuItem(
+                                value: item,
+                                child: Text(item),
+                              );
+                            }).toList(),
+                          );
+                        }
+                    ),
+            ),
+          );
+  }
+}
 
