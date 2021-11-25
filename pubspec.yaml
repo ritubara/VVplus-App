@@ -50,8 +50,8 @@ dependencies:
   meta: ^1.7.0
   flutter_spinkit: ^4.0.0
   dio: ^4.0.3
-  searchable_dropdown:
   dropdown_search: ^2.0.1
+  search_choices: ^2.0.14
 
 
 
