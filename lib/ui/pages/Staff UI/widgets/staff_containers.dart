@@ -578,11 +578,13 @@ class MyFormsContainer extends State<FormsContainer> {
 
 
                 StreamBuilder<bool>(
-                  //stream: bloc.MaterialValid,
+                  stream: bloc.submitCheck,
                   builder: (context, snapshot) {
                     return RoundedButtonInput(
                       text: "Add Item to List",
-                      press: !snapshot.hasData ? null : bloc.submitProduct,
+                      press: !snapshot.hasData ? null: (){
+
+                      } ,
                       fontsize1: 12,
                       size1: 0.5,
                       horizontal1: 30,

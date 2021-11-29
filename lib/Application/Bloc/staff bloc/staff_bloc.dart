@@ -25,6 +25,8 @@ class StaffBloc{
   Stream<String> get outDropField2  => _dropDownField.stream;
   Stream<String> get outtextField => _textController.stream.transform(textFieldValidator);
   //Stream<bool> get MaterialValid => Observable.combineLatest2(requestQty,_ratefield,(requestQty,_ratefield)=>true);
+  Stream<bool> get submitCheck =>
+      Rx.combineLatest2(requestQty, ratefield, (p, o,) => true);
 
 
 
