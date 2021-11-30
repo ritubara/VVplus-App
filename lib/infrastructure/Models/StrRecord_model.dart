@@ -1,8 +1,19 @@
 import 'dart:convert';
 
-StrRecord strRecordFromJson(String str) => StrRecord.fromJson(json.decode(str));
+//StrRecord strRecordFromJson(String str) => StrRecord.fromJson(json.decode(str));
+//String strRecordToJson(StrRecord data) => json.encode(data.toJson());
 
-String strRecordToJson(StrRecord data) => json.encode(data.toJson());
+List<StrRecord> StrRecordFromJson(String str) =>
+    List<StrRecord>.from(json.decode(str).map((x) => StrRecord.fromJson(x)));
+
+String StrRecordToJson(List<StrRecord> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+List<StrIndGrid> StrIndGridFromJson(String str) =>
+    List<StrIndGrid>.from(json.decode(str).map((x) => StrIndGrid.fromJson(x)));
+
+String StrIndGridToJson(List<StrRecord> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class StrRecord {
   StrRecord({
