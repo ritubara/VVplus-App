@@ -5,25 +5,17 @@ import 'package:vvplus_app/infrastructure/Repository/str_record_repository.dart'
 
 class DropdownBloc {
   final _repository = Repository();
-  final _selectedState$ = BehaviorSubject<StrRecord>();
-  //final _selectedCity$ = BehaviorSubject<StrIndGrid>();
+  final _selectedData$ = BehaviorSubject<StrRecord>();
 
-  Future<List<StrRecord>> states;
-  //Stream<List<StrIndGrid>> cities;
-  Stream<StrRecord> get selectedState => _selectedState$;
-  //Stream<StrIndGrid> get selectedCity => _selectedCity$;
-  void selectedStateEvent(StrRecord strIndTypeCode) => _selectedState$.add(strIndTypeCode);
-  //void selectedCityEvent(StrIndGrid strItemCode) => _selectedCity$.add(strItemCode);
+  Future<List<StrRecord>> data;
+  Stream<StrRecord> get selectedState => _selectedData$;
+  void selectedStateEvent(StrRecord strIndTypeCode) => _selectedData$.add(strIndTypeCode);
 
   DropdownBloc() {
-    states = _repository.getStates();
-    //cities = _selectedState$.switchMap((d) =>
-        //Stream.fromFuture(_repository.getCities(d.id)).startWith(null))
-      //..listen((e) => _selectedCity$.add(null));
+    data = _repository.getData();
   }
 
   void dispose() {
-    //_selectedCity$.close();
-    _selectedState$.close();
+    _selectedData$.close();
   }
 }

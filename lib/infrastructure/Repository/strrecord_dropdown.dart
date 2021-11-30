@@ -36,7 +36,7 @@ class _MyHomePage11State extends State<MyHomePage11> {
         height: 50, width: 343,
         decoration: DecorationForms(),
         child: FutureBuilder<List<StrRecord>>(
-            future: _dropdownBloc.states,
+            future: _dropdownBloc.data,
             builder: (context, snapshot) {
               return StreamBuilder<StrRecord>(
                   stream: _dropdownBloc.selectedState,

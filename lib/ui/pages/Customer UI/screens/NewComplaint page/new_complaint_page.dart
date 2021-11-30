@@ -77,28 +77,29 @@ class _ComplaintPageState extends State<ComplaintPage>{
                     child: Center(
                       child: Container(
                         decoration: decoration3(),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                            hint: const Text(text22),
-                            dropdownColor: PrimaryColor3,
-                            icon: const Icon(Icons.arrow_drop_down),
-                            iconSize: 40,
-                            isExpanded: true,
-                            iconEnabledColor: TextColor3,
-                            style: const TextStyle(color: PrimaryColor2,fontSize: 20),
-                            value: valueChoose,
-                            onChanged: (newValue){
-                              setState(() {
-                                valueChoose = newValue;
-                              });
-                            },
-                            items: listItem.map((valueItem){
-                              return DropdownMenuItem(
-                                value: valueItem,
-                                child: Text(valueItem),
-                              );
-                            }).toList(),
-                          ),
+                        child: StreamBuilder(
+                            //stream: bloc.outName,
+                            builder: (context, snapshot){
+                            return DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                hint: const Text(text22),
+                                dropdownColor: PrimaryColor3,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                iconSize: 40,
+                                isExpanded: true,
+                                iconEnabledColor: TextColor3,
+                                style: const TextStyle(color: PrimaryColor2,fontSize: 20),
+                                value: snapshot.data,
+                                //onChanged: bloc.inName,
+                                items: listItem.map((valueItem){
+                                  return DropdownMenuItem(
+                                    value: valueItem,
+                                    child: Text(valueItem),
+                                  );
+                                }).toList(),
+                              ),
+                            );
+                          }
                         ),
                       ),
                     ),

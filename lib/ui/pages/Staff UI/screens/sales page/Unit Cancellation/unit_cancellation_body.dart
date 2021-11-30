@@ -78,83 +78,15 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
           sizedbox1,
           FormsHeadText("Booking Id"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField1,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField1,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           const InformationBoxContainer4(),
           sizedbox1,
           FormsHeadText("Change Applicable"),
           Padding(
-            padding: padding1,
-            child: Container(
-              decoration: DecorationForms(),
-              child: DropdownButtonHideUnderline(
-                child: StreamBuilder(
-                    stream: bloc.outDropField2,
-                    builder: (context, snapshot) {
-                      return DropdownButton<String>(
-                        hint: Row(
-                          children: [
-                            IconButton(
-                              icon: dropDownFieldIcon1,
-                              onPressed: () {  },
-                            ),
-                            Text(dropDownFieldText),
-                          ],
-                        ),
-                        dropdownColor: PrimaryColor3,
-                        icon: dropDownFieldIcon2,
-                        iconSize: 20,
-                        isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
-                        style: dropDownFieldStyle,
-                        value: snapshot.data,
-                        onChanged: bloc.inDropField2,
-                        items: bloc.names.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                      );
-                    }
-                ),
-              ),
-            ),
+            padding: paddingForms,
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Due Date"),
