@@ -52,6 +52,7 @@ dependencies:
   dio: ^4.0.3
   dropdown_search: ^2.0.1
   search_choices: ^2.0.14
+  xml2json: ^5.3.1
 
 
 
