@@ -62,8 +62,7 @@ class ContractorProvider extends InheritedWidget{
   bool updateShouldNotify(_) => true;
 
   static StaffBloc of (BuildContext context){
-    return (context.dependOnInheritedWidgetOfExactType<ContractorProvider>() as ContractorProvider)
-        .bloc;
+    return (context.dependOnInheritedWidgetOfExactType<ContractorProvider>()).bloc;
   }
 
 }
