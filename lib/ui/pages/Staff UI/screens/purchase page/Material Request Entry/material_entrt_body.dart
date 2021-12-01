@@ -4,9 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/dropdown_button_item_list.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
@@ -323,28 +321,25 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                         color: StoreContainerColor,
                         child: RaisedButtonText("Clear This Item"),
                       ),
-
-
-                      /* StreamBuilder<bool>(
-                      //stream: bloc.MaterialValid,
-                        builder: (context, snapshot) {*/
-                      RoundedButtonInput(
-                        text: "Add Item to List",
-                        //press: !snapshot.hasData ? null : bloc.submitProduct,
-                        press: (){
-                          setState(() {
-                            pressed = true;
-                          });
-                        },
-                        fontsize1: 12,
-                        size1: 0.5,
-                        horizontal1: 30,
-                        vertical1: 10,
-                        color1: Colors.orange,
-                        textColor1: TextColor1,
+                      StreamBuilder<bool>(
+                          stream: bloc.submitCheck,
+                          builder: (context, snapshot) {
+                            return RoundedButtonInput(
+                              text: "Add Item to List",
+                              press: !snapshot.hasData ? null: (){
+                                setState(() {
+                                  pressed = true;
+                                });
+                              } ,
+                              fontsize1: 12,
+                              size1: 0.5,
+                              horizontal1: 30,
+                              vertical1: 10,
+                              color1: Colors.orange,
+                              textColor1: TextColor1,
+                            );
+                          }
                       ),
-                      /*   }
-                    ),*/
                     ],
                   )
                 ],
@@ -418,7 +413,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                               ],
                             ),
                             const SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Row(
                               children:[
@@ -440,7 +435,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                               ],
                             ),
                             const SizedBox(
-                              height: 2,
+                              height: 5,
                             ),
                             Row(
                               children:[
@@ -496,7 +491,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             padding: paddingForms,
             child: SearchDropDown(),
           ),
-          Padding(padding: paddingForms),
+          const SizedBox(height: 15),
           FormsHeadText("Req. Date"),
           Container(
             padding: dateFieldPadding,
@@ -523,7 +518,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               ),
             ),
           ),
-          Padding(padding: paddingForms),
+          const SizedBox(height: 15),
           FormsHeadText("Remarks"),
           Container(
             height: 50,
