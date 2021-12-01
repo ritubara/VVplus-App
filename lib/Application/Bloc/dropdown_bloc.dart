@@ -9,7 +9,7 @@ class DropdownBloc {
 
   Future<List<StrRecord>> data;
   Stream<StrRecord> get selectedState => _selectedData$;
-  void selectedStateEvent(StrRecord strIndTypeCode) => _selectedData$.add(strIndTypeCode);
+  void selectedStateEvent(StrRecord state) => _selectedData$.add(state);
 
   DropdownBloc() {
     data = _repository.getData();

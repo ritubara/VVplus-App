@@ -19,3 +19,14 @@ class Repository {
     }
   }
 }
+/*
+getData1()async{
+  http.Response res = await http.get(Uri.parse(URL));
+  xml2json.parse(res.body);
+  var jsondata = xml2json.toGData();
+  var data = json.decode(jsondata);
+  //buildlists(data);
+  print(data);
+}
+
+ */

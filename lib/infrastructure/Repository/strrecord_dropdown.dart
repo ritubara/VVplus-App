@@ -6,9 +6,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class MyHomePage11 extends StatefulWidget {
-  MyHomePage11({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage11({Key key}) : super(key: key);
 
   @override
   _MyHomePage11State createState() => _MyHomePage11State();
@@ -53,9 +51,9 @@ class _MyHomePage11State extends State<MyHomePage11> {
                           ?.map<DropdownMenuItem<StrRecord>>((e) {
                         return DropdownMenuItem<StrRecord>(
                           value: e,
-                          child: Text(e.strName),
+                          child: Text(e.strSubCode),
                         );
-                      })?.toList(),
+                      })?.toList() ??[],
                     );
                   }
               );
