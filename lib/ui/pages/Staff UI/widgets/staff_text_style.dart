@@ -9,7 +9,7 @@ TextStyle containerTextStyle1() {
   return textStyle1(boxDecorationTextColor1,18,FontWeight.bold);
 }
 TextStyle containerTextStyle2() {
-  return textStyle1(boxDecorationTextColor1,12,FontWeight.w500);
+  return textStyle1(boxDecorationTextColor1,14,FontWeight.w500);
 }
 TextStyle containerTextStyle3() {
   return textStyle1(boxDecorationTextColor2,12,FontWeight.w500);
