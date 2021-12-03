@@ -1,5 +1,5 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:vvplus_app/infrastructure/Models/StrRecord_model.dart';
+import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
 import 'dart:async';
 
 import 'package:vvplus_app/infrastructure/Repository/item_current_status_repository.dart';

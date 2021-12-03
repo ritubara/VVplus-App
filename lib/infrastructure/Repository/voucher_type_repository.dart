@@ -3,7 +3,8 @@ import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
 import 'package:vvplus_app/data_source/api/api_details.dart';
 import 'dart:async';
-import 'package:vvplus_app/infrastructure/Models/StrRecord_model.dart';
+
+import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 
 
 class VoucherTypeRepository {

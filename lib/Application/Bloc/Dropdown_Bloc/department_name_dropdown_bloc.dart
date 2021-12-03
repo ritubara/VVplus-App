@@ -1,5 +1,5 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:vvplus_app/infrastructure/Models/StrRecord_model.dart';
+import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Repository/department_name_repository.dart';
 import 'dart:async';
 
@@ -11,7 +11,7 @@ class DepartmentNameDropdownBloc {
   Stream<StrRecord> get selectedState => _selectedData$;
   void selectedStateEvent(StrRecord state) => _selectedData$.add(state);
 
-  DropdownBloc() {
+  DepartmentNameDropdownBloc() {
     data = _repository.getData();
   }
 

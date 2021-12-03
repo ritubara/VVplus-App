@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdown_bloc.dart';
-import 'package:vvplus_app/infrastructure/Models/StrRecord_model.dart';
+import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 

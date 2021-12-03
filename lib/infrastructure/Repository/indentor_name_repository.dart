@@ -4,9 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:vvplus_app/data_source/api/api_details.dart';
 import 'dart:async';
 
-import 'package:vvplus_app/infrastructure/Models/StrRecord_model.dart';
-
-//final String url = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Indentor","StrSiteCode":"AS","StrV_Type":"IND","StrChkNonStockabl// e":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostC// enterCode":""},{"StrCostCenterCode":""}]}'}";
+import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 
 class IndentorNameRepository {
   Client client = new Client();
