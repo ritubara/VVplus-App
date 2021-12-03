@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
-import 'package:vvplus_app/infrastructure/Repository/strrecord_dropdown.dart';
+import 'package:vvplus_app/data_source/api/api_details.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/department_name_dropdown.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/indentor_name_dropdown.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_current_status_dropdown.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_name_dropdown.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/voucher_type_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -25,7 +30,9 @@ class DailyManpowerBody extends StatefulWidget {
 class myDailyManpowerBody extends State<DailyManpowerBody> {
   Xml2Json xml2json = new Xml2Json();
   //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FPostIndent?StrRecord=${'{"StrIndTypeCode":"IND","StrSiteCode":"AD","StrIndNo":"11","StrIndDate":"10/11/2021","StrDepartmentCode":"AD2","StrIndentorCode":"SG344","StrPreparedByCode":"SA","StrIndGrid":[{"StrItemCode":"PN1","DblQuantity":"100","StrCostCenterCode":"AD1","StrRequiredDate":"10/11/2021","StrRemark":"remark1"}]}'}";
-  final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Indentor","StrSiteCode":"AS","StrV_Type":"IND","StrChkNonStockabl// e":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostC// enterCode":""},{"StrCostCenterCode":""}]}'}";
+  //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Indentor","StrSiteCode":"AS","StrV_Type":"IND","StrChkNonStockabl// e":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostC// enterCode":""},{"StrCostCenterCode":""}]}'}";
+  //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Department","StrSiteCode":"AS","StrV_Type":"","StrChkNonStockable":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostCenterCode":""},{"StrCostCenterCode":""}]}'}";
+  final String URL = getItemCostCenterURL;
   //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FPostIndent?StrRecord={"StrIndTypeCode":"IND","StrSiteCode":"AD","StrIndNo":"11","StrIndDate":"10/11/2021","StrDepartmentCode":"AD2","StrIndentorCode":"SG344","StrPreparedByCode":"SA","StrIndGrid":[{"StrItemCode":"PN1","DblQuantity":"100","StrCostCenterCode":"AD1","StrRequiredDate":"10/11/2021","StrRemark":"remark1"}]}";
   Future getResponse() async {
     http.Response response = await http.get(Uri.parse(URL));
@@ -38,7 +45,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
     if (response.statusCode == 200) {
       print(response.statusCode);
       print("working");
-      //print(json.decode(response.body));
+      print(json.decode(response.body));
     } else {
       print(response.statusCode);
     }
@@ -50,6 +57,14 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
       var data = json.decode(jsondata);
       //buildlists(data);
      print(data);
+  }
+  getData2()async{
+    http.Response res = await http.get(Uri.parse(URL));
+    xml2json.parse(res.body);
+    var jsondata = xml2json.toGData();
+    var data = json.decode(jsondata);
+    //buildlists(data);
+    print(data);
   }
 
   TextEditingController dateinput = TextEditingController();
@@ -255,12 +270,16 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
-          DropdownData(),
-          sizedbox1,
-          //MyHomePage1(),
+          IndentorNameDropdown(),
+          //VoucherTypeDropdown(),
+          //DepartmentNameDropdown(),
+          DepartmentNameDropdown(),
+          VoucherTypeDropdown(),
+          ItemNameDropdown(),
+          ItemCurrentStatusDropdown(),
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){getData1();},roundedButtonHomeColor1)),
+              child: RoundedButtonHome2("Submit",(){getResponse();},roundedButtonHomeColor1)),
         ],
       ),
     );
