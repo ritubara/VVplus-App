@@ -1,9 +1,16 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/Model/post_data.dart';
+import 'package:vvplus_app/data_source/api/api_details.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/department_name_dropdown.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_cost_center_dropdown.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_name_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -12,6 +19,45 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+
+
+
+//=============================================================================//
+/*
+void postData1() async{
+  try{
+    final response = await http.post(Uri.parse(PostApiURL),
+      headers: <String, String>{
+        'Content-Type': 'text/xml; charset=utf-8',
+      },
+    );
+    print(response.body);
+    print('URL: $PostApiURL \n status: ${response.statusCode}');
+    //print("working");
+    //print('Response: $response');
+    print(json.decode(response.body));
+  } catch (er){}
+}
+
+ */
+final String URL = PostApiURL;
+postData() async {
+  http.Response response = await http.get(Uri.parse(URL));
+  //print('URL: $URL \n status: ${response.statusCode}');
+  if (response.statusCode == 200) {
+    print('URL: $URL \n status: ${response.statusCode}');
+    //print("working");
+    //print('Response: $response');
+    print(json.decode(response.body));
+  } else {
+    print(response.statusCode);
+  }
+}
+//=============================================================================
+
+
 
 class MaterialEntryBody extends StatefulWidget {
 
@@ -21,11 +67,10 @@ class MaterialEntryBody extends StatefulWidget {
 }
 
 class myMaterialEntryBody extends State<MaterialEntryBody> {
+  Future<PostData> _futurePostData;
 
-  //final Future<FetchData> post;
-  //myMaterialEntryBody({Key key, this.post}) :super(key: key);
-
-  TextEditingController dateinput = TextEditingController();
+  TextEditingController IntendDateInput = TextEditingController();
+  TextEditingController ReqDateInput = TextEditingController();
   TextEditingController indentType = TextEditingController();
   TextEditingController item = TextEditingController();
   TextEditingController ReqQty = TextEditingController();
@@ -50,9 +95,11 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
 
   @override
   void initState() {
-    dateinput.text = "";
+    IntendDateInput.text = "";
+    ReqDateInput.text="";
     super.initState();
   }
+
 
   bool pressed = false;
 
@@ -72,7 +119,8 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               children: [
                 RaisedButton(
                   onPressed: () {
-                    dateinput.clear();
+                    ReqDateInput.clear();
+                    IntendDateInput.clear();
                     Remarks.clear();
                   },
                   elevation: 0.0,
@@ -82,11 +130,13 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               ],
             ),
           ),
+
+
           FormsHeadText("Indent Type"),
 
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child:DepartmentNameDropdown(),
           ),
 
           const Padding(padding: EdgeInsets.all(10)),
@@ -97,7 +147,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             height: dateFieldHeight,
             child: Center(
               child: TextFormField(
-                controller: dateinput,
+                controller: IntendDateInput,
                 decoration: dateFieldDecoration(),
                 readOnly: true,
                 onTap: () async {
@@ -109,7 +159,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   if (pickedDate != null) {
                     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                     setState(() {
-                      dateinput.text = formattedDate;
+                      IntendDateInput.text = formattedDate;
                     });
                   }
                 },
@@ -118,7 +168,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
           ),
           const Padding(padding: EdgeInsets.all(10)),
 
-          //const FormsContainer(),
+
 
           //============================================================ FormsContainer
           Padding(
@@ -135,54 +185,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                 children: [
                   const Padding(padding: EdgeInsets.all(10)),
                   FormsHeadText("Item "),
-                  ContainerSearchDropDown(),
-
-                  //const DropdownFormCont(),
-                  //==================================== dropdown form
-             /* Padding(
-                padding: padding1,
-                child: Container(
-                  decoration: DecorationForms(),
-                  child: DropdownButtonHideUnderline(
-                    child: StreamBuilder(
-                        stream: bloc.outDropField1,
-                        builder: (context, snapshot) {
-                          return DropdownButtonFormField<String>(
-                            hint: Row(
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.search), onPressed: () {  },
-                                ),
-                                const Text("Search here"),
-                              ],
-                            ),
-                            dropdownColor: PrimaryColor3,
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            iconSize: 20,
-                            isExpanded: true,
-                            iconEnabledColor: PrimaryColor4,
-                            style: const TextStyle(color: PrimaryColor2, fontSize: 16),
-                            validator: (value) => value == null
-                                ? 'Field required' : null,
-                            value: snapshot.data,
-
-
-                            onChanged: bloc.inDropField1,
-                            items: bloc.names.map((item) {
-                              return DropdownMenuItem(
-                                value: item,
-                                child: Text(item),
-                              );
-                            }).toList(),
-                          );
-                        }
-                    ),
-                  ),
-                ),
-              ),*/
-
-                  //====================================
-
+                  ItemNameDropdown(),
 
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   FormsHeadText("Request Qty. "),
@@ -314,8 +317,6 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                         onPressed: () {
                           ReqQty.clear();
                           rate.clear();
-
-
                         },
                         elevation: 0.0,
                         color: StoreContainerColor,
@@ -347,7 +348,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             ),
           ),
 
-          //============================================================
+          //============================================================ popup container
 
           pressed? Padding(
             padding: const EdgeInsets.all(10),
@@ -465,31 +466,14 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                 ],
               ),
             ),
-          ) : SizedBox(),
-
+          ) :const SizedBox(),
+//=============================================================================
           const Padding(padding: EdgeInsets.all(10)),
-          
-          //***************************************** api fetching
-          /*Container(
-            child: FutureBuilder<FetchData>(
-              //future: post,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Text(snapshot.data.strFilter);
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
 
-                // By default, show a loading spinner
-                return CircularProgressIndicator();
-              },
-            ),
-          ),*/
-          //******************************************
           FormsHeadText("Choose Phase (Cost Center)"),
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child: ItemCostCenterDropdown(),
           ),
           const SizedBox(height: 15),
           FormsHeadText("Req. Date"),
@@ -498,7 +482,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             height: dateFieldHeight,
             child: Center(
               child: TextFormField(
-                controller: dateinput,
+                controller: ReqDateInput,
                 decoration: dateFieldDecoration(),
                 readOnly: true,
                 onTap: () async {
@@ -510,7 +494,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   if (pickedDate != null) {
                     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                     setState(() {
-                      dateinput.text = formattedDate;
+                      ReqDateInput.text = formattedDate;
                     });
                   } else {
                   }
@@ -545,17 +529,41 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
               child: RoundedButtonHome(
                   "Submit",
                       (){
-                        //postData();
+                    //print(IntendDateInput.text);
+                    //print(ReqDateInput.text);
+                    //print(Remarks.text);
+                    //print(item.text);
+                    //print(ReqQty.text);
+                    //print(rate.text);
+                    //print(costCenter.text);
+                    postData();
 
 
-                      })
+                  })
           ),
         ],
       ),
     );
   }
+/*
+  FutureBuilder<PostData> buildFutureBuilder() {
+    return FutureBuilder<PostData>(
+      future: _futurePostData,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Text(snapshot.data.strIndDate);
+        } else if (snapshot.hasError) {
+          return Text('${snapshot.error}');
+        }
+
+        return const CircularProgressIndicator();
+      },
+    );
+  }
+
+   */
 }
