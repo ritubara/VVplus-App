@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/Model/post_data.dart';
-import 'package:vvplus_app/data_source/api/api_details.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/department_name_dropdown.dart';
@@ -21,42 +20,23 @@ import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-
-
 //=============================================================================//
-/*
-void postData1() async{
-  try{
-    final response = await http.post(Uri.parse(PostApiURL),
-      headers: <String, String>{
-        'Content-Type': 'text/xml; charset=utf-8',
-      },
-    );
-    print(response.body);
-    print('URL: $PostApiURL \n status: ${response.statusCode}');
-    //print("working");
-    //print('Response: $response');
-    print(json.decode(response.body));
-  } catch (er){}
-}
 
- */
-final String URL = PostApiURL;
-postData() async {
+Future postData(String indentDateInput, String reqQty, String reqDateInput, String remarks) async {
+  final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FPostIndent?StrRecord=${'{"StrIndTypeCode":"IND","StrSiteCode":"AD","StrIndNo":"11","StrIndDate":"$indentDateInput","StrDepartmentCode":"AD2","StrIndentorCode":"SG344","StrPreparedByCode":"SA","StrIndGrid":[{"StrItemCode":"PN1","DblQuantity":"$reqQty","StrCostCenterCode":"AD1","StrRequiredDate":"$reqDateInput","StrRemark":"$remarks"}]}'}";
   http.Response response = await http.get(Uri.parse(URL));
-  //print('URL: $URL \n status: ${response.statusCode}');
+  print('URL: $URL \n status: ${response.statusCode}');
   if (response.statusCode == 200) {
     print('URL: $URL \n status: ${response.statusCode}');
-    //print("working");
-    //print('Response: $response');
+    print("working");
+    print('Response: $response');
     print(json.decode(response.body));
   } else {
     print(response.statusCode);
   }
 }
+
 //=============================================================================
-
-
 
 class MaterialEntryBody extends StatefulWidget {
 
@@ -76,7 +56,6 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
   TextEditingController rate = TextEditingController();
   TextEditingController costCenter = TextEditingController();
   TextEditingController Remarks = TextEditingController();
-
 
   String dropdownValue = 'Choose an option';
 
@@ -156,7 +135,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                       lastDate: DateTime(2101)
                   );
                   if (pickedDate != null) {
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                    String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                     setState(() {
                       IntendDateInput.text = formattedDate;
                     });
@@ -491,7 +470,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                       lastDate: DateTime(2101)
                   );
                   if (pickedDate != null) {
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                    String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                     setState(() {
                       ReqDateInput.text = formattedDate;
                     });
@@ -532,16 +511,14 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               child: RoundedButtonHome(
                   "Submit",
                       (){
-                    //print(IntendDateInput.text);
-                    //print(ReqDateInput.text);
-                    //print(Remarks.text);
+                    print(IntendDateInput.text);
+                    print(ReqQty.text);
+                    print(ReqDateInput.text);
+                    print(Remarks.text);
+                    print(rate.text);
+                    postData(IntendDateInput.text,ReqQty.text,ReqDateInput.text,Remarks.text);
                     //print(item.text);
-                    //print(ReqQty.text);
-                    //print(rate.text);
                     //print(costCenter.text);
-                    postData();
-
-
                   })
           ),
         ],

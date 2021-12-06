@@ -82,7 +82,7 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           FormsHeadText("Party Bill No"),
           Padding(
             padding: paddingForms,
-            child: NormalTextFormField(),
+            child: const NormalTextFormField(),
           ),
           sizedbox1,
           FormsHeadText("Party Bill Date"),
@@ -115,23 +115,23 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           FormsHeadText("Supplier"),
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Purchase Order Select"),
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Vehicle No."),
-          NormalTextFormField(),
+          const NormalTextFormField(),
           sizedbox1,
 
           FormsHeadText("Godown"),
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           Padding(
