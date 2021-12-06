@@ -8,7 +8,7 @@ import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 
 
 class VoucherTypeRepository {
-  Client client = new Client();
+  Client client = Client();
 
   Future<List<StrRecord>> getData() async {
     try {

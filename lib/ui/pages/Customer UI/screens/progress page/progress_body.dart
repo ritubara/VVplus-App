@@ -75,7 +75,7 @@ class ProgressBodyState extends State<ProgressBody> {
               ),
             ),
           ),
-           StepperBody(),
+           const StepperBody(),
 
         ],
       ),

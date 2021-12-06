@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/ui/pages/Customer%20UI/screens/NewComplaint page/new_complaint_page.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/appbar_widget.dart';
+import 'package:vvplus_app/ui/pages/Customer%20UI/screens/NewComplaint%20page/new_complaint_page.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
@@ -32,7 +32,7 @@ class _CustomerCarePageState extends State<CustomerCarePage>{
                       text15,
                       () {
                         Navigator.push( context, MaterialPageRoute(
-                            builder: (context) => const ComplaintPage()));
+                            builder: (context) => const NewComplaintPage()));
                       },
                     ),
 

@@ -180,8 +180,8 @@ class DropdownFormCont extends StatefulWidget {
   State<DropdownFormCont> createState() => MyDropdownFormCont();
 }
 class MyDropdownFormCont extends State<DropdownFormCont> {
-  final _formKey = GlobalKey<FormState>();
-  bool _autovalidate = false;
+  //final _formKey = GlobalKey<FormState>();
+  //final bool _autovalidate = false;
   String selectedSalutation;
   String name;
 

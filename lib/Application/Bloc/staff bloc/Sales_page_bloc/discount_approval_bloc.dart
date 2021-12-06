@@ -65,10 +65,11 @@ class DiscountApprovalProvider extends InheritedWidget{
       :bloc = StaffBloc(),
         super(key : key, child : child);
 
+  @override
   bool updateShouldNotify(_) => true;
 
   static StaffBloc of (BuildContext context){
-    return (context.dependOnInheritedWidgetOfExactType<DiscountApprovalProvider>() as DiscountApprovalProvider)
+    return (context.dependOnInheritedWidgetOfExactType<DiscountApprovalProvider>())
         .bloc;
   }
 

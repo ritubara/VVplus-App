@@ -63,10 +63,11 @@ class SalesExtraWorkEntryProvider extends InheritedWidget{
       :bloc = StaffBloc(),
         super(key : key, child : child);
 
+  @override
   bool updateShouldNotify(_) => true;
 
   static StaffBloc of (BuildContext context){
-    return (context.dependOnInheritedWidgetOfExactType<SalesExtraWorkEntryProvider>() as SalesExtraWorkEntryProvider)
+    return (context.dependOnInheritedWidgetOfExactType<SalesExtraWorkEntryProvider>())
         .bloc;
   }
 

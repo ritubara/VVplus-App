@@ -58,5 +58,5 @@ TextStyle Stepperstyle() {
   return simpleTextStyle(TextColor3, 15);
 }
 TextStyle phoneTextStyle(){
-  return TextStyle(color: TextColor4, decorationColor: decorationColor1,);
+  return const TextStyle(color: TextColor4, decorationColor: decorationColor1,);
 }

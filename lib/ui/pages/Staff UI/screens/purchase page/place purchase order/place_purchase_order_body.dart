@@ -34,7 +34,7 @@ class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
           FormsHeadText("Voucher Type"),
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("Date"),
@@ -73,7 +73,7 @@ class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
           FormsHeadText("Indent Selection"),
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child: const SearchDropDown(),
           ),
           sizedbox1,
           FormsHeadText("PO Valid Date"),

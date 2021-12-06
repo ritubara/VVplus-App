@@ -7,7 +7,7 @@ import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 
 
 class DepartmentNameRepository {
-  Client client = new Client();
+  Client client = Client();
 
   Future<List<StrRecord>> getData() async {
     try {

@@ -8,10 +8,11 @@ class MaterialProvider extends InheritedWidget{
       :bloc = StaffBloc(),
         super(key : key, child : child);
 
+  @override
   bool updateShouldNotify(_) => true;
 
   static StaffBloc of (BuildContext context){
-    return (context.dependOnInheritedWidgetOfExactType<MaterialProvider>() as MaterialProvider)
+    return (context.dependOnInheritedWidgetOfExactType<MaterialProvider>())
         .bloc;
   }
 

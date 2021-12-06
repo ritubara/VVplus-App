@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/Model/post_data.dart';
@@ -136,7 +135,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
 
           Padding(
             padding: paddingForms,
-            child:DepartmentNameDropdown(),
+            child:const DepartmentNameDropdown(),
           ),
 
           const Padding(padding: EdgeInsets.all(10)),
@@ -185,7 +184,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                 children: [
                   const Padding(padding: EdgeInsets.all(10)),
                   FormsHeadText("Item "),
-                  ItemNameDropdown(),
+                  const ItemNameDropdown(),
 
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   FormsHeadText("Request Qty. "),
@@ -473,7 +472,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
           FormsHeadText("Choose Phase (Cost Center)"),
           Padding(
             padding: paddingForms,
-            child: ItemCostCenterDropdown(),
+            child: const ItemCostCenterDropdown(),
           ),
           const SizedBox(height: 15),
           FormsHeadText("Req. Date"),

@@ -60,10 +60,11 @@ class UnitCancellationProvider extends InheritedWidget{
       :bloc = StaffBloc(),
         super(key : key, child : child);
 
+  @override
   bool updateShouldNotify(_) => true;
 
   static StaffBloc of (BuildContext context){
-    return (context.dependOnInheritedWidgetOfExactType<UnitCancellationProvider>() as UnitCancellationProvider)
+    return (context.dependOnInheritedWidgetOfExactType<UnitCancellationProvider>())
         .bloc;
   }
 

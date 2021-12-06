@@ -1,11 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/Application/Bloc/Customer_Bloc/NewComplaint_Bloc/new_complaint_bloc.dart';
-import 'package:vvplus_app/domain/value_objects/Validators/login_validators.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
-import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
 class textFieldDecoration extends StatefulWidget {
@@ -18,7 +14,7 @@ class textFieldDecoration extends StatefulWidget {
   _textFieldDecorationState createState() => _textFieldDecorationState();
 }
 class _textFieldDecorationState extends State<textFieldDecoration>{
-  final bloc = TextFieldBloc();
+  final bloc = NewComplaintPageBloc();
   @override
   Widget build(BuildContext context) {
     //String hintText;

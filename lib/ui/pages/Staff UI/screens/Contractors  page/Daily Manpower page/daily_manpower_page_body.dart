@@ -28,23 +28,27 @@ class DailyManpowerBody extends StatefulWidget {
   State<DailyManpowerBody> createState() => myDailyManpowerBody();
 }
 class myDailyManpowerBody extends State<DailyManpowerBody> {
-  Xml2Json xml2json = new Xml2Json();
+  Xml2Json xml2json = Xml2Json();
   //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FPostIndent?StrRecord=${'{"StrIndTypeCode":"IND","StrSiteCode":"AD","StrIndNo":"11","StrIndDate":"10/11/2021","StrDepartmentCode":"AD2","StrIndentorCode":"SG344","StrPreparedByCode":"SA","StrIndGrid":[{"StrItemCode":"PN1","DblQuantity":"100","StrCostCenterCode":"AD1","StrRequiredDate":"10/11/2021","StrRemark":"remark1"}]}'}";
   //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Indentor","StrSiteCode":"AS","StrV_Type":"IND","StrChkNonStockabl// e":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostC// enterCode":""},{"StrCostCenterCode":""}]}'}";
   //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Department","StrSiteCode":"AS","StrV_Type":"","StrChkNonStockable":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostCenterCode":""},{"StrCostCenterCode":""}]}'}";
-  final String URL = getItemCostCenterURL;
+  final String URL = PostApiURL;
   //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FPostIndent?StrRecord={"StrIndTypeCode":"IND","StrSiteCode":"AD","StrIndNo":"11","StrIndDate":"10/11/2021","StrDepartmentCode":"AD2","StrIndentorCode":"SG344","StrPreparedByCode":"SA","StrIndGrid":[{"StrItemCode":"PN1","DblQuantity":"100","StrCostCenterCode":"AD1","StrRequiredDate":"10/11/2021","StrRemark":"remark1"}]}";
   Future getResponse() async {
-    http.Response response = await http.get(Uri.parse(URL));
+    http.Response response = await http.post(Uri.parse(URL),
+        headers: <String, String>{'Content-Type': 'text/xml; charset=UTF-8'});
     print('URL: $URL \n status: ${response.statusCode}');
     print('Response: $response');
+    print('Response body: ${response.body}');
     return response.statusCode == 200 ? jsonDecode(response.body) : null;
   }
   Future getResponse1() async {
     http.Response response = await http.get(Uri.parse(URL));
+    print('URL: $URL \n status: ${response.statusCode}');
     if (response.statusCode == 200) {
-      print(response.statusCode);
+      print('URL: $URL \n status: ${response.statusCode}');
       print("working");
+      print('Response: $response');
       print(json.decode(response.body));
     } else {
       print(response.statusCode);
@@ -279,7 +283,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
           ItemCurrentStatusDropdown(),
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){getResponse();},roundedButtonHomeColor1)),
+              child: RoundedButtonHome2("Submit",(){getResponse1();},roundedButtonHomeColor1)),
         ],
       ),
     );

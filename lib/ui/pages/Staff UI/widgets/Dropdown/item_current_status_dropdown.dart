@@ -6,7 +6,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class ItemCurrentStatusDropdown extends StatefulWidget {
-  ItemCurrentStatusDropdown({Key key}) : super(key: key);
+  const ItemCurrentStatusDropdown({Key key}) : super(key: key);
 
   @override
   _ItemCurrentStatusDropdownState createState() => _ItemCurrentStatusDropdownState();
@@ -40,7 +40,7 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
                   stream: _dropdownBloc.selectedState,
                   builder: (context, item) {
                     return SearchChoices<StrRecord>.single(
-                      icon: Icon(Icons.keyboard_arrow_down_sharp),
+                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       underline: "",
                       padding: 1,
                       isExpanded: true,

@@ -59,6 +59,7 @@ class ContractorProvider extends InheritedWidget{
       :bloc = StaffBloc(),
         super(key : key, child : child);
 
+  @override
   bool updateShouldNotify(_) => true;
 
   static StaffBloc of (BuildContext context){
