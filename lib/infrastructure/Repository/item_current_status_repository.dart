@@ -22,10 +22,11 @@ class ItemCurrentStatusRepository {
     }
   }
 }
-Future<List<StrRecord>> createUser(String strSubCode,String strName) async{
+Future<List<StrRecord>> createUser( String strItemName, double dblQty,String strUnit) async{
   final response = await http.post(Uri.parse(getItemCurrentStatusURL), body: {
-    "StrSubCode": strSubCode,
-    "StrName": strName,
+    "StrItemName": strItemName,
+    "DblQty": dblQty,
+    "StrUnit": strUnit,
   });
 
   if(response.statusCode == 200){
