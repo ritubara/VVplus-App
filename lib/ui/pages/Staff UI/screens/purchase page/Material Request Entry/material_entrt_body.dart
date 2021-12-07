@@ -8,6 +8,7 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/department_name_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_cost_center_dropdown.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_current_status_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_name_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
@@ -145,6 +146,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             ),
           ),
           const Padding(padding: EdgeInsets.all(10)),
+          FormsContainerSearchDropDown(),
 
 
 
