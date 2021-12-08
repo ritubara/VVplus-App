@@ -6,7 +6,7 @@ import 'dart:async';
 
 import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
 
-
+String firebaseUrl = "https://vvplus-app-default-rtdb.firebaseio.com/StrRecord.json";
 class ItemCurrentStatusRepository {
   Client client = Client();
 

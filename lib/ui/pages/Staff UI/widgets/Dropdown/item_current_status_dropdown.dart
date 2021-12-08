@@ -56,11 +56,7 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
                       isExpanded: true,
                       hint: "Search here",
                       value: item.data,
-                      onChanged: (value){
-                        setState(() {
-                          selectedValue= value;
-                        });
-                      },
+                      displayClearIcon: false,
                       items: snapshot?.data
                           ?.map<DropdownMenuItem<StrRecord>>((e) {
                         return DropdownMenuItem<StrRecord>(
@@ -68,6 +64,12 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
                           child: Text(e.strItemName),
                         );
                       })?.toList() ??[],
+                      onChanged: (value){
+                        setState(() {
+                          selectedValue= value;
+                        });
+                        print(selectedValue);
+                      },
                     );
                   }
               );
@@ -150,6 +152,7 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                             setState(() {
                               selectedValue= value;
                             });
+                            print(selectedValue);
                           },
                           items: snapshot?.data
                               ?.map<DropdownMenuItem<StrRecord>>((e) {

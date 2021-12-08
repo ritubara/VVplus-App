@@ -46,6 +46,7 @@ class _VoucherTypeDropdownState extends State<VoucherTypeDropdown> {
                       isExpanded: true,
                       hint: "Search here",
                       value: item.data,
+                      displayClearIcon: false,
                       onChanged: _dropdownBloc.selectedStateEvent,
                       items: snapshot?.data
                           ?.map<DropdownMenuItem<StrRecord>>((e) {

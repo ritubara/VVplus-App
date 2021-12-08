@@ -46,6 +46,7 @@ class _ItemCostCenterDropdownState extends State<ItemCostCenterDropdown> {
                       isExpanded: true,
                       hint: "Search here",
                       value: item.data,
+                      displayClearIcon: false,
                       onChanged: _dropdownBloc.selectedStateEvent,
                       items: snapshot?.data
                           ?.map<DropdownMenuItem<StrRecord>>((e) {
