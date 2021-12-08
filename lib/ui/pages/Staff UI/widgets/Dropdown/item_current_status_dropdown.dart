@@ -64,12 +64,7 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
                           child: Text(e.strItemName),
                         );
                       })?.toList() ??[],
-                      onChanged: (value){
-                        setState(() {
-                          selectedValue= value;
-                        });
-                        print(selectedValue);
-                      },
+                      onChanged: _dropdownBloc.selectedStateEvent,
                     );
                   }
               );
@@ -127,48 +122,12 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             const Padding(padding: EdgeInsets.all(10)),
             FormsHeadText("Item "),
-            //================================================================== Dropdown
-        Padding(
-          padding: padding1,
-          child: Container(
-            height: 50, width: 343,
-            decoration: DecorationForms(),
-            child: FutureBuilder<List<StrRecord>>(
-                future: _dropdownBloc.data,
-                builder: (context, snapshot) {
-                  return StreamBuilder<StrRecord>(
-                      stream: _dropdownBloc.selectedState,
-                      builder: (context, item) {
-                        return SearchChoices<StrRecord>.single(
-                          icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                          underline: "",
-                          padding: 1,
-                          isExpanded: true,
-                          hint: "Search here",
-                          value: item.data,
-                          onChanged: (value){
-                            setState(() {
-                              selectedValue= value;
-                            });
-                            print(selectedValue);
-                          },
-                          items: snapshot?.data
-                              ?.map<DropdownMenuItem<StrRecord>>((e) {
-                            return DropdownMenuItem<StrRecord>(
-                              value: e,
-                              child: Text(e.strItemName),
-                            );
-                          })?.toList() ??[],
-                        );
-                      }
-                  );
-                }
-            ),
-          ),
-        ),
-            //==================================================================
+
+            ItemCurrentStatusDropdown(),
+
             const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
             Row(
               children:[
@@ -182,12 +141,12 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child:selectedValue != null? Container(
+                  child:_dropdownBloc.selectedStateEvent != null? Container(
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
                     child: SizedBox(
-                      width: 130,
+                      width: 40,
                       child: FutureBuilder(
                         future: _dropdownBloc.data,
                         builder: (context,snapshot){
@@ -205,13 +164,13 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                     ),
                   ):Text("No data"),
                 ),
-                SizedBox(width: 100 ),
-                selectedValue != null? Container(
+                SizedBox(width: 20 ),
+                _dropdownBloc.selectedStateEvent != null? Container(
                   height: 50,
                   padding: padding1,
                   decoration: decoration1(),
                   child: SizedBox(
-                    width: 130,
+                    width: 40,
                     child: FutureBuilder(
                         future: _dropdownBloc.data,
                         builder: (context,snapshot){

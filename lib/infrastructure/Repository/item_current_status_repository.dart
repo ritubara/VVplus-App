@@ -12,7 +12,7 @@ class ItemCurrentStatusRepository {
 
   Future<List<StrRecord>> getData() async {
     try {
-      final response = await client.get(Uri.parse(getItemCurrentStatusURL));
+      final response = await client.get(Uri.parse(mockDataItemCurrentStatusURL));
       final items = (jsonDecode(response.body) as List)
           .map((e) => StrRecord.fromJson(e))
           .toList();

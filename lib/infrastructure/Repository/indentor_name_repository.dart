@@ -11,7 +11,7 @@ class IndentorNameRepository {
 
   Future<List<StrRecord>> getData() async {
     try {
-      final response = await client.get(Uri.parse(getIndentorNameURL));
+      final response = await client.get(Uri.parse(mockDataIndentorNameURL));
       final items = (jsonDecode(response.body) as List)
           .map((e) => StrRecord.fromJson(e))
           .toList();
