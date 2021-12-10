@@ -14,18 +14,30 @@ class StrRecord {
   StrRecord({
     this.strSubCode,
     this.strName,
+    this.Godown,
+    this.Purchase_order_select,
+    this.Supplier,
   });
 
   String strSubCode;
   String strName;
+  String Godown;
+  String Purchase_order_select;
+  String Supplier;
 
   factory StrRecord.fromJson(Map<String, dynamic> json) => StrRecord(
     strSubCode: json["StrSubCode"],
     strName: json["StrName"],
+    Godown: json["Godown"],
+    Purchase_order_select: json["Purchase_order_select"],
+    Supplier: json["Supplier"],
   );
 
   Map<String, dynamic> toJson() => {
     "StrSubCode": strSubCode,
     "StrName": strName,
+    "Godown": Godown,
+    "Purchase_order_select": Purchase_order_select,
+    "Supplier": Supplier,
   };
 }
