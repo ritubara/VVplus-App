@@ -12,7 +12,6 @@ import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/department_name_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -20,7 +19,6 @@ import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
-import 'package:http/http.dart' as http;
 
 class DailyManpowerBody extends StatefulWidget {
   const DailyManpowerBody({Key key}) : super(key: key);
@@ -124,11 +122,9 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                             hint: "Search here",
                             value: item.data,
                             displayClearIcon: false,
-                                //  (DepartmentName newValue) => departmentNameDropdownBloc.selectedStateEvent(newValue)
                             onChanged: (DepartmentName newValue) {
                               setState(() {
                                 departmentNameDropdownBloc.selectedStateEvent(newValue);
-                                //print();
                               });
                             },
                             items: snapshot?.data
@@ -169,7 +165,6 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                             onChanged: (ItemCostCenter newValue) {
                               setState(() {
                                 itemCostCenterDropdownBloc.selectedStateEvent(newValue);
-                                //print();
                               });
                             },
                             items: snapshot?.data

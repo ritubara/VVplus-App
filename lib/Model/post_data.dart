@@ -32,24 +32,24 @@ class PostData {
     strIndentorCode = json['StrIndentorCode'];
     strPreparedByCode = json['StrPreparedByCode'];
     if (json['StrIndGrid'] != null) {
-      strIndGrid = new List<StrIndGrid>();
+      strIndGrid = <StrIndGrid>[];
       json['StrIndGrid'].forEach((v) {
-        strIndGrid.add(new StrIndGrid.fromJson(v));
+        strIndGrid.add(StrIndGrid.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['StrIndTypeCode'] = this.strIndTypeCode;
-    data['StrSiteCode'] = this.strSiteCode;
-    data['StrIndNo'] = this.strIndNo;
-    data['StrIndDate'] = this.strIndDate;
-    data['StrDepartmentCode'] = this.strDepartmentCode;
-    data['StrIndentorCode'] = this.strIndentorCode;
-    data['StrPreparedByCode'] = this.strPreparedByCode;
-    if (this.strIndGrid != null) {
-      data['StrIndGrid'] = this.strIndGrid.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['StrIndTypeCode'] = strIndTypeCode;
+    data['StrSiteCode'] = strSiteCode;
+    data['StrIndNo'] = strIndNo;
+    data['StrIndDate'] = strIndDate;
+    data['StrDepartmentCode'] = strDepartmentCode;
+    data['StrIndentorCode'] = strIndentorCode;
+    data['StrPreparedByCode'] = strPreparedByCode;
+    if (strIndGrid != null) {
+      data['StrIndGrid'] = strIndGrid.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -78,12 +78,12 @@ class StrIndGrid {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['StrItemCode'] = this.strItemCode;
-    data['DblQuantity'] = this.dblQuantity;
-    data['StrCostCenterCode'] = this.strCostCenterCode;
-    data['StrRequiredDate'] = this.strRequiredDate;
-    data['StrRemark'] = this.strRemark;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['StrItemCode'] = strItemCode;
+    data['DblQuantity'] = dblQuantity;
+    data['StrCostCenterCode'] = strCostCenterCode;
+    data['StrRequiredDate'] = strRequiredDate;
+    data['StrRemark'] = strRemark;
     return data;
   }
 }
