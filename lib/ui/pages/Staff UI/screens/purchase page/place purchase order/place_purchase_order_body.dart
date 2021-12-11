@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/indentor_name_dropdown.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/voucher_type_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -34,7 +36,7 @@ class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
           FormsHeadText("Voucher Type"),
           Padding(
             padding: paddingForms,
-            child: const SearchDropDown(),
+            child: const VoucherTypeDropdown(),
           ),
           sizedbox1,
           FormsHeadText("Date"),
@@ -67,13 +69,13 @@ class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
           FormsHeadText("Supplier"),
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child: SupplierDropdown(),
           ),
           sizedbox1,
           FormsHeadText("Indent Selection"),
           Padding(
             padding: paddingForms,
-            child: const SearchDropDown(),
+            child: const IndentorNameDropdown(),
           ),
           sizedbox1,
           FormsHeadText("PO Valid Date"),

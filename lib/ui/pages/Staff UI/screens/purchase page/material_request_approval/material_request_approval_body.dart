@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/indentor_name_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -60,7 +61,7 @@ class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
           FormsHeadText("Indant Selection"),
           Padding(
             padding: paddingForms,
-            child: const SearchDropDown(),
+            child: const IndentorNameDropdown(),
           ),
           //SizedBox(height: 10,),
           const InformationBoxContainer1(),

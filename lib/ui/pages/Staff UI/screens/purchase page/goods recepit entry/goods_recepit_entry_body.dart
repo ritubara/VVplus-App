@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/voucher_type_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
@@ -47,7 +48,7 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           FormsHeadText("Voucher Type"),
           Padding(
             padding: paddingForms,
-            child: SearchDropDown(),
+            child: VoucherTypeDropdown(),
           ),
           sizedbox1,
           FormsHeadText("Date"),
@@ -115,13 +116,13 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           FormsHeadText("Supplier"),
           Padding(
             padding: paddingForms,
-            child: const SearchDropDown(),
+            child: const SupplierDropdown(),
           ),
           sizedbox1,
           FormsHeadText("Purchase Order Select"),
           Padding(
             padding: paddingForms,
-            child: const SearchDropDown(),
+            child: const Purchase_order_selectDropdown(),
           ),
           sizedbox1,
           FormsHeadText("Vehicle No."),
@@ -131,7 +132,7 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           FormsHeadText("Godown"),
           Padding(
             padding: paddingForms,
-            child: const SearchDropDown(),
+            child: const VoucherTypeGodownDropdown(),
           ),
           sizedbox1,
           Padding(
