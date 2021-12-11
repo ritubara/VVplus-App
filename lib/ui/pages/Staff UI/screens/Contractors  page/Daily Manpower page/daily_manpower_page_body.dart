@@ -3,15 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdown_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
-import 'package:vvplus_app/data_source/api/api_details.dart';
+import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
+import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
+import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/department_name_dropdown.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/indentor_name_dropdown.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_current_status_dropdown.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/item_name_dropdown.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/voucher_type_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -20,7 +21,6 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:http/http.dart' as http;
-import 'package:xml2json/xml2json.dart';
 
 class DailyManpowerBody extends StatefulWidget {
   const DailyManpowerBody({Key key}) : super(key: key);
@@ -28,56 +28,25 @@ class DailyManpowerBody extends StatefulWidget {
   State<DailyManpowerBody> createState() => myDailyManpowerBody();
 }
 class myDailyManpowerBody extends State<DailyManpowerBody> {
-  Xml2Json xml2json = Xml2Json();
-  //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FPostIndent?StrRecord=${'{"StrIndTypeCode":"IND","StrSiteCode":"AD","StrIndNo":"11","StrIndDate":"10/11/2021","StrDepartmentCode":"AD2","StrIndentorCode":"SG344","StrPreparedByCode":"SA","StrIndGrid":[{"StrItemCode":"PN1","DblQuantity":"100","StrCostCenterCode":"AD1","StrRequiredDate":"10/11/2021","StrRemark":"remark1"}]}'}";
-  //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Indentor","StrSiteCode":"AS","StrV_Type":"IND","StrChkNonStockabl// e":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostC// enterCode":""},{"StrCostCenterCode":""}]}'}";
-  //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Department","StrSiteCode":"AS","StrV_Type":"","StrChkNonStockable":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostCenterCode":""},{"StrCostCenterCode":""}]}'}";
-  final String URL = PostApiURL;
-  //final String URL = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FPostIndent?StrRecord={"StrIndTypeCode":"IND","StrSiteCode":"AD","StrIndNo":"11","StrIndDate":"10/11/2021","StrDepartmentCode":"AD2","StrIndentorCode":"SG344","StrPreparedByCode":"SA","StrIndGrid":[{"StrItemCode":"PN1","DblQuantity":"100","StrCostCenterCode":"AD1","StrRequiredDate":"10/11/2021","StrRemark":"remark1"}]}";
-  Future getResponse() async {
-    http.Response response = await http.post(Uri.parse(URL),
-        headers: <String, String>{'Content-Type': 'text/xml; charset=UTF-8'});
-    print('URL: $URL \n status: ${response.statusCode}');
-    print('Response: $response');
-    print('Response body: ${response.body}');
-    return response.statusCode == 200 ? jsonDecode(response.body) : null;
-  }
-  Future getResponse1() async {
-    http.Response response = await http.get(Uri.parse(URL));
-    print('URL: $URL \n status: ${response.statusCode}');
-    if (response.statusCode == 200) {
-      print('URL: $URL \n status: ${response.statusCode}');
-      print("working");
-      print('Response: $response');
-      print(json.decode(response.body));
-    } else {
-      print(response.statusCode);
-    }
-  }
-  getData1()async{
-      http.Response res = await http.get(Uri.parse(URL));
-      xml2json.parse(res.body);
-      var jsondata = xml2json.toGData();
-      var data = json.decode(jsondata);
-      //buildlists(data);
-     print(data);
-  }
-  getData2()async{
-    http.Response res = await http.get(Uri.parse(URL));
-    xml2json.parse(res.body);
-    var jsondata = xml2json.toGData();
-    var data = json.decode(jsondata);
-    //buildlists(data);
-    print(data);
-  }
 
   TextEditingController dateinput = TextEditingController();
   final TextEditingController _qty = TextEditingController();
   final TextEditingController _remarks = TextEditingController();
-  //final GlobalKey _key = GlobalKey();
+
+  DepartmentNameDropdownBloc departmentNameDropdownBloc;
+  ItemCostCenterDropdownBloc itemCostCenterDropdownBloc;
+  VoucherTypeDropdownBloc voucherTypeDropdownBloc;
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
   @override
   void initState() {
     dateinput.text = "";
+    departmentNameDropdownBloc = DepartmentNameDropdownBloc();
+    itemCostCenterDropdownBloc = ItemCostCenterDropdownBloc();
+    voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
     super.initState();
   }
   void clearData(){
@@ -139,25 +108,38 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
           Padding(
             padding: padding1,
             child: Container(
-              height: 50,
-              width: 343,
+              height: 50, width: 343,
               decoration: DecorationForms(),
-              child: StreamBuilder(
-                stream: bloc.outDropField1,
+              child: FutureBuilder<List<DepartmentName>>(
+                  future: departmentNameDropdownBloc.departmentNameData,
                   builder: (context, snapshot) {
-                    return SearchChoices.single(
-                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                      underline: "",
-                      padding: 1,
-                      isExpanded: true,
-                      hint: "Search here",
-                      value: snapshot.data,
-                      onChanged: bloc.inDropField1,
-                      items:(bloc.names != null && bloc.names.isNotEmpty)
-                          ? bloc.names.map((item) {
-                        return DropdownMenuItem(
-                          value: item,
-                          child: Text(item),);}).toList():[],
+                    return StreamBuilder<DepartmentName>(
+                        stream: departmentNameDropdownBloc.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<DepartmentName>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: item.data,
+                            displayClearIcon: false,
+                                //  (DepartmentName newValue) => departmentNameDropdownBloc.selectedStateEvent(newValue)
+                            onChanged: (DepartmentName newValue) {
+                              setState(() {
+                                departmentNameDropdownBloc.selectedStateEvent(newValue);
+                                //print();
+                              });
+                            },
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                              return DropdownMenuItem<DepartmentName>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
                     );
                   }
               ),
@@ -168,25 +150,37 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
           Padding(
             padding: padding1,
             child: Container(
-              height: 50,
-              width: 343,
+              height: 50, width: 343,
               decoration: DecorationForms(),
-              child: StreamBuilder(
-                stream: bloc.outDropField2,
+              child: FutureBuilder<List<ItemCostCenter>>(
+                  future: itemCostCenterDropdownBloc.itemCostCenterData,
                   builder: (context, snapshot) {
-                    return SearchChoices.single(
-                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                      underline: "",
-                      padding: 1,
-                      isExpanded: true,
-                      hint: "Search here",
-                      value: snapshot.data,
-                      onChanged: bloc.inDropField2,
-                      items: (bloc.names != null && bloc.names.isNotEmpty)
-                          ? bloc.names.map((item) {
-                        return DropdownMenuItem(
-                          value: item,
-                          child: Text(item),);}).toList():[],
+                    return StreamBuilder<ItemCostCenter>(
+                        stream: itemCostCenterDropdownBloc.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<ItemCostCenter>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: item.data,
+                            displayClearIcon: false,
+                            onChanged: (ItemCostCenter newValue) {
+                              setState(() {
+                                itemCostCenterDropdownBloc.selectedStateEvent(newValue);
+                                //print();
+                              });
+                            },
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                              return DropdownMenuItem<ItemCostCenter>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
                     );
                   }
               ),
@@ -197,25 +191,36 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
           Padding(
             padding: padding1,
             child: Container(
-              height: 50,
-              width: 343,
+              height: 50, width: 343,
               decoration: DecorationForms(),
-              child: StreamBuilder(
-                stream: bloc.outDropField3,
+              child: FutureBuilder<List<VoucherType>>(
+                  future: voucherTypeDropdownBloc.voucherTypeDropdownData,
                   builder: (context, snapshot) {
-                    return SearchChoices.single(
-                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                      underline: "",
-                      padding: 1,
-                      isExpanded: true,
-                      hint: "Search here",
-                      value: snapshot.data,
-                      onChanged: bloc.inDropField3,
-                      items: (bloc.names != null && bloc.names.isNotEmpty)
-                          ? bloc.names.map((item) {
-                        return DropdownMenuItem(
-                          value: item,
-                          child: Text(item),);}).toList():[],
+                    return StreamBuilder<VoucherType>(
+                        stream: voucherTypeDropdownBloc.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<VoucherType>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: item.data,
+                            displayClearIcon: false,
+                            onChanged: (VoucherType newValue) {
+                              setState(() {
+                                voucherTypeDropdownBloc.selectedStateEvent(newValue);
+                              });
+                            },
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<VoucherType>>((e) {
+                              return DropdownMenuItem<VoucherType>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
                     );
                   }
               ),
@@ -274,16 +279,9 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
-          IndentorNameDropdown(),
-          //VoucherTypeDropdown(),
-          //DepartmentNameDropdown(),
-          DepartmentNameDropdown(),
-          VoucherTypeDropdown(),
-          ItemNameDropdown(),
-          ItemCurrentStatusDropdown(),
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){getResponse1();},roundedButtonHomeColor1)),
+              child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
         ],
       ),
     );

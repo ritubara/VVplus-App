@@ -33,13 +33,13 @@ class _DepartmentNameDropdownState extends State<DepartmentNameDropdown> {
       child: Container(
         height: 50, width: 343,
         decoration: DecorationForms(),
-        child: FutureBuilder<List<StrRecord>>(
-            future: _dropdownBloc.data,
+        child: FutureBuilder<List<DepartmentName>>(
+            future: _dropdownBloc.departmentNameData,
             builder: (context, snapshot) {
-              return StreamBuilder<StrRecord>(
+              return StreamBuilder<DepartmentName>(
                   stream: _dropdownBloc.selectedState,
                   builder: (context, item) {
-                    return SearchChoices<StrRecord>.single(
+                    return SearchChoices<DepartmentName>.single(
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       underline: "",
                       padding: 1,
@@ -49,8 +49,8 @@ class _DepartmentNameDropdownState extends State<DepartmentNameDropdown> {
                       displayClearIcon: false,
                       onChanged: _dropdownBloc.selectedStateEvent,
                       items: snapshot?.data
-                          ?.map<DropdownMenuItem<StrRecord>>((e) {
-                        return DropdownMenuItem<StrRecord>(
+                          ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                        return DropdownMenuItem<DepartmentName>(
                           value: e,
                           child: Text(e.strName),
                         );

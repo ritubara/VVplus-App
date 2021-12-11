@@ -4,18 +4,18 @@ import 'dart:async';
 import 'package:vvplus_app/infrastructure/Repository/voucher_type_repository.dart';
 
 class VoucherTypeDropdownBloc {
-  final _repository = VoucherTypeRepository();
-  final _selectedData$ = BehaviorSubject<StrRecord>();
+  final voucherTypeDropdownRepository = VoucherTypeRepository();
+  final voucherTypeDropdownGetData = BehaviorSubject<VoucherType>();
 
-  Future<List<StrRecord>> data;
-  Stream<StrRecord> get selectedState => _selectedData$;
-  void selectedStateEvent(StrRecord state) => _selectedData$.add(state);
+  Future<List<VoucherType>> voucherTypeDropdownData;
+  Stream<VoucherType> get selectedState => voucherTypeDropdownGetData;
+  void selectedStateEvent(VoucherType state) => voucherTypeDropdownGetData.add(state);
 
   VoucherTypeDropdownBloc() {
-    data = _repository.getData();
+    voucherTypeDropdownData = voucherTypeDropdownRepository.getData();
   }
 
   void dispose() {
-    _selectedData$.close();
+    voucherTypeDropdownGetData.close();
   }
 }

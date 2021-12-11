@@ -4,18 +4,18 @@ import 'package:vvplus_app/infrastructure/Repository/department_name_repository.
 import 'dart:async';
 
 class DepartmentNameDropdownBloc {
-  final _repository = DepartmentNameRepository();
-  final _selectedData$ = BehaviorSubject<StrRecord>();
+  final departmentNameRepository = DepartmentNameRepository();
+  final departmentNameGetData = BehaviorSubject<DepartmentName>();
 
-  Future<List<StrRecord>> data;
-  Stream<StrRecord> get selectedState => _selectedData$;
-  void selectedStateEvent(StrRecord state) => _selectedData$.add(state);
+  Future<List<DepartmentName>> departmentNameData;
+  Stream<DepartmentName> get selectedState => departmentNameGetData;
+  void selectedStateEvent(DepartmentName state) => departmentNameGetData.add(state);
 
   DepartmentNameDropdownBloc() {
-    data = _repository.getData();
+    departmentNameData = departmentNameRepository.getData();
   }
 
   void dispose() {
-    _selectedData$.close();
+    departmentNameGetData.close();
   }
 }

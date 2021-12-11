@@ -1,16 +1,15 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'dart:async';
-
 import 'package:vvplus_app/infrastructure/Repository/indentor_name_repository.dart';
 
 class IndentorNameDropdownBloc {
   final _repository = IndentorNameRepository();
-  final _selectedData$ = BehaviorSubject<StrRecord>();
+  final _selectedData$ = BehaviorSubject<IndentorName>();
 
-  Future<List<StrRecord>> data;
-  Stream<StrRecord> get selectedState => _selectedData$;
-  void selectedStateEvent(StrRecord state) => _selectedData$.add(state);
+  Future<List<IndentorName>> data;
+  Stream<IndentorName> get selectedState => _selectedData$;
+  void selectedStateEvent(IndentorName state) => _selectedData$.add(state);
 
   IndentorNameDropdownBloc() {
     data = _repository.getData();

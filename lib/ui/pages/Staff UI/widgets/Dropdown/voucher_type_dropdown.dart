@@ -13,11 +13,11 @@ class VoucherTypeDropdown extends StatefulWidget {
 }
 
 class _VoucherTypeDropdownState extends State<VoucherTypeDropdown> {
-  VoucherTypeDropdownBloc _dropdownBloc;
+  VoucherTypeDropdownBloc voucherTypeDropdownBloc;
 
   @override
   void initState() {
-    _dropdownBloc = VoucherTypeDropdownBloc();
+    voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
     super.initState();
   }
 
@@ -33,13 +33,13 @@ class _VoucherTypeDropdownState extends State<VoucherTypeDropdown> {
       child: Container(
         height: 50, width: 343,
         decoration: DecorationForms(),
-        child: FutureBuilder<List<StrRecord>>(
-            future: _dropdownBloc.data,
+        child: FutureBuilder<List<VoucherType>>(
+            future: voucherTypeDropdownBloc.voucherTypeDropdownData,
             builder: (context, snapshot) {
-              return StreamBuilder<StrRecord>(
-                  stream: _dropdownBloc.selectedState,
+              return StreamBuilder<VoucherType>(
+                  stream: voucherTypeDropdownBloc.selectedState,
                   builder: (context, item) {
-                    return SearchChoices<StrRecord>.single(
+                    return SearchChoices<VoucherType>.single(
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       underline: "",
                       padding: 1,
@@ -47,10 +47,10 @@ class _VoucherTypeDropdownState extends State<VoucherTypeDropdown> {
                       hint: "Search here",
                       value: item.data,
                       displayClearIcon: false,
-                      onChanged: _dropdownBloc.selectedStateEvent,
+                      onChanged: voucherTypeDropdownBloc.selectedStateEvent,
                       items: snapshot?.data
-                          ?.map<DropdownMenuItem<StrRecord>>((e) {
-                        return DropdownMenuItem<StrRecord>(
+                          ?.map<DropdownMenuItem<VoucherType>>((e) {
+                        return DropdownMenuItem<VoucherType>(
                           value: e,
                           child: Text(e.strName),
                         );

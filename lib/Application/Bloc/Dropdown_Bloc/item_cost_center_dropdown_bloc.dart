@@ -1,21 +1,21 @@
 import 'package:rxdart/rxdart.dart';
-import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
+import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'dart:async';
 import 'package:vvplus_app/infrastructure/Repository/item_cost_center_repository.dart';
 
 class ItemCostCenterDropdownBloc {
-  final _repository = ItemCostCenterRepository();
-  final _selectedData$ = BehaviorSubject<StrRecord>();
+  final itemCostCenterRepository = ItemCostCenterRepository();
+  final itemCostCenterGetData = BehaviorSubject<ItemCostCenter>();
 
-  Future<List<StrRecord>> data;
-  Stream<StrRecord> get selectedState => _selectedData$;
-  void selectedStateEvent(StrRecord state) => _selectedData$.add(state);
+  Future<List<ItemCostCenter>> itemCostCenterData;
+  Stream<ItemCostCenter> get selectedState => itemCostCenterGetData;
+  void selectedStateEvent(ItemCostCenter state) => itemCostCenterGetData.add(state);
 
   ItemCostCenterDropdownBloc() {
-    data = _repository.getData();
+    itemCostCenterData = itemCostCenterRepository.getData();
   }
 
   void dispose() {
-    _selectedData$.close();
+    itemCostCenterGetData.close();
   }
 }

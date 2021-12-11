@@ -5,11 +5,11 @@ import 'package:vvplus_app/infrastructure/Repository/item_name_repository.dart';
 
 class ItemNameDropdownBloc {
   final _repository = ItemNameRepository();
-  final _selectedData$ = BehaviorSubject<StrRecord>();
+  final _selectedData$ = BehaviorSubject<ItemName>();
 
-  Future<List<StrRecord>> data;
-  Stream<StrRecord> get selectedState => _selectedData$;
-  void selectedStateEvent(StrRecord state) => _selectedData$.add(state);
+  Future<List<ItemName>> data;
+  Stream<ItemName> get selectedState => _selectedData$;
+  void selectedStateEvent(ItemName state) => _selectedData$.add(state);
 
   ItemNameDropdownBloc() {
     data = _repository.getData();

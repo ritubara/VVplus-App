@@ -9,11 +9,11 @@ import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 class DepartmentNameRepository {
   Client client = Client();
 
-  Future<List<StrRecord>> getData() async {
+  Future<List<DepartmentName>> getData() async {
     try {
-      final response = await client.get(Uri.parse(getIndentorNameURL));
+      final response = await client.get(Uri.parse(mockDataIndentorNameURL));
       final items = (jsonDecode(response.body) as List)
-          .map((e) => StrRecord.fromJson(e))
+          .map((e) => DepartmentName.fromJson(e))
           .toList();
       return items;
     } catch (e) {
@@ -21,7 +21,7 @@ class DepartmentNameRepository {
     }
   }
 }
-Future<List<StrRecord>> createUser(String strSubCode,String strName) async{
+Future<List<DepartmentName>> createUser(String strSubCode,String strName) async{
   final response = await http.post(Uri.parse(getIndentorNameURL), body: {
     "StrSubCode": strSubCode,
     "StrName": strName,

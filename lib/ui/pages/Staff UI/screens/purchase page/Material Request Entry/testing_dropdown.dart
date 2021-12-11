@@ -24,7 +24,7 @@ class ItemCurrentStatusDropdown1 extends StatefulWidget {
 class _ItemCurrentStatusDropdown1State extends State<ItemCurrentStatusDropdown1> {
  // ItemCurrentStatusDropdownBloc _dropdownBloc;
   String selectedValue;
-  Future<List<StrRecord>> myFuture;
+  Future<List<ItemCurrentStatus>> myFuture;
   String selectedSpinnerItem;
   @override
   void initState() {
@@ -44,10 +44,10 @@ class _ItemCurrentStatusDropdown1State extends State<ItemCurrentStatusDropdown1>
       child: Container(
         height: 50, width: 343,
         decoration: DecorationForms(),
-        child: FutureBuilder<List<StrRecord>>(
+        child: FutureBuilder<List<ItemCurrentStatus>>(
             future: myFuture,
             builder: (context, snapshot) {
-              return SearchChoices<StrRecord>.single(
+              return SearchChoices<ItemCurrentStatus>.single(
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       underline: "",
                       padding: 1,
@@ -57,8 +57,8 @@ class _ItemCurrentStatusDropdown1State extends State<ItemCurrentStatusDropdown1>
                       //value: selectedSpinnerItem,
                       displayClearIcon: false,
                       items: snapshot?.data
-                          ?.map<DropdownMenuItem<StrRecord>>((e) {
-                        return DropdownMenuItem<StrRecord>(
+                          ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
+                        return DropdownMenuItem<ItemCurrentStatus>(
                           value: e,
                           child: Text(e.strItemName),
                         );

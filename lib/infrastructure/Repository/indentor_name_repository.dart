@@ -9,11 +9,11 @@ import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 class IndentorNameRepository {
   Client client = Client();
 
-  Future<List<StrRecord>> getData() async {
+  Future<List<IndentorName>> getData() async {
     try {
       final response = await client.get(Uri.parse(mockDataIndentorNameURL));
       final items = (jsonDecode(response.body) as List)
-          .map((e) => StrRecord.fromJson(e))
+          .map((e) => IndentorName.fromJson(e))
           .toList();
       return items;
     } catch (e) {
@@ -21,7 +21,7 @@ class IndentorNameRepository {
     }
   }
 }
-Future<List<StrRecord>> createUser(String strSubCode,String strName) async{
+Future<List<IndentorName>> createUser(String strSubCode,String strName) async{
   const String URL1 = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FPostIndent?StrRecord=${'{"StrIndTypeCode":"IND","StrSiteCode":"AD","StrIndNo":"11","StrIndDate":"10/11/2021","StrDepartmentCode":"AD2","StrIndentorCode":"SG344","StrPreparedByCode":"SA","StrIndGrid":[{"StrItemCode":"PN1","DblQuantity":"100","StrCostCenterCode":"AD1","StrRequiredDate":"10/11/2021","StrRemark":"remark1"}]}'}";
   // final String url = "http://103.136.82.200:777/Individual_WebSite/LoginInfo_WS/WCF/WebService_Test.asmx/FGetIndent?StrRecord=${'{"StrFilter":"Indentor","StrSiteCode":"AS","StrV_Type":"IND","StrChkNonStockabl// e":"","StrItemCode":"","StrCostCenterCode":"","StrAllCostCenter":"","StrUPCostCenter":[{"StrCostC// enterCode":""},{"StrCostCenterCode":""}]}'}";
   final response = await http.post(Uri.parse(URL1), body: {

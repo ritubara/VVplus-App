@@ -4,14 +4,14 @@ import 'dart:convert';
 
 //String strRecordToJson(StrRecord data) => json.encode(data.toJson());
 
-List<StrRecord> StrRecordFromJson(String str) =>
-    List<StrRecord>.from(json.decode(str).map((x) => StrRecord.fromJson(x)));
+List<ItemCurrentStatus> StrRecordFromJson(String str) =>
+    List<ItemCurrentStatus>.from(json.decode(str).map((x) => ItemCurrentStatus.fromJson(x)));
 
-String StrRecordToJson(List<StrRecord> data) =>
+String StrRecordToJson(List<ItemCurrentStatus> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class StrRecord {
-  StrRecord({
+class ItemCurrentStatus {
+  ItemCurrentStatus({
     this.strItemName,
     this.strCostCenterName,
     this.dblQty,
@@ -23,7 +23,7 @@ class StrRecord {
   double dblQty;
   String strUnit;
 
-  factory StrRecord.fromJson(Map<String, dynamic> json) => StrRecord(
+  factory ItemCurrentStatus.fromJson(Map<String, dynamic> json) => ItemCurrentStatus(
     strItemName: json["StrItemName"],
     strCostCenterName: json["StrCostCenterName"],
     dblQty: json["DblQty"].toDouble(),

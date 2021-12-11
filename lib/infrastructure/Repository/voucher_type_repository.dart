@@ -3,18 +3,17 @@ import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
 import 'package:vvplus_app/data_source/api/api_details.dart';
 import 'dart:async';
-
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 
 
 class VoucherTypeRepository {
   Client client = Client();
 
-  Future<List<StrRecord>> getData() async {
+  Future<List<VoucherType>> getData() async {
     try {
-      final response = await client.get(Uri.parse(getVoucherTypeURL));
+      final response = await client.get(Uri.parse(mockDataVoucherTypeURL));
       final items = (jsonDecode(response.body) as List)
-          .map((e) => StrRecord.fromJson(e))
+          .map((e) => VoucherType.fromJson(e))
           .toList();
       return items;
     } catch (e) {
@@ -22,7 +21,7 @@ class VoucherTypeRepository {
     }
   }
 }
-Future<List<StrRecord>> createUser(String strSubCode,String strName) async{
+Future<List<VoucherType>> createUser(String strSubCode,String strName) async{
   final response = await http.post(Uri.parse(getVoucherTypeURL), body: {
     "StrSubCode": strSubCode,
     "StrName": strName,

@@ -3,15 +3,15 @@ import 'dart:convert';
 //StrRecord strRecordFromJson(String str) => StrRecord.fromJson(json.decode(str));
 //String strRecordToJson(StrRecord data) => json.encode(data.toJson());
 
-List<StrRecord> StrRecordFromJson(String str) =>
-    List<StrRecord>.from(json.decode(str).map((x) => StrRecord.fromJson(x)));
+List<IndentorName> StrRecordFromJson(String str) =>
+    List<IndentorName>.from(json.decode(str).map((x) => IndentorName.fromJson(x)));
 
-String StrRecordToJson(List<StrRecord> data) =>
+String StrRecordToJson(List<IndentorName> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 
-class StrRecord {
-  StrRecord({
+class IndentorName {
+  IndentorName({
     this.strSubCode,
     this.strName,
   });
@@ -19,7 +19,7 @@ class StrRecord {
   String strSubCode;
   String strName;
 
-  factory StrRecord.fromJson(Map<String, dynamic> json) => StrRecord(
+  factory IndentorName.fromJson(Map<String, dynamic> json) => IndentorName(
     strSubCode: json["StrSubCode"],
     strName: json["StrName"],
   );

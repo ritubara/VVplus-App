@@ -4,17 +4,17 @@ import 'package:http/http.dart' as http;
 import 'package:vvplus_app/data_source/api/api_details.dart';
 import 'dart:async';
 
-import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
+import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 
 
 class ItemCostCenterRepository {
   Client client = Client();
 
-  Future<List<StrRecord>> getData() async {
+  Future<List<ItemCostCenter>> getData() async {
     try {
-      final response = await client.get(Uri.parse(getItemCostCenterURL));
+      final response = await client.get(Uri.parse(mockDataItemCostCenterURL));
       final items = (jsonDecode(response.body) as List)
-          .map((e) => StrRecord.fromJson(e))
+          .map((e) => ItemCostCenter.fromJson(e))
           .toList();
       return items;
     } catch (e) {
@@ -22,7 +22,7 @@ class ItemCostCenterRepository {
     }
   }
 }
-Future<List<StrRecord>> createUser(String strSubCode,String strName) async{
+Future<List<ItemCostCenter>> createUser(String strSubCode,String strName) async{
   final response = await http.post(Uri.parse(getItemCostCenterURL), body: {
     "StrSubCode": strSubCode,
     "StrName": strName,

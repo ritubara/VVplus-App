@@ -43,13 +43,13 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
       child: Container(
         height: 50, width: 343,
         decoration: DecorationForms(),
-        child: FutureBuilder<List<StrRecord>>(
+        child: FutureBuilder<List<ItemCurrentStatus>>(
             future: _dropdownBloc.data,
             builder: (context, snapshot) {
-              return StreamBuilder<StrRecord>(
+              return StreamBuilder<ItemCurrentStatus>(
                   stream: _dropdownBloc.selectedState,
                   builder: (context, item) {
-                    return SearchChoices<StrRecord>.single(
+                    return SearchChoices<ItemCurrentStatus>.single(
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       underline: "",
                       padding: 1,
@@ -58,8 +58,8 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
                       value: item.data,
                       displayClearIcon: false,
                       items: snapshot?.data
-                          ?.map<DropdownMenuItem<StrRecord>>((e) {
-                        return DropdownMenuItem<StrRecord>(
+                          ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
+                        return DropdownMenuItem<ItemCurrentStatus>(
                           value: e,
                           child: Text(e.strItemName),
                         );

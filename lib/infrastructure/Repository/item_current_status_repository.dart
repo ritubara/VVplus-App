@@ -10,11 +10,11 @@ String firebaseUrl = "https://vvplus-app-default-rtdb.firebaseio.com/StrRecord.j
 class ItemCurrentStatusRepository {
   Client client = Client();
 
-  Future<List<StrRecord>> getData() async {
+  Future<List<ItemCurrentStatus>> getData() async {
     try {
       final response = await client.get(Uri.parse(mockDataItemCurrentStatusURL));
       final items = (jsonDecode(response.body) as List)
-          .map((e) => StrRecord.fromJson(e))
+          .map((e) => ItemCurrentStatus.fromJson(e))
           .toList();
       return items;
     } catch (e) {
@@ -22,7 +22,7 @@ class ItemCurrentStatusRepository {
     }
   }
 }
-Future<List<StrRecord>> createUser( String strItemName, double dblQty,String strUnit) async{
+Future<List<ItemCurrentStatus>> createUser( String strItemName, double dblQty,String strUnit) async{
   final response = await http.post(Uri.parse(getItemCurrentStatusURL), body: {
     "StrItemName": strItemName,
     "DblQty": dblQty,

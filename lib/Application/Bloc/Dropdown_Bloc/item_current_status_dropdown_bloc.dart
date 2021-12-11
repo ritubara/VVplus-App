@@ -6,11 +6,11 @@ import 'package:vvplus_app/infrastructure/Repository/item_current_status_reposit
 
 class ItemCurrentStatusDropdownBloc {
   final _repository = ItemCurrentStatusRepository();
-  final _selectedData$ = BehaviorSubject<StrRecord>();
+  final _selectedData$ = BehaviorSubject<ItemCurrentStatus>();
 
-  Future<List<StrRecord>> data;
-  Stream<StrRecord> get selectedState => _selectedData$;
-  void selectedStateEvent(StrRecord state) => _selectedData$.add(state);
+  Future<List<ItemCurrentStatus>> data;
+  Stream<ItemCurrentStatus> get selectedState => _selectedData$;
+  void selectedStateEvent(ItemCurrentStatus state) => _selectedData$.add(state);
 
   ItemCurrentStatusDropdownBloc() {
     data = _repository.getData();
