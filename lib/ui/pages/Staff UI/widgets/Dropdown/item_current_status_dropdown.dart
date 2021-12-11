@@ -1,14 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_current_status_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
-import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
-import 'package:vvplus_app/infrastructure/Repository/item_current_status_repository.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
@@ -35,40 +33,63 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
   void dispose() {
     super.dispose();
   }
+  var ItemName;
+  var setDefaultMake = true, setDefaultMakeModel = true;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return   Padding(
       padding: padding1,
       child: Container(
         height: 50, width: 343,
         decoration: DecorationForms(),
-        child: FutureBuilder<List<ItemCurrentStatus>>(
-            future: _dropdownBloc.itemCurrentStatusDropdowndata,
-            builder: (context, snapshot) {
-              return StreamBuilder<ItemCurrentStatus>(
-                  stream: _dropdownBloc.selectedState,
-                  builder: (context, item) {
-                    return SearchChoices<ItemCurrentStatus>.single(
-                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                      underline: "",
-                      padding: 1,
-                      isExpanded: true,
-                      hint: "Search here",
-                      value: item.data,
-                      displayClearIcon: false,
-                      items: snapshot?.data
-                          ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
-                        return DropdownMenuItem<ItemCurrentStatus>(
-                          value: e,
-                          child: Text(e.strItemName),
-                        );
-                      })?.toList() ??[],
-                      onChanged: _dropdownBloc.selectedStateEvent,
-                    );
-                  }
-              );
-            }
+        child:StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('ItemName')
+              .orderBy('Item')
+              .snapshots(),
+          builder: (BuildContext context,
+              AsyncSnapshot<QuerySnapshot> snapshot) {
+            // Safety check to ensure that snapshot contains data
+            // without this safety check, StreamBuilder dirty state warnings will be thrown
+            if (!snapshot.hasData) return Container();
+            // Set this value for default,
+            // setDefault will change if an item was selected
+            // First item from the List will be displayed
+            return SearchChoices.single(
+              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+              underline: "",
+              padding: 1,
+              isExpanded: true,
+              hint: "Search here",
+              displayClearIcon: false,
+              value: ItemName,
+              items: snapshot.data.docs.map((value) {
+                if (setDefaultMake) {
+                  ItemName = snapshot.data.docs[0].get('Item');
+                  debugPrint('setDefault make: $ItemName');
+                }
+                return DropdownMenuItem(
+                  value: value.get('Item'),
+                  child: Text('${value.get('Item')}'),
+                );
+              }).toList(),
+              onChanged: (value) {
+                debugPrint('selected onchange: $value');
+                setState(
+                      () {
+                    debugPrint('make selected: $value');
+                    // Selected value will be stored
+                    ItemName = value;
+                    // Default dropdown value won't be displayed anymore
+                    setDefaultMake = false;
+                    // Set makeModel to true to display first car from list
+                    setDefaultMakeModel = true;
+                  },
+                );
+              },
+            );
+          },
         ),
       ),
     );
@@ -84,6 +105,9 @@ class FormsContainerSearchDropDown extends StatefulWidget {
 }
 
 class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown> {
+
+  var ItemName;
+  var setDefaultMake = true, setDefaultMakeModel = true;
   //=======================================================
   ItemCurrentStatusDropdownBloc _dropdownBloc;
   String selectedValue;
@@ -107,7 +131,18 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
   //final GlobalKey<FormState> _formKey = GlobalKey();
   int valueChoose = 4;
 
-  @override
+  Widget _buildList(QuerySnapshot snapshot) {
+
+    return ListView.builder(
+        itemCount: snapshot.docs.length,
+        itemBuilder: (context, index) {
+          final doc = snapshot.docs[index];
+        }
+    );
+  }
+
+
+          @override
   Widget build(BuildContext context) {
     final bloc = MaterialProvider.of(context);
     return Padding(
@@ -126,7 +161,63 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
             const Padding(padding: EdgeInsets.all(10)),
             FormsHeadText("Item "),
 
-            ItemCurrentStatusDropdown(),
+           //===================================================================
+        Padding(
+          padding: padding1,
+          child: Container(
+            height: 50, width: 343,
+            decoration: DecorationForms(),
+            child:StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('ItemName')
+                  .orderBy('Item')
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                // Safety check to ensure that snapshot contains data
+                // without this safety check, StreamBuilder dirty state warnings will be thrown
+                if (!snapshot.hasData) return Container();
+                // Set this value for default,
+                // setDefault will change if an item was selected
+                // First item from the List will be displayed
+                return SearchChoices.single(
+                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                  underline: "",
+                  padding: 1,
+                  isExpanded: true,
+                  hint: "Search here",
+                  displayClearIcon: false,
+                  value: ItemName,
+                  items: snapshot.data.docs.map((value) {
+                    if (setDefaultMake) {
+                      ItemName = snapshot.data.docs[0].get('Item');
+                      debugPrint('setDefault make: $ItemName');
+                    }
+                    return DropdownMenuItem(
+                      value: value.get('Item'),
+                      child: Text('${value.get('Item')}'),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    debugPrint('selected onchange: $value');
+                    setState(
+                          () {
+                        debugPrint('make selected: $value');
+                        // Selected value will be stored
+                        ItemName = value;
+                        // Default dropdown value won't be displayed anymore
+                        setDefaultMake = false;
+                        // Set makeModel to true to display first car from list
+                        setDefaultMakeModel = true;
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+          ),
+           //===================================================================
 
             const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
             Row(
@@ -141,28 +232,38 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child:_dropdownBloc.selectedStateEvent != null? Container(
-                    height: 50,
-                    padding: padding1,
-                    decoration: decoration1(),
-                    child: SizedBox(
-                      width: 40,
-                      child: FutureBuilder(
+                 //child:ItemName != null?
+                      child: SizedBox(
+                      width: 50,
+                      child: StreamBuilder<QuerySnapshot>(
+                          stream: FirebaseFirestore.instance.collection("ItemName").snapshots(),
+                          builder: (context, snapshot) {
+                            if(!snapshot.hasData) return LinearProgressIndicator();
+                            return Expanded(
+                                child: _buildList(snapshot.data)
+                            );
+
+                          }
+                      )
+                      /*
+                       FutureBuilder(
                         future: _dropdownBloc.itemCurrentStatusDropdowndata,
                         builder: (context,snapshot){
                           if(snapshot.hasData){
                             return ListView.builder(
                               itemBuilder: (context,index){
                                 var list = snapshot.data[index];
-                                return ListTile(title:Text(list['dblQty']),);
+                                return Text('dblQty');
                               }
                             );
                           }
                           return Text("No data Found");
                         }
-                      ),
-                    ),
-                  ):Text("No data"),
+                      ),*/
+                    ),/*:SizedBox(
+                   child: Text("data failure"),
+                 ),*/
+                  //:Text("No data"),
                 ),
                 SizedBox(width: 20 ),
                 _dropdownBloc.selectedStateEvent != null? Container(
