@@ -34,7 +34,7 @@ class _IndentorNameDropdownState extends State<IndentorNameDropdown> {
         height: 50, width: 343,
         decoration: DecorationForms(),
         child: FutureBuilder<List<IndentorName>>(
-            future: _dropdownBloc.data,
+            future: _dropdownBloc.indentorNameDropdownData,
             builder: (context, snapshot) {
               return StreamBuilder<IndentorName>(
                   stream: _dropdownBloc.selectedState,

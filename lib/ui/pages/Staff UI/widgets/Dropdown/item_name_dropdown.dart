@@ -34,7 +34,7 @@ class _ItemNameDropdownState extends State<ItemNameDropdown> {
         height: 50, width: 343,
         decoration: DecorationForms(),
         child: FutureBuilder<List<ItemName>>(
-            future: _dropdownBloc.data,
+            future: _dropdownBloc.itemNameDropdownData,
             builder: (context, snapshot) {
               return StreamBuilder<ItemName>(
                   stream: _dropdownBloc.selectedState,

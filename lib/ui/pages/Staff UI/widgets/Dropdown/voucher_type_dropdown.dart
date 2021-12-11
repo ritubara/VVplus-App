@@ -95,13 +95,13 @@ class _VoucherTypeGodownDropdown extends State<VoucherTypeGodownDropdown> {
       child: Container(
         height: 50, width: 343,
         decoration: DecorationForms(),
-        child: FutureBuilder<List<StrRecord>>(
-            future: _dropdownBloc.data,
+        child: FutureBuilder<List<VoucherType>>(
+            future: _dropdownBloc.voucherTypeDropdownData,
             builder: (context, snapshot) {
-              return StreamBuilder<StrRecord>(
+              return StreamBuilder<VoucherType>(
                   stream: _dropdownBloc.selectedState,
                   builder: (context, item) {
-                    return SearchChoices<StrRecord>.single(
+                    return SearchChoices<VoucherType>.single(
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       underline: "",
                       padding: 1,
@@ -111,8 +111,8 @@ class _VoucherTypeGodownDropdown extends State<VoucherTypeGodownDropdown> {
                       displayClearIcon: false,
                       onChanged: _dropdownBloc.selectedStateEvent,
                       items: snapshot?.data
-                          ?.map<DropdownMenuItem<StrRecord>>((e) {
-                        return DropdownMenuItem<StrRecord>(
+                          ?.map<DropdownMenuItem<VoucherType>>((e) {
+                        return DropdownMenuItem<VoucherType>(
                           value: e,
                           child: Text(e.Godown),
                         );
@@ -157,13 +157,13 @@ class _Purchase_order_selectDropdown extends State<Purchase_order_selectDropdown
       child: Container(
         height: 50, width: 343,
         decoration: DecorationForms(),
-        child: FutureBuilder<List<StrRecord>>(
-            future: _dropdownBloc.data,
+        child: FutureBuilder<List<VoucherType>>(
+            future: _dropdownBloc.voucherTypeDropdownData,
             builder: (context, snapshot) {
-              return StreamBuilder<StrRecord>(
+              return StreamBuilder<VoucherType>(
                   stream: _dropdownBloc.selectedState,
                   builder: (context, item) {
-                    return SearchChoices<StrRecord>.single(
+                    return SearchChoices<VoucherType>.single(
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       underline: "",
                       padding: 1,
@@ -173,8 +173,8 @@ class _Purchase_order_selectDropdown extends State<Purchase_order_selectDropdown
                       displayClearIcon: false,
                       onChanged: _dropdownBloc.selectedStateEvent,
                       items: snapshot?.data
-                          ?.map<DropdownMenuItem<StrRecord>>((e) {
-                        return DropdownMenuItem<StrRecord>(
+                          ?.map<DropdownMenuItem<VoucherType>>((e) {
+                        return DropdownMenuItem<VoucherType>(
                           value: e,
                           child: Text(e.Purchase_order_select),
                         );
@@ -219,13 +219,13 @@ class _SupplierDropdown extends State<SupplierDropdown> {
       child: Container(
         height: 50, width: 343,
         decoration: DecorationForms(),
-        child: FutureBuilder<List<StrRecord>>(
-            future: _dropdownBloc.data,
+        child: FutureBuilder<List<VoucherType>>(
+            future: _dropdownBloc.voucherTypeDropdownData,
             builder: (context, snapshot) {
-              return StreamBuilder<StrRecord>(
+              return StreamBuilder<VoucherType>(
                   stream: _dropdownBloc.selectedState,
                   builder: (context, item) {
-                    return SearchChoices<StrRecord>.single(
+                    return SearchChoices<VoucherType>.single(
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       underline: "",
                       padding: 1,
@@ -235,8 +235,8 @@ class _SupplierDropdown extends State<SupplierDropdown> {
                       displayClearIcon: false,
                       onChanged: _dropdownBloc.selectedStateEvent,
                       items: snapshot?.data
-                          ?.map<DropdownMenuItem<StrRecord>>((e) {
-                        return DropdownMenuItem<StrRecord>(
+                          ?.map<DropdownMenuItem<VoucherType>>((e) {
+                        return DropdownMenuItem<VoucherType>(
                           value: e,
                           child: Text(e.Supplier),
                         );

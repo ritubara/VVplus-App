@@ -44,7 +44,7 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
         height: 50, width: 343,
         decoration: DecorationForms(),
         child: FutureBuilder<List<ItemCurrentStatus>>(
-            future: _dropdownBloc.data,
+            future: _dropdownBloc.itemCurrentStatusDropdowndata,
             builder: (context, snapshot) {
               return StreamBuilder<ItemCurrentStatus>(
                   stream: _dropdownBloc.selectedState,
@@ -148,7 +148,7 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                     child: SizedBox(
                       width: 40,
                       child: FutureBuilder(
-                        future: _dropdownBloc.data,
+                        future: _dropdownBloc.itemCurrentStatusDropdowndata,
                         builder: (context,snapshot){
                           if(snapshot.hasData){
                             return ListView.builder(
@@ -172,7 +172,7 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                   child: SizedBox(
                     width: 40,
                     child: FutureBuilder(
-                        future: _dropdownBloc.data,
+                        future: _dropdownBloc.itemCurrentStatusDropdowndata,
                         builder: (context,snapshot){
                           if(snapshot.hasData){
                             return ListView.builder(

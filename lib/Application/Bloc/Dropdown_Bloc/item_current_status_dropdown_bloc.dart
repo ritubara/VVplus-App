@@ -5,18 +5,18 @@ import 'dart:async';
 import 'package:vvplus_app/infrastructure/Repository/item_current_status_repository.dart';
 
 class ItemCurrentStatusDropdownBloc {
-  final _repository = ItemCurrentStatusRepository();
-  final _selectedData$ = BehaviorSubject<ItemCurrentStatus>();
+  final itemCurrentStatusDropdownRepository = ItemCurrentStatusRepository();
+  final itemCurrentStatusDropdownData = BehaviorSubject<ItemCurrentStatus>();
 
-  Future<List<ItemCurrentStatus>> data;
-  Stream<ItemCurrentStatus> get selectedState => _selectedData$;
-  void selectedStateEvent(ItemCurrentStatus state) => _selectedData$.add(state);
+  Future<List<ItemCurrentStatus>> itemCurrentStatusDropdowndata;
+  Stream<ItemCurrentStatus> get selectedState => itemCurrentStatusDropdownData;
+  void selectedStateEvent(ItemCurrentStatus state) => itemCurrentStatusDropdownData.add(state);
 
   ItemCurrentStatusDropdownBloc() {
-    data = _repository.getData();
+    itemCurrentStatusDropdowndata = itemCurrentStatusDropdownRepository.getData();
   }
 
   void dispose() {
-    _selectedData$.close();
+    itemCurrentStatusDropdownData.close();
   }
 }

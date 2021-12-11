@@ -4,18 +4,18 @@ import 'dart:async';
 import 'package:vvplus_app/infrastructure/Repository/indentor_name_repository.dart';
 
 class IndentorNameDropdownBloc {
-  final _repository = IndentorNameRepository();
-  final _selectedData$ = BehaviorSubject<IndentorName>();
+  final indentorNameDropdownRepository = IndentorNameRepository();
+  final indentorNameDropdownGetData = BehaviorSubject<IndentorName>();
 
-  Future<List<IndentorName>> data;
-  Stream<IndentorName> get selectedState => _selectedData$;
-  void selectedStateEvent(IndentorName state) => _selectedData$.add(state);
+  Future<List<IndentorName>> indentorNameDropdownData;
+  Stream<IndentorName> get selectedState => indentorNameDropdownGetData;
+  void selectedStateEvent(IndentorName state) => indentorNameDropdownGetData.add(state);
 
   IndentorNameDropdownBloc() {
-    data = _repository.getData();
+    indentorNameDropdownData = indentorNameDropdownRepository.getData();
   }
 
   void dispose() {
-    _selectedData$.close();
+    indentorNameDropdownGetData.close();
   }
 }
