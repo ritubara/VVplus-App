@@ -16,17 +16,17 @@ const String getItemCostCenterURL = "http://103.136.82.200:777/Individual_WebSit
 
 // mock data url
 
-const String mockDataIndentorNameURL = "https://vvplus-app-default-rtdb.firebaseio.com/IndentorName.json";
+const String mockDataIndentorNameURL = "https://vv-plus-app-default-rtdb.firebaseio.com/IndentorName.json";
 
-const String mockDataDepartmentNameURL = "https://vvplus-app-default-rtdb.firebaseio.com/DepartmentName.json";
+const String mockDataDepartmentNameURL = "https://vv-plus-app-default-rtdb.firebaseio.com/DepartmentName.json";
 
-const String mockDataVoucherTypeURL = "https://vvplus-app-default-rtdb.firebaseio.com/VoucherType.json";
+const String mockDataVoucherTypeURL = "https://vv-plus-app-default-rtdb.firebaseio.com/VoucherType.json";
 
-const String mockDataItemNameURL = "https://vvplus-app-default-rtdb.firebaseio.com/ItemName.json";
+const String mockDataItemNameURL = "https://vv-plus-app-default-rtdb.firebaseio.com/ItemName.json";
 
-const String mockDataItemCurrentStatusURL = "https://vvplus-app-default-rtdb.firebaseio.com/ItemCurrentStatus.json";
+const String mockDataItemCurrentStatusURL = "https://vv-plus-app-default-rtdb.firebaseio.com/ItemCurrentStatus.json";
 
-const String mockDataItemCostCenterURL = "https://vvplus-app-default-rtdb.firebaseio.com/ItemCostCenter.json";
+const String mockDataItemCostCenterURL = "https://vv-plus-app-default-rtdb.firebaseio.com/ItemCostCenter.json";
 
 
 
