@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/Application/Bloc/Login_Bloc/login_bloc.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/homepage/home_page.dart';
@@ -25,50 +26,53 @@ class _LoginPageState extends State<LoginPage> {
     _obscureText = false;
     super.initState();
   }
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     var height = SizeConfig.getHeight(context);
     var width = SizeConfig.getWidth(context);
     return Scaffold(
-      body: SafeArea(
-          child: Container(
-            width: width,
-            height: height,
-            decoration: const BoxDecoration(
-              color: PrimaryColor3,
+      body: SingleChildScrollView(
+        child: SafeArea(
+            child: Container(
+              width: width,
+              height: height,
+              decoration: const BoxDecoration(
+                color: PrimaryColor3,
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 47,
+                      top: 39,
+                    ),
+                    child: Image.asset(
+                      image1,
+                      scale: 1.5,
+                      height: 241,
+                      width: 286,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 240,
+                      top: 25,
+                    ),
+                    child: Image.asset(
+                      image2,
+                      scale: 1.5,
+                      height: 134,
+                      width: 68,
+                    ),
+                  ),
+                  _buildBottomPart(context),
+                ],
+              ),
             ),
-            child: Stack(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 47,
-                    top: 39,
-                  ),
-                  child: Image.asset(
-                    image1,
-                    scale: 1.5,
-                    height: 241,
-                    width: 286,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 240,
-                    top: 25,
-                  ),
-                  child: Image.asset(
-                    image2,
-                    scale: 1.5,
-                    height: 134,
-                    width: 68,
-                  ),
-                ),
-                _buildBottomPart(context),
-              ],
-            ),
-          ),
 
+        ),
       ),
     );
   }
