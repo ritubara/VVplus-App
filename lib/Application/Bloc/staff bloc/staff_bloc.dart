@@ -19,7 +19,7 @@ class StaffBloc{
   Function(String) get intextField => _textController.sink.add;
 
 
-  Stream<double> get requestQty =>  _requestQty.stream.transform(validateRequestQty);
+  Stream<String> get requestQty =>  _requestQty.stream.transform(textFieldValidator);
   Stream<double> get ratefield =>  _ratefield.stream.transform(validateRateField);
   Stream<String> get outDropField1  => _dropDownField.stream;
   Stream<String> get outDropField2  => _dropDownField.stream;

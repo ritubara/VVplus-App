@@ -464,7 +464,7 @@ class MyFormsContainer extends State<FormsContainer> {
                     child: SizedBox(
                       width: 130,
 
-                      child: StreamBuilder<double>(
+                      child: StreamBuilder<String>(
                           stream: bloc.requestQty,
                           builder: (context, snapshot) {
                             return TextFormField(

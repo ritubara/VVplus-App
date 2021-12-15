@@ -38,7 +38,7 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return   Padding(
+    return Padding(
       padding: padding1,
       child: Container(
         height: 50, width: 343,

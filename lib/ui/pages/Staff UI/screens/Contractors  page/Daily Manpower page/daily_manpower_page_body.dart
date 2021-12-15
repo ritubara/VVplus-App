@@ -7,6 +7,7 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdo
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
+import 'package:vvplus_app/Model/sample_data.dart';
 import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
@@ -19,6 +20,7 @@ import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:http/http.dart' as http;
 
 class DailyManpowerBody extends StatefulWidget {
   const DailyManpowerBody({Key key}) : super(key: key);
@@ -51,6 +53,26 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
     dateinput.clear();
     _qty.clear();
     _remarks.clear();
+  }
+  sendData() {
+    http.post(Uri.parse("https://vv-plus-app-default-rtdb.firebaseio.com/PostDataDailyManPower.json"),
+        body: json.encode({
+          "StrItemName":"BINDING WIRE 12333333333",
+          "StrCostCenterName":"Asansol PH-01(NR)1111111",
+          "DblQty":46.599999999999909,
+          "StrUnit":"KG111"
+        }));
+    print("Successfull2");
+    /*
+    setState(() {
+      userProfile.add(Profile(
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        email: emailController.text,
+      ));
+    });
+
+     */
   }
 
   @override
@@ -274,9 +296,10 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
+          DepartmentNameDropdown1(),
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
+              child: RoundedButtonHome2("Submit",(){sendData();},roundedButtonHomeColor1)),
         ],
       ),
     );
