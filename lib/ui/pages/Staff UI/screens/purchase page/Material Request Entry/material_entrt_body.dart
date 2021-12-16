@@ -654,6 +654,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   "Submit",
                       (){
                         print(selectIndentName.strSubCode);
+                        print(selectIndentName.strName);
                         print(IntendDateInput.text);
                         print(selectItemCurrentStatus.strItemName);
                         print(ReqQty.text);
@@ -661,7 +662,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                         print(selectItemCostCenter.strSubCode);
                         print(ReqDateInput.text);
                         print(Remarks.text);
-                        sendData();
+                        //sendData();
                   })
           ),
         ],

@@ -1,13 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:search_choices/search_choices.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/indentor_name_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/indentor_name_dropdown.dart';
+import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:http/http.dart' as http;
 
 class MaterialRequestApprovalBody extends StatefulWidget{
   const MaterialRequestApprovalBody({Key key}) : super(key: key);
@@ -17,10 +22,27 @@ class MaterialRequestApprovalBody extends StatefulWidget{
 class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
 
   TextEditingController dateinput = TextEditingController();
+  IndentorNameDropdownBloc _dropdownBloc;
   @override
   void initState() {
     dateinput.text = "";
+    _dropdownBloc = IndentorNameDropdownBloc();
     super.initState();
+  }
+  IndentorName selectIndentorName;
+  void onDataChange1(IndentorName state) {
+    setState(() {
+      selectIndentorName = state;
+    });
+  }
+  sendData() {
+    http.post(Uri.parse(""),
+        body: json.encode({
+          "IndentDate":dateinput.text,
+          "IndentSelection":selectIndentorName.strSubCode
+
+        }));
+    print("Successfull2");
   }
   @override
   Widget build(BuildContext context) {
@@ -60,8 +82,38 @@ class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
           sizedbox1,
           FormsHeadText("Indant Selection"),
           Padding(
-            padding: paddingForms,
-            child: const IndentorNameDropdown(),
+            padding: padding1,
+            child: Container(
+              height: 50, width: 343,
+              decoration: DecorationForms(),
+              child: FutureBuilder<List<IndentorName>>(
+                  future: _dropdownBloc.indentorNameDropdownData,
+                  builder: (context, snapshot) {
+                    return StreamBuilder<IndentorName>(
+                        stream: _dropdownBloc.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<IndentorName>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: selectIndentorName,
+                            displayClearIcon: false,
+                            onChanged: onDataChange1,
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<IndentorName>>((e) {
+                              return DropdownMenuItem<IndentorName>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
+                    );
+                  }
+              ),
+            ),
           ),
           //SizedBox(height: 10,),
           const InformationBoxContainer1(),
