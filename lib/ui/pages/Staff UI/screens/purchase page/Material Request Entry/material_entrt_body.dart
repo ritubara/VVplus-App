@@ -65,6 +65,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
   IndentorNameDropdownBloc dropdownBlocIndentorName;
   ItemCurrentStatusDropdownBloc dropdownBlocItemCurrentStatus;
   ItemCostCenterDropdownBloc dropdownBlocItemCostCenter;
+  double _amount;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   String Item = "";
@@ -76,6 +77,11 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
       Item = dropdownValue ;
     });
   }
+  _calculation() {
+    setState((){
+      _amount = double.parse(ReqQty.text) * double.parse(ReqQty.text);
+    });
+  }
 
   @override
   void initState() {
@@ -84,6 +90,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
     dropdownBlocIndentorName = IndentorNameDropdownBloc();
     dropdownBlocItemCurrentStatus = ItemCurrentStatusDropdownBloc();
     dropdownBlocItemCostCenter = ItemCostCenterDropdownBloc();
+    _amount = 0;
     super.initState();
   }
 
@@ -291,7 +298,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   children: [
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      padding: const EdgeInsets.symmetric(horizontal: 35),
 
                       child: Container(
                         height: 50,
@@ -312,6 +319,8 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                                   ),
                                   onChanged: bloc.changerequestQty,
                                   keyboardType: TextInputType.number,
+                                  //onSaved: selectItemCurrentStatus.strItemName,
+
                                   style: simpleTextStyle7(),
                                 );
                               }
@@ -319,42 +328,14 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 50,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                            hint: const Text(" "),
-                            dropdownColor: PrimaryColor3,
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            iconSize: 20,
-                            isExpanded: true,
-                            iconEnabledColor: PrimaryColor4,
-                            style: const TextStyle(
-                                color: PrimaryColor2, fontSize: 12),
-                            value: valueChoose,
-                            items: const <DropdownMenuItem<int>>[
-                              DropdownMenuItem(
-                                child: Text('\tTon'),
-                                value: 0,
-                              ),
-                              DropdownMenuItem(
-                                child: Text('\tKG'),
-                                value: 4,
-                              ),
-                            ],
-                            onChanged: (Value) {
-                              setState(() {
-                                valueChoose = Value;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
+                    selectItemCurrentStatus!=null ? Container(
+                        height: 50, padding: padding1, decoration: decoration1(),
+                        child: Center(
+                            child: Text(selectItemCurrentStatus.strUnit))):
+                        Container(
+                        height: 50, padding: padding1, decoration: decoration1(),
+                        child: const Center(
+                            child: Text("No"))),
                   ],
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -363,38 +344,24 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                     FormsHeadText("Rate"),
                     const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
                     FormsHeadText("Amount:"),
+                   Text(_amount.toString()),
                   ],
                 ),
                 Row(
                   children: [
-
+                    selectItemCurrentStatus!=null ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Container(
+                          height: 50, padding: padding1, decoration: decoration1(),
+                          child: Center(
+                              child: Text(selectItemCurrentStatus.dblQty))),
+                    ):
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
-
                       child: Container(
-                        height: 50,
-                        padding: padding1,
-                        decoration: decoration1(),
-
-                        child: SizedBox(
-                          width: 100,
-
-                          child: StreamBuilder<double>(
-                              stream: bloc.ratefield,
-                              builder: (context, snapshot) {
-                                return TextFormField(
-                                  controller: rate,
-                                  decoration: InputDecoration(
-                                    errorText: snapshot.error,
-                                  ),
-                                  onChanged: bloc.changeratefield,
-                                  keyboardType: TextInputType.number,
-                                  style: simpleTextStyle7(),
-                                );
-                              }
-                          ),
-                        ),
-                      ),
+                          height: 50, padding: padding1, decoration: decoration1(),
+                          child: const Center(
+                              child: Text("No"))),
                     ),
                   ],
                 ),
@@ -404,10 +371,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   children: [
                     const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                     RaisedButton(
-                      onPressed: () {
-                        ReqQty.clear();
-                        rate.clear();
-                      },
+                      onPressed: () {},
                       elevation: 0.0,
                       color: StoreContainerColor,
                       child: RaisedButtonText("Clear This Item"),
@@ -653,20 +617,33 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               child: RoundedButtonHome(
                   "Submit",
                       (){
-                        print(selectIndentName.strSubCode);
-                        print(selectIndentName.strName);
-                        print(IntendDateInput.text);
-                        print(selectItemCurrentStatus.strItemName);
-                        print(ReqQty.text);
-                        print(rate.text);
-                        print(selectItemCostCenter.strSubCode);
-                        print(ReqDateInput.text);
-                        print(Remarks.text);
+                        //print(selectIndentName.strSubCode);
+                        //print(selectIndentName.strName);
+                        //print(IntendDateInput.text);
+                        //print(selectItemCurrentStatus.strItemName);
+                        //print(selectItemCurrentStatus.dblQty);
+                       // print(selectItemCurrentStatus.strUnit);
+                        print(_calculation.call());
+                        //check();
+                        //print(ReqQty.text);
+                        //print(rate.text);
+                        //print(selectItemCostCenter.strSubCode);
+                        //print(ReqDateInput.text);
+                        //print(Remarks.text);
                         //sendData();
                   })
           ),
         ],
       ),
     );
+  }
+  check(){
+    if(selectItemCurrentStatus.strItemName!=null){
+      print("yes");
+      print(selectItemCurrentStatus.dblQty);
+    }
+    else{
+      print("no");
+    }
   }
 }
