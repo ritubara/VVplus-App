@@ -149,7 +149,8 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
           "IntendDate":IntendDateInput.text,
           "ItemName":selectItemCurrentStatus.strItemName,
           "ReqQty":ReqQty.text,
-          "Rate":rate.text,
+          "ItemUnit":selectItemCurrentStatus.strUnit,
+          "Rate":selectItemCurrentStatus.dblQty,
           "ItemSubCode":selectItemCostCenter.strSubCode,
           "ReqDate":ReqDateInput.text,
           "Remarks":Remarks.text
@@ -385,7 +386,6 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                           return RoundedButtonInput(
                             text: "Add Item to List",
                             press: !snapshot.hasData ? null: (){
-
                             } ,
                             fontsize1: 12,
                             size1: 0.5,
@@ -405,122 +405,6 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
 
           //============================================================ popup container
 
-          pressed? Padding(
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              alignment: Alignment.center,
-              height: 85,
-              width: 392,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: PrimaryColor3,
-                boxShadow: const [
-                  BoxShadow(
-                    color: PrimaryColor5,
-                    offset: Offset(0.0, 1.0), //(x,y)
-                    blurRadius: 6.0,
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, top: 10),
-                    child: Column(
-                      //mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text("",
-                          //staff.item,
-                          style: containerTextStyle1(),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text("HSN/SAC: 7307",
-                          style: containerTextStyle9(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50, top: 13),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Order Qty.:",
-                                  style: containerTextStyle2(),
-                                ),
-                                Text(Qty ,
-                                  //   staff.quantity,
-                                  style: containerTextStyle2(),
-                                ),
-                                Padding(
-                                    padding: const EdgeInsets.only(left: 50),
-                                    child: Image.asset(icon15)),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children:[
-                                Text(
-                                  "Rate:",
-                                  style: containerTextStyle2(),
-                                ),
-                                Text(Rate,
-                                  //staff.rate,
-                                  style: containerTextStyle2(),
-                                ),
-                                const SizedBox(
-                                  width: 75,
-                                ),
-                                Text("Edit",
-                                  style: containerTextStyle8(),
-                                ),
-
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children:[
-                                Text(
-                                  "Amount:",
-                                  style: containerTextStyle2(),
-                                ),
-                                Text("",
-                                  //staff.quantity*staff.rate,
-                                  style: containerTextStyle2(),
-                                ),
-                                const SizedBox(
-                                  width: 70,
-                                ),
-                                Text(
-                                  "Inc.Tax",
-                                  style: containerTextStyle7(),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ) :const SizedBox(),
 //=============================================================================
           const Padding(padding: EdgeInsets.all(10)),
 
@@ -623,7 +507,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                         //print(selectItemCurrentStatus.strItemName);
                         //print(selectItemCurrentStatus.dblQty);
                        // print(selectItemCurrentStatus.strUnit);
-                        print(_calculation.call());
+                        //print(_calculation.call());
                         //check();
                         //print(ReqQty.text);
                         //print(rate.text);
