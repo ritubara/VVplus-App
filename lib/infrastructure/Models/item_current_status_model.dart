@@ -20,13 +20,13 @@ class ItemCurrentStatus {
 
   String strItemName;
   String strCostCenterName;
-  double dblQty;
+  String dblQty;
   String strUnit;
 
   factory ItemCurrentStatus.fromJson(Map<String, dynamic> json) => ItemCurrentStatus(
     strItemName: json["StrItemName"],
     strCostCenterName: json["StrCostCenterName"],
-    dblQty: json["DblQty"].toDouble(),
+    dblQty: json["DblQty"],
     strUnit: json["StrUnit"],
   );
 

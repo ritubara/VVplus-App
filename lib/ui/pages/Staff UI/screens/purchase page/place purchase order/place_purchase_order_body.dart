@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:search_choices/search_choices.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/indentor_name_dropdown_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
+import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/indentor_name_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/voucher_type_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
@@ -17,9 +22,36 @@ class PlacePurchaseOrderBody extends StatefulWidget{
 }
 class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
   TextEditingController dateinput = TextEditingController();
+  VoucherTypeDropdownBloc voucherTypeDropdownBloc;
+  VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
+  IndentorNameDropdownBloc dropdownBlocIndentorName;
   @override
+
+  VoucherType selectVoucherType;
+  VoucherType selectVoucherType1;
+  IndentorName selectIndentName;
+
+  void onDataChange1(VoucherType state) {
+    setState(() {
+      selectVoucherType = state;
+    });
+  }
+  void onDataChange2(VoucherType state) {
+    setState(() {
+      selectVoucherType1 = state;
+    });
+  }
+  void onDataChange3(IndentorName state) {
+    setState(() {
+      selectIndentName = state;
+    });
+  }
+
   void initState() {
     dateinput.text = "";
+    voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
+    voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
+    dropdownBlocIndentorName = IndentorNameDropdownBloc();
     super.initState();
   }
   @override
@@ -35,8 +67,38 @@ class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
           sizedbox1,
           FormsHeadText("Voucher Type"),
           Padding(
-            padding: paddingForms,
-            child: const VoucherTypeDropdown(),
+            padding: padding1,
+            child: Container(
+              height: 50, width: 343,
+              decoration: DecorationForms(),
+              child: FutureBuilder<List<VoucherType>>(
+                  future: voucherTypeDropdownBloc.voucherTypeDropdownData,
+                  builder: (context, snapshot) {
+                    return StreamBuilder<VoucherType>(
+                        stream: voucherTypeDropdownBloc.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<VoucherType>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: selectVoucherType,
+                            displayClearIcon: false,
+                            onChanged: onDataChange1,
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<VoucherType>>((e) {
+                              return DropdownMenuItem<VoucherType>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
+                    );
+                  }
+              ),
+            ),
           ),
           sizedbox1,
           FormsHeadText("Date"),
@@ -68,14 +130,74 @@ class myPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
           sizedbox1,
           FormsHeadText("Supplier"),
           Padding(
-            padding: paddingForms,
-            child: SupplierDropdown(),
+            padding: padding1,
+            child: Container(
+              height: 50, width: 343,
+              decoration: DecorationForms(),
+              child: FutureBuilder<List<VoucherType>>(
+                  future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                  builder: (context, snapshot) {
+                    return StreamBuilder<VoucherType>(
+                        stream: voucherTypeDropdownBloc1.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<VoucherType>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: selectVoucherType1,
+                            displayClearIcon: false,
+                            onChanged: onDataChange2,
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<VoucherType>>((e) {
+                              return DropdownMenuItem<VoucherType>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
+                    );
+                  }
+              ),
+            ),
           ),
           sizedbox1,
           FormsHeadText("Indent Selection"),
           Padding(
-            padding: paddingForms,
-            child: const IndentorNameDropdown(),
+            padding: padding1,
+            child: Container(
+              height: 50, width: 343,
+              decoration: DecorationForms(),
+              child: FutureBuilder<List<IndentorName>>(
+                  future: dropdownBlocIndentorName.indentorNameDropdownData,
+                  builder: (context, snapshot) {
+                    return StreamBuilder<IndentorName>(
+                        stream: dropdownBlocIndentorName.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<IndentorName>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: selectIndentName,
+                            displayClearIcon: false,
+                            onChanged: onDataChange3,
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<IndentorName>>((e) {
+                              return DropdownMenuItem<IndentorName>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
+                    );
+                  }
+              ),
+            ),
           ),
           sizedbox1,
           FormsHeadText("PO Valid Date"),

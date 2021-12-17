@@ -37,6 +37,25 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
   ItemCostCenterDropdownBloc itemCostCenterDropdownBloc;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc;
 
+  ItemCostCenter selectItemCostCenter;
+  VoucherType selectVoucherType;
+  DepartmentName selectDepartmentName;
+
+  void onDataChange1(VoucherType state) {
+    setState(() {
+      selectVoucherType = state;
+    });
+  }
+  void onDataChange2(DepartmentName state) {
+    setState(() {
+      selectDepartmentName = state;
+    });
+  }
+  void onDataChange3(ItemCostCenter state) {
+    setState(() {
+      selectItemCostCenter = state;
+    });
+  }
   @override
   void dispose() {
     super.dispose();
@@ -57,22 +76,14 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
   sendData() {
     http.post(Uri.parse("https://vv-plus-app-default-rtdb.firebaseio.com/PostDataDailyManPower.json"),
         body: json.encode({
-          "StrItemName":"BINDING WIRE 12333333333",
-          "StrCostCenterName":"Asansol PH-01(NR)1111111",
-          "DblQty":46.599999999999909,
-          "StrUnit":"KG111"
+          "IntendDate":dateinput.text,
+          "PartyNameSubCode":selectDepartmentName.strSubCode,
+          "CostCenterSubCode":selectItemCostCenter.strSubCode,
+          "ResourceTypeSubCode":selectVoucherType.strSubCode,
+          "ReqQty":_qty.text,
+          "Remarks":_remarks.text
         }));
     print("Successfull2");
-    /*
-    setState(() {
-      userProfile.add(Profile(
-        firstName: firstNameController.text,
-        lastName: lastNameController.text,
-        email: emailController.text,
-      ));
-    });
-
-     */
   }
 
   @override
@@ -142,13 +153,9 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                             padding: 1,
                             isExpanded: true,
                             hint: "Search here",
-                            value: item.data,
+                            value: selectDepartmentName,
                             displayClearIcon: false,
-                            onChanged: (DepartmentName newValue) {
-                              setState(() {
-                                departmentNameDropdownBloc.selectedStateEvent(newValue);
-                              });
-                            },
+                            onChanged: onDataChange2,
                             items: snapshot?.data
                                 ?.map<DropdownMenuItem<DepartmentName>>((e) {
                               return DropdownMenuItem<DepartmentName>(
@@ -182,13 +189,9 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                             padding: 1,
                             isExpanded: true,
                             hint: "Search here",
-                            value: item.data,
+                            value: selectItemCostCenter,
                             displayClearIcon: false,
-                            onChanged: (ItemCostCenter newValue) {
-                              setState(() {
-                                itemCostCenterDropdownBloc.selectedStateEvent(newValue);
-                              });
-                            },
+                            onChanged: onDataChange3,
                             items: snapshot?.data
                                 ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
                               return DropdownMenuItem<ItemCostCenter>(
@@ -222,13 +225,9 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                             padding: 1,
                             isExpanded: true,
                             hint: "Search here",
-                            value: item.data,
+                            value: selectVoucherType,
                             displayClearIcon: false,
-                            onChanged: (VoucherType newValue) {
-                              setState(() {
-                                voucherTypeDropdownBloc.selectedStateEvent(newValue);
-                              });
-                            },
+                            onChanged: onDataChange1,
                             items: snapshot?.data
                                 ?.map<DropdownMenuItem<VoucherType>>((e) {
                               return DropdownMenuItem<VoucherType>(
@@ -296,10 +295,17 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
-          DepartmentNameDropdown1(),
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){sendData();},roundedButtonHomeColor1)),
+              child: RoundedButtonHome2("Submit",(){
+                sendData();
+                print(dateinput.text);
+                print(selectDepartmentName.strSubCode);
+                print(selectItemCostCenter.strSubCode);
+                print(selectVoucherType.strSubCode);
+                print(_qty.text);
+                print(_remarks.text);
+                },roundedButtonHomeColor1)),
         ],
       ),
     );

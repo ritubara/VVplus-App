@@ -65,6 +65,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
   IndentorNameDropdownBloc dropdownBlocIndentorName;
   ItemCurrentStatusDropdownBloc dropdownBlocItemCurrentStatus;
   ItemCostCenterDropdownBloc dropdownBlocItemCostCenter;
+  double _amount;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   String Item = "";
@@ -76,6 +77,11 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
       Item = dropdownValue ;
     });
   }
+  _calculation() {
+    setState((){
+      _amount = double.parse(ReqQty.text) * double.parse(ReqQty.text);
+    });
+  }
 
   @override
   void initState() {
@@ -84,6 +90,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
     dropdownBlocIndentorName = IndentorNameDropdownBloc();
     dropdownBlocItemCurrentStatus = ItemCurrentStatusDropdownBloc();
     dropdownBlocItemCostCenter = ItemCostCenterDropdownBloc();
+    _amount = 0;
     super.initState();
   }
 
@@ -142,7 +149,8 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
           "IntendDate":IntendDateInput.text,
           "ItemName":selectItemCurrentStatus.strItemName,
           "ReqQty":ReqQty.text,
-          "Rate":rate.text,
+          "ItemUnit":selectItemCurrentStatus.strUnit,
+          "Rate":selectItemCurrentStatus.dblQty,
           "ItemSubCode":selectItemCostCenter.strSubCode,
           "ReqDate":ReqDateInput.text,
           "Remarks":Remarks.text
@@ -291,7 +299,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   children: [
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      padding: const EdgeInsets.symmetric(horizontal: 35),
 
                       child: Container(
                         height: 50,
@@ -312,6 +320,8 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                                   ),
                                   onChanged: bloc.changerequestQty,
                                   keyboardType: TextInputType.number,
+                                  //onSaved: selectItemCurrentStatus.strItemName,
+
                                   style: simpleTextStyle7(),
                                 );
                               }
@@ -319,42 +329,14 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 50,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton(
-                            hint: const Text(" "),
-                            dropdownColor: PrimaryColor3,
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            iconSize: 20,
-                            isExpanded: true,
-                            iconEnabledColor: PrimaryColor4,
-                            style: const TextStyle(
-                                color: PrimaryColor2, fontSize: 12),
-                            value: valueChoose,
-                            items: const <DropdownMenuItem<int>>[
-                              DropdownMenuItem(
-                                child: Text('\tTon'),
-                                value: 0,
-                              ),
-                              DropdownMenuItem(
-                                child: Text('\tKG'),
-                                value: 4,
-                              ),
-                            ],
-                            onChanged: (Value) {
-                              setState(() {
-                                valueChoose = Value;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
+                    selectItemCurrentStatus!=null ? Container(
+                        height: 50, padding: padding1, decoration: decoration1(),
+                        child: Center(
+                            child: Text(selectItemCurrentStatus.strUnit))):
+                        Container(
+                        height: 50, padding: padding1, decoration: decoration1(),
+                        child: const Center(
+                            child: Text("No"))),
                   ],
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -363,38 +345,24 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                     FormsHeadText("Rate"),
                     const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
                     FormsHeadText("Amount:"),
+                   Text(_amount.toString()),
                   ],
                 ),
                 Row(
                   children: [
-
+                    selectItemCurrentStatus!=null ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Container(
+                          height: 50, padding: padding1, decoration: decoration1(),
+                          child: Center(
+                              child: Text(selectItemCurrentStatus.dblQty))),
+                    ):
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
-
                       child: Container(
-                        height: 50,
-                        padding: padding1,
-                        decoration: decoration1(),
-
-                        child: SizedBox(
-                          width: 100,
-
-                          child: StreamBuilder<double>(
-                              stream: bloc.ratefield,
-                              builder: (context, snapshot) {
-                                return TextFormField(
-                                  controller: rate,
-                                  decoration: InputDecoration(
-                                    errorText: snapshot.error,
-                                  ),
-                                  onChanged: bloc.changeratefield,
-                                  keyboardType: TextInputType.number,
-                                  style: simpleTextStyle7(),
-                                );
-                              }
-                          ),
-                        ),
-                      ),
+                          height: 50, padding: padding1, decoration: decoration1(),
+                          child: const Center(
+                              child: Text("No"))),
                     ),
                   ],
                 ),
@@ -404,10 +372,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   children: [
                     const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                     RaisedButton(
-                      onPressed: () {
-                        ReqQty.clear();
-                        rate.clear();
-                      },
+                      onPressed: () {},
                       elevation: 0.0,
                       color: StoreContainerColor,
                       child: RaisedButtonText("Clear This Item"),
@@ -421,7 +386,6 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                           return RoundedButtonInput(
                             text: "Add Item to List",
                             press: !snapshot.hasData ? null: (){
-
                             } ,
                             fontsize1: 12,
                             size1: 0.5,
@@ -441,122 +405,6 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
 
           //============================================================ popup container
 
-          pressed? Padding(
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              alignment: Alignment.center,
-              height: 85,
-              width: 392,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: PrimaryColor3,
-                boxShadow: const [
-                  BoxShadow(
-                    color: PrimaryColor5,
-                    offset: Offset(0.0, 1.0), //(x,y)
-                    blurRadius: 6.0,
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, top: 10),
-                    child: Column(
-                      //mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text("",
-                          //staff.item,
-                          style: containerTextStyle1(),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text("HSN/SAC: 7307",
-                          style: containerTextStyle9(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50, top: 13),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Order Qty.:",
-                                  style: containerTextStyle2(),
-                                ),
-                                Text(Qty ,
-                                  //   staff.quantity,
-                                  style: containerTextStyle2(),
-                                ),
-                                Padding(
-                                    padding: const EdgeInsets.only(left: 50),
-                                    child: Image.asset(icon15)),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children:[
-                                Text(
-                                  "Rate:",
-                                  style: containerTextStyle2(),
-                                ),
-                                Text(Rate,
-                                  //staff.rate,
-                                  style: containerTextStyle2(),
-                                ),
-                                const SizedBox(
-                                  width: 75,
-                                ),
-                                Text("Edit",
-                                  style: containerTextStyle8(),
-                                ),
-
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              children:[
-                                Text(
-                                  "Amount:",
-                                  style: containerTextStyle2(),
-                                ),
-                                Text("",
-                                  //staff.quantity*staff.rate,
-                                  style: containerTextStyle2(),
-                                ),
-                                const SizedBox(
-                                  width: 70,
-                                ),
-                                Text(
-                                  "Inc.Tax",
-                                  style: containerTextStyle7(),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ) :const SizedBox(),
 //=============================================================================
           const Padding(padding: EdgeInsets.all(10)),
 
@@ -653,19 +501,33 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               child: RoundedButtonHome(
                   "Submit",
                       (){
-                        print(selectIndentName.strSubCode);
-                        print(IntendDateInput.text);
-                        print(selectItemCurrentStatus.strItemName);
-                        print(ReqQty.text);
-                        print(rate.text);
-                        print(selectItemCostCenter.strSubCode);
-                        print(ReqDateInput.text);
-                        print(Remarks.text);
-                        sendData();
+                        //print(selectIndentName.strSubCode);
+                        //print(selectIndentName.strName);
+                        //print(IntendDateInput.text);
+                        //print(selectItemCurrentStatus.strItemName);
+                        //print(selectItemCurrentStatus.dblQty);
+                       // print(selectItemCurrentStatus.strUnit);
+                        //print(_calculation.call());
+                        //check();
+                        //print(ReqQty.text);
+                        //print(rate.text);
+                        //print(selectItemCostCenter.strSubCode);
+                        //print(ReqDateInput.text);
+                        //print(Remarks.text);
+                        //sendData();
                   })
           ),
         ],
       ),
     );
+  }
+  check(){
+    if(selectItemCurrentStatus.strItemName!=null){
+      print("yes");
+      print(selectItemCurrentStatus.dblQty);
+    }
+    else{
+      print("no");
+    }
   }
 }
