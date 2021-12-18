@@ -50,7 +50,6 @@ class MaterialEntryBody extends StatefulWidget {
 }
 
 class myMaterialEntryBody extends State<MaterialEntryBody> {
-  Future<PostData> _futurePostData;
 
   TextEditingController IntendDateInput = TextEditingController();
   TextEditingController ReqDateInput = TextEditingController();
@@ -78,9 +77,8 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
     });
   }
   _calculation() {
-    setState((){
       _amount = double.parse(ReqQty.text) * double.parse(ReqQty.text);
-    });
+
   }
 
   @override

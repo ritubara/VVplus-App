@@ -28,7 +28,7 @@ const String mockDataItemCurrentStatusURL = "https://vv-plus-app-default-rtdb.fi
 
 const String mockDataItemCostCenterURL = "https://vv-plus-app-default-rtdb.firebaseio.com/ItemCostCenter.json";
 
-
+const String materialReqPostURL = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataMaterialRequestEntry.json";
 
 
 

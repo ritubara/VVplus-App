@@ -8,6 +8,7 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropd
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
 import 'package:vvplus_app/Model/sample_data.dart';
+import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
@@ -74,16 +75,23 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
     _remarks.clear();
   }
   sendData() {
-    http.post(Uri.parse("https://vv-plus-app-default-rtdb.firebaseio.com/PostDataDailyManPower.json"),
-        body: json.encode({
-          "IntendDate":dateinput.text,
-          "PartyNameSubCode":selectDepartmentName.strSubCode,
-          "CostCenterSubCode":selectItemCostCenter.strSubCode,
-          "ResourceTypeSubCode":selectVoucherType.strSubCode,
-          "ReqQty":_qty.text,
-          "Remarks":_remarks.text
-        }));
-    print("Successfull2");
+    if (_qty.text != null) {
+      http.post(Uri.parse(
+          "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataDailyManPower.json"),
+          body: json.encode({
+            "IntendDate": dateinput.text,
+            "PartyNameSubCode": selectDepartmentName.strSubCode,
+            "CostCenterSubCode": selectItemCostCenter.strSubCode,
+            "ResourceTypeSubCode": selectVoucherType.strSubCode,
+            "ReqQty": _qty.text,
+            "Remarks": _remarks.text
+          }));
+      Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
+      print("Successfull2");
+    }
+    else{
+      Scaffold.of(context).showSnackBar(snackBar("Field is empty"));
+    }
   }
 
   @override
@@ -299,12 +307,13 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
               padding: padding4,
               child: RoundedButtonHome2("Submit",(){
                 sendData();
-                print(dateinput.text);
-                print(selectDepartmentName.strSubCode);
-                print(selectItemCostCenter.strSubCode);
-                print(selectVoucherType.strSubCode);
-                print(_qty.text);
-                print(_remarks.text);
+                //print(dateinput.text);
+                //print(selectDepartmentName.strSubCode);
+                //print(selectItemCostCenter.strSubCode);
+                //print(selectVoucherType.strSubCode);
+                //print(_qty.text);
+                //print(_remarks.text);
+                //Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
                 },roundedButtonHomeColor1)),
         ],
       ),
