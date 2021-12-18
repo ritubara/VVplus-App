@@ -102,7 +102,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
   }
   void onDataChange2(ItemCurrentStatus state) {
     setState(() {
-      selectItemCurrentStatus = state;
+      selectItemCurrentStatus= state;
     });
   }
   void onDataChange3(ItemCostCenter state) {
