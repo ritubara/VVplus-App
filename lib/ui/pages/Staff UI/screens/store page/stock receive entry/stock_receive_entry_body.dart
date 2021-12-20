@@ -1,20 +1,25 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_current_status_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/stock%20receive%20entry/items_container.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:http/http.dart'as http;
 
 class StockReceiveEntryBody extends StatefulWidget{
   const StockReceiveEntryBody({Key key}) : super(key: key);
@@ -22,8 +27,11 @@ class StockReceiveEntryBody extends StatefulWidget{
   State<StockReceiveEntryBody> createState() => MyStockReceiveEntryBody();
 }
 class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
-
+  bool isActive = false;
   TextEditingController reqQty = TextEditingController();
+  bool pressed = false;
+
+
 
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc2;
@@ -37,10 +45,24 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
   ItemCostCenter selectItemCostCenter;
   ItemCurrentStatus selectItemCurrentStatus;
 
-  double _amount;
+  double _amount ;
+
+  _calculation() {
+    _amount = double.parse(reqQty.text) *
+        double.parse(selectItemCurrentStatus.strUnit);
+  }
 
   @override
   void initState() {
+    super.initState();
+    reqQty = TextEditingController();
+    reqQty.addListener(() {
+      if(isActive = reqQty.text.isNotEmpty){
+        isActive=true;
+      }
+      setState(()  =>this.isActive = isActive );
+    });
+
     voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc2 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc3 = VoucherTypeDropdownBloc();
@@ -50,7 +72,13 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
     super.initState();
   }
   @override
+
+  void clearData(){
+  reqQty.clear();
+  }
+
   void dispose() {
+    reqQty.dispose();
     super.dispose();
   }
   void onDataChange1(VoucherType state) {
@@ -78,6 +106,44 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
       selectItemCurrentStatus= state;
     });
   }
+
+  sendDataStockReceive(){
+    http.post(Uri.parse(
+        "https://vv-plus-app-default-rtdb.firebaseio.com/PostStockReceiveEntry.json"),
+        body: json.encode({
+          "Voucher Type": selectVoucherType1.strName,
+          "Received By": selectVoucherType2.strName,
+          "Godown": selectVoucherType3.strName,
+          "Cost Center":selectItemCostCenter.strName,
+          "Item": selectItemCurrentStatus.strItemName,
+          "ReqQuantity": reqQty.text,
+          "Unit": selectItemCurrentStatus.strUnit,
+          "Rate": selectItemCurrentStatus.dblQty,
+          //"Amount": _remarks.text
+        }));
+    Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
+    print("Successfull2");
+  }
+
+  sendDataItem() {
+    if (reqQty.text != null) {
+      http.post(Uri.parse(
+          "https://vv-plus-app-default-rtdb.firebaseio.com/PostItemDetails.json"),
+          body: json.encode({
+            "Item": selectItemCurrentStatus.strItemName,
+            "ReqQuantity": reqQty.text,
+            "Unit": selectItemCurrentStatus.strUnit,
+            "Rate": selectItemCurrentStatus.dblQty,
+            //"Amount": _remarks.text
+          }));
+      Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
+      print("Successfull2");
+    }
+    else{
+      Scaffold.of(context).showSnackBar(snackBar("Field is empty"));
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -382,40 +448,53 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
                       ),
 
 
-                      StreamBuilder<bool>(
-                          stream: bloc.submitCheck,
-                          builder: (context, snapshot) {
-                            return RoundedButtonInput(
+                     // StreamBuilder<bool>(
+                         // stream: bloc.submitCheck,
+                       //   builder: (context, snapshot) {
+        //                    return
+                              RoundedButtonInput(
                               text: "Add Item to List",
-                              press: !snapshot.hasData ? null: (){
-                              } ,
+                              press: isActive ? (){
+                                sendDataItem();
+                                setState(() {
+                                  pressed = true;
+                                });
+                                clearData();
+                              } :null,
                               fontsize1: 12,
                               size1: 0.5,
                               horizontal1: 30,
                               vertical1: 10,
                               color1: Colors.orange,
                               textColor1: textColor1,
-                            );
-                          }
-                      ),
+                            ),
+                        //  }
+                      //),
                     ],
                   )
                 ],
               ),
+
             ),
           ),
 
           //-----------------------------------------------------------
+
+          pressed?
+          Page1():SizedBox(),
 
           sizedbox1,
           formsHeadText("Total Amount:"),
           sizedbox1,
           Padding(
               padding: padding4,
-              child: roundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
+              child: roundedButtonHome2("Submit",(){
+                sendDataStockReceive();
+              },roundedButtonHomeColor1)),
         ],
       ),
     );
+
   }
 
 }
