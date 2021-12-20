@@ -11,7 +11,7 @@ class DailyManpowerPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return ContractorProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Daily Manpower"),
+        appBar: appBarSatff("Daily Manpower"),
         body: const DailyManpowerBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),
