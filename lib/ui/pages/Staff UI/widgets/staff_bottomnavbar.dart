@@ -21,27 +21,27 @@ class _MyBottomNavbarStaff extends State<BottomNavBarStaff>{
   Widget build(BuildContext context) {
     return  BottomNavigationBar(
       //NavigationBar
-      backgroundColor: PrimaryColor1,
+      backgroundColor: primaryColor1,
       type: BottomNavigationBarType.fixed,
       showUnselectedLabels: true,
       elevation: 10,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            icon: Icon(Icons.home,color: PrimaryColor3,),
-            activeIcon: Icon(Icons.home,color: PrimaryColor5,),
-            title: Text('', style: TextStyle(color: PrimaryColor2))),
+            icon: Icon(Icons.home,color: primaryColor3,),
+            activeIcon: Icon(Icons.home,color: primaryColor5,),
+            title: Text('', style: TextStyle(color: primaryColor2))),
         BottomNavigationBarItem(
-            icon: Icon(Icons.notifications,color: PrimaryColor3,),
-            activeIcon: Icon(Icons.notifications,color: PrimaryColor5,),
-            title: Text('', style: TextStyle(color: PrimaryColor2))),
+            icon: Icon(Icons.notifications,color: primaryColor3,),
+            activeIcon: Icon(Icons.notifications,color: primaryColor5,),
+            title: Text('', style: TextStyle(color: primaryColor2))),
         BottomNavigationBarItem(
-            icon: Icon(Icons.check,size: 30,color: PrimaryColor3,),
-            activeIcon: Icon(Icons.check,size:30,color: PrimaryColor5,),
-            title: Text('', style: TextStyle(color: PrimaryColor2))),
+            icon: Icon(Icons.check,size: 30,color: primaryColor3,),
+            activeIcon: Icon(Icons.check,size:30,color: primaryColor5,),
+            title: Text('', style: TextStyle(color: primaryColor2))),
         BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle,color: PrimaryColor3,),
-            activeIcon: Icon(Icons.account_circle,color: PrimaryColor5,),
-            title: Text('', style: TextStyle(color: PrimaryColor2))),
+            icon: Icon(Icons.account_circle,color: primaryColor3,),
+            activeIcon: Icon(Icons.account_circle,color: primaryColor5,),
+            title: Text('', style: TextStyle(color: primaryColor2))),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: Colors.grey,

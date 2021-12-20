@@ -16,7 +16,7 @@ class _PhaseToPhaseTransferPageState extends State<PhaseToPhaseTransferPage> {
   Widget build(BuildContext context) {
     return MaterialProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Phase to Phase Transfer"),
+        appBar: appBarSatff("Phase to Phase Transfer"),
         body: const PhaseToPhaseTransferBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

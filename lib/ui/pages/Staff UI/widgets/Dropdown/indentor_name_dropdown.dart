@@ -33,7 +33,7 @@ class _IndentorNameDropdownState extends State<IndentorNameDropdown> {
       padding: padding1,
       child: Container(
         height: 50, width: 343,
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child: FutureBuilder<List<IndentorName>>(
             future: _dropdownBloc.indentorNameDropdownData,
             builder: (context, snapshot) {
@@ -87,7 +87,8 @@ class _IndentorNameDropdownFirestore extends State<IndentorNameDropdownFirestore
   void dispose() {
     super.dispose();
   }
-  var IndentorName;
+  // ignore: prefer_typing_uninitialized_variables
+  var indentorName;
   var setDefaultMake = true, setDefaultMakeModel = true;
 
   @override
@@ -96,7 +97,7 @@ class _IndentorNameDropdownFirestore extends State<IndentorNameDropdownFirestore
       padding: padding1,
       child: Container(
         height: 50, width: 343,
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child:StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('IndentorName')
@@ -117,11 +118,11 @@ class _IndentorNameDropdownFirestore extends State<IndentorNameDropdownFirestore
               isExpanded: true,
               hint: "Search here",
               displayClearIcon: false,
-              value: IndentorName,
+              value: indentorName,
               items: snapshot.data.docs.map((value) {
                 if (setDefaultMake) {
-                  IndentorName = snapshot.data.docs[0].get('StrName');
-                  debugPrint('setDefault make: $IndentorName');
+                  indentorName = snapshot.data.docs[0].get('StrName');
+                  debugPrint('setDefault make: $indentorName');
                 }
                 return DropdownMenuItem(
                   value: value.get('StrName'),
@@ -134,7 +135,7 @@ class _IndentorNameDropdownFirestore extends State<IndentorNameDropdownFirestore
                       () {
                     debugPrint('make selected: $value');
                     // Selected value will be stored
-                    IndentorName = value;
+                    indentorName = value;
                     // Default dropdown value won't be displayed anymore
                     setDefaultMake = false;
                     // Set makeModel to true to display first car from list

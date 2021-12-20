@@ -30,10 +30,10 @@ class PurchaseBody extends StatelessWidget{
           width: 300,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.0),
-            color: PrimaryColor3,
+            color: primaryColor3,
             boxShadow: const [
               BoxShadow(
-                color: PrimaryColor5,
+                color: primaryColor5,
                 offset: Offset(0.0, 1.0), //(x,y)
                 blurRadius: 6.0,
               ),
@@ -58,24 +58,24 @@ class PurchaseBody extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButtonHome(text38, () {
+              roundedButtonHome(text38, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const MaterialReqEntry()));
               }),
 
-              RoundedButtonHome(text39, () {
+              roundedButtonHome(text39, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const MaterialRequestApproval()));
               }),
-              RoundedButtonHome(text40, () {Navigator.push(
+              roundedButtonHome(text40, () {Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const PlacePurchaseOrder()));}),
-              RoundedButtonHome(text41, () {
+              roundedButtonHome(text41, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(

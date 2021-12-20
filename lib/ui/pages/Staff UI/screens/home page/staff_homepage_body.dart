@@ -29,10 +29,10 @@ class HomeBody extends StatelessWidget{
             width: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
-              color: PrimaryColor3,
+              color: primaryColor3,
               boxShadow: const [
                 BoxShadow(
-                  color: PrimaryColor5,
+                  color: primaryColor5,
                   offset: Offset(0.0, 1.0), //(x,y)
                   blurRadius: 6.0,
                 ),
@@ -47,7 +47,7 @@ class HomeBody extends StatelessWidget{
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 18,fontWeight: FontWeight.w400),
                   ),
-                 RoundedButton6("View Approval Requests ",
+                 roundedButton6("View Approval Requests ",
                          (){}
                          ),
 
@@ -58,7 +58,7 @@ class HomeBody extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButtonHome(
+              roundedButtonHome(
                 text52,
                     () {
                   Navigator.push(
@@ -67,7 +67,7 @@ class HomeBody extends StatelessWidget{
                           builder: (context) => const PurchasePage()));
                 },
               ),
-              RoundedButtonHome(
+              roundedButtonHome(
                 text53,
                     () {
                   Navigator.push(
@@ -76,21 +76,21 @@ class HomeBody extends StatelessWidget{
                           builder: (context) => const StorePage()));
                 },
               ),
-              RoundedButtonHome(
+              roundedButtonHome(
                 text54,
                     () {Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const SalesPage()));},
               ),
-              RoundedButtonHome(
+              roundedButtonHome(
                 text55,
                     () {
                  Navigator.push(context, MaterialPageRoute(
                           builder: (context) =>  const ContractorsPage()));
                 },
               ),
-              RoundedButtonHome(
+              roundedButtonHome(
                 text56,
                     () {
                   /*Navigator.push(
@@ -99,7 +99,7 @@ class HomeBody extends StatelessWidget{
                           builder: (context) => HouseInformation()));*/
                 },
               ),
-              RoundedButtonHome2(
+              roundedButtonHome2(
                 text57,
                     () {
                   /*Navigator.push(
@@ -108,7 +108,7 @@ class HomeBody extends StatelessWidget{
                           builder: (context) => HouseInformation()));*/
                 },roundedButtonHomeColor1
               ),
-              RoundedButtonHome2(
+              roundedButtonHome2(
                 "Approval and Request not a Dataman",
                     () {
                   /*Navigator.push(

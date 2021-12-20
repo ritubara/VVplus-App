@@ -4,16 +4,16 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
-class textFieldDecoration extends StatefulWidget {
+class TextFieldDecoration extends StatefulWidget {
   //final String hintText;
   //final double borderRadiusValue;
   //const textFieldDecoration({this.hintText, this.borderRadiusValue});
-  const textFieldDecoration({Key key}) : super(key: key);
+  const TextFieldDecoration({Key key}) : super(key: key);
 
   @override
-  _textFieldDecorationState createState() => _textFieldDecorationState();
+  _TextFieldDecorationState createState() => _TextFieldDecorationState();
 }
-class _textFieldDecorationState extends State<textFieldDecoration>{
+class _TextFieldDecorationState extends State<TextFieldDecoration>{
   final bloc = NewComplaintPageBloc();
   @override
   Widget build(BuildContext context) {
@@ -27,20 +27,20 @@ class _textFieldDecorationState extends State<textFieldDecoration>{
             onChanged: bloc.textFieldChanged,
             style: simpleTextStyle7(),
             decoration:InputDecoration(
-              fillColor: PrimaryColor3,
+              fillColor: primaryColor3,
               filled: true,
               enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: PrimaryColor2),
+                  borderSide: const BorderSide(color: primaryColor2),
                   borderRadius: BorderRadius.circular(10)),
               focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: PrimaryColor2),
+                  borderSide: const BorderSide(color: primaryColor2),
                   borderRadius: BorderRadius.circular(10)),
               prefix: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
               ),
               hintText: "Enter Field",
               hintStyle: const TextStyle(
-                color: PrimaryColor4,
+                color: primaryColor4,
               ),
               errorText: snapshot.error,
             ),
@@ -64,30 +64,30 @@ CountryCodePicker phoneTextFieldPicker(){
   return CountryCodePicker(
     initialSelection: '+91',
     favorite: const ['+91', 'IN'],
-    textStyle: const TextStyle(color: TextColor4),
+    textStyle: const TextStyle(color: textColor4),
     showFlag: true,
   );
 }
 OutlineInputBorder outlineBorder(){
   return const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
-      borderSide: BorderSide(color: TextColor4)
+      borderSide: BorderSide(color: textColor4)
   );
 }
 
 BoxDecoration decoration1() {
   return BoxDecoration(
-    color: PrimaryColor3,
+    color: primaryColor3,
     borderRadius: BorderRadius.circular(12),
   );
 }
 
 BoxDecoration decoration2(){                                                       //Boxdecoration for containers
   return BoxDecoration(borderRadius: BorderRadius.circular(5.0),
-    color: PrimaryColor3,
+    color: primaryColor3,
     boxShadow: const [
       BoxShadow(
-        color: PrimaryColor5,
+        color: primaryColor5,
         offset: Offset(0.0, 1.0), //(x,y)
         blurRadius: 6.0,
       ),
@@ -97,9 +97,9 @@ BoxDecoration decoration2(){                                                    
 
 BoxDecoration decoration3() {
   return BoxDecoration(
-    color: PrimaryColor3,
+    color: primaryColor3,
     borderRadius: BorderRadius.circular(5),
-    border: Border.all(color: PrimaryColor2,width: 1),
+    border: Border.all(color: primaryColor2,width: 1),
   );
 }
 
@@ -110,7 +110,7 @@ BoxDecoration decoration4(var colorof){                                         
     color: colorof,
     boxShadow: const [
       BoxShadow(
-        color: PrimaryColor5,
+        color: primaryColor5,
         offset: Offset(0.0, 1.0), //(x,y)
         blurRadius: 6.0,
       ),

@@ -16,7 +16,7 @@ class _BranchtoBranchReceivePageState extends State<BranchtoBranchReceivePage> {
   Widget build(BuildContext context) {
     return MaterialProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Branch to Branch Receive"),
+        appBar: appBarSatff("Branch to Branch Receive"),
         body: const BranchtoBranchReceiveBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

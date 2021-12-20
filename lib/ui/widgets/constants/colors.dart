@@ -1,24 +1,24 @@
 
 import 'package:flutter/material.dart';
 
-const PrimaryColor1 = Colors.green; // green
-const PrimaryColor2 = Colors.black;   // black
-const PrimaryColor3 = Colors.white;    // white
-const PrimaryColor4 = Colors.black45;   // black45
-const PrimaryColor5 = Colors.grey;
-const PrimaryColor6 = Colors.red;
-const PrimaryColor7 = Colors.lightGreen;
-const PrimaryColor8 = Color(0xFFF6F6F6);
-const PrimaryColor9 = Color(0xFFCFD8DC);
+const primaryColor1 = Colors.green; // green
+const primaryColor2 = Colors.black;   // black
+const primaryColor3 = Colors.white;    // white
+const primaryColor4 = Colors.black45;   // black45
+const primaryColor5 = Colors.grey;
+const primaryColor6 = Colors.red;
+const primaryColor7 = Colors.lightGreen;
+const primaryColor8 = Color(0xFFF6F6F6);
+const primaryColor9 = Color(0xFFCFD8DC);
 
-const TextColor1= Colors.white;
-const TextColor2= Colors.green;
-const TextColor3= Colors.red;
-const TextColor4= Colors.black;
-const TextColor5= Colors.black45;
+const textColor1= Colors.white;
+const textColor2= Colors.green;
+const textColor3= Colors.red;
+const textColor4= Colors.black;
+const textColor5= Colors.black45;
 
-const StepperColor= Colors.purple;
-const StepperColor1 = Colors.orange;
+const stepperColor= Colors.purple;
+const stepperColor1 = Colors.orange;
 
 const decorationColor1 = Colors.white;
 
@@ -38,4 +38,4 @@ const boxDecorationTextColor4 = Colors.blue;
 const boxDecorationTextColor5 = Color(0xFF000AFF);
 const boxDecorationTextColor6 = Colors.grey;
 
-const StoreContainerColor = Color(0xFFEBE7E7);
+const storeContainerColor = Color(0xFFEBE7E7);

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/Application/Bloc/Login_Bloc/login_bloc.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/homepage/home_page.dart';
@@ -26,7 +25,6 @@ class _LoginPageState extends State<LoginPage> {
     _obscureText = false;
     super.initState();
   }
-  FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
               width: width,
               height: height,
               decoration: const BoxDecoration(
-                color: PrimaryColor3,
+                color: primaryColor3,
               ),
               child: Stack(
                 children: <Widget>[
@@ -98,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 20,),
             Container(
               padding: padding2,
-              color: PrimaryColor3,
+              color: primaryColor3,
               height: 51.0,
               child: StreamBuilder<String>(
                 stream: bloc.phone,
@@ -109,12 +107,12 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: InputDecoration(
                       contentPadding: phoneTextFieldPadding,
                       prefixIcon: phoneTextFieldPicker(),
-                      focusColor: TextColor4,
+                      focusColor: textColor4,
                       enabledBorder: outlineBorder(),
                       focusedBorder: outlineBorder(),//floatingLabelBehavior: FloatingLabelBehavior.never,
                       prefix: Padding(padding: phoneTextFieldPadding1),
                       hintText: "Enter Mobile Number",
-                      hintStyle: const TextStyle(color: PrimaryColor2,),
+                      hintStyle: const TextStyle(color: primaryColor2,),
                       errorText: snapshot.error
                   ),
                 ),
@@ -171,10 +169,10 @@ class _LoginPageState extends State<LoginPage> {
                             });
                           },
                         ),
-                        labelStyle: const TextStyle(color: PrimaryColor4,),
+                        labelStyle: const TextStyle(color: primaryColor4,),
                         hintText: hintText2,
-                        hintStyle: const TextStyle(color: PrimaryColor4,),
-                        fillColor: PrimaryColor3,
+                        hintStyle: const TextStyle(color: primaryColor4,),
+                        fillColor: primaryColor3,
                         filled: true,
                         enabledBorder: outlineBorder(),
                         focusedBorder: outlineBorder(),
@@ -191,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                 StreamBuilder<bool>(
                   stream: bloc.submitCheck,
                   builder: (context, snapshot) => RoundedButtonInput(
-                    color1: PrimaryColor1,
+                    color1: primaryColor1,
                     fontsize1: 14,
                     size1: 0.37,
                     horizontal1: 30,
@@ -207,15 +205,13 @@ class _LoginPageState extends State<LoginPage> {
                 StreamBuilder<bool>(
                   stream: bloc.submitCheck,
                   builder: (context, snapshot) => RoundedButtonInput(
-                    color1: PrimaryColor1,
+                    color1: primaryColor1,
                     fontsize1: 14,
                     size1: 0.37,
                     horizontal1: 30,
                     vertical1: 17,
-                    press: snapshot.hasData
-                        ? () {Navigator.push( context, MaterialPageRoute(
-                        builder: (context) => const HomePageStaff()));}
-                        : null,
+                    press: () {Navigator.push( context, MaterialPageRoute(
+                        builder: (context) => const HomePageStaff()));},
                     text: "Sign In Staff",
                   ),
                 ),

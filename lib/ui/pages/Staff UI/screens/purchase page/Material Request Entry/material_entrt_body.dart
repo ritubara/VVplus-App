@@ -7,7 +7,6 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/indentor_name_dropdown
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_current_status_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
-import 'package:vvplus_app/Model/post_data.dart';
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
@@ -15,11 +14,9 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
-import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:http/http.dart' as http;
@@ -46,19 +43,19 @@ class MaterialEntryBody extends StatefulWidget {
 
   const MaterialEntryBody({Key key}) : super(key: key);
   @override
-  State<MaterialEntryBody> createState() => myMaterialEntryBody();
+  State<MaterialEntryBody> createState() => MyMaterialEntryBody();
 }
 
-class myMaterialEntryBody extends State<MaterialEntryBody> {
+class MyMaterialEntryBody extends State<MaterialEntryBody> {
 
-  TextEditingController IntendDateInput = TextEditingController();
-  TextEditingController ReqDateInput = TextEditingController();
+  TextEditingController intendDateInput = TextEditingController();
+  TextEditingController reqDateInput = TextEditingController();
   TextEditingController indentType = TextEditingController();
   TextEditingController item = TextEditingController();
-  TextEditingController ReqQty = TextEditingController();
+  TextEditingController reqQty = TextEditingController();
   TextEditingController rate = TextEditingController();
   TextEditingController costCenter = TextEditingController();
-  TextEditingController Remarks = TextEditingController();
+  TextEditingController remarks = TextEditingController();
 
   String dropdownValue = 'Choose an option';
   IndentorNameDropdownBloc dropdownBlocIndentorName;
@@ -77,14 +74,14 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
     });
   }
   _calculation() {
-      _amount = double.parse(ReqQty.text) * double.parse(ReqQty.text);
+      _amount = double.parse(reqQty.text) * double.parse(reqQty.text);
 
   }
 
   @override
   void initState() {
-    IntendDateInput.text = "";
-    ReqDateInput.text="";
+    intendDateInput.text = "";
+    reqDateInput.text="";
     dropdownBlocIndentorName = IndentorNameDropdownBloc();
     dropdownBlocItemCurrentStatus = ItemCurrentStatusDropdownBloc();
     dropdownBlocItemCostCenter = ItemCostCenterDropdownBloc();
@@ -115,9 +112,9 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
   int valueChoose = 4;
 
   onClear(){
-    ReqDateInput.clear();
-    IntendDateInput.clear();
-    Remarks.clear();
+    reqDateInput.clear();
+    intendDateInput.clear();
+    remarks.clear();
   }
   @override
   void dispose() {
@@ -144,14 +141,14 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
         "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataMaterialRequestEntry.json"),
         body: json.encode({
           "IndentSubCode":selectIndentName.strSubCode,
-          "IntendDate":IntendDateInput.text,
+          "IntendDate":intendDateInput.text,
           "ItemName":selectItemCurrentStatus.strItemName,
-          "ReqQty":ReqQty.text,
+          "ReqQty":reqQty.text,
           "ItemUnit":selectItemCurrentStatus.strUnit,
           "Rate":selectItemCurrentStatus.dblQty,
           "ItemSubCode":selectItemCostCenter.strSubCode,
-          "ReqDate":ReqDateInput.text,
-          "Remarks":Remarks.text
+          "ReqDate":reqDateInput.text,
+          "Remarks":remarks.text
         }));
     print("Successfull2");
   }
@@ -172,18 +169,18 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   onPressed: () {onClear();},
                   elevation: 0.0,
                   color: Colors.white,
-                  child: RaisedButtonText("Clear all"),
+                  child: raisedButtonText("Clear all"),
                 ),
               ],
             ),
           ),
 
-          FormsHeadText("Indent Type"),
+          formsHeadText("Indent Type"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<IndentorName>>(
                   future: dropdownBlocIndentorName.indentorNameDropdownData,
                   builder: (context, snapshot) {
@@ -216,13 +213,13 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
 
           const Padding(padding: EdgeInsets.all(10)),
 
-          FormsHeadText("Indent Date"),
+          formsHeadText("Indent Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
             child: Center(
               child: TextFormField(
-                controller: IntendDateInput,
+                controller: intendDateInput,
                 decoration: dateFieldDecoration(),
                 readOnly: true,
                 onTap: () async {
@@ -234,7 +231,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   if (pickedDate != null) {
                     String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                     setState(() {
-                      IntendDateInput.text = formattedDate;
+                      intendDateInput.text = formattedDate;
                     });
                   }
                 },
@@ -249,19 +246,19 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             height: 378,
             width: SizeConfig.getWidth(context),
             decoration: BoxDecoration(
-              color: StoreContainerColor,
+              color: storeContainerColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(padding: EdgeInsets.all(10)),
-                FormsHeadText("Item "),
+                formsHeadText("Item "),
                 Padding(
                   padding: padding1,
                   child: Container(
                     height: 50, width: 343,
-                    decoration: DecorationForms(),
+                    decoration: decorationForms(),
                     child: FutureBuilder<List<ItemCurrentStatus>>(
                         future: dropdownBlocItemCurrentStatus.itemCurrentStatusDropdowndata,
                         builder: (context, snapshot) {
@@ -292,7 +289,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   ),
                 ),
                 const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                FormsHeadText("Request Qty. "),
+                formsHeadText("Request Qty. "),
                 Row(
                   children: [
 
@@ -312,7 +309,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                               builder: (context, snapshot) {
                                 return TextFormField(
                                  // initialValue: "no",
-                                  controller: ReqQty,
+                                  controller: reqQty,
                                   decoration: InputDecoration(
                                     errorText: snapshot.error,
                                   ),
@@ -340,9 +337,9 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                 const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                 Row(
                   children: [
-                    FormsHeadText("Rate"),
+                    formsHeadText("Rate"),
                     const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
-                    FormsHeadText("Amount:"),
+                    formsHeadText("Amount:"),
                    Text(_amount.toString()),
                   ],
                 ),
@@ -372,8 +369,8 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                     RaisedButton(
                       onPressed: () {},
                       elevation: 0.0,
-                      color: StoreContainerColor,
-                      child: RaisedButtonText("Clear This Item"),
+                      color: storeContainerColor,
+                      child: raisedButtonText("Clear This Item"),
 
                     ),
 
@@ -390,7 +387,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                             horizontal1: 30,
                             vertical1: 10,
                             color1: Colors.orange,
-                            textColor1: TextColor1,
+                            textColor1: textColor1,
                           );
                         }
                     ),
@@ -406,12 +403,12 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
 //=============================================================================
           const Padding(padding: EdgeInsets.all(10)),
 
-          FormsHeadText("Choose Phase (Cost Center)"),
+          formsHeadText("Choose Phase (Cost Center)"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<ItemCostCenter>>(
                   future: dropdownBlocItemCostCenter.itemCostCenterData,
                   builder: (context, snapshot) {
@@ -442,13 +439,13 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             ),
           ),
           const SizedBox(height: 15),
-          FormsHeadText("Req. Date"),
+          formsHeadText("Req. Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
             child: Center(
               child: TextFormField(
-                controller: ReqDateInput,
+                controller: reqDateInput,
                 decoration: dateFieldDecoration(),
                 readOnly: true,
                 onTap: () async {
@@ -460,7 +457,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
                   if (pickedDate != null) {
                     String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                     setState(() {
-                      ReqDateInput.text = formattedDate;
+                      reqDateInput.text = formattedDate;
                     });
                   } else {
                   }
@@ -469,7 +466,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
             ),
           ),
           const SizedBox(height: 15),
-          FormsHeadText("Remarks"),
+          formsHeadText("Remarks"),
           Container(
             height: 50,
             padding: padding1,
@@ -479,11 +476,11 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
               child: StreamBuilder<String>(
                 stream: bloc.outtextField,
                 builder: (context, snapshot) => TextFormField(
-                  controller: Remarks,
+                  controller: remarks,
                   onChanged: bloc.intextField,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -496,7 +493,7 @@ class myMaterialEntryBody extends State<MaterialEntryBody> {
           ),
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
-              child: RoundedButtonHome(
+              child: roundedButtonHome(
                   "Submit",
                       (){
                         //print(selectIndentName.strSubCode);

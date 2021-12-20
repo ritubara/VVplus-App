@@ -15,9 +15,9 @@ import 'package:vvplus_app/ui/widgets/constants/size.dart';
 class ExtraWorkEntryBody extends StatefulWidget {
   const ExtraWorkEntryBody({Key key}) : super(key: key);
   @override
-  State<ExtraWorkEntryBody> createState() => myExtraWorkEntryBody();
+  State<ExtraWorkEntryBody> createState() => MyExtraWorkEntryBody();
 }
-class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
+class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
   TextEditingController dateinput = TextEditingController();
   @override
   void initState() {
@@ -43,12 +43,12 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
                   onPressed: () {},
                   elevation: 0.0,
                   color: Colors.white,
-                  child: RaisedButtonText("Clear all"),
+                  child: raisedButtonText("Clear all"),
                 ),
               ],
             ),
           ),
-          FormsHeadText("Voucher Type"),
+          formsHeadText("Voucher Type"),
           Container(
             height: 50,
             padding: padding1,
@@ -61,7 +61,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
                   onChanged: bloc.intextField1,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -73,26 +73,26 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Booking Id"),
+          formsHeadText("Booking Id"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           const InformationBoxContainer3(),
           sizedbox1,
-          FormsHeadText("Stage (purpose? extra work? extra land?)"),
+          formsHeadText("Stage (purpose? extra work? extra land?)"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           sizedbox1,
-          FormsHeadText("Overhead"),
+          formsHeadText("Overhead"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           sizedbox1,
-          FormsHeadText("Date of Estimate"),
+          formsHeadText("Date of Estimate"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
@@ -119,7 +119,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Base Amount"),
+          formsHeadText("Base Amount"),
           Container(
             height: 50,
             padding: padding1,
@@ -132,7 +132,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
                   onChanged: bloc.intextField2,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -144,11 +144,11 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Tax:"),
+          formsHeadText("Tax:"),
           sizedbox1,
-          FormsHeadText("Net Amount:"),
+          formsHeadText("Net Amount:"),
           sizedbox1,
-          FormsHeadText("Remarks"),
+          formsHeadText("Remarks"),
           Container(
             height: 50,
             padding: padding1,
@@ -161,7 +161,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
                   onChanged: bloc.intextField3,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -175,7 +175,7 @@ class myExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
           sizedbox1,
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
+              child: roundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
         ],
       ),
     );

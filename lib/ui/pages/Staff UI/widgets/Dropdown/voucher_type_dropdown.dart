@@ -32,7 +32,7 @@ class _VoucherTypeDropdownState extends State<VoucherTypeDropdown> {
       padding: padding1,
       child: Container(
         height: 50, width: 343,
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child: FutureBuilder<List<VoucherType>>(
             future: voucherTypeDropdownBloc.voucherTypeDropdownData,
             builder: (context, snapshot) {
@@ -94,7 +94,7 @@ class _VoucherTypeGodownDropdown extends State<VoucherTypeGodownDropdown> {
       padding: padding1,
       child: Container(
         height: 50, width: 343,
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child: FutureBuilder<List<VoucherType>>(
             future: _dropdownBloc.voucherTypeDropdownData,
             builder: (context, snapshot) {
@@ -114,7 +114,7 @@ class _VoucherTypeGodownDropdown extends State<VoucherTypeGodownDropdown> {
                           ?.map<DropdownMenuItem<VoucherType>>((e) {
                         return DropdownMenuItem<VoucherType>(
                           value: e,
-                          child: Text(e.Godown),
+                          child: Text(e.godown),
                         );
                       })?.toList() ??[],
                     );
@@ -127,16 +127,16 @@ class _VoucherTypeGodownDropdown extends State<VoucherTypeGodownDropdown> {
   }
 }
 
-class Purchase_order_selectDropdown extends StatefulWidget {
-  const Purchase_order_selectDropdown({Key key}) : super(key: key);
+class PurchaseOrderSelectDropdown extends StatefulWidget {
+  const PurchaseOrderSelectDropdown({Key key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() =>_Purchase_order_selectDropdown();
+  State<StatefulWidget> createState() =>_PurchaseOrderSelectDropdown();
 
 
 }
 
-class _Purchase_order_selectDropdown extends State<Purchase_order_selectDropdown> {
+class _PurchaseOrderSelectDropdown extends State<PurchaseOrderSelectDropdown> {
   VoucherTypeDropdownBloc _dropdownBloc;
 
   @override
@@ -156,7 +156,7 @@ class _Purchase_order_selectDropdown extends State<Purchase_order_selectDropdown
       padding: padding1,
       child: Container(
         height: 50, width: 343,
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child: FutureBuilder<List<VoucherType>>(
             future: _dropdownBloc.voucherTypeDropdownData,
             builder: (context, snapshot) {
@@ -176,7 +176,7 @@ class _Purchase_order_selectDropdown extends State<Purchase_order_selectDropdown
                           ?.map<DropdownMenuItem<VoucherType>>((e) {
                         return DropdownMenuItem<VoucherType>(
                           value: e,
-                          child: Text(e.Purchase_order_select),
+                          child: Text(e.purchaseOrderSelect),
                         );
                       })?.toList() ??[],
                     );
@@ -218,7 +218,7 @@ class _SupplierDropdown extends State<SupplierDropdown> {
       padding: padding1,
       child: Container(
         height: 50, width: 343,
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child: FutureBuilder<List<VoucherType>>(
             future: _dropdownBloc.voucherTypeDropdownData,
             builder: (context, snapshot) {
@@ -238,7 +238,7 @@ class _SupplierDropdown extends State<SupplierDropdown> {
                           ?.map<DropdownMenuItem<VoucherType>>((e) {
                         return DropdownMenuItem<VoucherType>(
                           value: e,
-                          child: Text(e.Supplier),
+                          child: Text(e.supplier),
                         );
                       })?.toList() ??[],
                     );

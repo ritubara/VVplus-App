@@ -16,7 +16,7 @@ class _StockReceiveEntryPageState extends State<StockReceiveEntryPage> {
   Widget build(BuildContext context) {
     return MaterialProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Stock Receive Entry"),
+        appBar: appBarSatff("Stock Receive Entry"),
         body: const StockReceiveEntryBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

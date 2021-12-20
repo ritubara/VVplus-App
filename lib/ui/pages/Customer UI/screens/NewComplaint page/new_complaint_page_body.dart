@@ -26,7 +26,7 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
             width: SizeConfig.getWidth(context),
             height: SizeConfig.getHeight(context),
             decoration: const BoxDecoration(
-              color: PrimaryColor3,
+              color: primaryColor3,
             ),
             child: Stack(
               children: <Widget>[
@@ -38,28 +38,28 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: const textFieldDecoration(),
+                    child: const TextFieldDecoration(),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: const textFieldDecoration(),
+                    child: const TextFieldDecoration(),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: const textFieldDecoration(),
+                    child: const TextFieldDecoration(),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 97,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: const textFieldDecoration(),
+                    child: const TextFieldDecoration(),
                   ),
                  const SizedBox(height: 1,),
                   Padding(
@@ -82,8 +82,8 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                               return SearchChoices.single(
                                 icon: const Icon(Icons.arrow_drop_down),
                                 iconSize: 30,
-                                iconEnabledColor: TextColor3,
-                                style: const TextStyle(color: PrimaryColor2,fontSize: 20),
+                                iconEnabledColor: textColor3,
+                                style: const TextStyle(color: primaryColor2,fontSize: 20),
                                 underline: "",
                                 padding: 1,
                                 isExpanded: true,
@@ -115,7 +115,7 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                   Padding(
                       padding: padding1,
                       child: DottedBorder(
-                        color: PrimaryColor2,
+                        color: primaryColor2,
                         strokeWidth: 1.5,
                         dashPattern: const [10,6],
                         child: Container(
@@ -141,7 +141,7 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                           ),
                           height:140,
                           width: double.infinity,
-                          color:PrimaryColor3,
+                          color:primaryColor3,
                         ),
                       )
                   ),
@@ -152,7 +152,7 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                       padding: const EdgeInsets.only(left: 35),
                       child: Container(
                         decoration: const BoxDecoration(
-                          color: PrimaryColor1,
+                          color: primaryColor1,
                           borderRadius: BorderRadius.all(
                             Radius.circular(50),
                           ),

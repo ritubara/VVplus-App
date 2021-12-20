@@ -17,17 +17,17 @@ double dateFieldHeight = 48;
 InputDecoration dateFieldDecoration(){
   return const InputDecoration(
     filled: true,
-    fillColor: PrimaryColor8,
+    fillColor: primaryColor8,
     focusColor: boxDecorationColor2,
     suffixIcon: Icon(Icons.calendar_today, color: iconColor1,),
     //hintText: "Enter Date",
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
-        borderSide: BorderSide(color: PrimaryColor9)
+        borderSide: BorderSide(color: primaryColor9)
     ),
     focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        borderSide: BorderSide(color: PrimaryColor9)
+        borderSide: BorderSide(color: primaryColor9)
     ),
     //prefixIcon: Icon(Icons.calendar_today),
     //labelText: "Enter Date"
@@ -38,13 +38,13 @@ InputDecoration dateFieldDecoration(){
 var dropDownFieldIcon1 = const Icon(Icons.search);
 String dropDownFieldText = "Search here";
 var dropDownFieldIcon2 = const Icon(Icons.keyboard_arrow_down_sharp);
-var dropDownFieldStyle = const TextStyle(color: PrimaryColor2, fontSize: 16);
+var dropDownFieldStyle = const TextStyle(color: primaryColor2, fontSize: 16);
 
 // normal text input field
 
 OutlineInputBorder textFieldBorder(){
   return OutlineInputBorder(
-      borderSide: const BorderSide(color: PrimaryColor9),
+      borderSide: const BorderSide(color: primaryColor9),
       borderRadius: BorderRadius.circular(10));
 }
 
@@ -75,17 +75,17 @@ class _DateTextFormFieldState extends State<DateTextFormField> {
           controller: dateinput,
           decoration: const InputDecoration(
             filled: true,
-            fillColor: PrimaryColor8,
+            fillColor: primaryColor8,
             focusColor: boxDecorationColor2,
             suffixIcon: Icon(Icons.calendar_today, color: iconColor1,),
             //hintText: "Enter Date",
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5)),
-                borderSide: BorderSide(color: PrimaryColor9)
+                borderSide: BorderSide(color: primaryColor9)
             ),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                borderSide: BorderSide(color: PrimaryColor9)
+                borderSide: BorderSide(color: primaryColor9)
             ),
 
             //prefixIcon: Icon(Icons.calendar_today),
@@ -134,7 +134,7 @@ class MyDropdownForm extends State<DropdownForm> {
     return Padding(
       padding: padding1,
       child: Container(
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child: DropdownButtonHideUnderline(
           child: StreamBuilder(
         stream: bloc.outDropField1,
@@ -148,12 +148,12 @@ class MyDropdownForm extends State<DropdownForm> {
                       const Text("Search here"),
                     ],
                   ),
-                  dropdownColor: PrimaryColor3,
+                  dropdownColor: primaryColor3,
                   icon: const Icon(Icons.keyboard_arrow_down_sharp),
                   iconSize: 20,
                   isExpanded: true,
-                  iconEnabledColor: PrimaryColor4,
-                  style: const TextStyle(color: PrimaryColor2, fontSize: 16),
+                  iconEnabledColor: primaryColor4,
+                  style: const TextStyle(color: primaryColor2, fontSize: 16),
                   validator: (value) => value == null
                       ? 'Field required' : null,
                   value: snapshot.data,
@@ -194,7 +194,7 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
           padding: padding1,
           child: Center(
             child: Container(
-              decoration: ContainerDecorationForms(),
+              decoration: containerDecorationForms(),
               child: DropdownButtonHideUnderline(
               child: StreamBuilder(
               stream: bloc.outDropField2,
@@ -208,12 +208,12 @@ class MyDropdownFormCont extends State<DropdownFormCont> {
                           const Text("Search here"),
                         ],
                       ),
-                      dropdownColor: PrimaryColor3,
+                      dropdownColor: primaryColor3,
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),
                       iconSize: 20,
                       isExpanded: true,
-                      iconEnabledColor: PrimaryColor4,
-                      style: const TextStyle(color: PrimaryColor2, fontSize: 16),
+                      iconEnabledColor: primaryColor4,
+                      style: const TextStyle(color: primaryColor2, fontSize: 16),
                       validator: (value) => value == null
                           ? 'Field required' : null,
                       value: snapshot.data,
@@ -258,12 +258,12 @@ class MyNormalTextFormField extends State<NormalTextFormField> {
             onChanged: bloc.intextField,
             decoration: InputDecoration(
               filled: true,
-              fillColor: PrimaryColor8,
+              fillColor: primaryColor8,
               enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: PrimaryColor9),
+                  borderSide: const BorderSide(color: primaryColor9),
                   borderRadius: BorderRadius.circular(10)),
               focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: PrimaryColor9),
+                  borderSide: const BorderSide(color: primaryColor9),
                   borderRadius: BorderRadius.circular(10)),
                 errorText: snapshot.error
             ),
@@ -290,7 +290,7 @@ class MySearchDropdown extends State<SearchDropDown> {
       child: Container(
         height: 50,
         width: 343,
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child: StreamBuilder(
           //stream: bloc.outDropField3,
           builder: (context, snapshot) => DropdownSearch<String>(
@@ -324,7 +324,7 @@ class MyContainerSearchDropdown extends State<ContainerSearchDropDown> {
       child: Container(
         height: 50,
         width: 343,
-        decoration: ContainerDecorationForms(),
+        decoration: containerDecorationForms(),
         child: StreamBuilder(
           //stream: bloc.outDropField3,
           builder: (context, snapshot) => DropdownSearch<String>(
@@ -344,7 +344,7 @@ class MyContainerSearchDropdown extends State<ContainerSearchDropDown> {
 }
 
 class SearchChoiceDropdown extends StatefulWidget {
-  SearchChoiceDropdown({Key key}) : super(key: key);
+  const SearchChoiceDropdown({Key key}) : super(key: key);
 
   @override
   _SearchChoiceDropdownState createState() => _SearchChoiceDropdownState();
@@ -360,7 +360,7 @@ class _SearchChoiceDropdownState extends State<SearchChoiceDropdown> {
             child: Container(
               height: 50,
               width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: StreamBuilder(
                   //stream: bloc.outDropField1,
                   builder: (context, snapshot) {

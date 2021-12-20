@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 
-Padding FormsHeadText(String text){
+Padding formsHeadText(String text){
   return Padding(
     padding:const EdgeInsets.symmetric(horizontal:40),
     child: Text(
@@ -11,7 +11,7 @@ Padding FormsHeadText(String text){
   );
 }
 
-Padding FormsDetailText(String text){
+Padding formsDetailText(String text){
   return Padding(
     padding:const EdgeInsets.symmetric(horizontal:40),
     child: Text(
@@ -21,7 +21,7 @@ Padding FormsDetailText(String text){
   );
 }
 
-Padding ClearButton() {
+Padding clearButton() {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 10),
     child: Row(
@@ -31,7 +31,7 @@ Padding ClearButton() {
           onPressed: () {},
           elevation: 0.0,
           color: Colors.white,
-          child: RaisedButtonText("Clear all"),
+          child: raisedButtonText("Clear all"),
         ),
       ],
     ),

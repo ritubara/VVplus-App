@@ -13,20 +13,20 @@ import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 
 
-BoxDecoration DecorationForms() {
+BoxDecoration decorationForms() {
   return BoxDecoration(
-    color: PrimaryColor8,
+    color: primaryColor8,
     borderRadius: BorderRadius.circular(5),
-    border: Border.all(color: PrimaryColor9, width: 0),
+    border: Border.all(color: primaryColor9, width: 0),
 
   );
 }
 
-BoxDecoration ContainerDecorationForms() {
+BoxDecoration containerDecorationForms() {
   return BoxDecoration(
-    color: PrimaryColor3,
+    color: primaryColor3,
     borderRadius: BorderRadius.circular(5),
-    border: Border.all(color: PrimaryColor9, width: 1),
+    border: Border.all(color: primaryColor9, width: 1),
 
   );
 }
@@ -50,10 +50,10 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
         width: SizeConfig.getWidth(context),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: PrimaryColor3,
+          color: primaryColor3,
           boxShadow: const [
             BoxShadow(
-              color: PrimaryColor5,
+              color: primaryColor5,
               offset: Offset(0.0, 1.0), //(x,y)
               blurRadius: 6.0,
             ),
@@ -161,10 +161,10 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
         width: SizeConfig.getWidth(context),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: PrimaryColor3,
+          color: primaryColor3,
           boxShadow: const [
             BoxShadow(
-              color: PrimaryColor5,
+              color: primaryColor5,
               offset: Offset(0.0, 1.0), //(x,y)
               blurRadius: 6.0,
             ),
@@ -284,10 +284,10 @@ class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
         width: SizeConfig.getWidth(context) * .93,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: PrimaryColor3,
+          color: primaryColor3,
           boxShadow: const [
             BoxShadow(
-              color: PrimaryColor5,
+              color: primaryColor5,
               offset: Offset(0.0, 1.0), //(x,y)
               blurRadius: 6.0,
             ),
@@ -359,10 +359,10 @@ class _InformationBoxContainer4State extends State<InformationBoxContainer4> {
         width: SizeConfig.getWidth(context) * .93,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: PrimaryColor3,
+          color: primaryColor3,
           boxShadow: const [
             BoxShadow(
-              color: PrimaryColor5,
+              color: primaryColor5,
               offset: Offset(0.0, 1.0), //(x,y)
               blurRadius: 6.0,
             ),
@@ -424,7 +424,7 @@ class FormsContainer extends StatefulWidget {
 
 class MyFormsContainer extends State<FormsContainer> {
 
-  TextEditingController ReqQty = TextEditingController();
+  TextEditingController reqQty = TextEditingController();
   TextEditingController rate = TextEditingController();
 
   //final GlobalKey<FormState> _formKey = GlobalKey();
@@ -439,17 +439,17 @@ class MyFormsContainer extends State<FormsContainer> {
         height: 378,
         width: SizeConfig.getWidth(context),
         decoration: BoxDecoration(
-          color: StoreContainerColor,
+          color: storeContainerColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(padding: EdgeInsets.all(10)),
-            FormsHeadText("Item "),
+            formsHeadText("Item "),
             const ContainerSearchDropDown(),
             const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-            FormsHeadText("Request Qty. "),
+            formsHeadText("Request Qty. "),
             Row(
               children: [
 
@@ -468,7 +468,7 @@ class MyFormsContainer extends State<FormsContainer> {
                           stream: bloc.requestQty,
                           builder: (context, snapshot) {
                             return TextFormField(
-                              controller: ReqQty,
+                              controller: reqQty,
                               decoration: InputDecoration(
                                 errorText: snapshot.error,
                               ),
@@ -490,13 +490,13 @@ class MyFormsContainer extends State<FormsContainer> {
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton(
                         hint: const Text(" "),
-                        dropdownColor: PrimaryColor3,
+                        dropdownColor: primaryColor3,
                         icon: const Icon(Icons.keyboard_arrow_down_sharp),
                         iconSize: 20,
                         isExpanded: true,
-                        iconEnabledColor: PrimaryColor4,
+                        iconEnabledColor: primaryColor4,
                         style: const TextStyle(
-                            color: PrimaryColor2, fontSize: 12),
+                            color: primaryColor2, fontSize: 12),
                         value: valueChoose,
                         items: const <DropdownMenuItem<int>>[
                           DropdownMenuItem(
@@ -508,9 +508,9 @@ class MyFormsContainer extends State<FormsContainer> {
                             value: 4,
                           ),
                         ],
-                        onChanged: (Value) {
+                        onChanged: (value) {
                           setState(() {
-                            valueChoose = Value;
+                            valueChoose = value;
                           });
                         },
                       ),
@@ -522,9 +522,9 @@ class MyFormsContainer extends State<FormsContainer> {
             const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
             Row(
               children: [
-                FormsHeadText("Rate"),
+                formsHeadText("Rate"),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
-                FormsHeadText("Amount:"),
+                formsHeadText("Amount:"),
               ],
             ),
             Row(
@@ -567,12 +567,12 @@ class MyFormsContainer extends State<FormsContainer> {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 RaisedButton(
                   onPressed: () {
-                     ReqQty.clear();
+                     reqQty.clear();
                     rate.clear();
                   },
                   elevation: 0.0,
-                  color: StoreContainerColor,
-                  child: RaisedButtonText("Clear This Item"),
+                  color: storeContainerColor,
+                  child: raisedButtonText("Clear This Item"),
 
                 ),
 
@@ -590,7 +590,7 @@ class MyFormsContainer extends State<FormsContainer> {
                       horizontal1: 30,
                       vertical1: 10,
                       color1: Colors.orange,
-                      textColor1: TextColor1,
+                      textColor1: textColor1,
                     );
                   }
                 ),
@@ -605,11 +605,11 @@ class MyFormsContainer extends State<FormsContainer> {
 }
 
 
-BoxDecoration DecorationFormsCont() {
+BoxDecoration decorationFormsCont() {
   return BoxDecoration(
-    color: PrimaryColor3,
+    color: primaryColor3,
     borderRadius: BorderRadius.circular(5),
-    border: Border.all(color: PrimaryColor9, width: 1),
+    border: Border.all(color: primaryColor9, width: 1),
 
   );
 }

@@ -14,7 +14,7 @@ class _SalesPageState extends State<SalesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarSatff("Sales"),
+      appBar: appBarSatff("Sales"),
       body: const SalesBody(),
       bottomNavigationBar: const BottomNavBarStaff(),
     );

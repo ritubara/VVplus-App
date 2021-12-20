@@ -11,7 +11,7 @@ class ExtraWorkEntryPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return SalesExtraWorkEntryProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Extra Work Entry"),
+        appBar: appBarSatff("Extra Work Entry"),
         body: const ExtraWorkEntryBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

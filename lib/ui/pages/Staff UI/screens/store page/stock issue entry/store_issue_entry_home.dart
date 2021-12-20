@@ -16,7 +16,7 @@ class _StockIssueEntryPageState extends State<StockIssueEntryPage> {
   Widget build(BuildContext context) {
     return MaterialProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Stock Issue Entry"),
+        appBar: appBarSatff("Stock Issue Entry"),
         body: const StockIssueEntryBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

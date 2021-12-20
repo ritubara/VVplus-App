@@ -11,7 +11,7 @@ class UnitCancellationPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return UnitCancellationProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Unit Cancellation"),
+        appBar: appBarSatff("Unit Cancellation"),
         body: const UnitCancellationBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

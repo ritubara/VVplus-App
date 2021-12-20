@@ -16,7 +16,7 @@ class _BranchtoBranchSendPageState extends State<BranchtoBranchSendPage> {
   Widget build(BuildContext context) {
     return MaterialProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Branch to Branch Send"),
+        appBar: appBarSatff("Branch to Branch Send"),
         body: const BranchtoBranchSendBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

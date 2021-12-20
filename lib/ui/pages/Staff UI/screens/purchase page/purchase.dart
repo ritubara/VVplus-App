@@ -14,7 +14,7 @@ class _PurchasePageState extends State<PurchasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarSatff("Purchase"),
+      appBar: appBarSatff("Purchase"),
       body: const PurchaseBody(),
       bottomNavigationBar: const BottomNavBarStaff(),
     );

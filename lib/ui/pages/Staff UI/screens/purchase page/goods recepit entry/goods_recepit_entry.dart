@@ -16,7 +16,7 @@ class _GoodsRecepitEntryPageState extends State<GoodsRecepitEntryPage> {
   Widget build(BuildContext context) {
     return MaterialProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Goods Recepit Entry"),
+        appBar: appBarSatff("Goods Recepit Entry"),
         body: const GoodsRecepitEntryBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

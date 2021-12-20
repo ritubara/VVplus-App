@@ -29,10 +29,10 @@ class Background extends StatelessWidget {
             width: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5.0),
-              color: PrimaryColor3,
+              color: primaryColor3,
               boxShadow: const [
                 BoxShadow(
-                  color: PrimaryColor5,
+                  color: primaryColor5,
                   offset: Offset(0.0, 1.0), //(x,y)
                   blurRadius: 6.0,
                 ),
@@ -58,7 +58,7 @@ class Background extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: PrimaryColor1),
+                        color: primaryColor1),
                   ),
                 ]),
           ),
@@ -66,7 +66,7 @@ class Background extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-              RoundedButtonHome(
+              roundedButtonHome(
                 "Progress",
                 () {
                   Navigator.push(
@@ -75,7 +75,7 @@ class Background extends StatelessWidget {
                           builder: (context) => const ProgressPage()));
                 },
               ),
-              RoundedButtonHome(
+              roundedButtonHome(
                 "Customer Care",
                 () {
                   Navigator.push(
@@ -84,11 +84,11 @@ class Background extends StatelessWidget {
                           builder: (context) => const CustomerCarePage()));
                 },
               ),
-              RoundedButtonHome(
+              roundedButtonHome(
                 "Edit Profile",
                 () {},
               ),
-              RoundedButtonHome(
+              roundedButtonHome(
                 "View House",
                 () {
                   Navigator.push(
@@ -97,7 +97,7 @@ class Background extends StatelessWidget {
                           builder: (context) => const ViewHouse()));
                 },
               ),
-              RoundedButtonHome(
+              roundedButtonHome(
                 "Maintanance",
                 () {
                   Navigator.push(

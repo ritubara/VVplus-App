@@ -40,7 +40,7 @@ class PostData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['StrIndTypeCode'] = strIndTypeCode;
     data['StrSiteCode'] = strSiteCode;
     data['StrIndNo'] = strIndNo;
@@ -78,7 +78,7 @@ class StrIndGrid {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['StrItemCode'] = strItemCode;
     data['DblQuantity'] = dblQuantity;
     data['StrCostCenterCode'] = strCostCenterCode;

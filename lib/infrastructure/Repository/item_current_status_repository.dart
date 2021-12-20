@@ -31,7 +31,7 @@ Future<List<ItemCurrentStatus>> createUser( String strItemName, double dblQty,St
 
   if(response.statusCode == 200){
     final String responseString = response.body;
-    return StrRecordFromJson(responseString);
+    return strRecordFromJson(responseString);
   }else{
     return null;
   }

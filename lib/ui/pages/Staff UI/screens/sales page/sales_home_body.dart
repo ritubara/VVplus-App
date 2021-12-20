@@ -30,10 +30,10 @@ class SalesBody extends StatelessWidget{
               width: 300,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.0),
-                color: PrimaryColor3,
+                color: primaryColor3,
                 boxShadow: const [
                   BoxShadow(
-                    color: PrimaryColor5,
+                    color: primaryColor5,
                     offset: Offset(0.0, 1.0), //(x,y)
                     blurRadius: 6.0,
                   ),
@@ -58,27 +58,27 @@ class SalesBody extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(padding: paddingForms2),
-              RoundedButtonHome(text47, () {
+              roundedButtonHome(text47, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const ExtraWorkEntryPage()));
               }),
 
-              RoundedButtonHome(text48, () {
+              roundedButtonHome(text48, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const UnitCancellationPage()));
               }),
-              RoundedButtonHome(text49, () {
+              roundedButtonHome(text49, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                     builder: (context) => const ChequeEntry()));
               }),
 
-              RoundedButtonHome(text50, () {
+              roundedButtonHome(text50, () {
                 Navigator.push(context, MaterialPageRoute(
                         builder: (context) => const DiscountApprovalPage()));
               }),

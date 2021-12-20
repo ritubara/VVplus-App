@@ -25,9 +25,9 @@ import 'package:http/http.dart' as http;
 class DailyManpowerBody extends StatefulWidget {
   const DailyManpowerBody({Key key}) : super(key: key);
   @override
-  State<DailyManpowerBody> createState() => myDailyManpowerBody();
+  State<DailyManpowerBody> createState() => MyDailyManpowerBody();
 }
-class myDailyManpowerBody extends State<DailyManpowerBody> {
+class MyDailyManpowerBody extends State<DailyManpowerBody> {
 
   TextEditingController dateinput = TextEditingController();
   final TextEditingController _qty = TextEditingController();
@@ -110,12 +110,12 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                   onPressed: () {clearData();},
                   elevation: 0.0,
                   color: Colors.white,
-                  child: RaisedButtonText("Clear all"),
+                  child: raisedButtonText("Clear all"),
                 ),
               ],
             ),
           ),
-          FormsHeadText("Date"),
+          formsHeadText("Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
@@ -142,12 +142,12 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Party Name"),
+          formsHeadText("Party Name"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<DepartmentName>>(
                   future: departmentNameDropdownBloc.departmentNameData,
                   builder: (context, snapshot) {
@@ -178,12 +178,12 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Phase (cost center)"),
+          formsHeadText("Phase (cost center)"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<ItemCostCenter>>(
                   future: itemCostCenterDropdownBloc.itemCostCenterData,
                   builder: (context, snapshot) {
@@ -214,12 +214,12 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Resource Type"),
+          formsHeadText("Resource Type"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<VoucherType>>(
                   future: voucherTypeDropdownBloc.voucherTypeDropdownData,
                   builder: (context, snapshot) {
@@ -250,7 +250,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Qty."),
+          formsHeadText("Qty."),
           Container(
             height: 50,
             padding: padding1,
@@ -264,7 +264,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                   onChanged: bloc.intextField1,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -276,7 +276,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Remarks"),
+          formsHeadText("Remarks"),
           Container(
             height: 50,
             padding: padding1,
@@ -290,7 +290,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
                   onChanged: bloc.intextField2,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -304,7 +304,7 @@ class myDailyManpowerBody extends State<DailyManpowerBody> {
           sizedbox1,
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){
+              child: roundedButtonHome2("Submit",(){
                 sendData();
                 //print(dateinput.text);
                 //print(selectDepartmentName.strSubCode);

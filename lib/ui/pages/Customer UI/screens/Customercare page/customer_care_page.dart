@@ -28,7 +28,7 @@ class _CustomerCarePageState extends State<CustomerCarePage>{
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  RoundedButtonComplaint(
+                  roundedButtonComplaint(
                       text15,
                       () {
                         Navigator.push( context, MaterialPageRoute(
@@ -36,11 +36,11 @@ class _CustomerCarePageState extends State<CustomerCarePage>{
                       },
                     ),
 
-                  RoundedButtonComplaint(
+                  roundedButtonComplaint(
                       text16,
                        () {},
                     ),
-                   RoundedButtonComplaint(
+                   roundedButtonComplaint(
                       text17,
                        () {},
                     ),

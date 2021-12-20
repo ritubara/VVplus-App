@@ -16,7 +16,7 @@ class _PlacePurchaseOrderState extends State<PlacePurchaseOrder> {
   Widget build(BuildContext context) {
     return MaterialProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Place Purchase Order"),
+        appBar: appBarSatff("Place Purchase Order"),
         body: const PlacePurchaseOrderBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

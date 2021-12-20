@@ -16,7 +16,7 @@ class _StorePageState extends State<StorePage> {
   Widget build(BuildContext context) {
     return MaterialProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Store"),
+        appBar: appBarSatff("Store"),
         body: const StorePageBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

@@ -9,7 +9,7 @@ import 'package:vvplus_app/infrastructure/Models/material_req_approval_model.dar
 class MaterialReqApprovalRepository {
   Client client = Client();
 
-  Future<List<MaterialReqPost>> FetchPostData() async {
+  Future<List<MaterialReqPost>> fetchPostData() async {
     try {
       final response = await client.get(Uri.parse(materialReqPostURL));
       final items = (jsonDecode(response.body) as List)
@@ -21,22 +21,22 @@ class MaterialReqApprovalRepository {
     }
   }
 }
-Future<List<MaterialReqPost>> createUser(String IndentSubCode,String IntendDate,String ItemName,String ItemSubCode,String ItemUnit,String Rate,String Remarks,String ReqDate,String ReqQty) async {
+Future<List<MaterialReqPost>> createUser(String indentSubCode,String intendDate,String itemName,String itemSubCode,String itemUnit,String rate,String remarks,String reqDate,String reqQty) async {
   final response = await http.post(Uri.parse(materialReqPostURL), body: {
-    "IndentSubCode": IndentSubCode,
-    "IntendDate": IntendDate,
-    "ItemName": ItemName,
-    "ItemSubCode": ItemSubCode,
-    "ItemUnit": ItemUnit,
-    "Rate": Rate,
-    "Remarks": Remarks,
-    "ReqDate": ReqDate,
-    "ReqQty": ReqQty,
+    "IndentSubCode": indentSubCode,
+    "IntendDate": intendDate,
+    "ItemName": itemName,
+    "ItemSubCode": itemSubCode,
+    "ItemUnit": itemUnit,
+    "Rate": rate,
+    "Remarks": remarks,
+    "ReqDate": reqDate,
+    "ReqQty": reqQty,
   });
 
   if (response.statusCode == 200) {
     final String responseString = response.body;
-    return StrRecordFromJson(responseString);
+    return strRecordFromJson(responseString);
   } else {
     return null;
   }

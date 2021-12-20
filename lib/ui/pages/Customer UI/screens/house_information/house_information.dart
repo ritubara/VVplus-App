@@ -92,9 +92,9 @@ class _HouseInformationState extends State<HouseInformation> {
                 ),
                     Row(
                       children: [
-                        RoundedButton3("Next",(){}),
+                        roundedButton3("Next",(){}),
                         const SizedBox(width: 25,),
-                        RoundedButton3("Skip",(){}),
+                        roundedButton3("Skip",(){}),
                       ],
                     ),
                   ],

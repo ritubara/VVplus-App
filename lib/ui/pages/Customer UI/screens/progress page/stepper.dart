@@ -14,7 +14,7 @@ class StepperBody extends StatefulWidget {
 
 class StepperBodyState extends State<StepperBody> {
 
-  int current_step = 2;
+  int currentStep = 2;
   StepperBloc _stepperBloc;
 
   @override
@@ -73,7 +73,7 @@ class StepperBodyState extends State<StepperBody> {
               alignment: Alignment.center,
               child: const Text(text33,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: PrimaryColor3,fontWeight: FontWeight.bold),
+                style: TextStyle(color: primaryColor3,fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -86,11 +86,11 @@ class StepperBodyState extends State<StepperBody> {
             child: Container(
               height: 84,
               width: 250,
-              decoration: decoration4(PrimaryColor7),
+              decoration: decoration4(primaryColor7),
               alignment: Alignment.center,
               child: const Text(text34,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: PrimaryColor3,fontWeight: FontWeight.bold),
+                style: TextStyle(color: primaryColor3,fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -119,10 +119,10 @@ class StepperBodyState extends State<StepperBody> {
               children:[
                 Theme(
                   data: ThemeData(
-                      accentColor: StepperColor1,
-                      primarySwatch: StepperColor1,
+                      accentColor: stepperColor1,
+                      primarySwatch: stepperColor1,
                       colorScheme: const ColorScheme.light(
-                        primary: StepperColor,
+                        primary: stepperColor,
 
                       )
                   ),

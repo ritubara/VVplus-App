@@ -14,7 +14,7 @@ class _ContractorsPageState extends State<ContractorsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarSatff("Contractors"),
+      appBar: appBarSatff("Contractors"),
       body: const ContractorsBody(),
       bottomNavigationBar: const BottomNavBarStaff(),
     );

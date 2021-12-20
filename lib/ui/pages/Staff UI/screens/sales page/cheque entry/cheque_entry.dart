@@ -16,7 +16,7 @@ class MyChequeEntry extends State<ChequeEntry> {
   Widget build(BuildContext context) {
    return MaterialProvider(
      child: Scaffold(
-       appBar: AppBarSatff("Cheque Entry/Update"),
+       appBar: appBarSatff("Cheque Entry/Update"),
        body: const ChequeEntryBody(),
        bottomNavigationBar: const BottomNavBarStaff(),
      ),

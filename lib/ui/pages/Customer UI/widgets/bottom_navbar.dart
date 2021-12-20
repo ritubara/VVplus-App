@@ -26,18 +26,18 @@ class _MyBottomNavbar extends State<BottomNavBar>{
       elevation: 10,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-            backgroundColor: PrimaryColor3,
+            backgroundColor: primaryColor3,
             icon: Icon(Icons.circle),
-            title: Text('', style: TextStyle(color: PrimaryColor2))),
+            title: Text('', style: TextStyle(color: primaryColor2))),
         BottomNavigationBarItem(
             icon: Icon(Icons.circle),
-            title: Text('', style: TextStyle(color: PrimaryColor2))),
+            title: Text('', style: TextStyle(color: primaryColor2))),
         BottomNavigationBarItem(
             icon: Icon(Icons.circle),
             title: Text('', style: TextStyle(color: Colors.black))),
         BottomNavigationBarItem(
             icon: Icon(Icons.circle),
-            title: Text('', style: TextStyle(color: PrimaryColor2))),
+            title: Text('', style: TextStyle(color: primaryColor2))),
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: Colors.green,

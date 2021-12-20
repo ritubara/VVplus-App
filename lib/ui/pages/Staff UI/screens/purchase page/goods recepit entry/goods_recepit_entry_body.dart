@@ -6,7 +6,6 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/voucher_type_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -18,17 +17,15 @@ import 'package:vvplus_app/ui/widgets/constants/size.dart';
 class GoodsRecepitEntryBody extends StatefulWidget{
   const GoodsRecepitEntryBody({Key key}) : super(key: key);
   @override
-  State<GoodsRecepitEntryBody> createState() => myGoodsRecepitEntryBody();
+  State<GoodsRecepitEntryBody> createState() => MyGoodsRecepitEntryBody();
 }
-class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
+class MyGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
   TextEditingController dateinput = TextEditingController();
   VoucherTypeDropdownBloc voucherTypeDropdownBloc;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc2;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc3;
   IndentorNameDropdownBloc dropdownBlocIndentorName;
-  @override
-
   VoucherType selectVoucherType;
   VoucherType selectVoucherType1;
   VoucherType selectVoucherType2;
@@ -84,17 +81,17 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
                   },
                   elevation: 0.0,
                   color: Colors.white,
-                  child: RaisedButtonText("Clear all"),
+                  child: raisedButtonText("Clear all"),
                 ),
               ],
             ),
           ),
-          FormsHeadText("Voucher Type"),
+          formsHeadText("Voucher Type"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<VoucherType>>(
                   future: voucherTypeDropdownBloc.voucherTypeDropdownData,
                   builder: (context, snapshot) {
@@ -125,7 +122,7 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Date"),
+          formsHeadText("Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
@@ -152,15 +149,15 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Voucher No:"),
+          formsHeadText("Voucher No:"),
           sizedbox1,
-          FormsHeadText("Party Bill No"),
+          formsHeadText("Party Bill No"),
           Padding(
             padding: paddingForms,
             child: const NormalTextFormField(),
           ),
           sizedbox1,
-          FormsHeadText("Party Bill Date"),
+          formsHeadText("Party Bill Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
@@ -187,12 +184,12 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Supplier"),
+          formsHeadText("Supplier"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<VoucherType>>(
                   future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
                   builder: (context, snapshot) {
@@ -223,12 +220,12 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Purchase Order Select"),
+          formsHeadText("Purchase Order Select"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<VoucherType>>(
                   future: voucherTypeDropdownBloc3.voucherTypeDropdownData,
                   builder: (context, snapshot) {
@@ -259,16 +256,16 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Vehicle No."),
+          formsHeadText("Vehicle No."),
           const NormalTextFormField(),
           sizedbox1,
 
-          FormsHeadText("Godown"),
+          formsHeadText("Godown"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<VoucherType>>(
                   future: voucherTypeDropdownBloc2.voucherTypeDropdownData,
                   builder: (context, snapshot) {
@@ -301,7 +298,7 @@ class myGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
           sizedbox1,
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
+              child: roundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
         ],
       ),
     );

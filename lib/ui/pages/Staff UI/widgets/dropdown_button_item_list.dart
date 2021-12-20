@@ -7,8 +7,8 @@ List listItem = [
   "Item4"
 ];
 
-String ItemContainer;
-List ItemList = [
+String itemContainer;
+List itemList = [
   "Ball Valve UPVC 1’’x1/2’’",
   "Ball Valve UPVC 1’’x1/4’’",
 ];

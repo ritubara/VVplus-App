@@ -64,13 +64,13 @@ RoundedButtonInput roundedButtonLogin(String text1,var press1) {
     size1: 0.8,
     horizontal1: 40,
     vertical1: 15,
-    color1: PrimaryColor1,
-    textColor1: PrimaryColor3,
+    color1: primaryColor1,
+    textColor1: primaryColor3,
   );
 }
 
 // use in home page
-RoundedButtonInput RoundedButtonHome(String text1,var press1) {
+RoundedButtonInput roundedButtonHome(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -78,12 +78,12 @@ RoundedButtonInput RoundedButtonHome(String text1,var press1) {
     size1: 0.8,
     horizontal1: 40,
     vertical1: 15,
-    color1: PrimaryColor1,
-    textColor1: PrimaryColor3,
+    color1: primaryColor1,
+    textColor1: primaryColor3,
   );
 }
 
-RoundedButtonInput RoundedButtonHome2(String text1,var press1,var buttonColor) {
+RoundedButtonInput roundedButtonHome2(String text1,var press1,var buttonColor) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -92,11 +92,11 @@ RoundedButtonInput RoundedButtonHome2(String text1,var press1,var buttonColor) {
     horizontal1: 40,
     vertical1: 15,
     color1: buttonColor,
-    textColor1: PrimaryColor3,
+    textColor1: primaryColor3,
   );
 }
 
-RoundedButtonInput RoundedButtonComplaint(String text1,var press1) {
+RoundedButtonInput roundedButtonComplaint(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -104,13 +104,13 @@ RoundedButtonInput RoundedButtonComplaint(String text1,var press1) {
     size1: 0.8,
     horizontal1: 40,
     vertical1: 23,
-    color1: PrimaryColor1,
-    textColor1: PrimaryColor3,
+    color1: primaryColor1,
+    textColor1: primaryColor3,
   );
 }
 
 // use for next and skip button
-RoundedButtonInput RoundedButton3(String text1,var press1) {
+RoundedButtonInput roundedButton3(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -118,12 +118,12 @@ RoundedButtonInput RoundedButton3(String text1,var press1) {
     size1: 0.37,
     horizontal1: 30,
     vertical1: 17,
-    color1: PrimaryColor1,
-    textColor1: PrimaryColor3,
+    color1: primaryColor1,
+    textColor1: primaryColor3,
   );
 }
 
-RoundedButtonInput RoundedButton4(String text1,var press1) {
+RoundedButtonInput roundedButton4(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -131,11 +131,11 @@ RoundedButtonInput RoundedButton4(String text1,var press1) {
     size1: 0.8,
     horizontal1: 20,
     vertical1: 10,
-    color1: PrimaryColor6,
-    textColor1: TextColor1,
+    color1: primaryColor6,
+    textColor1: textColor1,
   );
 }
-RoundedButtonInput RoundedButton5(String text1,var press1) {
+RoundedButtonInput roundedButton5(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -143,12 +143,12 @@ RoundedButtonInput RoundedButton5(String text1,var press1) {
     size1: 0.8,
     horizontal1: 30,
     vertical1: 10,
-    color1: PrimaryColor7,
-    textColor1: TextColor1,
+    color1: primaryColor7,
+    textColor1: textColor1,
   );
 }
 // for staff homepage container
-RoundedButtonInput RoundedButton6(String text1,var press1) {
+RoundedButtonInput roundedButton6(String text1,var press1) {
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -156,12 +156,12 @@ RoundedButtonInput RoundedButton6(String text1,var press1) {
     size1: 0.6,
     horizontal1: 30,
     vertical1: 10,
-    color1: PrimaryColor1,
-    textColor1: TextColor1,
+    color1: primaryColor1,
+    textColor1: textColor1,
   );
 }
 
-RoundedButtonInput ButtonStaffContainer(String text1,var press1){
+RoundedButtonInput buttonStaffContainer(String text1,var press1){
   return RoundedButtonInput(
     text: text1,
     press: press1,
@@ -170,6 +170,6 @@ RoundedButtonInput ButtonStaffContainer(String text1,var press1){
     horizontal1: 30,
     vertical1: 10,
     color1: Colors.orange,
-    textColor1: TextColor1,
+    textColor1: textColor1,
   );
 }

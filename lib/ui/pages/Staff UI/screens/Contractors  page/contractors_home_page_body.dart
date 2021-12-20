@@ -27,10 +27,10 @@ class ContractorsBody extends StatelessWidget{
               width: 300,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.0),
-                color: PrimaryColor3,
+                color: primaryColor3,
                 boxShadow: const [
                   BoxShadow(
-                    color: PrimaryColor5,
+                    color: primaryColor5,
                     offset: Offset(0.0, 1.0), //(x,y)
                     blurRadius: 6.0,
                   ),
@@ -55,7 +55,7 @@ class ContractorsBody extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(padding: paddingForms2),
-              RoundedButtonHome(text51, () {
+              roundedButtonHome(text51, () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(

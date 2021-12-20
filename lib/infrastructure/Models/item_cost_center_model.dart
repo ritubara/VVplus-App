@@ -3,10 +3,10 @@ import 'dart:convert';
 //StrRecord strRecordFromJson(String str) => StrRecord.fromJson(json.decode(str));
 //String strRecordToJson(StrRecord data) => json.encode(data.toJson());
 
-List<ItemCostCenter> StrRecordFromJson(String str) =>
+List<ItemCostCenter> strRecordFromJson(String str) =>
     List<ItemCostCenter>.from(json.decode(str).map((x) => ItemCostCenter.fromJson(x)));
 
-String StrRecordToJson(List<ItemCostCenter> data) =>
+String strRecordToJson(List<ItemCostCenter> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 

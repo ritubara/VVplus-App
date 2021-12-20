@@ -15,9 +15,9 @@ import 'package:vvplus_app/ui/widgets/constants/size.dart';
 class UnitCancellationBody extends StatefulWidget {
   const UnitCancellationBody({Key key}) : super(key: key);
   @override
-  State<UnitCancellationBody> createState() => myUnitCancellationBody();
+  State<UnitCancellationBody> createState() => MyUnitCancellationBody();
 }
-class myUnitCancellationBody extends State<UnitCancellationBody> {
+class MyUnitCancellationBody extends State<UnitCancellationBody> {
   TextEditingController dateinput = TextEditingController();
   @override
   void initState() {
@@ -43,12 +43,12 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
                   onPressed: () {},
                   elevation: 0.0,
                   color: Colors.white,
-                  child: RaisedButtonText("Clear all"),
+                  child: raisedButtonText("Clear all"),
                 ),
               ],
             ),
           ),
-          FormsHeadText("Cancellation Date"),
+          formsHeadText("Cancellation Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
@@ -75,20 +75,20 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Booking Id"),
+          formsHeadText("Booking Id"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           const InformationBoxContainer4(),
           sizedbox1,
-          FormsHeadText("Change Applicable"),
+          formsHeadText("Change Applicable"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           sizedbox1,
-          FormsHeadText("Due Date"),
+          formsHeadText("Due Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
@@ -115,7 +115,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Base Amount (deduction amount)"),
+          formsHeadText("Base Amount (deduction amount)"),
           Container(
             height: 50,
             padding: padding1,
@@ -128,7 +128,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
                   onChanged: bloc.intextField1,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -140,9 +140,9 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Tax:"),
+          formsHeadText("Tax:"),
           sizedbox1,
-          FormsHeadText("Remarks"),
+          formsHeadText("Remarks"),
           Container(
             height: 50,
             padding: padding1,
@@ -155,7 +155,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
                   onChanged: bloc.intextField2,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -169,7 +169,7 @@ class myUnitCancellationBody extends State<UnitCancellationBody> {
           sizedbox1,
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
+              child: roundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
         ],
       ),
     );

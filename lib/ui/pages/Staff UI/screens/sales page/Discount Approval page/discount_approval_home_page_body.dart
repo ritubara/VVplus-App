@@ -14,9 +14,9 @@ import 'package:vvplus_app/ui/widgets/constants/size.dart';
 class DiscountApprovalBody extends StatefulWidget {
   const DiscountApprovalBody({Key key}) : super(key: key);
   @override
-  State<DiscountApprovalBody> createState() => myDiscountApprovalBody();
+  State<DiscountApprovalBody> createState() => MyDiscountApprovalBody();
 }
-class myDiscountApprovalBody extends State<DiscountApprovalBody> {
+class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
   TextEditingController dateinput = TextEditingController();
   @override
   void initState() {
@@ -42,12 +42,12 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
                   onPressed: () {},
                   elevation: 0.0,
                   color: Colors.white,
-                  child: RaisedButtonText("Clear all"),
+                  child: raisedButtonText("Clear all"),
                 ),
               ],
             ),
           ),
-          FormsHeadText("Date"),
+          formsHeadText("Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
@@ -74,25 +74,25 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Branch and Phase"),
+          formsHeadText("Branch and Phase"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           sizedbox1,
-          FormsHeadText("Requested By"),
+          formsHeadText("Requested By"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           sizedbox1,
-          FormsHeadText("Reason for Discount"),
+          formsHeadText("Reason for Discount"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           sizedbox1,
-          FormsHeadText("Remarks"),
+          formsHeadText("Remarks"),
           Container(
             height: 50,
             padding: padding1,
@@ -105,7 +105,7 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
                   onChanged: bloc.intextField1,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -117,39 +117,39 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Customer Name"),
+          formsHeadText("Customer Name"),
           Padding(
             padding: paddingForms,
             child: const SearchDropDown(),
           ),
           sizedbox1,
-          FormsHeadText("Customer Contact No."),
+          formsHeadText("Customer Contact No."),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 35),
-            color: PrimaryColor3,
+            color: primaryColor3,
             height: 51.0,
             child: TextFormField(
               keyboardType: TextInputType.phone,
               style:const TextStyle(
-                color: TextColor4,
+                color: textColor4,
                 decorationColor: decorationColor1,
               ),
               decoration: InputDecoration(
                   contentPadding: phoneTextFieldPadding,
                   //prefixIcon: phoneTextFieldPicker(),
-                  focusColor: TextColor4,
+                  focusColor: textColor4,
                   enabledBorder: outlineBorder(),
                   focusedBorder: outlineBorder(),//floatingLabelBehavior: FloatingLabelBehavior.never,
                   prefix: Padding(padding: phoneTextFieldPadding1),
                   hintText: "Enter Mobile Number",
-                  hintStyle: const TextStyle(color: PrimaryColor2,),
+                  hintStyle: const TextStyle(color: primaryColor2,),
               ),
             ),
           ),
           sizedbox1,
-          FormsHeadText("For Unit No.:"),
+          formsHeadText("For Unit No.:"),
           sizedbox1,
-          FormsHeadText("Percentage Discount"),
+          formsHeadText("Percentage Discount"),
           Container(
             height: 50,
             padding: padding1,
@@ -162,7 +162,7 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
                   onChanged: bloc.intextField2,
                   decoration: InputDecoration(
                       filled: true,
-                      fillColor: PrimaryColor8,
+                      fillColor: primaryColor8,
                       enabledBorder: textFieldBorder(),
                       focusedBorder: textFieldBorder(),
                       errorText: snapshot.error
@@ -176,7 +176,7 @@ class myDiscountApprovalBody extends State<DiscountApprovalBody> {
           sizedbox1,
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
+              child: roundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
         ],
       ),
     );

@@ -29,7 +29,7 @@ Future<List<VoucherType>> createUser(String strSubCode,String strName) async{
 
   if(response.statusCode == 200){
     final String responseString = response.body;
-    return StrRecordFromJson(responseString);
+    return strRecordFromJson(responseString);
   }else{
     return null;
   }

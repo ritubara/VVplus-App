@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 
-AppBar AppBarSatff(String appBarText) {
+AppBar appBarSatff(String appBarText) {
   return AppBar(
     centerTitle: true,
     toolbarHeight: 100,
@@ -23,7 +23,7 @@ AppBar AppBarSatff(String appBarText) {
 
       ),
     ],
-    titleTextStyle: const TextStyle(color: PrimaryColor3),
-    backgroundColor: PrimaryColor1,
+    titleTextStyle: const TextStyle(color: primaryColor3),
+    backgroundColor: primaryColor1,
   );
 }

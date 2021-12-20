@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, missing_return
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:search_choices/search_choices.dart';
@@ -33,7 +35,7 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
   void dispose() {
     super.dispose();
   }
-  var ItemName;
+  var itemName;
   var setDefaultMake = true, setDefaultMakeModel = true;
 
   @override
@@ -42,7 +44,7 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
       padding: padding1,
       child: Container(
         height: 50, width: 343,
-        decoration: DecorationForms(),
+        decoration: decorationForms(),
         child:StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection('ItemName')
@@ -63,11 +65,11 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
               isExpanded: true,
               hint: "Search here",
               displayClearIcon: false,
-              value: ItemName,
+              value: itemName,
               items: snapshot.data.docs.map((value) {
                 if (setDefaultMake) {
-                  ItemName = snapshot.data.docs[0].get('Item');
-                  debugPrint('setDefault make: $ItemName');
+                  itemName = snapshot.data.docs[0].get('Item');
+                  debugPrint('setDefault make: $itemName');
                 }
                 return DropdownMenuItem(
                   value: value.get('Item'),
@@ -80,7 +82,7 @@ class _ItemCurrentStatusDropdownState extends State<ItemCurrentStatusDropdown> {
                       () {
                     debugPrint('make selected: $value');
                     // Selected value will be stored
-                    ItemName = value;
+                    itemName = value;
                     // Default dropdown value won't be displayed anymore
                     setDefaultMake = false;
                     // Set makeModel to true to display first car from list
@@ -106,7 +108,7 @@ class FormsContainerSearchDropDown extends StatefulWidget {
 
 class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown> {
 
-  var ItemName;
+  var itemName;
   var setDefaultMake = true, setDefaultMakeModel = true;
   //=======================================================
   ItemCurrentStatusDropdownBloc _dropdownBloc;
@@ -124,8 +126,8 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
   }
   //=======================================================
 
-  List categoryItemList = List();
-  TextEditingController ReqQty = TextEditingController();
+  List categoryItemList = [];
+  TextEditingController reqQty = TextEditingController();
   TextEditingController rate = TextEditingController();
 
   //final GlobalKey<FormState> _formKey = GlobalKey();
@@ -151,7 +153,7 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
         height: 378,
         width: SizeConfig.getWidth(context),
         decoration: BoxDecoration(
-          color: StoreContainerColor,
+          color: storeContainerColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -159,14 +161,14 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
           children: [
 
             const Padding(padding: EdgeInsets.all(10)),
-            FormsHeadText("Item "),
+            formsHeadText("Item "),
 
            //===================================================================
         Padding(
           padding: padding1,
           child: Container(
             height: 50, width: 343,
-            decoration: DecorationForms(),
+            decoration: decorationForms(),
             child:StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('ItemName')
@@ -187,11 +189,11 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                   isExpanded: true,
                   hint: "Search here",
                   displayClearIcon: false,
-                  value: ItemName,
+                  value: itemName,
                   items: snapshot.data.docs.map((value) {
                     if (setDefaultMake) {
-                      ItemName = snapshot.data.docs[0].get('Item');
-                      debugPrint('setDefault make: $ItemName');
+                      itemName = snapshot.data.docs[0].get('Item');
+                      debugPrint('setDefault make: $itemName');
                     }
                     return DropdownMenuItem(
                       value: value.get('Item'),
@@ -204,7 +206,7 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                           () {
                         debugPrint('make selected: $value');
                         // Selected value will be stored
-                        ItemName = value;
+                        itemName = value;
                         // Default dropdown value won't be displayed anymore
                         setDefaultMake = false;
                         // Set makeModel to true to display first car from list
@@ -222,9 +224,9 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
             const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
             Row(
               children:[
-            FormsHeadText("Request Qty. "),
+            formsHeadText("Request Qty. "),
                 const SizedBox(width: 20),
-                FormsHeadText("Unit"),
+                formsHeadText("Unit"),
             ],
             ),
             Row(
@@ -238,7 +240,7 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                       child: StreamBuilder<QuerySnapshot>(
                           stream: FirebaseFirestore.instance.collection("ItemName").snapshots(),
                           builder: (context, snapshot) {
-                            if(!snapshot.hasData) return LinearProgressIndicator();
+                            if(!snapshot.hasData) return const LinearProgressIndicator();
                             return Expanded(
                                 child: _buildList(snapshot.data)
                             );
@@ -265,7 +267,7 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                  ),*/
                   //:Text("No data"),
                 ),
-                SizedBox(width: 20 ),
+                const SizedBox(width: 20 ),
                 _dropdownBloc.selectedStateEvent != null? Container(
                   height: 50,
                   padding: padding1,
@@ -283,19 +285,19 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                                 }
                             );
                           }
-                          return Text("No data Found");
+                          return const Text("No data Found");
                         }
                     ),
                   ),
-                ):Text("No data"),
+                ):const Text("No data"),
               ],
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
             Row(
               children: [
-                FormsHeadText("Rate"),
+                formsHeadText("Rate"),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
-                FormsHeadText("Amount:"),
+                formsHeadText("Amount:"),
               ],
             ),
             Row(
@@ -338,12 +340,12 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 RaisedButton(
                   onPressed: () {
-                    ReqQty.clear();
+                    reqQty.clear();
                     rate.clear();
                   },
                   elevation: 0.0,
-                  color: StoreContainerColor,
-                  child: RaisedButtonText("Clear This Item"),
+                  color: storeContainerColor,
+                  child: raisedButtonText("Clear This Item"),
 
                 ),
 
@@ -361,7 +363,7 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
                         horizontal1: 30,
                         vertical1: 10,
                         color1: Colors.orange,
-                        textColor1: TextColor1,
+                        textColor1: textColor1,
                       );
                     }
                 ),
@@ -376,11 +378,11 @@ class MyFormsContainerSearchDropDown extends State<FormsContainerSearchDropDown>
 }
 
 
-BoxDecoration DecorationFormsCont() {
+BoxDecoration decorationFormsCont() {
   return BoxDecoration(
-    color: PrimaryColor3,
+    color: primaryColor3,
     borderRadius: BorderRadius.circular(5),
-    border: Border.all(color: PrimaryColor9, width: 1),
+    border: Border.all(color: primaryColor9, width: 1),
 
   );
 }

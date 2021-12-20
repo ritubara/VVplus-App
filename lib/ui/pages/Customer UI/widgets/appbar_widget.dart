@@ -10,7 +10,7 @@ AppBar appBarMain(String appBarText) {
       textAlign: TextAlign.center,
     ),
     toolbarHeight: 107,
-    titleTextStyle: const TextStyle(color: PrimaryColor3),
-    backgroundColor: PrimaryColor1,
+    titleTextStyle: const TextStyle(color: primaryColor3),
+    backgroundColor: primaryColor1,
   );
 }

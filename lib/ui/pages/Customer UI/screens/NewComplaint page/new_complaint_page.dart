@@ -10,7 +10,7 @@ class NewComplaintPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return NewComplaintPageProvider(
       child: Scaffold(
-        appBar: AppBarSatff("New Complaint Page"),
+        appBar: appBarSatff("New Complaint Page"),
         body: const NewComplaintPageBody(),
       ),
     );

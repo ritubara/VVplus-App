@@ -13,16 +13,13 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:http/http.dart' as http;
-import 'package:firebase_database/firebase_database.dart';
-import 'package:vvplus_app/infrastructure/Models/material_req_approval_model.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 
 class MaterialRequestApprovalBody extends StatefulWidget{
   const MaterialRequestApprovalBody({Key key}) : super(key: key);
   @override
-  State<MaterialRequestApprovalBody> createState() => myMaterialRequestApprovalBody();
+  State<MaterialRequestApprovalBody> createState() => MyMaterialRequestApprovalBody();
 }
-class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
+class MyMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
 
   TextEditingController dateinput = TextEditingController();
   IndentorNameDropdownBloc _dropdownBloc;
@@ -56,7 +53,7 @@ class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           sizedbox1,
-          FormsHeadText("Indant Date"),
+          formsHeadText("Indant Date"),
           Container(
             padding: dateFieldPadding,
             height: dateFieldHeight,
@@ -83,12 +80,12 @@ class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
             ),
           ),
           sizedbox1,
-          FormsHeadText("Indant Selection"),
+          formsHeadText("Indant Selection"),
           Padding(
             padding: padding1,
             child: Container(
               height: 50, width: 343,
-              decoration: DecorationForms(),
+              decoration: decorationForms(),
               child: FutureBuilder<List<IndentorName>>(
                   future: _dropdownBloc.indentorNameDropdownData,
                   builder: (context, snapshot) {
@@ -122,17 +119,17 @@ class myMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
           //const InformationBoxContainer1(),
           //SizedBox(height: 10,),
           //const InformationBoxContainer1(),
-          Page1(),
+          const Page1(),
           sizedbox1,
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Approve",(){},roundedButtonHomeColor1)),
+              child: roundedButtonHome2("Approve",(){},roundedButtonHomeColor1)),
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Deny",(){},roundedButtonHomeColor2)),
+              child: roundedButtonHome2("Deny",(){},roundedButtonHomeColor2)),
           Padding(
               padding: padding4,
-              child: RoundedButtonHome2("Wait",(){},roundedButtonHomeColor3)),
+              child: roundedButtonHome2("Wait",(){},roundedButtonHomeColor3)),
         ],
       ),
     );

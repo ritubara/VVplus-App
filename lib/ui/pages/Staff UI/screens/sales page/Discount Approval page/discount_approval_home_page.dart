@@ -11,7 +11,7 @@ class DiscountApprovalPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return DiscountApprovalProvider(
       child: Scaffold(
-        appBar: AppBarSatff("Discount Approval"),
+        appBar: appBarSatff("Discount Approval"),
         body: const DiscountApprovalBody(),
         bottomNavigationBar: const BottomNavBarStaff(),
       ),

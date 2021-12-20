@@ -7,19 +7,21 @@ import 'dart:convert';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class Page1 extends StatefulWidget {
+  const Page1({Key key}) : super(key: key);
+
   @override
   _Page1State createState() => _Page1State();
 }
 
 class _Page1State extends State<Page1> {
-  List Data;
+  List data;
 
   fetchData1() async {
 
     http.Response response =
     await http.get(Uri.parse('https://vv-plus-app-default-rtdb.firebaseio.com/PostDataMaterialRequestEntry.json'));
     setState(() {
-      Data = json.decode(response.body);
+      data = json.decode(response.body);
     });
   }
 
@@ -31,7 +33,7 @@ class _Page1State extends State<Page1> {
 
   @override
   Widget build(BuildContext context) {
-    return Data == null
+    return data == null
         ? const Center(
       child: CircularProgressIndicator(),
     )
@@ -51,10 +53,10 @@ class _Page1State extends State<Page1> {
                 width: SizeConfig.getWidth(context),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  color: PrimaryColor3,
+                  color: primaryColor3,
                   boxShadow: const [
                     BoxShadow(
-                      color: PrimaryColor5,
+                      color: primaryColor5,
                       offset: Offset(0.0, 1.0), //(x,y)
                       blurRadius: 6.0,
                     ),
@@ -70,7 +72,7 @@ class _Page1State extends State<Page1> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            Data[index]['IndentSubCode'],
+                            data[index]['IndentSubCode'],
                             style: containerTextStyle1(),
                           ),
                           const SizedBox(height: 13,),
@@ -85,7 +87,7 @@ class _Page1State extends State<Page1> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 40),
                                 child: Text(
-                                  Data[index]['ReqQty'],
+                                  data[index]['ReqQty'],
                                   style: containerTextStyle2(),
                                 ),
                               ),
@@ -155,17 +157,17 @@ class _Page1State extends State<Page1> {
 
                               const SizedBox(height: 2,),
                               Text(
-                                Data[index]['ReqDate'],
+                                data[index]['ReqDate'],
                                 style: containerTextStyle2(),
                               ),
                               const SizedBox(height: 2,),
                               Text(
-                                Data[index]['ItemName'],
+                                data[index]['ItemName'],
                                 style: containerTextStyle2(),
                               ),
                               const SizedBox(height: 2,),
                               Text(
-                                Data[index]['ItemSubCode'],
+                                data[index]['ItemSubCode'],
                                 style: containerTextStyle2(),
                               ),
                             ],
@@ -179,7 +181,7 @@ class _Page1State extends State<Page1> {
             ),
           );
       },
-      itemCount: Data == null ? 0 : Data.length,
+      itemCount: data == null ? 0 : data.length,
     ),
         );
   }
