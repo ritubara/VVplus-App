@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/Application/Bloc/Login_Bloc/login_provider.dart';
 import 'package:vvplus_app/ui/pages/Login%20page/login_page.dart';
-import 'package:vvplus_app/ui/widgets/constants/colors.dart';
+
+import 'ui/widgets/constants/colors.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

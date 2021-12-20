@@ -21,10 +21,11 @@ class VoucherTypeRepository {
     }
   }
 }
-Future<List<VoucherType>> createUser(String strSubCode,String strName) async{
+Future<List<VoucherType>> createUser(String strSubCode,String strName,String Godown) async{
   final response = await http.post(Uri.parse(getVoucherTypeURL), body: {
     "StrSubCode": strSubCode,
     "StrName": strName,
+    "Godown": Godown,
   });
 
   if(response.statusCode == 200){
