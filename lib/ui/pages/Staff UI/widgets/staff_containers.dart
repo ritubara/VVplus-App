@@ -277,11 +277,11 @@ class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 32, left: 15),
+      padding: const EdgeInsets.only(top: 32, left: 11),
       child: Container(
         alignment: Alignment.center,
         height: 134,
-        width: SizeConfig.getWidth(context) * .93,
+        width: SizeConfig.getWidth(context) * .95,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
           color: primaryColor3,
