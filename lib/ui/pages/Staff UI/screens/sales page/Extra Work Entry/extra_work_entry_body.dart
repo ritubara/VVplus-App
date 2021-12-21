@@ -18,7 +18,9 @@ class ExtraWorkEntryBody extends StatefulWidget {
   State<ExtraWorkEntryBody> createState() => MyExtraWorkEntryBody();
 }
 class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
-  TextEditingController dateinput = TextEditingController();
+  final TextEditingController dateinput = TextEditingController();
+  final TextEditingController _voucherType = TextEditingController();
+  final TextEditingController _remarks = TextEditingController();
   @override
   void initState() {
     dateinput.text = "";
@@ -58,6 +60,7 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
               child: StreamBuilder<String>(
                 stream: bloc.outtextField1,
                 builder: (context, snapshot) => TextFormField(
+                  controller: _voucherType,
                   onChanged: bloc.intextField1,
                   decoration: InputDecoration(
                       filled: true,
@@ -158,6 +161,7 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
               child: StreamBuilder<String>(
                 stream: bloc.outtextField3,
                 builder: (context, snapshot) => TextFormField(
+                  controller: _remarks,
                   onChanged: bloc.intextField3,
                   decoration: InputDecoration(
                       filled: true,

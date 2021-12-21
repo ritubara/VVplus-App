@@ -74,7 +74,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
     });
   }
   _calculation() {
-      _amount = double.parse(reqQty.text) * double.parse(reqQty.text);
+    _amount = double.parse(reqQty.text) * double.parse(reqQty.text);
 
   }
 
@@ -240,163 +240,163 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
           ),
 
           //============================================================ FormsContainer
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Container(
-            height: 378,
-            width: SizeConfig.getWidth(context),
-            decoration: BoxDecoration(
-              color: storeContainerColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(padding: EdgeInsets.all(10)),
-                formsHeadText("Item "),
-                Padding(
-                  padding: padding1,
-                  child: Container(
-                    height: 50, width: 343,
-                    decoration: decorationForms(),
-                    child: FutureBuilder<List<ItemCurrentStatus>>(
-                        future: dropdownBlocItemCurrentStatus.itemCurrentStatusDropdowndata,
-                        builder: (context, snapshot) {
-                          return StreamBuilder<ItemCurrentStatus>(
-                              stream: dropdownBlocItemCurrentStatus.selectedState,
-                              builder: (context, item) {
-                                return SearchChoices<ItemCurrentStatus>.single(
-                                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                                  underline: "",
-                                  padding: 1,
-                                  isExpanded: true,
-                                  hint: "Search here",
-                                  value: selectItemCurrentStatus,
-                                  displayClearIcon: false,
-                                  onChanged: onDataChange2,
-                                  items: snapshot?.data
-                                      ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
-                                    return DropdownMenuItem<ItemCurrentStatus>(
-                                      value: e,
-                                      child: Text(e.strItemName),
-                                    );
-                                  })?.toList() ??[],
-                                );
-                              }
-                          );
-                        }
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              height: 378,
+              width: SizeConfig.getWidth(context),
+              decoration: BoxDecoration(
+                color: storeContainerColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(padding: EdgeInsets.all(10)),
+                  formsHeadText("Item "),
+                  Padding(
+                    padding: padding1,
+                    child: Container(
+                      height: 50, width: 343,
+                      decoration: decorationForms(),
+                      child: FutureBuilder<List<ItemCurrentStatus>>(
+                          future: dropdownBlocItemCurrentStatus.itemCurrentStatusDropdowndata,
+                          builder: (context, snapshot) {
+                            return StreamBuilder<ItemCurrentStatus>(
+                                stream: dropdownBlocItemCurrentStatus.selectedState,
+                                builder: (context, item) {
+                                  return SearchChoices<ItemCurrentStatus>.single(
+                                    icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                                    underline: "",
+                                    padding: 1,
+                                    isExpanded: true,
+                                    hint: "Search here",
+                                    value: selectItemCurrentStatus,
+                                    displayClearIcon: false,
+                                    onChanged: onDataChange2,
+                                    items: snapshot?.data
+                                        ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
+                                      return DropdownMenuItem<ItemCurrentStatus>(
+                                        value: e,
+                                        child: Text(e.strItemName),
+                                      );
+                                    })?.toList() ??[],
+                                  );
+                                }
+                            );
+                          }
+                      ),
                     ),
                   ),
-                ),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                formsHeadText("Request Qty. "),
-                Row(
-                  children: [
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                  formsHeadText("Request Qty. "),
+                  Row(
+                    children: [
 
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 35),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35),
 
-                      child: Container(
-                        height: 50,
-                        padding: padding1,
-                        decoration: decoration1(),
+                        child: Container(
+                          height: 50,
+                          padding: padding1,
+                          decoration: decoration1(),
 
-                        child: SizedBox(
-                          width: 130,
+                          child: SizedBox(
+                            width: 130,
 
-                          child: StreamBuilder<String>(
-                              stream: bloc.requestQty,
-                              builder: (context, snapshot) {
-                                return TextFormField(
-                                 // initialValue: "no",
-                                  controller: reqQty,
-                                  decoration: InputDecoration(
-                                    errorText: snapshot.error,
-                                  ),
-                                  onChanged: bloc.changerequestQty,
-                                  keyboardType: TextInputType.number,
-                                  //onSaved: selectItemCurrentStatus.strItemName,
+                            child: StreamBuilder<String>(
+                                stream: bloc.requestQty,
+                                builder: (context, snapshot) {
+                                  return TextFormField(
+                                    // initialValue: "no",
+                                    controller: reqQty,
+                                    decoration: InputDecoration(
+                                      errorText: snapshot.error,
+                                    ),
+                                    onChanged: bloc.changerequestQty,
+                                    keyboardType: TextInputType.number,
+                                    //onSaved: selectItemCurrentStatus.strItemName,
 
-                                  style: simpleTextStyle7(),
-                                );
-                              }
+                                    style: simpleTextStyle7(),
+                                  );
+                                }
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    selectItemCurrentStatus!=null ? Container(
-                        height: 50, padding: padding1, decoration: decoration1(),
-                        child: Center(
-                            child: Text(selectItemCurrentStatus.strUnit))):
-                        Container(
-                        height: 50, padding: padding1, decoration: decoration1(),
-                        child: const Center(
-                            child: Text("No"))),
-                  ],
-                ),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                Row(
-                  children: [
-                    formsHeadText("Rate"),
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
-                    formsHeadText("Amount:"),
-                   Text(_amount.toString()),
-                  ],
-                ),
-                Row(
-                  children: [
-                    selectItemCurrentStatus!=null ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Container(
+                      selectItemCurrentStatus!=null ? Container(
                           height: 50, padding: padding1, decoration: decoration1(),
                           child: Center(
-                              child: Text(selectItemCurrentStatus.dblQty))),
-                    ):
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Container(
+                              child: Text(selectItemCurrentStatus.strUnit))):
+                      Container(
                           height: 50, padding: padding1, decoration: decoration1(),
                           child: const Center(
                               child: Text("No"))),
-                    ),
-                  ],
-                ),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                  Row(
+                    children: [
+                      formsHeadText("Rate"),
+                      const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
+                      formsHeadText("Amount:"),
+                      Text(_amount.toString()),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      selectItemCurrentStatus!=null ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: Container(
+                            height: 50, padding: padding1, decoration: decoration1(),
+                            child: Center(
+                                child: Text(selectItemCurrentStatus.dblQty))),
+                      ):
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: Container(
+                            height: 50, padding: padding1, decoration: decoration1(),
+                            child: const Center(
+                                child: Text("No"))),
+                      ),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
 
-                Row(
-                  children: [
-                    const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                    RaisedButton(
-                      onPressed: () {},
-                      elevation: 0.0,
-                      color: storeContainerColor,
-                      child: raisedButtonText("Clear This Item"),
+                  Row(
+                    children: [
+                      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                      RaisedButton(
+                        onPressed: () {},
+                        elevation: 0.0,
+                        color: storeContainerColor,
+                        child: raisedButtonText("Clear This Item"),
 
-                    ),
+                      ),
 
 
-                    StreamBuilder<bool>(
-                        stream: bloc.submitCheck,
-                        builder: (context, snapshot) {
-                          return RoundedButtonInput(
-                            text: "Add Item to List",
-                            press: !snapshot.hasData ? null: (){
-                            } ,
-                            fontsize1: 12,
-                            size1: 0.5,
-                            horizontal1: 30,
-                            vertical1: 10,
-                            color1: Colors.orange,
-                            textColor1: textColor1,
-                          );
-                        }
-                    ),
-                  ],
-                )
-              ],
+                      StreamBuilder<bool>(
+                          stream: bloc.submitCheck,
+                          builder: (context, snapshot) {
+                            return RoundedButtonInput(
+                              text: "Add Item to List",
+                              press: !snapshot.hasData ? null: (){
+                              } ,
+                              fontsize1: 12,
+                              size1: 0.5,
+                              horizontal1: 30,
+                              vertical1: 10,
+                              color1: Colors.orange,
+                              textColor1: textColor1,
+                            );
+                          }
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
-        ),
 
           //============================================================ popup container
 
@@ -496,20 +496,20 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
               child: roundedButtonHome(
                   "Submit",
                       (){
-                        //print(selectIndentName.strSubCode);
-                        //print(selectIndentName.strName);
-                        //print(IntendDateInput.text);
-                        //print(selectItemCurrentStatus.strItemName);
-                        //print(selectItemCurrentStatus.dblQty);
-                       // print(selectItemCurrentStatus.strUnit);
-                        //print(_calculation.call());
-                        //check();
-                        //print(ReqQty.text);
-                        //print(rate.text);
-                        //print(selectItemCostCenter.strSubCode);
-                        //print(ReqDateInput.text);
-                        //print(Remarks.text);
-                        //sendData();
+                    //print(selectIndentName.strSubCode);
+                    //print(selectIndentName.strName);
+                    //print(IntendDateInput.text);
+                    //print(selectItemCurrentStatus.strItemName);
+                    //print(selectItemCurrentStatus.dblQty);
+                    // print(selectItemCurrentStatus.strUnit);
+                    //print(_calculation.call());
+                    //check();
+                    //print(ReqQty.text);
+                    //print(rate.text);
+                    //print(selectItemCostCenter.strSubCode);
+                    //print(ReqDateInput.text);
+                    //print(Remarks.text);
+                    //sendData();
                   })
           ),
         ],
