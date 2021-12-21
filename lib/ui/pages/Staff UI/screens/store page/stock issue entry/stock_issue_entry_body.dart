@@ -1,14 +1,18 @@
+import 'dart:convert';
+import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_current_status_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/stock%20receive%20entry/items_container.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
@@ -16,13 +20,16 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
-class StockIssueEntryBody extends StatefulWidget{
+class StockIssueEntryBody extends StatefulWidget {
   const StockIssueEntryBody({Key key}) : super(key: key);
+
   @override
   State<StockIssueEntryBody> createState() => MyStockIssueEntryBody();
 }
-class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
 
+class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
+  bool isActive = false;
+  bool pressed = false;
   TextEditingController reqQty = TextEditingController();
 
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
@@ -38,9 +45,20 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
   ItemCurrentStatus selectItemCurrentStatus;
 
   double _amount;
+  void clearData(){
+    reqQty.clear();
+  }
 
   @override
   void initState() {
+    super.initState();
+    reqQty = TextEditingController();
+    reqQty.addListener(() {
+      if (isActive = reqQty.text.isNotEmpty) {
+        isActive = true;
+      }
+      setState(() => this.isActive = isActive);
+    });
     voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc2 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc3 = VoucherTypeDropdownBloc();
@@ -49,35 +67,79 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
     _amount = 0;
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
   }
+
   void onDataChange1(VoucherType state) {
     setState(() {
       selectVoucherType1 = state;
     });
   }
+
   void onDataChange2(VoucherType state) {
     setState(() {
       selectVoucherType2 = state;
     });
   }
+
   void onDataChange3(VoucherType state) {
     setState(() {
       selectVoucherType3 = state;
     });
   }
+
   void onDataChange4(ItemCostCenter state) {
     setState(() {
       selectItemCostCenter = state;
     });
   }
+
   void onDataChange5(ItemCurrentStatus state) {
     setState(() {
-      selectItemCurrentStatus= state;
+      selectItemCurrentStatus = state;
     });
   }
+
+  sendDataStockReceive(){
+    http.post(Uri.parse(
+        "https://vv-plus-app-default-rtdb.firebaseio.com/PostStockIssueReq.json"),
+        body: json.encode({
+          "Voucher Type": selectVoucherType1.strName,
+          "Issue By": selectVoucherType2.strName,
+          "Godown": selectVoucherType3.strName,
+          "Cost Center":selectItemCostCenter.strName,
+          "Item": selectItemCurrentStatus.strItemName,
+          "ReqQuantity": reqQty.text,
+          "Unit": selectItemCurrentStatus.strUnit,
+          "Rate": selectItemCurrentStatus.dblQty,
+          //"Amount": _remarks.text
+        }));
+    Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
+    print("Successfull2");
+  }
+
+  sendDataItem() {
+    if (reqQty.text != null) {
+      http.post(Uri.parse(
+          "https://vv-plus-app-default-rtdb.firebaseio.com/PostItemDetails.json"),
+          body: json.encode({
+            "Item": selectItemCurrentStatus.strItemName,
+            "ReqQuantity": reqQty.text,
+            "Unit": selectItemCurrentStatus.strUnit,
+            "Rate": selectItemCurrentStatus.dblQty,
+            //"Amount": _remarks.text
+          }));
+      Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
+      print("Successfull2");
+    }
+    else{
+      Scaffold.of(context).showSnackBar(snackBar("Field is empty"));
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +167,8 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
           Padding(
             padding: padding1,
             child: Container(
-              height: 50, width: 343,
+              height: 50,
+              width: 343,
               decoration: decorationForms(),
               child: FutureBuilder<List<VoucherType>>(
                   future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
@@ -123,17 +186,16 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                             displayClearIcon: false,
                             onChanged: onDataChange1,
                             items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??
+                                [],
                           );
-                        }
-                    );
-                  }
-              ),
+                        });
+                  }),
             ),
           ),
           sizedbox1,
@@ -141,7 +203,8 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
           Padding(
             padding: padding1,
             child: Container(
-              height: 50, width: 343,
+              height: 50,
+              width: 343,
               decoration: decorationForms(),
               child: FutureBuilder<List<VoucherType>>(
                   future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
@@ -159,17 +222,16 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                             displayClearIcon: false,
                             onChanged: onDataChange2,
                             items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??
+                                [],
                           );
-                        }
-                    );
-                  }
-              ),
+                        });
+                  }),
             ),
           ),
           sizedbox1,
@@ -177,7 +239,8 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
           Padding(
             padding: padding1,
             child: Container(
-              height: 50, width: 343,
+              height: 50,
+              width: 343,
               decoration: decorationForms(),
               child: FutureBuilder<List<VoucherType>>(
                   future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
@@ -195,17 +258,16 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                             displayClearIcon: false,
                             onChanged: onDataChange3,
                             items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??
+                                [],
                           );
-                        }
-                    );
-                  }
-              ),
+                        });
+                  }),
             ),
           ),
           sizedbox1,
@@ -213,7 +275,8 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
           Padding(
             padding: padding1,
             child: Container(
-              height: 50, width: 343,
+              height: 50,
+              width: 343,
               decoration: decorationForms(),
               child: FutureBuilder<List<ItemCostCenter>>(
                   future: itemCostCenterDropdownBloc.itemCostCenterData,
@@ -231,17 +294,17 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                             displayClearIcon: false,
                             onChanged: onDataChange4,
                             items: snapshot?.data
-                                ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                              return DropdownMenuItem<ItemCostCenter>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
+                                    ?.map<DropdownMenuItem<ItemCostCenter>>(
+                                        (e) {
+                                  return DropdownMenuItem<ItemCostCenter>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??
+                                [],
                           );
-                        }
-                    );
-                  }
-              ),
+                        });
+                  }),
             ),
           ),
           sizedbox1,
@@ -263,16 +326,21 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                   Padding(
                     padding: padding1,
                     child: Container(
-                      height: 50, width: 343,
+                      height: 50,
+                      width: 343,
                       decoration: decorationForms(),
                       child: FutureBuilder<List<ItemCurrentStatus>>(
-                          future: dropdownBlocItemCurrentStatus.itemCurrentStatusDropdowndata,
+                          future: dropdownBlocItemCurrentStatus
+                              .itemCurrentStatusDropdowndata,
                           builder: (context, snapshot) {
                             return StreamBuilder<ItemCurrentStatus>(
-                                stream: dropdownBlocItemCurrentStatus.selectedState,
+                                stream:
+                                    dropdownBlocItemCurrentStatus.selectedState,
                                 builder: (context, item) {
-                                  return SearchChoices<ItemCurrentStatus>.single(
-                                    icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                                  return SearchChoices<
+                                      ItemCurrentStatus>.single(
+                                    icon: const Icon(
+                                        Icons.keyboard_arrow_down_sharp),
                                     underline: "",
                                     padding: 1,
                                     isExpanded: true,
@@ -280,36 +348,33 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                                     value: selectItemCurrentStatus,
                                     displayClearIcon: false,
                                     onChanged: onDataChange5,
-                                    items: snapshot?.data
-                                        ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
-                                      return DropdownMenuItem<ItemCurrentStatus>(
-                                        value: e,
-                                        child: Text(e.strItemName),
-                                      );
-                                    })?.toList() ??[],
+                                    items: snapshot?.data?.map<
+                                            DropdownMenuItem<
+                                                ItemCurrentStatus>>((e) {
+                                          return DropdownMenuItem<
+                                              ItemCurrentStatus>(
+                                            value: e,
+                                            child: Text(e.strItemName),
+                                          );
+                                        })?.toList() ??
+                                        [],
                                   );
-                                }
-                            );
-                          }
-                      ),
+                                });
+                          }),
                     ),
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   formsHeadText("Request Qty. "),
                   Row(
                     children: [
-
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35),
-
                         child: Container(
                           height: 50,
                           padding: padding1,
                           decoration: decoration1(),
-
                           child: SizedBox(
                             width: 130,
-
                             child: StreamBuilder<String>(
                                 stream: bloc.requestQty,
                                 builder: (context, snapshot) {
@@ -325,78 +390,97 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
 
                                     style: simpleTextStyle7(),
                                   );
-                                }
-                            ),
+                                }),
                           ),
                         ),
                       ),
-                      selectItemCurrentStatus!=null ? Container(
-                          height: 50, padding: padding1, decoration: decoration1(),
-                          child: Center(
-                              child: Text(selectItemCurrentStatus.strUnit))):
-                      Container(
-                          height: 50, padding: padding1, decoration: decoration1(),
-                          child: const Center(
-                              child: Text("No"))),
+                      selectItemCurrentStatus != null
+                          ? Container(
+                              height: 50,
+                              padding: padding1,
+                              decoration: decoration1(),
+                              child: Center(
+                                  child: Text(selectItemCurrentStatus.strUnit)))
+                          : Container(
+                              height: 50,
+                              padding: padding1,
+                              decoration: decoration1(),
+                              child: const Center(child: Text("No"))),
                     ],
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                   Row(
                     children: [
                       formsHeadText("Rate"),
-                      const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 30)),
                       formsHeadText("Amount:"),
                       Text(_amount.toString()),
                     ],
                   ),
                   Row(
                     children: [
-                      selectItemCurrentStatus!=null ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Container(
-                            height: 50, padding: padding1, decoration: decoration1(),
-                            child: Center(
-                                child: Text(selectItemCurrentStatus.dblQty))),
-                      ):
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Container(
-                            height: 50, padding: padding1, decoration: decoration1(),
-                            child: const Center(
-                                child: Text("No"))),
-                      ),
+                      selectItemCurrentStatus != null
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40),
+                              child: Container(
+                                  height: 50,
+                                  padding: padding1,
+                                  decoration: decoration1(),
+                                  child: Center(
+                                      child: Text(
+                                          selectItemCurrentStatus.dblQty))),
+                            )
+                          : Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 40),
+                              child: Container(
+                                  height: 50,
+                                  padding: padding1,
+                                  decoration: decoration1(),
+                                  child: const Center(child: Text("No"))),
+                            ),
                     ],
                   ),
                   const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-
                   Row(
                     children: [
-                      const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                      const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10)),
                       RaisedButton(
                         onPressed: () {},
                         elevation: 0.0,
                         color: storeContainerColor,
                         child: raisedButtonText("Clear This Item"),
-
                       ),
 
-
-                      StreamBuilder<bool>(
+                      /* StreamBuilder<bool>(
                           stream: bloc.submitCheck,
                           builder: (context, snapshot) {
-                            return RoundedButtonInput(
-                              text: "Add Item to List",
-                              press: !snapshot.hasData ? null: (){
-                              } ,
-                              fontsize1: 12,
-                              size1: 0.5,
-                              horizontal1: 30,
-                              vertical1: 10,
-                              color1: Colors.orange,
-                              textColor1: textColor1,
-                            );
-                          }
+                            return*/
+                      RoundedButtonInput(
+                        text: "Add Item to List",
+                        press: isActive
+                            ? () {
+                                sendDataItem();
+                                setState(() {
+                                   pressed = true;
+                                });
+                                //clearData();
+                              }
+                            : null,
+                        /*press: !snapshot.hasData ? null: (){
+                              } ,*/
+                        fontsize1: 12,
+                        size1: 0.5,
+                        horizontal1: 30,
+                        vertical1: 10,
+                        color1: Colors.orange,
+                        textColor1: textColor1,
                       ),
+                      //}
+                      // ),
                     ],
                   )
                 ],
@@ -404,15 +488,20 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
             ),
           ),
           //-----------------------------------------------------------
+          pressed?
+          Page1():SizedBox(),
+
           sizedbox1,
           formsHeadText("Total Amount:"),
           sizedbox1,
           Padding(
               padding: padding4,
-              child: roundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
+              child:
+                  roundedButtonHome2("Submit", () {
+                    sendDataStockReceive();
+                  }, roundedButtonHomeColor1)),
         ],
       ),
     );
   }
-
 }
