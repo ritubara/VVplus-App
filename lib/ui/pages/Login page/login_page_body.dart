@@ -317,10 +317,8 @@ class SubmitButton2 extends StatelessWidget {
           size1: 0.37,
           horizontal1: 30,
           vertical1: 17,
-          press: state.status.isValidated
-              ? () {Navigator.push( context, MaterialPageRoute(
-              builder: (context) => const HomePageStaff()));}
-              : null,
+          press: () {Navigator.push( context, MaterialPageRoute(
+              builder: (context) => const HomePageStaff()));},
           text: "Sign In Staff",
         );
       },

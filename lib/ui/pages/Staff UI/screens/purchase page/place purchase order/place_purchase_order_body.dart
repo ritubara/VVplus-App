@@ -7,6 +7,7 @@ import 'package:vvplus_app/Application/Bloc/staff%20bloc/Purchase_Page_Bloc/plac
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/infrastructure/Repository/department_name_repository.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/place%20purchase%20order/container_data.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -237,7 +238,9 @@ class MyPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
                 ),
               ),
             ),
-            const InformationBoxContainer2(),
+            //const InformationBoxContainer2(),
+            const PlacePurchaseOrderContainerData(),
+
             sizedbox1,
             formsHeadText("Remarks:"),
             sizedbox1,

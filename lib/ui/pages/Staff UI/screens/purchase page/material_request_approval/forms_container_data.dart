@@ -6,14 +6,14 @@ import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'dart:convert';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
-class Page1 extends StatefulWidget {
-  const Page1({Key key}) : super(key: key);
+class MaterialApprovalPageContainerData extends StatefulWidget {
+  const MaterialApprovalPageContainerData({Key key}) : super(key: key);
 
   @override
-  _Page1State createState() => _Page1State();
+  _MaterialApprovalPageContainerDataState createState() => _MaterialApprovalPageContainerDataState();
 }
 
-class _Page1State extends State<Page1> {
+class _MaterialApprovalPageContainerDataState extends State<MaterialApprovalPageContainerData> {
   List data;
 
   fetchData1() async {
