@@ -7,6 +7,8 @@ import 'package:vvplus_app/Application/Bloc/staff%20bloc/Purchase_Page_Bloc/plac
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/infrastructure/Repository/department_name_repository.dart';
+import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
+import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/place%20purchase%20order/container_data.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
@@ -22,6 +24,7 @@ class PlacePurchaseOrderBody extends StatefulWidget{
 }
 class MyPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
   TextEditingController dateinput = TextEditingController();
+  TextEditingController remarks = TextEditingController();
   VoucherTypeDropdownBloc voucherTypeDropdownBloc;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
   IndentorNameDropdownBloc dropdownBlocIndentorName;
@@ -243,6 +246,30 @@ class MyPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
 
             sizedbox1,
             formsHeadText("Remarks:"),
+            Container(
+              height: 50,
+              padding: padding1,
+              decoration: decoration1(),
+              child: SizedBox(
+                width: 320,
+                child: StreamBuilder<String>(
+                  stream: bloc.outtextField,
+                  builder: (context, snapshot) => TextFormField(
+                    controller: remarks,
+                    onChanged: bloc.intextField,
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: primaryColor8,
+                        enabledBorder: textFieldBorder(),
+                        focusedBorder: textFieldBorder(),
+                        errorText: snapshot.error
+                    ),
+                    keyboardType: TextInputType.text,
+                    style: simpleTextStyle7(),
+                  ),
+                ),
+              ),
+            ),
             sizedbox1,
             Padding(
                 padding: padding4,
