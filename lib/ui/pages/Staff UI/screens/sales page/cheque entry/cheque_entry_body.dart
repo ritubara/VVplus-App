@@ -123,17 +123,17 @@ class ChequeEntryBody extends StatelessWidget {
                   ],
                   ),
 
-                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30,vertical: 60),
-                      child: CustomTabBar(),
-                    ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30,vertical: 60),
+                    child: CustomTabBar(),
+                  ),
 
 
-              ],
+                ],
+              ),
             ),
           ),
-      ),
-      ],
+        ],
       ),
     );
   }

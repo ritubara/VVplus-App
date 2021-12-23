@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/Goods_Receipt_Entry/goods_receipt_entry_page.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/Material_request_entry/material_request_entry_page.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/purchase%20page/place%20purchase%20order/place_purchase_order.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
-import 'Material Request Entry/material_entrt_body.dart';
-import 'goods recepit entry/goods_recepit_entry.dart';
 import 'material_request_approval/material_request_approval.dart';
 
 class PurchaseBody extends StatelessWidget{
@@ -62,7 +62,7 @@ class PurchaseBody extends StatelessWidget{
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const MaterialEntryBody()));
+                        builder: (context) => const MaterialReqEntry()));
               }),
 
               roundedButtonHome(text39, () {

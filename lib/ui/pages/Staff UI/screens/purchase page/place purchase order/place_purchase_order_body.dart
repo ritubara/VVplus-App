@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/indentor_name_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
-import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Purchase_Page_Bloc/place_purchase_order_page_bloc.dart';
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/infrastructure/Repository/department_name_repository.dart';
@@ -61,7 +61,7 @@ class MyPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = MaterialProvider.of(context);
+    final bloc = PlacePurchaseOrderProvider.of(context);
     return RefreshIndicator(
       triggerMode: RefreshIndicatorTriggerMode.onEdge,
       edgeOffset: 20,

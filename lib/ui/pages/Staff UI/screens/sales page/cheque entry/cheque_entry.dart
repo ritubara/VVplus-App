@@ -14,12 +14,12 @@ class ChequeEntry extends StatefulWidget{
 class MyChequeEntry extends State<ChequeEntry> {
   @override
   Widget build(BuildContext context) {
-   return MaterialProvider(
-     child: Scaffold(
-       appBar: appBarSatff("Cheque Entry/Update"),
-       body: const ChequeEntryBody(),
-       bottomNavigationBar: const BottomNavBarStaff(),
-     ),
-   );
+    return MaterialProvider(
+      child: Scaffold(
+        appBar: appBarSatff("Cheque Entry/Update"),
+        body: const ChequeEntryBody(),
+        bottomNavigationBar: const BottomNavBarStaff(),
+      ),
+    );
   }
 }

@@ -284,7 +284,7 @@ class SearchDropDown extends StatefulWidget {
 class MySearchDropdown extends State<SearchDropDown> {
   @override
   Widget build(BuildContext context) {
-    //final bloc = MaterialProvider.of(context);
+    //final Login_Page_Bloc = MaterialProvider.of(context);
     return Padding(
       padding: padding1,
       child: Container(
@@ -292,7 +292,7 @@ class MySearchDropdown extends State<SearchDropDown> {
         width: 343,
         decoration: decorationForms(),
         child: StreamBuilder(
-          //stream: bloc.outDropField3,
+          //stream: Login_Page_Bloc.outDropField3,
           builder: (context, snapshot) => DropdownSearch<String>(
             mode: Mode.DIALOG,
             showSearchBox: true,
@@ -300,7 +300,7 @@ class MySearchDropdown extends State<SearchDropDown> {
             //selectedItem: "India",
             //label: "Country",
             items: itemsNames,
-            //onChanged: bloc.inDropField3,
+            //onChanged: Login_Page_Bloc.inDropField3,
             hint: "Search",
           ),
         ),
@@ -318,7 +318,7 @@ class ContainerSearchDropDown extends StatefulWidget {
 class MyContainerSearchDropdown extends State<ContainerSearchDropDown> {
   @override
   Widget build(BuildContext context) {
-    //final bloc = MaterialProvider.of(context);
+    //final Login_Page_Bloc = MaterialProvider.of(context);
     return Padding(
       padding: padding1,
       child: Container(
@@ -326,7 +326,7 @@ class MyContainerSearchDropdown extends State<ContainerSearchDropDown> {
         width: 343,
         decoration: containerDecorationForms(),
         child: StreamBuilder(
-          //stream: bloc.outDropField3,
+          //stream: Login_Page_Bloc.outDropField3,
           builder: (context, snapshot) => DropdownSearch<String>(
             mode: Mode.DIALOG,
             showSearchBox: true,
@@ -334,7 +334,7 @@ class MyContainerSearchDropdown extends State<ContainerSearchDropDown> {
             //selectedItem: "India",
             //label: "Country",
             items: itemsNames,
-            //onChanged: bloc.inDropField3,
+            //onChanged: Login_Page_Bloc.inDropField3,
             hint: "Search",
           ),
         ),
@@ -362,7 +362,7 @@ class _SearchChoiceDropdownState extends State<SearchChoiceDropdown> {
               width: 343,
               decoration: decorationForms(),
               child: StreamBuilder(
-                  //stream: bloc.outDropField1,
+                  //stream: Login_Page_Bloc.outDropField1,
                   builder: (context, snapshot) {
                     return SearchChoices.single(
                       icon: const Icon(Icons.keyboard_arrow_down_sharp),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vvplus_app/Application/Bloc/staff%20bloc/staff_provider.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Store_Page_Bloc/phase_to_phase_transfer_bloc.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/Phase%20to%20Phase%20Transfer/phase_to_phase_transfer_body.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/appbar_staff.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_bottomnavbar.dart';
@@ -14,7 +14,7 @@ class PhaseToPhaseTransferPage extends StatefulWidget{
 class _PhaseToPhaseTransferPageState extends State<PhaseToPhaseTransferPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialProvider(
+    return PhaseToPhaseTransferProvider(
       child: Scaffold(
         appBar: appBarSatff("Phase to Phase Transfer"),
         body: const PhaseToPhaseTransferBody(),
