@@ -48,6 +48,12 @@ class MaterialEntryBody extends StatefulWidget {
 
 class MyMaterialEntryBody extends State<MaterialEntryBody> {
 
+  bool isActive = false;
+  bool pressed = false;
+  void clearData(){
+    reqQty.clear();
+  }
+
   TextEditingController intendDateInput = TextEditingController();
   TextEditingController reqDateInput = TextEditingController();
   TextEditingController indentType = TextEditingController();
@@ -80,6 +86,14 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
 
   @override
   void initState() {
+    super.initState();
+    reqQty = TextEditingController();
+    reqQty.addListener(() {
+      if (isActive = reqQty.text.isNotEmpty) {
+        isActive = true;
+      }
+      setState(() => this.isActive = isActive);
+    });
     intendDateInput.text = "";
     reqDateInput.text="";
     dropdownBlocIndentorName = IndentorNameDropdownBloc();
@@ -108,7 +122,6 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
     });
   }
 
-  bool pressed = false;
   int valueChoose = 4;
 
   onClear(){
@@ -375,22 +388,25 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                       ),
 
 
-                      StreamBuilder<bool>(
-                          stream: bloc.submitCheck,
-                          builder: (context, snapshot) {
-                            return RoundedButtonInput(
+
+                             RoundedButtonInput(
                               text: "Add Item to List",
-                              press: !snapshot.hasData ? null: (){
-                              } ,
+                              press: isActive
+                                  ? () {
+                               // sendDataItem();
+                                setState(() {
+                                  pressed = true;
+                                });
+                                //clearData();
+                              }
+                                  : null,
                               fontsize1: 12,
                               size1: 0.5,
                               horizontal1: 30,
                               vertical1: 10,
                               color1: Colors.orange,
                               textColor1: textColor1,
-                            );
-                          }
-                      ),
+                            ),
                     ],
                   )
                 ],
