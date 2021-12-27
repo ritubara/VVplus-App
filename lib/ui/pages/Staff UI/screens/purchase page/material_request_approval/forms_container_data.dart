@@ -49,7 +49,6 @@ class _MaterialApprovalPageContainerDataState
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      isActive = true;
                       setState(() {
                         isActive = true;
                         this.isActive = isActive;
