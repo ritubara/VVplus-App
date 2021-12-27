@@ -20,12 +20,14 @@ class MaterialRequestApprovalBody extends StatefulWidget{
   State<MaterialRequestApprovalBody> createState() => MyMaterialRequestApprovalBody();
 }
 class MyMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
-
+  bool isActive = false;
+  bool pressed = false;
   TextEditingController dateinput = TextEditingController();
   IndentorNameDropdownBloc _dropdownBloc;
   bool pressAttention = false;
   @override
   void initState() {
+
     dateinput.text = "";
     _dropdownBloc = IndentorNameDropdownBloc();
     super.initState();
@@ -121,22 +123,18 @@ class MyMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
           //SizedBox(height: 10,),
           //const InformationBoxContainer1(),
           const MaterialApprovalPageContainerData(),
-          sizedbox1,
+        /*  sizedbox1,
           Padding(
               padding: padding4,
-              child: roundedButtonHome2("Approve",(){},roundedButtonHomeColor1)),
+              child: roundedButtonHome2("Approve",(){
+
+              },roundedButtonHomeColor1)),
           Padding(
               padding: padding4,
               child: roundedButtonHome2("Deny",(){},roundedButtonHomeColor2)),
           Padding(
               padding: padding4,
-              child: roundedButtonHome2("Wait",(){},roundedButtonHomeColor3)),
-          Padding(
-              padding: padding4,
-              child: roundedButtonHome2(
-                  "Wait",
-                      (){setState(() => pressAttention = !pressAttention);},
-                  pressAttention ? Colors.grey :roundedButtonHomeColor3)),
+              child: roundedButtonHome2("Wait",(){},roundedButtonHomeColor3)),*/
         ],
       ),
     );
