@@ -1,14 +1,27 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Customer_Bloc/NewComplaint_Bloc/new_complaint_bloc.dart';
+import 'package:vvplus_app/service/Media/cloud_storage.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'dart:io' as io;
+import 'package:http/http.dart' as http;
+import 'package:path/path.dart' as Path;
 
 
 class NewComplaintPageBody extends StatefulWidget{
@@ -17,6 +30,189 @@ class NewComplaintPageBody extends StatefulWidget{
   _NewComplaintPageBodyState createState() => _NewComplaintPageBodyState();
 }
 class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
+
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _branchAndCity = TextEditingController();
+  final TextEditingController _unitNumber = TextEditingController();
+  final TextEditingController _problem = TextEditingController();
+  File imageFile;
+  final _storage = FirebaseStorage.instance;
+  String imgUrl;
+
+  sendData() async {
+    //UploadTask uploadTask = postImageRef.child(timeKey.toString() + ".jpg").putFile(imageFile);
+   // var storageImage = FirebaseStorage.instance.ref().child(imageFile.path);
+   // var task = storageImage.putFile(imageFile);
+  //  imgUrl = await (await uploadTask).ref.getDownloadURL();
+  //  await FirebaseFirestore.instance.collection('Course').add({'img':imgUrl});
+  // Reference ref = FirebaseStorage.instance.ref().child("unique_name.jpg");
+    // await ref.putFile(imageFile);
+   //  String imgUrl = await ref.getDownloadURL();
+  // print(imgUrl);
+    /*
+    Reference reference = _storage.ref().child(imageFile.path);
+
+    final TaskSnapshot snapshot = await reference.putFile(imageFile);
+
+    final downloadUrl = await snapshot.ref.getDownloadURL();
+    print(downloadUrl);
+
+     */
+    Reference storageRef = FirebaseStorage.instance.ref('images');
+    //file = await _compressImage(file: file,);
+    await storageRef.putFile(imageFile);
+    final String downloadUrl = await storageRef.getDownloadURL();
+    return downloadUrl;
+  }
+  Future<String> saveuserImage(File file) async {
+    try {
+      Reference ref =
+      _storage.ref().child('images/.${file.path}');
+      UploadTask task = ref.putFile(File(file.path));
+      return await task.then(
+            (result) => result.ref.getDownloadURL(),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  _imgFromGallery() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+  }
+  _imgFromCamera() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+  }
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                    leading: const Icon(Icons.photo_library),
+                    title: const Text('Photo Library'),
+                    onTap: () {
+                      _imgFromGallery();
+                      Navigator.of(context).pop();
+                    }),
+                ListTile(
+                  leading: const Icon(Icons.photo_camera),
+                  title: const Text('Camera'),
+                  onTap: () {
+                    _imgFromCamera();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+    );
+  }
+  String imageUrl;
+
+  uploadImage() async {
+
+      if (imageFile != null){
+        //Upload to Firebase
+        var snapshot = await _storage.ref()
+            .child('images/')
+            .putFile(imageFile);
+
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+
+        setState(() {
+          imageUrl = downloadUrl;
+          print(imageUrl);
+        });
+      } else {
+        print('No Path Received');
+      }
+
+
+
+
+  }
+  Future uploadImageToFirebase(BuildContext context) async {
+    String fileName = Path.basename(imageFile.path);
+    firebase_storage.Reference ref =
+    firebase_storage.FirebaseStorage.instance
+        .ref().child('images').child('chats/$fileName');
+
+    final metadata = firebase_storage.SettableMetadata(
+        contentType: 'image/jpeg',
+        customMetadata: {'chats': fileName});
+    firebase_storage.UploadTask uploadTask;
+    //StorageUploadTask uploadTask = firebaseStorageRef.putFile(_imageFile);
+    uploadTask = ref.putFile(io.File(imageFile.path), metadata);
+
+    firebase_storage.UploadTask task= await Future.value(uploadTask);
+    Future.value(uploadTask).then((value) => {
+      print("Upload file path ${value.ref.fullPath}")
+    }).onError((error, stackTrace) => {
+      print("Upload file path error ${error.toString()} ")
+    });
+
+
+
+  }
+  Future uploadImageToFirebase1(BuildContext context) async {
+  //  String fileName = Path.basename(imageFile.path);
+   // Reference firebaseStorageRef =
+   // FirebaseStorage.instance.ref().child('uploads/$fileName');
+   // UploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
+   // TaskSnapshot taskSnapshot = (await uploadTask.whenComplete) as TaskSnapshot;
+  //  taskSnapshot.ref.getDownloadURL().then(
+    //      (value) => print("Done: $value"),
+   // );
+    String fileName = Path.basename(imageFile.path);
+    Reference reference = _storage.ref('images');
+    final TaskSnapshot snapshot = await reference.putFile(imageFile);
+    final downloadUrl = await snapshot.ref.getDownloadURL();
+    print(downloadUrl);
+  }
+
+/*
+  CloudStorage storage;
+  sendData() async{
+    //String imgurl = await storage.saveuserImage(imageFile);
+      http.post(Uri.parse(
+          "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataDailyManPower.json"),
+          body: json.encode({
+            "Remarks": imageFile
+          }));
+      print("Successfull2");
+  }
+  Future<PlatformFile> imagefromLibrary() async {
+    FilePickerResult result =
+    await FilePicker.platform.pickFiles(type: FileType.image);
+    if (result != null) {
+      return result.files[0];
+    }
+    return null;
+  }
+
+ */
 
   @override
   Widget build(BuildContext context) {
@@ -38,30 +234,111 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: const TextFieldDecoration(),
+                    child: StreamBuilder<String>(
+                        stream: bloc.outTextField1,
+                        builder: (context, snapshot) {
+                          return TextFormField(
+                            controller: _name,
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: bloc.inTextField1,
+                            style: simpleTextStyle7(),
+                            decoration:InputDecoration(
+                              fillColor: primaryColor3,
+                              filled: true,
+                              enabledBorder: newComplaintTextFieldOutlineBorder(),
+                              focusedBorder: newComplaintTextFieldOutlineBorder(),
+                              prefix: Padding(padding: newComplaintTextPadding,),
+                              hintText: "Name",
+                              hintStyle: const TextStyle(color: primaryColor4,),
+                              errorText: snapshot.error,
+                            ),
+                          );
+                        }
+                    ),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: const TextFieldDecoration(),
+                    child: StreamBuilder<String>(
+                        stream: bloc.outTextField2,
+                        builder: (context, snapshot) {
+                          return TextFormField(
+                            controller: _branchAndCity,
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: bloc.inTextField2,
+                            style: simpleTextStyle7(),
+                            decoration:InputDecoration(
+                              fillColor: primaryColor3,
+                              filled: true,
+                              enabledBorder: newComplaintTextFieldOutlineBorder(),
+                              focusedBorder: newComplaintTextFieldOutlineBorder(),
+                              prefix: Padding(padding: newComplaintTextPadding,),
+                              hintText: "Branch and City",
+                              hintStyle: const TextStyle(color: primaryColor4,),
+                              errorText: snapshot.error,
+                            ),
+                          );
+                        }
+                    ),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 50,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: const TextFieldDecoration(),
+                    child: StreamBuilder<String>(
+                        stream: bloc.outTextField3,
+                        builder: (context, snapshot) {
+                          return TextFormField(
+                            controller: _unitNumber,
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: bloc.inTextField3,
+                            style: simpleTextStyle7(),
+                            decoration:InputDecoration(
+                              fillColor: primaryColor3,
+                              filled: true,
+                              enabledBorder: newComplaintTextFieldOutlineBorder(),
+                              focusedBorder: newComplaintTextFieldOutlineBorder(),
+                              prefix: Padding(padding: newComplaintTextPadding,),
+                              hintText: "Unit Number",
+                              hintStyle: const TextStyle(color: primaryColor4,),
+                              errorText: snapshot.error,
+                            ),
+                          );
+                        }
+                    ),
                   ),
                   const SizedBox(height: 13),
                   Container(
                     height: 97,
                     padding: padding1,
                     decoration: decoration1(),
-                    child: const TextFieldDecoration(),
+                    child: StreamBuilder<String>(
+                        stream: bloc.outTextField4,
+                        builder: (context, snapshot) {
+                          return TextFormField(
+                            controller: _problem,
+                            keyboardType: TextInputType.emailAddress,
+                            onChanged: bloc.inTextField4,
+                            style: simpleTextStyle7(),
+                            maxLines:3,
+                            decoration:InputDecoration(
+                              fillColor: primaryColor3,
+                              filled: true,
+                              enabledBorder: newComplaintTextFieldOutlineBorder(),
+                              focusedBorder: newComplaintTextFieldOutlineBorder(),
+                              prefix: Padding(padding: newComplaintTextPadding,),
+                              hintText: textNewComplaint,
+                              hintStyle: const TextStyle(color: primaryColor4,),
+                              errorText: snapshot.error,
+                            ),
+                          );
+                        }
+                    ),
                   ),
-                 const SizedBox(height: 1,),
+                 const SizedBox(height: 18,),
                   Padding(
                     padding: const EdgeInsets.only(left: 35),
                     child: Text(
@@ -112,42 +389,10 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                     ),
                   ),
                   const SizedBox(height: 10,),
-                  Padding(
-                      padding: padding1,
-                      child: DottedBorder(
-                        color: primaryColor2,
-                        strokeWidth: 1.5,
-                        dashPattern: const [10,6],
-                        child: Container(
-                          child: Column(
-                            children:  [
-                              Padding(
-                                  padding: padding5,
-                                  child: Image.asset(image3)
-                              ),
-                              Padding(
-                                  padding: padding6,
-                                  child: Image.asset(image4)
-                              ),
-                                Padding(
-                                padding: padding7,
-                                child: const Text(
-                                  text23,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ),
-                            ],
-                          ),
-                          height:140,
-                          width: double.infinity,
-                          color:primaryColor3,
-                        ),
-                      )
-                  ),
+                  imageBoxContainer(context),
                   const SizedBox(height: 12),
                   GestureDetector(                                                   //Onpressed
-                    onTap: () {},
+                    onTap: () {uploadImageToFirebase1(context);},
                     child: Padding(
                       padding: const EdgeInsets.only(left: 35),
                       child: Container(
@@ -170,12 +415,61 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               ],
             ),
           ),
         );
+  }
+  Widget imageBoxContainer(BuildContext context) {
+    return GestureDetector(
+      onTap: () {_showPicker(context);},
+      child: imageFile == null
+          ? Padding(
+          padding: padding1,
+          child: DottedBorder(
+            color: primaryColor2,
+            strokeWidth: 1.5,
+            dashPattern: const [10,6],
+            child: Container(
+              child: Column(
+                children:  [
+                  Padding(
+                      padding: padding5,
+                      child: Image.asset(image3)
+                  ),
+                  Padding(
+                      padding: padding6,
+                      child: Image.asset(image4)
+                  ),
+                  Padding(
+                    padding: padding7,
+                    child: const Text(
+                      text23,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                ],
+              ),
+              height:140,
+              width: double.infinity,
+              color:primaryColor3,
+            ),
+          )
+      ):Padding(
+        padding: padding1,
+        child: SizedBox(
+          height: 140,
+          width: double.infinity,
+          child: Image.file(
+            imageFile,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
   }
 }
