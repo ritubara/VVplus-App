@@ -1,10 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:search_choices/search_choices.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdown_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/indentor_name_dropdown_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Sales_page_bloc/discount_approval_bloc.dart';
+import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
+import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
+import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
@@ -18,9 +26,43 @@ class DiscountApprovalBody extends StatefulWidget {
 }
 class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
   TextEditingController dateinput = TextEditingController();
+  DepartmentNameDropdownBloc departmentNameDropdownBloc;
+  VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
+  VoucherTypeDropdownBloc voucherTypeDropdownBloc2;
+  IndentorNameDropdownBloc indentorNameDropdownBloc;
+
+  DepartmentName selectDepartmentName;
+  VoucherType selectVoucherType1;
+  VoucherType selectVoucherType2;
+  IndentorName selectIndentorName;
+
+  void onDataChange1(DepartmentName state) {
+    setState(() {
+      selectDepartmentName = state;
+    });
+  }
+  void onDataChange2(VoucherType state) {
+    setState(() {
+      selectVoucherType1 = state;
+    });
+  }
+  void onDataChange3(VoucherType state) {
+    setState(() {
+      selectVoucherType2 = state;
+    });
+  }
+  void onDataChange4(IndentorName state) {
+    setState(() {
+      selectIndentorName = state;
+    });
+  }
   @override
   void initState() {
     dateinput.text = "";
+    departmentNameDropdownBloc = DepartmentNameDropdownBloc();
+    voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
+    voucherTypeDropdownBloc2 = VoucherTypeDropdownBloc();
+    indentorNameDropdownBloc = IndentorNameDropdownBloc();
     super.initState();
   }
   int valueChoose = 4;
@@ -76,20 +118,110 @@ class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
           sizedbox1,
           formsHeadText("Branch and Phase"),
           Padding(
-            padding: paddingForms,
-            child: const SearchDropDown(),
+            padding: padding1,
+            child: Container(
+              height: 50, width: 343,
+              decoration: decorationForms(),
+              child: FutureBuilder<List<VoucherType>>(
+                  future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                  builder: (context, snapshot) {
+                    return StreamBuilder<VoucherType>(
+                        stream: voucherTypeDropdownBloc1.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<VoucherType>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: selectVoucherType1,
+                            displayClearIcon: false,
+                            onChanged: onDataChange2,
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<VoucherType>>((e) {
+                              return DropdownMenuItem<VoucherType>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
+                    );
+                  }
+              ),
+            ),
           ),
           sizedbox1,
           formsHeadText("Requested By"),
           Padding(
-            padding: paddingForms,
-            child: const SearchDropDown(),
+            padding: padding1,
+            child: Container(
+              height: 50, width: 343,
+              decoration: decorationForms(),
+              child: FutureBuilder<List<DepartmentName>>(
+                  future: departmentNameDropdownBloc.departmentNameData,
+                  builder: (context, snapshot) {
+                    return StreamBuilder<DepartmentName>(
+                        stream: departmentNameDropdownBloc.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<DepartmentName>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: selectDepartmentName,
+                            displayClearIcon: false,
+                            onChanged: onDataChange1,
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                              return DropdownMenuItem<DepartmentName>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
+                    );
+                  }
+              ),
+            ),
           ),
           sizedbox1,
           formsHeadText("Reason for Discount"),
           Padding(
-            padding: paddingForms,
-            child: const SearchDropDown(),
+            padding: padding1,
+            child: Container(
+              height: 50, width: 343,
+              decoration: decorationForms(),
+              child: FutureBuilder<List<VoucherType>>(
+                  future: voucherTypeDropdownBloc2.voucherTypeDropdownData,
+                  builder: (context, snapshot) {
+                    return StreamBuilder<VoucherType>(
+                        stream: voucherTypeDropdownBloc2.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<VoucherType>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: selectVoucherType2,
+                            displayClearIcon: false,
+                            onChanged: onDataChange3,
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<VoucherType>>((e) {
+                              return DropdownMenuItem<VoucherType>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
+                    );
+                  }
+              ),
+            ),
           ),
           sizedbox1,
           formsHeadText("Remarks"),
@@ -119,8 +251,38 @@ class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
           sizedbox1,
           formsHeadText("Customer Name"),
           Padding(
-            padding: paddingForms,
-            child: const SearchDropDown(),
+            padding: padding1,
+            child: Container(
+              height: 50, width: 343,
+              decoration: decorationForms(),
+              child: FutureBuilder<List<IndentorName>>(
+                  future: indentorNameDropdownBloc.indentorNameDropdownData,
+                  builder: (context, snapshot) {
+                    return StreamBuilder<IndentorName>(
+                        stream: indentorNameDropdownBloc.selectedState,
+                        builder: (context, item) {
+                          return SearchChoices<IndentorName>.single(
+                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                            underline: "",
+                            padding: 1,
+                            isExpanded: true,
+                            hint: "Search here",
+                            value: selectIndentorName,
+                            displayClearIcon: false,
+                            onChanged: onDataChange4,
+                            items: snapshot?.data
+                                ?.map<DropdownMenuItem<IndentorName>>((e) {
+                              return DropdownMenuItem<IndentorName>(
+                                value: e,
+                                child: Text(e.strName),
+                              );
+                            })?.toList() ??[],
+                          );
+                        }
+                    );
+                  }
+              ),
+            ),
           ),
           sizedbox1,
           formsHeadText("Customer Contact No."),

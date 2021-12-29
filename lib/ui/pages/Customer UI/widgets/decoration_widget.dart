@@ -4,6 +4,16 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
+
+// new complaint page widget
+
+OutlineInputBorder newComplaintTextFieldOutlineBorder() {
+  return OutlineInputBorder(
+      borderSide: const BorderSide(color: primaryColor2),
+      borderRadius: BorderRadius.circular(10));
+}
+var newComplaintTextPadding = const EdgeInsets.symmetric(horizontal: 8);
+
 class TextFieldDecoration extends StatefulWidget {
   //final String hintText;
   //final double borderRadiusValue;
@@ -20,11 +30,11 @@ class _TextFieldDecorationState extends State<TextFieldDecoration>{
     //String hintText;
     //double borderRadiusValue;
     return StreamBuilder<String>(
-        stream: bloc.textField,
+        stream: bloc.outTextField1,
         builder: (context, snapshot) {
           return TextFormField(
             keyboardType: TextInputType.emailAddress,
-            onChanged: bloc.textFieldChanged,
+            onChanged: bloc.inDropField1,
             style: simpleTextStyle7(),
             decoration:InputDecoration(
               fillColor: primaryColor3,
