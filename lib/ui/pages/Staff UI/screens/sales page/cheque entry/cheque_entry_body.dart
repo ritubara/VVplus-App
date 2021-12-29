@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/Custom_Tab_Bar_Item/cleared.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/Custom_Tab_Bar_Item/deposit.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/Custom_Tab_Bar_Item/receive.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/custom_tab_bar.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -14,7 +17,6 @@ class ChequeEntryBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-
           DefaultTabController(
             length: 3,
             initialIndex: 0,
@@ -23,103 +25,13 @@ class ChequeEntryBody extends StatelessWidget {
               child: Stack(
                 children: [
                   clearButton(),
-                  TabBarView(children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
-                        formsHeadText("Voucher Type"),
-                        const NormalTextFormField(),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Cheque Receiving Date"),
-                        const DateTextFormField(),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Payment Type"),
-                        const DropdownForm(),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Credit Account (customer name)"),
-                        const DateTextFormField(),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Debit Account (company):"),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Drawn Bank"),
-                        const DropdownForm(),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Customer Info:"),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Cheque No."),
-                        const NormalTextFormField(),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Amount"),
-                        const NormalTextFormField(),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 40),
-                            child: roundedButtonHome("Submit", () {})),
-                      ],
-                    ),
+                  const TabBarView(children: [
 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
-                        formsHeadText("Cheque Up To"),
-                        const DateTextFormField(),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Choose Cheque"),
-                        const DropdownForm(),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Bank:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Name of Customer:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Cheque Date:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Bank:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Amount:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Size:"),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Desposit Date"),
-                        const DateTextFormField(),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 40),
-                            child: roundedButtonHome("Submit", () {})),
-                      ],
-                    ),
+                    ChequeEntryReceiveBody(),
 
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
-                        formsHeadText("Deposit Up To"),
-                        const DateTextFormField(),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Choose Cheque"),
-                        const DropdownForm(),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Bank:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Name of Customer:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Cheque Date:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Bank:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Amount:"),
-                        Padding(padding: paddingForms),
-                        formsDetailText("Size:"),
-                        Padding(padding: paddingForms),
-                        formsHeadText("Cleared Date"),
-                        const DateTextFormField(),
-                        Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 40),
-                            child: roundedButtonHome("Submit", () {})),
-                      ],
-                    ),
+                    ChequeEntryDepositBody(),
+
+                    ChequeEntryClearedBody(),
                   ],
                   ),
 
@@ -127,8 +39,6 @@ class ChequeEntryBody extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 30,vertical: 60),
                     child: CustomTabBar(),
                   ),
-
-
                 ],
               ),
             ),
