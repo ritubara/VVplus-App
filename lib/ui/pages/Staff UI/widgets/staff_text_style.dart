@@ -32,4 +32,7 @@ TextStyle containerTextStyle8() {
 TextStyle containerTextStyle9() {
   return textStyle1(boxDecorationTextColor6,12,FontWeight.w500);
 }
+TextStyle containerTextStyle10() {
+  return textStyle1(boxDecorationTextColor1,12,FontWeight.w500);
+}
 
