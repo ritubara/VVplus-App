@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
@@ -19,7 +20,7 @@ class _Page1State extends State<Page1> {
   fetchData1() async {
 
     http.Response response =
-    await http.get(Uri.parse('https://vv-plus-app-default-rtdb.firebaseio.com/PostItemDetails.json'));
+    await http.get(Uri.parse(ApiService.mockDataPostItemDetail));
     setState(() {
       data = json.decode(response.body);
     });
@@ -79,7 +80,7 @@ class _Page1State extends State<Page1> {
                           Row(
                             //mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
+                            children: const <Widget>[
 
                             ],
                           ),

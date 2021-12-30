@@ -80,6 +80,7 @@ class MyGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                // ignore: deprecated_member_use
                 RaisedButton(
                   onPressed: () {
                     dateinput.clear();

@@ -74,6 +74,7 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                // ignore: deprecated_member_use
                 RaisedButton(
                   onPressed: () {},
                   elevation: 0.0,

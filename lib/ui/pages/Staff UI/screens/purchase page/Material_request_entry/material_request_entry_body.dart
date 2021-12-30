@@ -7,6 +7,7 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/indentor_name_dropdown
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_current_status_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Purchase_Page_Bloc/material_request_entry_page_bloc.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
@@ -69,7 +70,6 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
   ItemCostCenterDropdownBloc dropdownBlocItemCostCenter;
   double _amount;
 
-  final GlobalKey<FormState> _formKey = GlobalKey();
   String Item = "";
   String Qty = "";
   String Rate="";
@@ -92,7 +92,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
       if (isActive = reqQty.text.isNotEmpty) {
         isActive = true;
       }
-      setState(() => this.isActive = isActive);
+      setState(() => isActive = isActive);
     });
     intendDateInput.text = "";
     reqDateInput.text="";
@@ -150,8 +150,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
     });
   }
   sendData() {
-    http.post(Uri.parse(
-        "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataMaterialRequestEntry.json"),
+    http.post(Uri.parse(ApiService.mockDataPostMaterialRequestEntryURL),
         body: json.encode({
           "IndentSubCode":selectIndentName.strSubCode,
           "IntendDate":intendDateInput.text,
@@ -178,6 +177,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                // ignore: deprecated_member_use
                 RaisedButton(
                   onPressed: () {onClear();},
                   elevation: 0.0,
@@ -379,6 +379,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                   Row(
                     children: [
                       const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                      // ignore: deprecated_member_use
                       RaisedButton(
                         onPressed: () {},
                         elevation: 0.0,

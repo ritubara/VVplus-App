@@ -4,7 +4,6 @@ import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/indentor_name_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
-import 'package:vvplus_app/Application/Bloc/staff%20bloc/Store_Page_Bloc/branch_to_branch_receive_bloc.dart';
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
@@ -113,7 +112,6 @@ class MyBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = BranchToBranchReceiveProvider.of(context);
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -124,6 +122,7 @@ class MyBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                // ignore: deprecated_member_use
                 RaisedButton(
                   onPressed: () {},
                   elevation: 0.0,

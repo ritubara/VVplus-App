@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
-import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'dart:convert';
@@ -21,8 +21,7 @@ class _MaterialApprovalPageContainerDataState
   bool isActive = false;
 
   fetchData1() async {
-    http.Response response = await http.get(Uri.parse(
-        'https://vv-plus-app-default-rtdb.firebaseio.com/PostDataMaterialRequestEntry.json'));
+    http.Response response = await http.get(Uri.parse(ApiService.mockDataPostMaterialRequestEntryURL));
     setState(() {
       data = json.decode(response.body);
     });
@@ -51,7 +50,7 @@ class _MaterialApprovalPageContainerDataState
                     onTap: () {
                       setState(() {
                         isActive = true;
-                        this.isActive = isActive;
+                        isActive = isActive;
                       });
                       print("no");
                     },
@@ -224,7 +223,7 @@ class _MaterialApprovalPageContainerDataState
                       onSurface: primaryColor1,
                     ),
                     onPressed: isActive ? () {} : null,
-                    child: Text("Approve")),
+                    child: const Text("Approve")),
               ),
               sizedbox1,
               SizedBox(
@@ -238,7 +237,7 @@ class _MaterialApprovalPageContainerDataState
                       onSurface: primaryColor6,
                     ),
                     onPressed: isActive ? () {} : null,
-                    child: Text("Deny")),
+                    child: const Text("Deny")),
               ),
               sizedbox1,
               SizedBox(
@@ -252,7 +251,7 @@ class _MaterialApprovalPageContainerDataState
                       onSurface: primaryColor5,
                     ),
                     onPressed: isActive ? () {} : null,
-                    child: Text("Wait")),
+                    child: const Text("Wait")),
               ),
               sizedbox1,
             ]),

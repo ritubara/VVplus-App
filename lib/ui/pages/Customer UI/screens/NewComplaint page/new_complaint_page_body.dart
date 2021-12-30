@@ -1,27 +1,22 @@
-import 'dart:convert';
+// ignore_for_file: missing_return, deprecated_member_use
+
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Customer_Bloc/NewComplaint_Bloc/new_complaint_bloc.dart';
-import 'package:vvplus_app/service/Media/cloud_storage.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:vvplus_app/ui/widgets/constants/text_feild.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io' as io;
-import 'package:http/http.dart' as http;
-import 'package:path/path.dart' as Path;
+import 'package:path/path.dart' as path;
 
 
 class NewComplaintPageBody extends StatefulWidget{
@@ -154,7 +149,7 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
 
   }
   Future uploadImageToFirebase(BuildContext context) async {
-    String fileName = Path.basename(imageFile.path);
+    String fileName = path.basename(imageFile.path);
     firebase_storage.Reference ref =
     firebase_storage.FirebaseStorage.instance
         .ref().child('images').child('chats/$fileName');
@@ -185,7 +180,7 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
   //  taskSnapshot.ref.getDownloadURL().then(
     //      (value) => print("Done: $value"),
    // );
-    String fileName = Path.basename(imageFile.path);
+    String fileName = path.basename(imageFile.path);
     Reference reference = _storage.ref('images');
     final TaskSnapshot snapshot = await reference.putFile(imageFile);
     final downloadUrl = await snapshot.ref.getDownloadURL();

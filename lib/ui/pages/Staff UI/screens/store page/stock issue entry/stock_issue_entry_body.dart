@@ -6,6 +6,7 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropd
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_current_status_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Store_Page_Bloc/stock_issue_entry_bloc.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
@@ -57,7 +58,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
       if (isActive = reqQty.text.isNotEmpty) {
         isActive = true;
       }
-      setState(() => this.isActive = isActive);
+      setState(() => isActive = isActive);
     });
     voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc2 = VoucherTypeDropdownBloc();
@@ -104,8 +105,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
   }
 
   sendDataStockReceive(){
-    http.post(Uri.parse(
-        "https://vv-plus-app-default-rtdb.firebaseio.com/PostStockIssueReq.json"),
+    http.post(Uri.parse(ApiService.mockDataPostStockIssueEntry),
         body: json.encode({
           "Voucher Type": selectVoucherType1.strName,
           "Issue By": selectVoucherType2.strName,
@@ -154,6 +154,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                // ignore: deprecated_member_use
                 RaisedButton(
                   onPressed: () {},
                   elevation: 0.0,
@@ -448,6 +449,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                     children: [
                       const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10)),
+                      // ignore: deprecated_member_use
                       RaisedButton(
                         onPressed: () {},
                         elevation: 0.0,
@@ -489,7 +491,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
           ),
           //-----------------------------------------------------------
           pressed?
-          Page1():SizedBox(),
+          const Page1():const SizedBox(),
 
           sizedbox1,
           formsHeadText("Total Amount:"),

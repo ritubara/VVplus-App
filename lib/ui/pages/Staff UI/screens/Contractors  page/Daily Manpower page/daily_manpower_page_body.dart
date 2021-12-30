@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdo
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
@@ -75,8 +78,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
   }
   sendData() {
     if (_qty.text != null) {
-      http.post(Uri.parse(
-          "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataDailyManPower.json"),
+      http.post(Uri.parse(ApiService.mockDataPostDailyManPowerURL),
           body: json.encode({
             "IntendDate": dateinput.text,
             "PartyNameSubCode": selectDepartmentName.strSubCode,

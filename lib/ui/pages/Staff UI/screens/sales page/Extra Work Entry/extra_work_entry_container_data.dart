@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
-import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'dart:convert';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';

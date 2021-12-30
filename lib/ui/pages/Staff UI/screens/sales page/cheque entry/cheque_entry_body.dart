@@ -4,9 +4,6 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20ent
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/Custom_Tab_Bar_Item/receive.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/custom_tab_bar.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
-import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
-import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class ChequeEntryBody extends StatelessWidget {
   const ChequeEntryBody({Key key}) : super(key: key);
