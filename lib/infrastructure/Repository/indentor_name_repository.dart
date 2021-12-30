@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
-import 'package:vvplus_app/data_source/api/api_details.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'dart:async';
 
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
@@ -11,7 +11,7 @@ class IndentorNameRepository {
 
   Future<List<IndentorName>> getData() async {
     try {
-      final response = await client.get(Uri.parse(mockDataIndentorNameURL));
+      final response = await client.get(Uri.parse(ApiService.mockDataIndentorNameURL));
       final items = (jsonDecode(response.body) as List)
           .map((e) => IndentorName.fromJson(e))
           .toList();

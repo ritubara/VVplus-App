@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' show Client;
 import 'package:http/http.dart' as http;
-import 'package:vvplus_app/data_source/api/api_details.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'dart:async';
 
 import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart';
@@ -12,7 +12,7 @@ class ItemCurrentStatusRepository {
 
   Future<List<ItemCurrentStatus>> getData() async {
     try {
-      final response = await client.get(Uri.parse(mockDataItemCurrentStatusURL));
+      final response = await client.get(Uri.parse(ApiService.mockDataItemCurrentStatusURL));
       final items = (jsonDecode(response.body) as List)
           .map((e) => ItemCurrentStatus.fromJson(e))
           .toList();
@@ -23,7 +23,7 @@ class ItemCurrentStatusRepository {
   }
 }
 Future<List<ItemCurrentStatus>> createUser( String strItemName, double dblQty,String strUnit) async{
-  final response = await http.post(Uri.parse(getItemCurrentStatusURL), body: {
+  final response = await http.post(Uri.parse(ApiService.getItemCurrentStatusURL), body: {
     "StrItemName": strItemName,
     "DblQty": dblQty,
     "StrUnit": strUnit,

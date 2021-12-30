@@ -82,6 +82,7 @@ class MyBranchtoBranchReceiveBody extends State<BranchtoBranchReceiveBody> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                // ignore: deprecated_member_use
                 RaisedButton(
                   onPressed: () {},
                   elevation: 0.0,

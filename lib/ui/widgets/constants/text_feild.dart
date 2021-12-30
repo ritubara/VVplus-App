@@ -53,7 +53,7 @@ const String text23 = "Browse to upload photo of house or photo of letter";
 const String text24 = "Upload Complaint";
 const String text25 = "Choose the type of complaint";
 const String text26 = "Constrcution? Poor Quality work? Legal matter? Cancelation?    Speed of work is slow? Land registry? ";
-
+const String textNewComplaint = "Write a detailed summary of your problem or you may upload a photo of a hand written letter";
 
 // use in progress page Stepper Widget
 

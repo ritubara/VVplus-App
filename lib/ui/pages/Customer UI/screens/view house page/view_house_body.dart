@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/Technical%20specs/technical_specs.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/screens/view%20house%20page/caruosel_slider.dart';

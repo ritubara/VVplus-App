@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:vvplus_app/Application/Bloc/Customer_Bloc/Stepper_bloc/stepper_bloc.dart';
 import 'package:vvplus_app/ui/Pages/Customer%20UI/widgets/decoration_widget.dart';
