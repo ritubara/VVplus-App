@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdown_bloc.dart';
-import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_current_status_dropdown_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
+import 'package:vvplus_app/Application/Bloc/staff%20bloc/Sales_page_bloc/cheque_entry_update_bloc.dart';
 import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
+import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/custom_tab_bar.dart';
+import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
+import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
+import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 class ChequeEntryReceiveBody extends StatefulWidget {
@@ -19,14 +25,16 @@ class ChequeEntryReceiveBody extends StatefulWidget {
 class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
 
   TextEditingController chequeReceivingDateInput = TextEditingController();
+  final TextEditingController voucherTypeInput = TextEditingController();
+  final TextEditingController chequeNoInput = TextEditingController();
+  final TextEditingController amountInput = TextEditingController();
   DepartmentNameDropdownBloc departmentNameDropdownBloc;
-  VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
-  VoucherTypeDropdownBloc voucherTypeDropdownBloc2;
-  ItemCurrentStatusDropdownBloc itemCurrentStatusDropdownBloc;
+  VoucherTypeDropdownBloc voucherTypeDropdownBloc;
+  ItemCostCenterDropdownBloc itemCostCenterDropdownBloc;
 
+  ItemCostCenter selectItemCostCenter;
+  VoucherType selectVoucherType;
   DepartmentName selectDepartmentName;
-  VoucherType selectVoucherType1;
-  VoucherType selectVoucherType2;
 
   void onDataChange1(DepartmentName state) {
     setState(() {
@@ -35,26 +43,26 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
   }
   void onDataChange2(VoucherType state) {
     setState(() {
-      selectVoucherType1 = state;
+      selectVoucherType = state;
     });
   }
-  void onDataChange3(VoucherType state) {
+  void onDataChange3(ItemCostCenter state) {
     setState(() {
-      selectVoucherType2 = state;
+      selectItemCostCenter = state;
     });
   }
   @override
   void initState() {
     chequeReceivingDateInput.text = "";
     departmentNameDropdownBloc = DepartmentNameDropdownBloc();
-    voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
-    voucherTypeDropdownBloc2 = VoucherTypeDropdownBloc();
-    itemCurrentStatusDropdownBloc = ItemCurrentStatusDropdownBloc();
+    voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
+    itemCostCenterDropdownBloc = ItemCostCenterDropdownBloc();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final bloc = ChequeEntryUpdateProvider.of(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +74,30 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
 
               formsHeadText("Voucher Type"),
 
-              const NormalTextFormField(),
+              Container(
+                height: 50,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField1,
+                    builder: (context, snapshot) => TextFormField(
+                      controller: voucherTypeInput,
+                      onChanged: bloc.intextField1,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          errorText: snapshot.error
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
+                    ),
+                  ),
+                ),
+              ),
 
               Padding(padding: paddingForms),
 
@@ -102,13 +133,79 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
 
               formsHeadText("Payment Type"),
 
-              const DropdownForm(),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 50, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<VoucherType>>(
+                      future: voucherTypeDropdownBloc.voucherTypeDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<VoucherType>(
+                            stream: voucherTypeDropdownBloc.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<VoucherType>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                                underline: "",
+                                padding: 1,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectVoucherType,
+                                displayClearIcon: false,
+                                onChanged: onDataChange2,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
 
               Padding(padding: paddingForms),
 
               formsHeadText("Credit Account (customer name)"),
 
-              const DateTextFormField(),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 50, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<DepartmentName>>(
+                      future: departmentNameDropdownBloc.departmentNameData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<DepartmentName>(
+                            stream: departmentNameDropdownBloc.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<DepartmentName>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                                underline: "",
+                                padding: 1,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectDepartmentName,
+                                displayClearIcon: false,
+                                onChanged: onDataChange1,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                                  return DropdownMenuItem<DepartmentName>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
 
               Padding(padding: paddingForms),
 
@@ -118,7 +215,40 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
 
               formsHeadText("Drawn Bank"),
 
-              const DropdownForm(),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 50, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<ItemCostCenter>>(
+                      future: itemCostCenterDropdownBloc.itemCostCenterData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<ItemCostCenter>(
+                            stream: itemCostCenterDropdownBloc.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<ItemCostCenter>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                                underline: "",
+                                padding: 1,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectItemCostCenter,
+                                displayClearIcon: false,
+                                onChanged: onDataChange3,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                  return DropdownMenuItem<ItemCostCenter>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
 
               Padding(padding: paddingForms),
 
@@ -128,13 +258,59 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
 
               formsHeadText("Cheque No."),
 
-              const NormalTextFormField(),
+              Container(
+                height: 50,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField2,
+                    builder: (context, snapshot) => TextFormField(
+                      controller: chequeNoInput,
+                      onChanged: bloc.intextField2,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          errorText: snapshot.error
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
+                    ),
+                  ),
+                ),
+              ),
 
               Padding(padding: paddingForms),
 
               formsHeadText("Amount"),
 
-              const NormalTextFormField(),
+              Container(
+                height: 50,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField3,
+                    builder: (context, snapshot) => TextFormField(
+                      controller: amountInput,
+                      onChanged: bloc.intextField3,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          errorText: snapshot.error
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
+                    ),
+                  ),
+                ),
+              ),
 
               Padding(
                   padding: const EdgeInsets.symmetric(
