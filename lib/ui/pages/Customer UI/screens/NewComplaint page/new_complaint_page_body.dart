@@ -1,4 +1,4 @@
-// ignore_for_file: missing_return, deprecated_member_use
+// ignore_for_file: missing_return, deprecated_member_use, avoid_print
 
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';

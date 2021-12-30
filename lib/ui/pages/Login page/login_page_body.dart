@@ -223,7 +223,7 @@ class PhoneNumberInput extends StatelessWidget {
 
 class OtpInput extends StatefulWidget {
   final FocusNode focusNode;
-  OtpInput({Key key, this.focusNode}) : super(key: key);
+  const OtpInput({Key key, this.focusNode}) : super(key: key);
   @override
   _OtpInputState createState() => _OtpInputState();
 }
@@ -293,10 +293,8 @@ class SubmitButton1 extends StatelessWidget {
           size1: 0.37,
           horizontal1: 30,
           vertical1: 17,
-          press: state.status.isValidated
-              ? () {Navigator.push(context, MaterialPageRoute(
-              builder: (context) => const HomePage()));}
-              : null,
+          press: () {Navigator.push(context, MaterialPageRoute(
+              builder: (context) => const HomePage()));},
           text: "Sign In",
         );
       },
