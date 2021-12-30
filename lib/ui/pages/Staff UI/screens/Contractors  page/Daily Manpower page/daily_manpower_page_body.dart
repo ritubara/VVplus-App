@@ -32,7 +32,7 @@ class DailyManpowerBody extends StatefulWidget {
 }
 class MyDailyManpowerBody extends State<DailyManpowerBody> {
 
-  TextEditingController dateinput = TextEditingController();
+  TextEditingController dateInput = TextEditingController();
   final TextEditingController _qty = TextEditingController();
   final TextEditingController _remarks = TextEditingController();
 
@@ -65,14 +65,14 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
   }
   @override
   void initState() {
-    dateinput.text = "";
+    dateInput.text = "";
     departmentNameDropdownBloc = DepartmentNameDropdownBloc();
     itemCostCenterDropdownBloc = ItemCostCenterDropdownBloc();
     voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
     super.initState();
   }
   void clearData(){
-    dateinput.clear();
+    dateInput.clear();
     _qty.clear();
     _remarks.clear();
   }
@@ -80,7 +80,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
     if (_qty.text != null) {
       http.post(Uri.parse(ApiService.mockDataPostDailyManPowerURL),
           body: json.encode({
-            "IntendDate": dateinput.text,
+            "IntendDate": dateInput.text,
             "PartyNameSubCode": selectDepartmentName.strSubCode,
             "CostCenterSubCode": selectItemCostCenter.strSubCode,
             "ResourceTypeSubCode": selectVoucherType.strSubCode,
@@ -123,7 +123,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
             height: dateFieldHeight,
             child: Center(
               child: TextFormField(
-                controller: dateinput,
+                controller: dateInput,
                 decoration: dateFieldDecoration(),
                 readOnly: true,
                 onTap: () async {
@@ -135,7 +135,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
                   if (pickedDate != null) {
                     String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                     setState(() {
-                      dateinput.text = formattedDate;
+                      dateInput.text = formattedDate;
                     });
                   } else {
                   }
@@ -162,6 +162,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
                             padding: 1,
                             isExpanded: true,
                             hint: "Search here",
+                            //validator: (value) => value == null ? 'Select the value' : null,
                             value: selectDepartmentName,
                             displayClearIcon: false,
                             onChanged: onDataChange2,

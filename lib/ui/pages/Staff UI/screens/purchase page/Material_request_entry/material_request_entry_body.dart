@@ -360,17 +360,23 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                     children: [
                       selectItemCurrentStatus!=null ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Container(
-                            height: 50, padding: padding1, decoration: decoration1(),
-                            child: Center(
-                                child: Text(selectItemCurrentStatus.dblQty))),
+                        child: SizedBox(
+                          width: 160,
+                          child: Container(
+                              height: 50, padding: padding1, decoration: decoration1(),
+                              child: Center(
+                                  child: Text(selectItemCurrentStatus.dblQty))),
+                        ),
                       ):
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Container(
-                            height: 50, padding: padding1, decoration: decoration1(),
-                            child: const Center(
-                                child: Text("No"))),
+                        child: SizedBox(
+                          width: 160,
+                          child: Container(
+                              height: 50, padding: padding1, decoration: decoration1(),
+                              child: const Center(
+                                  child: Text("No"))),
+                        ),
                       ),
                     ],
                   ),
