@@ -1,3 +1,5 @@
+// Login page Ui
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -24,12 +26,14 @@ class _LoginPageBodyState extends State<LoginPageBody> {
 
   @override
   void initState() {
+    // Calling Phone number validation with BLoc
     _phoneNumberFocusNode.addListener(() {
       if (!_phoneNumberFocusNode.hasFocus) {
         context.read<LoginBloc>().add(PhoneNumberUnfocused());
         FocusScope.of(context).requestFocus(_otpFocusNode);
       }
     });
+    // Calling OTP validation with BLoc
     _otpFocusNode.addListener(() {
       if (!_otpFocusNode.hasFocus) {
         context.read<LoginBloc>().add(OtpUnfocused());
@@ -39,12 +43,14 @@ class _LoginPageBodyState extends State<LoginPageBody> {
   }
 
   @override
+  //dispose
   void dispose() {
     _phoneNumberFocusNode.dispose();
     _otpFocusNode.dispose();
     super.dispose();
   }
 
+//Widgets
   @override
   Widget build(BuildContext context) {
     var height = SizeConfig.getHeight(context);
@@ -109,6 +115,9 @@ class _LoginPageBodyState extends State<LoginPageBody> {
       ),
     );
   }
+
+
+
   Widget _buildBottomPart(BuildContext context) {
     var width = SizeConfig.getWidth(context);
     return Padding(
@@ -185,6 +194,8 @@ class _LoginPageBodyState extends State<LoginPageBody> {
   }
 }
 
+
+//Phone number text field class
 class PhoneNumberInput extends StatelessWidget {
   const PhoneNumberInput({Key key,this.focusNode}) : super(key: key);
 
@@ -221,6 +232,7 @@ class PhoneNumberInput extends StatelessWidget {
   }
 }
 
+//OTP text field class
 class OtpInput extends StatefulWidget {
   final FocusNode focusNode;
   const OtpInput({Key key, this.focusNode}) : super(key: key);
@@ -301,6 +313,8 @@ class SubmitButton1 extends StatelessWidget {
     );
   }
 }
+
+//Submit button class
 class SubmitButton2 extends StatelessWidget {
   const SubmitButton2({Key key}) : super(key: key);
 
