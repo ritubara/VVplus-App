@@ -37,6 +37,7 @@ class ApiService{
 
   static const String mockDataPostMaterialRequestEntryURL = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/PurchasePageData/0/PostDataMaterialRequestEntry.json";
 
+  static const String mockDataPostPlacePurchaseOrderURL = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/PurchasePageData/0/PostDataPlacePurchaseOrder.json";
   static const String mockDataPostStockIssueEntry = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/StorePageData/0/PostStockIssueEntry.json";
 
   static const String mockDataPostStockReceiveEntry = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/StorePageData/0/PostStockReceiveEntry.json";

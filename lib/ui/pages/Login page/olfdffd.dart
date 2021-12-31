@@ -5,6 +5,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:vvplus_app/domain/common/common_text.dart';
 import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
 
 
 triggerMode: RefreshIndicatorTriggerMode.onEdge,
