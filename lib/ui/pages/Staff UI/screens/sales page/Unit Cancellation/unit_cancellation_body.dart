@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use
+
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -138,7 +140,6 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () {},
                     elevation: 0.0,

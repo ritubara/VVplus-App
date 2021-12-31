@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables, deprecated_member_use
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -17,14 +17,11 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/add_item_container.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
-import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:http/http.dart'as http;
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:vvplus_app/domain/common/common_text.dart';
 import 'dart:io';
@@ -182,7 +179,6 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () {},
                     elevation: 0.0,
@@ -464,7 +460,6 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
                     Row(
                       children: [
                         const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                        // ignore: deprecated_member_use
                         RaisedButton(
                           onPressed: () {},
                           elevation: 0.0,

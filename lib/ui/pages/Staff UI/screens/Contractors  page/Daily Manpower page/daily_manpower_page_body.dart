@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, avoid_print
+// ignore_for_file: deprecated_member_use, avoid_print, prefer_typing_uninitialized_variables
 
 import 'dart:convert';
 
@@ -26,7 +26,6 @@ import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'dart:io';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
 

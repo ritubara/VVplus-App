@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use
+
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -19,7 +21,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
-import 'package:vvplus_app/ui/widgets/constants/size.dart';import 'package:fluttertoast/fluttertoast.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:vvplus_app/domain/common/common_text.dart';
 import 'package:vvplus_app/domain/common/snackbar_widget.dart';
@@ -140,7 +142,6 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () {},
                     elevation: 0.0,

@@ -4,8 +4,6 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20ent
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/Custom_Tab_Bar_Item/receive.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/custom_tab_bar.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
-import 'package:connectivity/connectivity.dart';
-
 
 class ChequeEntryBody extends StatefulWidget {
   const ChequeEntryBody({Key key}) : super(key: key);

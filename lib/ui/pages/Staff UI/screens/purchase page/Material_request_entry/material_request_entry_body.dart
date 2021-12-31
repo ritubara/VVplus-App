@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables, non_constant_identifier_names, deprecated_member_use
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -24,7 +24,6 @@ import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'dart:async';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:vvplus_app/domain/common/common_text.dart';
 import 'dart:io';
@@ -199,7 +198,6 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () {onClear();},
                     elevation: 0.0,
@@ -407,7 +405,6 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                     Row(
                       children: [
                         const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                        // ignore: deprecated_member_use
                         RaisedButton(
                           onPressed: () {reqQty.clear();},
                           elevation: 0.0,
