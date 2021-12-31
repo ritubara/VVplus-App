@@ -35,103 +35,107 @@ class MyMaterialRequestApprovalBody extends State<MaterialRequestApprovalBody> {
       selectIndentorName = state;
     });
   }
-  sendData() {
-    http.post(Uri.parse(""),
-        body: json.encode({
-          "IndentDate":dateinput.text,
-          "IndentSelection":selectIndentorName.strSubCode
-
-        }));
-    print("Successfull2");
+  Future<void> _refresh() async{
+    await Future.delayed(const Duration(milliseconds: 800),() {
+      setState(() {
+      });
+    });
   }
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          sizedbox1,
-          formsHeadText("Indant Date"),
-          Container(
-            padding: dateFieldPadding,
-            height: dateFieldHeight,
-            child: Center(
-              child: TextFormField(
-                controller: dateinput,
-                decoration: dateFieldDecoration(),
-                readOnly: true,
-                onTap: () async {
-                  DateTime pickedDate = await showDatePicker(
-                      context: context, initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2101)
-                  );
-                  if (pickedDate != null) {
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                    setState(() {
-                      dateinput.text = formattedDate;
-                    });
-                  } else {
-                  }
-                },
-              ),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Indant Selection"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<IndentorName>>(
-                  future: _dropdownBloc.indentorNameDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<IndentorName>(
-                        stream: _dropdownBloc.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<IndentorName>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectIndentorName,
-                            displayClearIcon: false,
-                            onChanged: onDataChange1,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<IndentorName>>((e) {
-                              return DropdownMenuItem<IndentorName>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
+    return RefreshIndicator(
+      triggerMode: RefreshIndicatorTriggerMode.onEdge,
+      edgeOffset: 20,
+      displacement: 200,
+      strokeWidth: 5,
+      onRefresh: _refresh,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            sizedbox1,
+            formsHeadText("Indant Date"),
+            Container(
+              padding: dateFieldPadding,
+              height: dateFieldHeight,
+              child: Center(
+                child: TextFormField(
+                  controller: dateinput,
+                  decoration: dateFieldDecoration(),
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime pickedDate = await showDatePicker(
+                        context: context, initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101)
                     );
-                  }
+                    if (pickedDate != null) {
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      setState(() {
+                        dateinput.text = formattedDate;
+                      });
+                    } else {
+                    }
+                  },
+                ),
               ),
             ),
-          ),
-          //SizedBox(height: 10,),
-          //const InformationBoxContainer1(),
-          //SizedBox(height: 10,),
-          //const InformationBoxContainer1(),
-          const MaterialApprovalPageContainerData(),
-        /*  sizedbox1,
-          Padding(
-              padding: padding4,
-              child: roundedButtonHome2("Approve",(){
+            sizedbox1,
+            formsHeadText("Indant Selection"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<IndentorName>>(
+                    future: _dropdownBloc.indentorNameDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<IndentorName>(
+                          stream: _dropdownBloc.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<IndentorName>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectIndentorName,
+                              displayClearIcon: false,
+                              onChanged: onDataChange1,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<IndentorName>>((e) {
+                                return DropdownMenuItem<IndentorName>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
+              ),
+            ),
+            //SizedBox(height: 10,),
+            //const InformationBoxContainer1(),
+            //SizedBox(height: 10,),
+            //const InformationBoxContainer1(),
+            const MaterialApprovalPageContainerData(),
+          /*  sizedbox1,
+            Padding(
+                padding: padding4,
+                child: roundedButtonHome2("Approve",(){
 
-              },roundedButtonHomeColor1)),
-          Padding(
-              padding: padding4,
-              child: roundedButtonHome2("Deny",(){},roundedButtonHomeColor2)),
-          Padding(
-              padding: padding4,
-              child: roundedButtonHome2("Wait",(){},roundedButtonHomeColor3)),*/
-        ],
+                },roundedButtonHomeColor1)),
+            Padding(
+                padding: padding4,
+                child: roundedButtonHome2("Deny",(){},roundedButtonHomeColor2)),
+            Padding(
+                padding: padding4,
+                child: roundedButtonHome2("Wait",(){},roundedButtonHomeColor3)),*/
+          ],
+        ),
       ),
     );
   }
