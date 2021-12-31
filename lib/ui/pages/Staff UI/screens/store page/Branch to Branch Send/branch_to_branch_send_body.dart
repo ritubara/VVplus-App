@@ -1,13 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/indentor_name_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/infrastructure/Models/indentor_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/alert_dialog_box.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -15,6 +17,11 @@ import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:vvplus_app/domain/common/common_text.dart';
+import 'package:vvplus_app/domain/common/snackbar_widget.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class BranchtoBranchSendBody extends StatefulWidget{
   const BranchtoBranchSendBody({Key key}) : super(key: key);
@@ -46,6 +53,9 @@ class MyBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
   ItemCostCenter selectItemCostCenter4;
   IndentorName selectIndentorName;
 
+  var subscription;
+  var connectionStatus;
+
   @override
   void initState() {
     voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
@@ -58,10 +68,14 @@ class MyBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
     itemCostCenterDropdownBloc4 = ItemCostCenterDropdownBloc();
     indentorNameDropdownBloc = IndentorNameDropdownBloc();
     dateinput.text = "";
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() => connectionStatus = result );
+    });
     super.initState();
   }
   @override
   void dispose() {
+    subscription.cancel();
     super.dispose();
   }
   void onDataChange1(VoucherType state) {
@@ -109,390 +123,441 @@ class MyBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
       selectItemCostCenter4 = state;
     });
   }
+  Future<void> _refresh() async{
+    await Future.delayed(const Duration(milliseconds: 800),() {
+      setState(() {
+      });
+    });
+  }
+  verifyDetail(){
+    if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
+      if(selectVoucherType1!=null && dateinput.text!=null && selectItemCostCenter1!=null && selectItemCostCenter2!=null && selectVoucherType2!=null && selectItemCostCenter3!=null && selectItemCostCenter4!=null && selectVoucherType3!=null && selectIndentorName!=null && selectVoucherType4!=null){
+        sendData();
+      }
+      else{
+        Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
+      }
+    }
+    else{
+      Scaffold.of(context).showSnackBar(snackBar(internetFailedConnectionText));
+    }
+  }
+
+  Future<dynamic> sendData() async{
+    try {
+      await http.post(Uri.parse(ApiService.mockDataPostBranchToBranchSend),
+          body: json.encode({
+            "Voucher Type": selectVoucherType1.strSubCode,
+            "VoucherNoDate": dateinput.text,
+            "FromBranch": selectItemCostCenter1.strSubCode,
+            "FromPhase": selectItemCostCenter2.strSubCode,
+            "FromGodown": selectVoucherType2.strSubCode,
+            "ToBranch": selectItemCostCenter3.strSubCode,
+            "ToPhase": selectItemCostCenter4.strSubCode,
+            "ToGodown": selectVoucherType3.strSubCode,
+            "VehicleNo": selectVoucherType4.strSubCode,
+            "IndentSelection": selectIndentorName.strSubCode
+          }));
+      Scaffold.of(context).showSnackBar(snackBar(sendDataText));
+    } on SocketException {
+      Scaffold.of(context).showSnackBar(snackBar(socketExceptionText));
+    } on HttpException {
+      Scaffold.of(context).showSnackBar(snackBar(httpExceptionText));
+    } on FormatException {
+      Scaffold.of(context).showSnackBar(snackBar(formatExceptionText));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: paddingForms2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // ignore: deprecated_member_use
-                RaisedButton(
-                  onPressed: () {},
-                  elevation: 0.0,
-                  color: Colors.white,
-                  child: raisedButtonText("Clear all"),
+    return RefreshIndicator(
+      triggerMode: RefreshIndicatorTriggerMode.onEdge,
+      edgeOffset: 20,
+      displacement: 200,
+      strokeWidth: 5,
+      onRefresh: _refresh,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: paddingForms2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  // ignore: deprecated_member_use
+                  RaisedButton(
+                    onPressed: () {},
+                    elevation: 0.0,
+                    color: Colors.white,
+                    child: raisedButtonText("Clear all"),
+                  ),
+                ],
+              ),
+            ),
+            formsHeadText("Voucher Type"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc1.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType1,
+                              displayClearIcon: false,
+                              onChanged: onDataChange1,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
                 ),
-              ],
+              ),
             ),
-          ),
-          formsHeadText("Voucher Type"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc1.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType1,
-                            displayClearIcon: false,
-                            onChanged: onDataChange1,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
+            sizedbox1,
+            formsHeadText("Voucher No. Date"),
+            Container(
+              padding: dateFieldPadding,
+              height: dateFieldHeight,
+              child: Center(
+                child: TextFormField(
+                  controller: dateinput,
+                  decoration: dateFieldDecoration(),
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime pickedDate = await showDatePicker(
+                        context: context, initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101)
                     );
-                  }
+                    if (pickedDate != null) {
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      setState(() {
+                        dateinput.text = formattedDate;
+                      });
+                    } else {
+                    }
+                  },
+                ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("Voucher No. Date"),
-          Container(
-            padding: dateFieldPadding,
-            height: dateFieldHeight,
-            child: Center(
-              child: TextFormField(
-                controller: dateinput,
-                decoration: dateFieldDecoration(),
-                readOnly: true,
-                onTap: () async {
-                  DateTime pickedDate = await showDatePicker(
-                      context: context, initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2101)
-                  );
-                  if (pickedDate != null) {
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                    setState(() {
-                      dateinput.text = formattedDate;
-                    });
-                  } else {
-                  }
-                },
+            sizedbox1,
+            formsHeadText("From Branch"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<ItemCostCenter>>(
+                    future: itemCostCenterDropdownBloc1.itemCostCenterData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<ItemCostCenter>(
+                          stream: itemCostCenterDropdownBloc1.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<ItemCostCenter>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectItemCostCenter1,
+                              displayClearIcon: false,
+                              onChanged: onDataChange5,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                return DropdownMenuItem<ItemCostCenter>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("From Branch"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<ItemCostCenter>>(
-                  future: itemCostCenterDropdownBloc1.itemCostCenterData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<ItemCostCenter>(
-                        stream: itemCostCenterDropdownBloc1.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<ItemCostCenter>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectItemCostCenter1,
-                            displayClearIcon: false,
-                            onChanged: onDataChange5,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                              return DropdownMenuItem<ItemCostCenter>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
+            sizedbox1,
+            formsHeadText("From Phase"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<ItemCostCenter>>(
+                    future: itemCostCenterDropdownBloc2.itemCostCenterData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<ItemCostCenter>(
+                          stream: itemCostCenterDropdownBloc2.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<ItemCostCenter>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectItemCostCenter2,
+                              displayClearIcon: false,
+                              onChanged: onDataChange6,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                return DropdownMenuItem<ItemCostCenter>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("From Phase"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<ItemCostCenter>>(
-                  future: itemCostCenterDropdownBloc2.itemCostCenterData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<ItemCostCenter>(
-                        stream: itemCostCenterDropdownBloc2.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<ItemCostCenter>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectItemCostCenter2,
-                            displayClearIcon: false,
-                            onChanged: onDataChange6,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                              return DropdownMenuItem<ItemCostCenter>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
-              ),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("From Godown"),
+            sizedbox1,
+            formsHeadText("From Godown"),
 
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc2.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc2.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType2,
-                            displayClearIcon: false,
-                            onChanged: onDataChange2,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc2.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc2.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType2,
+                              displayClearIcon: false,
+                              onChanged: onDataChange2,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
               ),
             ),
-          ),
 
-          sizedbox1,
+            sizedbox1,
 
-          formsHeadText("To Branch"),
+            formsHeadText("To Branch"),
 
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<ItemCostCenter>>(
-                  future: itemCostCenterDropdownBloc3.itemCostCenterData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<ItemCostCenter>(
-                        stream: itemCostCenterDropdownBloc3.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<ItemCostCenter>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectItemCostCenter3,
-                            displayClearIcon: false,
-                            onChanged: onDataChange8,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                              return DropdownMenuItem<ItemCostCenter>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<ItemCostCenter>>(
+                    future: itemCostCenterDropdownBloc3.itemCostCenterData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<ItemCostCenter>(
+                          stream: itemCostCenterDropdownBloc3.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<ItemCostCenter>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectItemCostCenter3,
+                              displayClearIcon: false,
+                              onChanged: onDataChange8,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                return DropdownMenuItem<ItemCostCenter>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("To Phase"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<ItemCostCenter>>(
-                  future: itemCostCenterDropdownBloc4.itemCostCenterData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<ItemCostCenter>(
-                        stream: itemCostCenterDropdownBloc4.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<ItemCostCenter>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectItemCostCenter4,
-                            displayClearIcon: false,
-                            onChanged: onDataChange9,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                              return DropdownMenuItem<ItemCostCenter>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
+            sizedbox1,
+            formsHeadText("To Phase"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<ItemCostCenter>>(
+                    future: itemCostCenterDropdownBloc4.itemCostCenterData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<ItemCostCenter>(
+                          stream: itemCostCenterDropdownBloc4.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<ItemCostCenter>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectItemCostCenter4,
+                              displayClearIcon: false,
+                              onChanged: onDataChange9,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                return DropdownMenuItem<ItemCostCenter>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("To Godown"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc3.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc3.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType3,
-                            displayClearIcon: false,
-                            onChanged: onDataChange3,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
+            sizedbox1,
+            formsHeadText("To Godown"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc3.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc3.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType3,
+                              displayClearIcon: false,
+                              onChanged: onDataChange3,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("Vehicle No."),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc4.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc4.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType4,
-                            displayClearIcon: false,
-                            onChanged: onDataChange4,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
+            sizedbox1,
+            formsHeadText("Vehicle No."),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc4.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc4.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType4,
+                              displayClearIcon: false,
+                              onChanged: onDataChange4,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("Indent Selection"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<IndentorName>>(
-                  future: indentorNameDropdownBloc.indentorNameDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<IndentorName>(
-                        stream: indentorNameDropdownBloc.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<IndentorName>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectIndentorName,
-                            displayClearIcon: false,
-                            onChanged: onDataChange6,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<IndentorName>>((e) {
-                              return DropdownMenuItem<IndentorName>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
+            sizedbox1,
+            formsHeadText("Indent Selection"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<IndentorName>>(
+                    future: indentorNameDropdownBloc.indentorNameDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<IndentorName>(
+                          stream: indentorNameDropdownBloc.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<IndentorName>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectIndentorName,
+                              displayClearIcon: false,
+                              onChanged: onDataChange6,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<IndentorName>>((e) {
+                                return DropdownMenuItem<IndentorName>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
               ),
             ),
-          ),
-          sizedbox1,
-          Padding(
-              padding: padding4,
-              child: roundedButtonHome2("Submit",
-                      (){showAlertDialog(context);},
-                  roundedButtonHomeColor1)),
-        ],
+            sizedbox1,
+            Padding(
+                padding: padding4,
+                child: roundedButtonHome2("Submit",
+                        (){verifyDetail();},
+                    roundedButtonHomeColor1)),
+          ],
+        ),
       ),
     );
   }
