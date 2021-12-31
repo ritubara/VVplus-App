@@ -2,12 +2,14 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:vvplus_app/data_source/api/api_services.dart';
+import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 
 class DailyManPowerPostData{
-  Future<dynamic> sendData(String intendDate, String partyNameSubCode, String costCenterSubCode, String resourceTypeSubCode, String reqQty, String remarks) async{
 
+  Future<dynamic> sendData(String intendDate, String partyNameSubCode, String costCenterSubCode, String resourceTypeSubCode, String reqQty, String remarks) async{
     var responseJson;
     try {
       final response = await http.post(Uri.parse(ApiService.mockDataPostDailyManPowerURL),
@@ -20,13 +22,17 @@ class DailyManPowerPostData{
             "Remarks": remarks
           }));
       print("success");
+      @override
+      Widget build(BuildContext context) {
+        Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
+      }
       responseJson = _response(response);
     } on SocketException {
-      print('No Internet connection 😑');
+      print('No Internet connection');
     } on HttpException {
-      print("Couldn't find the post 😱");
+      print("Couldn't find the post");
     } on FormatException {
-      print("Bad response format 👎");
+      print("Bad response format");
     }
     return responseJson;
   }

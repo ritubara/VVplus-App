@@ -292,7 +292,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
               padding: padding4,
               child: roundedButtonHome2("Submit",(){
                 DailyManPowerPostData().sendData(dateInput.text,selectDepartmentName.strSubCode,selectItemCostCenter.strSubCode,selectVoucherType.strSubCode,_qty.text,_remarks.text);
-                //Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
+                Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
                 },roundedButtonHomeColor1)),
         ],
       ),
