@@ -51,6 +51,18 @@ class ApiService{
 
   static const String mockDataPostBranchToBranchReceive = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/StorePageData/0/PostBranchToBranchReceive.json";
 
+  static const String mockDataPostExtraWorkEntry = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/SalesPageData/0/PostExtraWorkEntry.json";
+
+  static const String mockDataPostUnitCancellation = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/SalesPageData/0/PostUnitCancellation.json";
+
+  static const String mockDataPostDiscountApproval = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/SalesPageData/0/PostDiscountApproval.json";
+
+  static const String mockDataPostChequeReceive = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/SalesPageData/0/PostChequeReceive.json";
+
+  static const String mockDataPostChequeDeposit = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/SalesPageData/0/PostChequeDeposit.json";
+
+  static const String mockDataPostChequeCleared = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/SalesPageData/0/PostChequeCleared.json";
+
   static const String mockDataPostItemDetail = "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataRecord/0/PurchasePageData/0/PostItemDetail.json";
 
 }

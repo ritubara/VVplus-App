@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -5,6 +7,7 @@ import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Sales_page_bloc/extra_work_entry_bloc.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
@@ -16,7 +19,12 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
-import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:vvplus_app/ui/widgets/constants/size.dart';import 'package:fluttertoast/fluttertoast.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:vvplus_app/domain/common/common_text.dart';
+import 'package:vvplus_app/domain/common/snackbar_widget.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class ExtraWorkEntryBody extends StatefulWidget {
   const ExtraWorkEntryBody({Key key}) : super(key: key);
@@ -27,6 +35,7 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
   final TextEditingController dateinput = TextEditingController();
   final TextEditingController _voucherType = TextEditingController();
   final TextEditingController _remarks = TextEditingController();
+  final TextEditingController _baseAmount = TextEditingController();
 
   DepartmentNameDropdownBloc departmentNameDropdownBloc;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
@@ -35,6 +44,8 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
   DepartmentName selectDepartmentName;
   VoucherType selectVoucherType1;
   VoucherType selectVoucherType2;
+  var subscription;
+  var connectionStatus;
 
   void onDataChange1(DepartmentName state) {
     setState(() {
@@ -57,254 +68,311 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
     departmentNameDropdownBloc = DepartmentNameDropdownBloc();
     voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc2 = VoucherTypeDropdownBloc();
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() => connectionStatus = result );
+    });
     super.initState();
+  }
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
   }
   int valueChoose = 4;
 
+  Future<void> _refresh() async{
+    await Future.delayed(const Duration(milliseconds: 800),() {
+      setState(() {
+      });
+    });
+  }
+  verifyDetail(){
+    if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
+      if(_voucherType.text!=null && selectDepartmentName!=null && selectVoucherType1!=null && selectVoucherType2!=null && dateinput.text!=null && _remarks!=null && _baseAmount.text!=null){
+        sendData();
+      }
+      else{
+        Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
+      }
+    }
+    else{
+      Scaffold.of(context).showSnackBar(snackBar(internetFailedConnectionText));
+    }
+  }
+
+  Future<dynamic> sendData() async{
+    try {
+      await http.post(Uri.parse(ApiService.mockDataPostExtraWorkEntry),
+          body: json.encode({
+            "VoucherType": _voucherType.text,
+            "BookingId": selectDepartmentName.strSubCode,
+            "StagePurpose": selectVoucherType1.strSubCode,
+            "Overhead": selectVoucherType2.strSubCode,
+            "DateOfEstimate": dateinput.text,
+            "BaseAmount": _baseAmount.text,
+            "Remarks": _remarks.text
+          }));
+      Scaffold.of(context).showSnackBar(snackBar(sendDataText));
+    } on SocketException {
+      Scaffold.of(context).showSnackBar(snackBar(socketExceptionText));
+    } on HttpException {
+      Scaffold.of(context).showSnackBar(snackBar(httpExceptionText));
+    } on FormatException {
+      Scaffold.of(context).showSnackBar(snackBar(formatExceptionText));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final bloc = SalesExtraWorkEntryProvider.of(context);
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: paddingForms2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // ignore: deprecated_member_use
-                RaisedButton(
-                  onPressed: () {},
-                  elevation: 0.0,
-                  color: Colors.white,
-                  child: raisedButtonText("Clear all"),
-                ),
-              ],
-            ),
-          ),
-          formsHeadText("Voucher Type"),
-          Container(
-            height: 50,
-            padding: padding1,
-            decoration: decoration1(),
-            child: SizedBox(
-              width: 320,
-              child: StreamBuilder<String>(
-                stream: bloc.outtextField1,
-                builder: (context, snapshot) => TextFormField(
-                  controller: _voucherType,
-                  onChanged: bloc.intextField1,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: primaryColor8,
-                      enabledBorder: textFieldBorder(),
-                      focusedBorder: textFieldBorder(),
-                      errorText: snapshot.error
+    return RefreshIndicator(
+      triggerMode: RefreshIndicatorTriggerMode.onEdge,
+      edgeOffset: 20,
+      displacement: 200,
+      strokeWidth: 5,
+      onRefresh: _refresh,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: paddingForms2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  // ignore: deprecated_member_use
+                  RaisedButton(
+                    onPressed: () {},
+                    elevation: 0.0,
+                    color: Colors.white,
+                    child: raisedButtonText("Clear all"),
                   ),
-                  keyboardType: TextInputType.text,
-                  style: simpleTextStyle7(),
-                ),
+                ],
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("Booking Id"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<DepartmentName>>(
-                  future: departmentNameDropdownBloc.departmentNameData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<DepartmentName>(
-                        stream: departmentNameDropdownBloc.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<DepartmentName>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectDepartmentName,
-                            displayClearIcon: false,
-                            onChanged: onDataChange1,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<DepartmentName>>((e) {
-                              return DropdownMenuItem<DepartmentName>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
-              ),
-            ),
-          ),
-          const ExtraWorkEntryContainerData(),
-          sizedbox1,
-          formsHeadText("Stage (purpose? extra work? extra land?)"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc1.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType1,
-                            displayClearIcon: false,
-                            onChanged: onDataChange2,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
-              ),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Overhead"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc2.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc2.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType2,
-                            displayClearIcon: false,
-                            onChanged: onDataChange3,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
-              ),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Date of Estimate"),
-          Container(
-            padding: dateFieldPadding,
-            height: dateFieldHeight,
-            child: Center(
-              child: TextFormField(
-                controller: dateinput,
-                decoration: dateFieldDecoration(),
-                readOnly: true,
-                onTap: () async {
-                  DateTime pickedDate = await showDatePicker(
-                      context: context, initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2101)
-                  );
-                  if (pickedDate != null) {
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                    setState(() {
-                      dateinput.text = formattedDate;
-                    });
-                  } else {
-                  }
-                },
-              ),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Base Amount"),
-          Container(
-            height: 50,
-            padding: padding1,
-            decoration: decoration1(),
-            child: SizedBox(
-              width: 320,
-              child: StreamBuilder<String>(
-                stream: bloc.outtextField2,
-                builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField2,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: primaryColor8,
-                      enabledBorder: textFieldBorder(),
-                      focusedBorder: textFieldBorder(),
-                      errorText: snapshot.error
+            formsHeadText("Voucher Type"),
+            Container(
+              height: 50,
+              padding: padding1,
+              decoration: decoration1(),
+              child: SizedBox(
+                width: 320,
+                child: StreamBuilder<String>(
+                  stream: bloc.outtextField1,
+                  builder: (context, snapshot) => TextFormField(
+                    controller: _voucherType,
+                    onChanged: bloc.intextField1,
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: primaryColor8,
+                        enabledBorder: textFieldBorder(),
+                        focusedBorder: textFieldBorder(),
+                        errorText: snapshot.error
+                    ),
+                    keyboardType: TextInputType.text,
+                    style: simpleTextStyle7(),
                   ),
-                  keyboardType: TextInputType.text,
-                  style: simpleTextStyle7(),
                 ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("Tax:"),
-          sizedbox1,
-          formsHeadText("Net Amount:"),
-          sizedbox1,
-          formsHeadText("Remarks"),
-          Container(
-            height: 50,
-            padding: padding1,
-            decoration: decoration1(),
-            child: SizedBox(
-              width: 320,
-              child: StreamBuilder<String>(
-                stream: bloc.outtextField3,
-                builder: (context, snapshot) => TextFormField(
-                  controller: _remarks,
-                  onChanged: bloc.intextField3,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: primaryColor8,
-                      enabledBorder: textFieldBorder(),
-                      focusedBorder: textFieldBorder(),
-                      errorText: snapshot.error
+            sizedbox1,
+            formsHeadText("Booking Id"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<DepartmentName>>(
+                    future: departmentNameDropdownBloc.departmentNameData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<DepartmentName>(
+                          stream: departmentNameDropdownBloc.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<DepartmentName>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectDepartmentName,
+                              displayClearIcon: false,
+                              onChanged: onDataChange1,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                                return DropdownMenuItem<DepartmentName>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
+              ),
+            ),
+            const ExtraWorkEntryContainerData(),
+            sizedbox1,
+            formsHeadText("Stage (purpose? extra work? extra land?)"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc1.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType1,
+                              displayClearIcon: false,
+                              onChanged: onDataChange2,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
+              ),
+            ),
+            sizedbox1,
+            formsHeadText("Overhead"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc2.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc2.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType2,
+                              displayClearIcon: false,
+                              onChanged: onDataChange3,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
+              ),
+            ),
+            sizedbox1,
+            formsHeadText("Date of Estimate"),
+            Container(
+              padding: dateFieldPadding,
+              height: dateFieldHeight,
+              child: Center(
+                child: TextFormField(
+                  controller: dateinput,
+                  decoration: dateFieldDecoration(),
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime pickedDate = await showDatePicker(
+                        context: context, initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101)
+                    );
+                    if (pickedDate != null) {
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      setState(() {
+                        dateinput.text = formattedDate;
+                      });
+                    } else {
+                    }
+                  },
+                ),
+              ),
+            ),
+            sizedbox1,
+            formsHeadText("Base Amount"),
+            Container(
+              height: 50,
+              padding: padding1,
+              decoration: decoration1(),
+              child: SizedBox(
+                width: 320,
+                child: StreamBuilder<String>(
+                  stream: bloc.outtextField2,
+                  builder: (context, snapshot) => TextFormField(
+                    controller: _baseAmount,
+                    onChanged: bloc.intextField2,
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: primaryColor8,
+                        enabledBorder: textFieldBorder(),
+                        focusedBorder: textFieldBorder(),
+                        errorText: snapshot.error
+                    ),
+                    keyboardType: TextInputType.text,
+                    style: simpleTextStyle7(),
                   ),
-                  keyboardType: TextInputType.text,
-                  style: simpleTextStyle7(),
                 ),
               ),
             ),
-          ),
-          sizedbox1,
-          Padding(
-              padding: padding4,
-              child: roundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
-        ],
+            sizedbox1,
+            formsHeadText("Tax:"),
+            sizedbox1,
+            formsHeadText("Net Amount:"),
+            sizedbox1,
+            formsHeadText("Remarks"),
+            Container(
+              height: 50,
+              padding: padding1,
+              decoration: decoration1(),
+              child: SizedBox(
+                width: 320,
+                child: StreamBuilder<String>(
+                  stream: bloc.outtextField3,
+                  builder: (context, snapshot) => TextFormField(
+                    controller: _remarks,
+                    onChanged: bloc.intextField3,
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: primaryColor8,
+                        enabledBorder: textFieldBorder(),
+                        focusedBorder: textFieldBorder(),
+                        errorText: snapshot.error
+                    ),
+                    keyboardType: TextInputType.text,
+                    style: simpleTextStyle7(),
+                  ),
+                ),
+              ),
+            ),
+            sizedbox1,
+            Padding(
+                padding: padding4,
+                child: roundedButtonHome2("Submit",(){verifyDetail();},roundedButtonHomeColor1)),
+          ],
+        ),
       ),
     );
   }

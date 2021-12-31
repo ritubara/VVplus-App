@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -5,6 +6,7 @@ import 'package:search_choices/search_choices.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Sales_page_bloc/unit_cancellation_bloc.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
@@ -17,6 +19,11 @@ import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:vvplus_app/domain/common/common_text.dart';
+import 'package:vvplus_app/domain/common/snackbar_widget.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class UnitCancellationBody extends StatefulWidget {
   const UnitCancellationBody({Key key}) : super(key: key);
@@ -25,6 +32,9 @@ class UnitCancellationBody extends StatefulWidget {
 }
 class MyUnitCancellationBody extends State<UnitCancellationBody> {
   TextEditingController dateinput = TextEditingController();
+  TextEditingController dueDate = TextEditingController();
+  TextEditingController baseAmount = TextEditingController();
+  TextEditingController remarks = TextEditingController();
   DepartmentNameDropdownBloc departmentNameDropdownBloc;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc2;
@@ -32,6 +42,8 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
   DepartmentName selectDepartmentName;
   VoucherType selectVoucherType1;
   VoucherType selectVoucherType2;
+  var subscription;
+  var connectionStatus;
 
   void onDataChange1(DepartmentName state) {
     setState(() {
@@ -54,216 +66,274 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
     departmentNameDropdownBloc = DepartmentNameDropdownBloc();
     voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc2 = VoucherTypeDropdownBloc();
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() => connectionStatus = result );
+    });
     super.initState();
+  }
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
   }
   int valueChoose = 4;
 
+  Future<void> _refresh() async{
+    await Future.delayed(const Duration(milliseconds: 800),() {
+      setState(() {
+      });
+    });
+  }
+  verifyDetail(){
+    if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
+      if(dateinput.text!=null && selectDepartmentName!=null && selectVoucherType1!=null && dueDate.text!=null && baseAmount.text!=null && remarks.text!=null){
+        sendData();
+      }
+      else{
+        Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
+      }
+    }
+    else{
+      Scaffold.of(context).showSnackBar(snackBar(internetFailedConnectionText));
+    }
+  }
+
+  Future<dynamic> sendData() async{
+    try {
+      await http.post(Uri.parse(ApiService.mockDataPostUnitCancellation),
+          body: json.encode({
+            "CancellationDate": dateinput.text,
+            "BookingId": selectDepartmentName.strSubCode,
+            "ChangeApplicable": selectVoucherType1.strSubCode,
+            "DueDate": dueDate.text,
+            "BaseAmmount": baseAmount.text,
+            "Remarks": remarks.text
+
+          }));
+      Scaffold.of(context).showSnackBar(snackBar(sendDataText));
+    } on SocketException {
+      Scaffold.of(context).showSnackBar(snackBar(socketExceptionText));
+    } on HttpException {
+      Scaffold.of(context).showSnackBar(snackBar(httpExceptionText));
+    } on FormatException {
+      Scaffold.of(context).showSnackBar(snackBar(formatExceptionText));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final bloc = UnitCancellationProvider.of(context);
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: paddingForms2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // ignore: deprecated_member_use
-                RaisedButton(
-                  onPressed: () {},
-                  elevation: 0.0,
-                  color: Colors.white,
-                  child: raisedButtonText("Clear all"),
-                ),
-              ],
-            ),
-          ),
-          formsHeadText("Cancellation Date"),
-          Container(
-            padding: dateFieldPadding,
-            height: dateFieldHeight,
-            child: Center(
-              child: TextFormField(
-                controller: dateinput,
-                decoration: dateFieldDecoration(),
-                readOnly: true,
-                onTap: () async {
-                  DateTime pickedDate = await showDatePicker(
-                      context: context, initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2101)
-                  );
-                  if (pickedDate != null) {
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                    setState(() {
-                      dateinput.text = formattedDate;
-                    });
-                  } else {
-                  }
-                },
-              ),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Booking Id"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<DepartmentName>>(
-                  future: departmentNameDropdownBloc.departmentNameData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<DepartmentName>(
-                        stream: departmentNameDropdownBloc.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<DepartmentName>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectDepartmentName,
-                            displayClearIcon: false,
-                            onChanged: onDataChange1,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<DepartmentName>>((e) {
-                              return DropdownMenuItem<DepartmentName>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
-              ),
-            ),
-          ),
-          const UnitCancellationContainerData(),
-          sizedbox1,
-          formsHeadText("Change Applicable"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50, width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc1.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType1,
-                            displayClearIcon: false,
-                            onChanged: onDataChange2,
-                            items: snapshot?.data
-                                ?.map<DropdownMenuItem<VoucherType>>((e) {
-                              return DropdownMenuItem<VoucherType>(
-                                value: e,
-                                child: Text(e.strName),
-                              );
-                            })?.toList() ??[],
-                          );
-                        }
-                    );
-                  }
-              ),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Due Date"),
-          Container(
-            padding: dateFieldPadding,
-            height: dateFieldHeight,
-            child: Center(
-              child: TextFormField(
-                controller: dateinput,
-                decoration: dateFieldDecoration(),
-                readOnly: true,
-                onTap: () async {
-                  DateTime pickedDate = await showDatePicker(
-                      context: context, initialDate: DateTime.now(),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime(2101)
-                  );
-                  if (pickedDate != null) {
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                    setState(() {
-                      dateinput.text = formattedDate;
-                    });
-                  } else {
-                  }
-                },
-              ),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Base Amount (deduction amount)"),
-          Container(
-            height: 50,
-            padding: padding1,
-            decoration: decoration1(),
-            child: SizedBox(
-              width: 320,
-              child: StreamBuilder<String>(
-                stream: bloc.outtextField1,
-                builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField1,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: primaryColor8,
-                      enabledBorder: textFieldBorder(),
-                      focusedBorder: textFieldBorder(),
-                      errorText: snapshot.error
+    return RefreshIndicator(
+      triggerMode: RefreshIndicatorTriggerMode.onEdge,
+      edgeOffset: 20,
+      displacement: 200,
+      strokeWidth: 5,
+      onRefresh: _refresh,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: paddingForms2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  // ignore: deprecated_member_use
+                  RaisedButton(
+                    onPressed: () {},
+                    elevation: 0.0,
+                    color: Colors.white,
+                    child: raisedButtonText("Clear all"),
                   ),
-                  keyboardType: TextInputType.text,
-                  style: simpleTextStyle7(),
+                ],
+              ),
+            ),
+            formsHeadText("Cancellation Date"),
+            Container(
+              padding: dateFieldPadding,
+              height: dateFieldHeight,
+              child: Center(
+                child: TextFormField(
+                  controller: dateinput,
+                  decoration: dateFieldDecoration(),
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime pickedDate = await showDatePicker(
+                        context: context, initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101)
+                    );
+                    if (pickedDate != null) {
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      setState(() {
+                        dateinput.text = formattedDate;
+                      });
+                    } else {
+                    }
+                  },
                 ),
               ),
             ),
-          ),
-          sizedbox1,
-          formsHeadText("Tax:"),
-          sizedbox1,
-          formsHeadText("Remarks"),
-          Container(
-            height: 50,
-            padding: padding1,
-            decoration: decoration1(),
-            child: SizedBox(
-              width: 320,
-              child: StreamBuilder<String>(
-                stream: bloc.outtextField2,
-                builder: (context, snapshot) => TextFormField(
-                  onChanged: bloc.intextField2,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: primaryColor8,
-                      enabledBorder: textFieldBorder(),
-                      focusedBorder: textFieldBorder(),
-                      errorText: snapshot.error
+            sizedbox1,
+            formsHeadText("Booking Id"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<DepartmentName>>(
+                    future: departmentNameDropdownBloc.departmentNameData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<DepartmentName>(
+                          stream: departmentNameDropdownBloc.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<DepartmentName>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectDepartmentName,
+                              displayClearIcon: false,
+                              onChanged: onDataChange1,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                                return DropdownMenuItem<DepartmentName>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
+              ),
+            ),
+            const UnitCancellationContainerData(),
+            sizedbox1,
+            formsHeadText("Change Applicable"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50, width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc1.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType1,
+                              displayClearIcon: false,
+                              onChanged: onDataChange2,
+                              items: snapshot?.data
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??[],
+                            );
+                          }
+                      );
+                    }
+                ),
+              ),
+            ),
+            sizedbox1,
+            formsHeadText("Due Date"),
+            Container(
+              padding: dateFieldPadding,
+              height: dateFieldHeight,
+              child: Center(
+                child: TextFormField(
+                  controller: dueDate,
+                  decoration: dateFieldDecoration(),
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime pickedDate = await showDatePicker(
+                        context: context, initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101)
+                    );
+                    if (pickedDate != null) {
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      setState(() {
+                        dueDate.text = formattedDate;
+                      });
+                    } else {
+                    }
+                  },
+                ),
+              ),
+            ),
+            sizedbox1,
+            formsHeadText("Base Amount (deduction amount)"),
+            Container(
+              height: 50,
+              padding: padding1,
+              decoration: decoration1(),
+              child: SizedBox(
+                width: 320,
+                child: StreamBuilder<String>(
+                  stream: bloc.outtextField1,
+                  builder: (context, snapshot) => TextFormField(
+                    controller: baseAmount,
+                    onChanged: bloc.intextField1,
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: primaryColor8,
+                        enabledBorder: textFieldBorder(),
+                        focusedBorder: textFieldBorder(),
+                        errorText: snapshot.error
+                    ),
+                    keyboardType: TextInputType.text,
+                    style: simpleTextStyle7(),
                   ),
-                  keyboardType: TextInputType.text,
-                  style: simpleTextStyle7(),
                 ),
               ),
             ),
-          ),
-          sizedbox1,
-          Padding(
-              padding: padding4,
-              child: roundedButtonHome2("Submit",(){},roundedButtonHomeColor1)),
-        ],
+            sizedbox1,
+            formsHeadText("Tax:"),
+            sizedbox1,
+            formsHeadText("Remarks"),
+            Container(
+              height: 50,
+              padding: padding1,
+              decoration: decoration1(),
+              child: SizedBox(
+                width: 320,
+                child: StreamBuilder<String>(
+                  stream: bloc.outtextField2,
+                  builder: (context, snapshot) => TextFormField(
+                    controller: remarks,
+                    onChanged: bloc.intextField2,
+                    decoration: InputDecoration(
+                        filled: true,
+                        fillColor: primaryColor8,
+                        enabledBorder: textFieldBorder(),
+                        focusedBorder: textFieldBorder(),
+                        errorText: snapshot.error
+                    ),
+                    keyboardType: TextInputType.text,
+                    style: simpleTextStyle7(),
+                  ),
+                ),
+              ),
+            ),
+            sizedbox1,
+            Padding(
+                padding: padding4,
+                child: roundedButtonHome2("Submit",(){verifyDetail();},roundedButtonHomeColor1)),
+          ],
+        ),
       ),
     );
   }
