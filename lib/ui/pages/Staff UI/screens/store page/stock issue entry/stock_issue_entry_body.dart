@@ -13,13 +13,19 @@ import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart'
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/store%20page/stock%20receive%20entry/items_container.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/add_item_container.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
+import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:vvplus_app/domain/common/common_text.dart';
+import 'dart:io';
 
 class StockIssueEntryBody extends StatefulWidget {
   const StockIssueEntryBody({Key key}) : super(key: key);
@@ -46,6 +52,8 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
   ItemCurrentStatus selectItemCurrentStatus;
 
   double _amount;
+  var subscription;
+  var connectionStatus;
   void clearData(){
     reqQty.clear();
   }
@@ -66,11 +74,15 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
     itemCostCenterDropdownBloc = ItemCostCenterDropdownBloc();
     dropdownBlocItemCurrentStatus = ItemCurrentStatusDropdownBloc();
     _amount = 0;
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() => connectionStatus = result );
+    });
     super.initState();
   }
 
   @override
   void dispose() {
+    subscription.cancel();
     super.dispose();
   }
 
@@ -104,405 +116,421 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
     });
   }
 
-  sendDataStockReceive(){
-    http.post(Uri.parse(ApiService.mockDataPostStockIssueEntry),
-        body: json.encode({
-          "Voucher Type": selectVoucherType1.strName,
-          "Issue By": selectVoucherType2.strName,
-          "Godown": selectVoucherType3.strName,
-          "Cost Center":selectItemCostCenter.strName,
-          "Item": selectItemCurrentStatus.strItemName,
-          "ReqQuantity": reqQty.text,
-          "Unit": selectItemCurrentStatus.strUnit,
-          "Rate": selectItemCurrentStatus.dblQty,
-          //"Amount": _remarks.text
-        }));
-    Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
-    print("Successfull2");
+  Future<void> _refresh() async{
+    await Future.delayed(const Duration(milliseconds: 800),() {
+      setState(() {
+      });
+    });
+  }
+  verifyDetail(){
+    if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
+      if(selectVoucherType1!=null && selectVoucherType2!=null && selectVoucherType3!=null && selectItemCostCenter!=null && reqQty.text!=null){
+        sendData();
+      }
+      else{
+        Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
+      }
+    }
+    else{
+      Scaffold.of(context).showSnackBar(snackBar(internetFailedConnectionText));
+    }
   }
 
-  sendDataItem() {
-    if (reqQty.text != null) {
-      http.post(Uri.parse(
-          "https://vv-plus-app-default-rtdb.firebaseio.com/PostItemDetails.json"),
+  Future<dynamic> sendData() async{
+    try {
+      await http.post(Uri.parse(ApiService.mockDataPostStockIssueEntry),
           body: json.encode({
+            "Voucher Type": selectVoucherType1.strName,
+            "Issue By": selectVoucherType2.strName,
+            "Godown": selectVoucherType3.strName,
+            "Cost Center":selectItemCostCenter.strName,
             "Item": selectItemCurrentStatus.strItemName,
             "ReqQuantity": reqQty.text,
             "Unit": selectItemCurrentStatus.strUnit,
             "Rate": selectItemCurrentStatus.dblQty,
-            //"Amount": _remarks.text
           }));
-      Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
-      print("Successfull2");
-    }
-    else{
-      Scaffold.of(context).showSnackBar(snackBar("Field is empty"));
+      Scaffold.of(context).showSnackBar(snackBar(sendDataText));
+    } on SocketException {
+      Scaffold.of(context).showSnackBar(snackBar(socketExceptionText));
+    } on HttpException {
+      Scaffold.of(context).showSnackBar(snackBar(httpExceptionText));
+    } on FormatException {
+      Scaffold.of(context).showSnackBar(snackBar(formatExceptionText));
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     final bloc = StockIssueEntryProvider.of(context);
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: paddingForms2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // ignore: deprecated_member_use
-                RaisedButton(
-                  onPressed: () {},
-                  elevation: 0.0,
-                  color: Colors.white,
-                  child: raisedButtonText("Clear all"),
-                ),
-              ],
-            ),
-          ),
-          formsHeadText("Voucher Type"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50,
-              width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc1.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType1,
-                            displayClearIcon: false,
-                            onChanged: onDataChange1,
-                            items: snapshot?.data
-                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                  return DropdownMenuItem<VoucherType>(
-                                    value: e,
-                                    child: Text(e.strName),
-                                  );
-                                })?.toList() ??
-                                [],
-                          );
-                        });
-                  }),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Issue By"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50,
-              width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc1.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType2,
-                            displayClearIcon: false,
-                            onChanged: onDataChange2,
-                            items: snapshot?.data
-                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                  return DropdownMenuItem<VoucherType>(
-                                    value: e,
-                                    child: Text(e.strName),
-                                  );
-                                })?.toList() ??
-                                [],
-                          );
-                        });
-                  }),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Godown"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50,
-              width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<VoucherType>>(
-                  future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<VoucherType>(
-                        stream: voucherTypeDropdownBloc1.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<VoucherType>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectVoucherType3,
-                            displayClearIcon: false,
-                            onChanged: onDataChange3,
-                            items: snapshot?.data
-                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                  return DropdownMenuItem<VoucherType>(
-                                    value: e,
-                                    child: Text(e.strName),
-                                  );
-                                })?.toList() ??
-                                [],
-                          );
-                        });
-                  }),
-            ),
-          ),
-          sizedbox1,
-          formsHeadText("Choose your phase (Cost Centre"),
-          Padding(
-            padding: padding1,
-            child: Container(
-              height: 50,
-              width: 343,
-              decoration: decorationForms(),
-              child: FutureBuilder<List<ItemCostCenter>>(
-                  future: itemCostCenterDropdownBloc.itemCostCenterData,
-                  builder: (context, snapshot) {
-                    return StreamBuilder<ItemCostCenter>(
-                        stream: itemCostCenterDropdownBloc.selectedState,
-                        builder: (context, item) {
-                          return SearchChoices<ItemCostCenter>.single(
-                            icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                            underline: "",
-                            padding: 1,
-                            isExpanded: true,
-                            hint: "Search here",
-                            value: selectItemCostCenter,
-                            displayClearIcon: false,
-                            onChanged: onDataChange4,
-                            items: snapshot?.data
-                                    ?.map<DropdownMenuItem<ItemCostCenter>>(
-                                        (e) {
-                                  return DropdownMenuItem<ItemCostCenter>(
-                                    value: e,
-                                    child: Text(e.strName),
-                                  );
-                                })?.toList() ??
-                                [],
-                          );
-                        });
-                  }),
-            ),
-          ),
-          sizedbox1,
-          //----------------------------------------
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              height: 378,
-              width: SizeConfig.getWidth(context),
-              decoration: BoxDecoration(
-                color: storeContainerColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return RefreshIndicator(
+      triggerMode: RefreshIndicatorTriggerMode.onEdge,
+      edgeOffset: 20,
+      displacement: 200,
+      strokeWidth: 5,
+      onRefresh: _refresh,
+
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: paddingForms2,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Padding(padding: EdgeInsets.all(10)),
-                  formsHeadText("Item "),
-                  Padding(
-                    padding: padding1,
-                    child: Container(
-                      height: 50,
-                      width: 343,
-                      decoration: decorationForms(),
-                      child: FutureBuilder<List<ItemCurrentStatus>>(
-                          future: dropdownBlocItemCurrentStatus
-                              .itemCurrentStatusDropdowndata,
-                          builder: (context, snapshot) {
-                            return StreamBuilder<ItemCurrentStatus>(
-                                stream:
-                                    dropdownBlocItemCurrentStatus.selectedState,
-                                builder: (context, item) {
-                                  return SearchChoices<
-                                      ItemCurrentStatus>.single(
-                                    icon: const Icon(
-                                        Icons.keyboard_arrow_down_sharp),
-                                    underline: "",
-                                    padding: 1,
-                                    isExpanded: true,
-                                    hint: "Search here",
-                                    value: selectItemCurrentStatus,
-                                    displayClearIcon: false,
-                                    onChanged: onDataChange5,
-                                    items: snapshot?.data?.map<
-                                            DropdownMenuItem<
-                                                ItemCurrentStatus>>((e) {
-                                          return DropdownMenuItem<
-                                              ItemCurrentStatus>(
-                                            value: e,
-                                            child: Text(e.strItemName),
-                                          );
-                                        })?.toList() ??
-                                        [],
-                                  );
-                                });
-                          }),
-                    ),
+                  // ignore: deprecated_member_use
+                  RaisedButton(
+                    onPressed: () {},
+                    elevation: 0.0,
+                    color: Colors.white,
+                    child: raisedButtonText("Clear all"),
                   ),
-                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                  formsHeadText("Request Qty. "),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 35),
-                        child: Container(
-                          height: 50,
-                          padding: padding1,
-                          decoration: decoration1(),
-                          child: SizedBox(
-                            width: 130,
-                            child: StreamBuilder<String>(
-                                stream: bloc.requestQty,
-                                builder: (context, snapshot) {
-                                  return TextFormField(
-                                    // initialValue: "no",
-                                    controller: reqQty,
-                                    decoration: InputDecoration(
-                                      errorText: snapshot.error,
-                                    ),
-                                    onChanged: bloc.changerequestQty,
-                                    keyboardType: TextInputType.number,
-                                    //onSaved: selectItemCurrentStatus.strItemName,
-
-                                    style: simpleTextStyle7(),
-                                  );
-                                }),
-                          ),
-                        ),
-                      ),
-                      selectItemCurrentStatus != null
-                          ? Container(
-                              height: 50,
-                              padding: padding1,
-                              decoration: decoration1(),
-                              child: Center(
-                                  child: Text(selectItemCurrentStatus.strUnit)))
-                          : Container(
-                              height: 50,
-                              padding: padding1,
-                              decoration: decoration1(),
-                              child: const Center(child: Text("No"))),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                  Row(
-                    children: [
-                      formsHeadText("Rate"),
-                      const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30)),
-                      formsHeadText("Amount:"),
-                      Text(_amount.toString()),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      selectItemCurrentStatus != null
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 40),
-                              child: Container(
-                                  height: 50,
-                                  padding: padding1,
-                                  decoration: decoration1(),
-                                  child: Center(
-                                      child: Text(
-                                          selectItemCurrentStatus.dblQty))),
-                            )
-                          : Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 40),
-                              child: Container(
-                                  height: 50,
-                                  padding: padding1,
-                                  decoration: decoration1(),
-                                  child: const Center(child: Text("No"))),
-                            ),
-                    ],
-                  ),
-                  const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                  Row(
-                    children: [
-                      const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10)),
-                      // ignore: deprecated_member_use
-                      RaisedButton(
-                        onPressed: () {},
-                        elevation: 0.0,
-                        color: storeContainerColor,
-                        child: raisedButtonText("Clear This Item"),
-                      ),
-
-                      /* StreamBuilder<bool>(
-                          stream: bloc.submitCheck,
-                          builder: (context, snapshot) {
-                            return*/
-                      RoundedButtonInput(
-                        text: "Add Item to List",
-                        press: isActive
-                            ? () {
-                                sendDataItem();
-                                setState(() {
-                                   pressed = true;
-                                });
-                                //clearData();
-                              }
-                            : null,
-                        /*press: !snapshot.hasData ? null: (){
-                              } ,*/
-                        fontsize1: 12,
-                        size1: 0.5,
-                        horizontal1: 30,
-                        vertical1: 10,
-                        color1: Colors.orange,
-                        textColor1: textColor1,
-                      ),
-                      //}
-                      // ),
-                    ],
-                  )
                 ],
               ),
             ),
-          ),
-          //-----------------------------------------------------------
-          pressed?
-          const Page1():const SizedBox(),
+            formsHeadText("Voucher Type"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50,
+                width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc1.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType1,
+                              displayClearIcon: false,
+                              onChanged: onDataChange1,
+                              items: snapshot?.data
+                                      ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                    return DropdownMenuItem<VoucherType>(
+                                      value: e,
+                                      child: Text(e.strName),
+                                    );
+                                  })?.toList() ??
+                                  [],
+                            );
+                          });
+                    }),
+              ),
+            ),
+            sizedbox1,
+            formsHeadText("Issue By"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50,
+                width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc1.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType2,
+                              displayClearIcon: false,
+                              onChanged: onDataChange2,
+                              items: snapshot?.data
+                                      ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                    return DropdownMenuItem<VoucherType>(
+                                      value: e,
+                                      child: Text(e.strName),
+                                    );
+                                  })?.toList() ??
+                                  [],
+                            );
+                          });
+                    }),
+              ),
+            ),
+            sizedbox1,
+            formsHeadText("Godown"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50,
+                width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<VoucherType>>(
+                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<VoucherType>(
+                          stream: voucherTypeDropdownBloc1.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<VoucherType>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectVoucherType3,
+                              displayClearIcon: false,
+                              onChanged: onDataChange3,
+                              items: snapshot?.data
+                                      ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                    return DropdownMenuItem<VoucherType>(
+                                      value: e,
+                                      child: Text(e.strName),
+                                    );
+                                  })?.toList() ??
+                                  [],
+                            );
+                          });
+                    }),
+              ),
+            ),
+            sizedbox1,
+            formsHeadText("Choose your phase (Cost Centre"),
+            Padding(
+              padding: padding1,
+              child: Container(
+                height: 50,
+                width: 343,
+                decoration: decorationForms(),
+                child: FutureBuilder<List<ItemCostCenter>>(
+                    future: itemCostCenterDropdownBloc.itemCostCenterData,
+                    builder: (context, snapshot) {
+                      return StreamBuilder<ItemCostCenter>(
+                          stream: itemCostCenterDropdownBloc.selectedState,
+                          builder: (context, item) {
+                            return SearchChoices<ItemCostCenter>.single(
+                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                              underline: "",
+                              padding: 1,
+                              isExpanded: true,
+                              hint: "Search here",
+                              value: selectItemCostCenter,
+                              displayClearIcon: false,
+                              onChanged: onDataChange4,
+                              items: snapshot?.data
+                                      ?.map<DropdownMenuItem<ItemCostCenter>>(
+                                          (e) {
+                                    return DropdownMenuItem<ItemCostCenter>(
+                                      value: e,
+                                      child: Text(e.strName),
+                                    );
+                                  })?.toList() ??
+                                  [],
+                            );
+                          });
+                    }),
+              ),
+            ),
+            sizedbox1,
+            //----------------------------------------
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                height: 378,
+                width: SizeConfig.getWidth(context),
+                decoration: BoxDecoration(
+                  color: storeContainerColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(padding: EdgeInsets.all(10)),
+                    formsHeadText("Item "),
+                    Padding(
+                      padding: padding1,
+                      child: Container(
+                        height: 50,
+                        width: 343,
+                        decoration: decorationForms(),
+                        child: FutureBuilder<List<ItemCurrentStatus>>(
+                            future: dropdownBlocItemCurrentStatus
+                                .itemCurrentStatusDropdowndata,
+                            builder: (context, snapshot) {
+                              return StreamBuilder<ItemCurrentStatus>(
+                                  stream:
+                                      dropdownBlocItemCurrentStatus.selectedState,
+                                  builder: (context, item) {
+                                    return SearchChoices<
+                                        ItemCurrentStatus>.single(
+                                      icon: const Icon(
+                                          Icons.keyboard_arrow_down_sharp),
+                                      underline: "",
+                                      padding: 1,
+                                      isExpanded: true,
+                                      hint: "Search here",
+                                      value: selectItemCurrentStatus,
+                                      displayClearIcon: false,
+                                      onChanged: onDataChange5,
+                                      items: snapshot?.data?.map<
+                                              DropdownMenuItem<
+                                                  ItemCurrentStatus>>((e) {
+                                            return DropdownMenuItem<
+                                                ItemCurrentStatus>(
+                                              value: e,
+                                              child: Text(e.strItemName),
+                                            );
+                                          })?.toList() ??
+                                          [],
+                                    );
+                                  });
+                            }),
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    formsHeadText("Request Qty. "),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 35),
+                          child: Container(
+                            height: 50,
+                            padding: padding1,
+                            decoration: decoration1(),
+                            child: SizedBox(
+                              width: 130,
+                              child: StreamBuilder<String>(
+                                  stream: bloc.requestQty,
+                                  builder: (context, snapshot) {
+                                    return TextFormField(
+                                      // initialValue: "no",
+                                      controller: reqQty,
+                                      decoration: InputDecoration(
+                                        errorText: snapshot.error,
+                                      ),
+                                      onChanged: bloc.changerequestQty,
+                                      keyboardType: TextInputType.number,
+                                      //onSaved: selectItemCurrentStatus.strItemName,
 
-          sizedbox1,
-          formsHeadText("Total Amount:"),
-          sizedbox1,
-          Padding(
-              padding: padding4,
-              child:
-                  roundedButtonHome2("Submit", () {
-                    sendDataStockReceive();
-                  }, roundedButtonHomeColor1)),
-        ],
+                                      style: simpleTextStyle7(),
+                                    );
+                                  }),
+                            ),
+                          ),
+                        ),
+                        selectItemCurrentStatus != null
+                            ? Container(
+                                height: 50,
+                                padding: padding1,
+                                decoration: decoration1(),
+                                child: Center(
+                                    child: Text(selectItemCurrentStatus.strUnit)))
+                            : Container(
+                                height: 50,
+                                padding: padding1,
+                                decoration: decoration1(),
+                                child: const Center(child: Text("No"))),
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Row(
+                      children: [
+                        formsHeadText("Rate"),
+                        const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30)),
+                        formsHeadText("Amount:"),
+                        Text(_amount.toString()),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        selectItemCurrentStatus != null
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 40),
+                                child: Container(
+                                    height: 50,
+                                    padding: padding1,
+                                    decoration: decoration1(),
+                                    child: Center(
+                                        child: Text(
+                                            selectItemCurrentStatus.dblQty))),
+                              )
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 40),
+                                child: Container(
+                                    height: 50,
+                                    padding: padding1,
+                                    decoration: decoration1(),
+                                    child: const Center(child: Text("No"))),
+                              ),
+                      ],
+                    ),
+                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Row(
+                      children: [
+                        const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10)),
+                        // ignore: deprecated_member_use
+                        RaisedButton(
+                          onPressed: () {},
+                          elevation: 0.0,
+                          color: storeContainerColor,
+                          child: raisedButtonText("Clear This Item"),
+                        ),
+
+                        /* StreamBuilder<bool>(
+                            stream: bloc.submitCheck,
+                            builder: (context, snapshot) {
+                              return*/
+                        RoundedButtonInput(
+                          text: "Add Item to List",
+                          press: selectItemCurrentStatus!=null ? () {
+                                  setState(() {
+                                     pressed = true;
+                                  });
+                                  //clearData();
+                                }
+                              : null,
+                          /*press: !snapshot.hasData ? null: (){
+                                } ,*/
+                          fontsize1: 12,
+                          size1: 0.5,
+                          horizontal1: 30,
+                          vertical1: 10,
+                          color1: Colors.orange,
+                          textColor1: textColor1,
+                        ),
+                        //}
+                        // ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            //-----------------------------------------------------------
+            pressed? AddItemContainer(
+              itemNameText: selectItemCurrentStatus.strItemName,
+              orderQtyText: reqQty.text,
+              rateText: selectItemCurrentStatus.dblQty,
+              amountText: selectItemCurrentStatus.dblQty,
+            ) : const SizedBox(),
+
+            sizedbox1,
+            formsHeadText("Total Amount:"),
+            sizedbox1,
+            Padding(
+                padding: padding4,
+                child:
+                    roundedButtonHome2("Submit", () {
+                      verifyDetail();
+                    }, roundedButtonHomeColor1)),
+          ],
+        ),
       ),
     );
   }

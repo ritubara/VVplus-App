@@ -68,7 +68,6 @@ class MyPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
     subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       setState(() => connectionStatus = result );
     });
-    checkInternetConnectivity();
     super.initState();
   }
   @override
@@ -111,30 +110,6 @@ class MyPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
     }
   }
 
-  checkInternetConnectivity() {
-    if (connectionStatus == ConnectivityResult.none) {
-      return Fluttertoast.showToast(
-          msg: internetErrorText,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 2,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
-    }
-    else {
-      return Fluttertoast.showToast(
-          msg: internetSuccessText,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 2,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
-    }
-  }
   Future<void> _refresh() async{
     await Future.delayed(const Duration(milliseconds: 800),() {
       setState(() {

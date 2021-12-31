@@ -14,6 +14,7 @@ import 'package:vvplus_app/infrastructure/Models/item_current_status_model.dart'
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/add_item_container.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
@@ -80,7 +81,6 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
     subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       setState(() => connectionStatus = result );
     });
-    checkInternetConnectivity();
     super.initState();
   }
   void clearData(){
@@ -159,31 +159,6 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
       Scaffold.of(context).showSnackBar(snackBar(httpExceptionText));
     } on FormatException {
       Scaffold.of(context).showSnackBar(snackBar(formatExceptionText));
-    }
-  }
-
-  checkInternetConnectivity() {
-    if (connectionStatus == ConnectivityResult.none) {
-      return Fluttertoast.showToast(
-          msg: internetErrorText,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 2,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
-    }
-    else {
-      return Fluttertoast.showToast(
-          msg: internetSuccessText,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.TOP,
-          timeInSecForIosWeb: 2,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
     }
   }
 
@@ -529,136 +504,12 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
             ),
 
             //-----------------------------------------------------------
-            pressed? Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                alignment: Alignment.center,
-                height: 92,
-                width: SizeConfig.getWidth(context),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: primaryColor3,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: primaryColor5,
-                      offset: Offset(0.0, 1.0), //(x,y)
-                      blurRadius: 6.0,
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 10),
-                      child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(selectItemCurrentStatus.strItemName,
-                            style: containerTextStyle1(),
-                          ),
-                          const SizedBox(
-                            height: 3,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 40, top: 16),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Order Qty.:",
-                                    style: containerTextStyle2(),
-                                  ),
-                                  const Text( ""//reqQty,
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "Rate:",
-                                style: containerTextStyle2(),
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              Text(
-                                "Amount:",
-                                style: containerTextStyle2(),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 4,top: 15),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: <Widget>[
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              Text(reqQty.text,
-                                style: containerTextStyle2(),
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              Text(selectItemCurrentStatus.dblQty,
-                                style: containerTextStyle2(),
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              Text(selectItemCurrentStatus.dblQty,
-                                style: containerTextStyle2(),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 50,top: 15),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Image.asset(icon15),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ):const SizedBox(),
+            pressed? AddItemContainer(
+              itemNameText: selectItemCurrentStatus.strItemName,
+              orderQtyText: reqQty.text,
+              rateText: selectItemCurrentStatus.dblQty,
+              amountText: selectItemCurrentStatus.dblQty,
+            ) : const SizedBox(),
 
             sizedbox1,
             formsHeadText("Total Amount:"),
