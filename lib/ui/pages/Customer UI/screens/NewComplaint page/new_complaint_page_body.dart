@@ -34,31 +34,6 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
   final _storage = FirebaseStorage.instance;
   String imgUrl;
 
-  sendData() async {
-    //UploadTask uploadTask = postImageRef.child(timeKey.toString() + ".jpg").putFile(imageFile);
-   // var storageImage = FirebaseStorage.instance.ref().child(imageFile.path);
-   // var task = storageImage.putFile(imageFile);
-  //  imgUrl = await (await uploadTask).ref.getDownloadURL();
-  //  await FirebaseFirestore.instance.collection('Course').add({'img':imgUrl});
-  // Reference ref = FirebaseStorage.instance.ref().child("unique_name.jpg");
-    // await ref.putFile(imageFile);
-   //  String imgUrl = await ref.getDownloadURL();
-  // print(imgUrl);
-    /*
-    Reference reference = _storage.ref().child(imageFile.path);
-
-    final TaskSnapshot snapshot = await reference.putFile(imageFile);
-
-    final downloadUrl = await snapshot.ref.getDownloadURL();
-    print(downloadUrl);
-
-     */
-    Reference storageRef = FirebaseStorage.instance.ref('images');
-    //file = await _compressImage(file: file,);
-    await storageRef.putFile(imageFile);
-    final String downloadUrl = await storageRef.getDownloadURL();
-    return downloadUrl;
-  }
   Future<String> saveuserImage(File file) async {
     try {
       Reference ref =
@@ -143,10 +118,6 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
       } else {
         print('No Path Received');
       }
-
-
-
-
   }
   Future uploadImageToFirebase(BuildContext context) async {
     String fileName = path.basename(imageFile.path);
@@ -186,28 +157,6 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
     final downloadUrl = await snapshot.ref.getDownloadURL();
     print(downloadUrl);
   }
-
-/*
-  CloudStorage storage;
-  sendData() async{
-    //String imgurl = await storage.saveuserImage(imageFile);
-      http.post(Uri.parse(
-          "https://vv-plus-app-default-rtdb.firebaseio.com/PostDataDailyManPower.json"),
-          body: json.encode({
-            "Remarks": imageFile
-          }));
-      print("Successfull2");
-  }
-  Future<PlatformFile> imagefromLibrary() async {
-    FilePickerResult result =
-    await FilePicker.platform.pickFiles(type: FileType.image);
-    if (result != null) {
-      return result.files[0];
-    }
-    return null;
-  }
-
- */
 
   @override
   Widget build(BuildContext context) {
