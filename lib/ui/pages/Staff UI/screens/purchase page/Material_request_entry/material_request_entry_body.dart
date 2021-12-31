@@ -18,9 +18,11 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
+import 'package:vvplus_app/ui/widgets/constants/assets.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'dart:async';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -433,26 +435,20 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                         const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                         // ignore: deprecated_member_use
                         RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {reqQty.clear();},
                           elevation: 0.0,
                           color: storeContainerColor,
                           child: raisedButtonText("Clear This Item"),
 
                         ),
-
-
-
                                RoundedButtonInput(
                                 text: "Add Item to List",
-                                press: isActive
+                                press: selectItemCurrentStatus!=null
                                     ? () {
-                                 // sendDataItem();
                                   setState(() {
                                     pressed = true;
                                   });
-                                  //clearData();
-                                }
-                                    : null,
+                                } : null,
                                 fontsize1: 12,
                                 size1: 0.5,
                                 horizontal1: 30,
@@ -467,6 +463,136 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
               ),
             ),
 
+            pressed? Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Container(
+                alignment: Alignment.center,
+                height: 92,
+                width: SizeConfig.getWidth(context),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: primaryColor3,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: primaryColor5,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16, top: 10),
+                      child: Column(
+                        //mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(selectItemCurrentStatus.strItemName,
+                          style: containerTextStyle1(),
+                          ),
+                          const SizedBox(
+                            height: 3,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40, top: 16),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Order Qty.:",
+                                    style: containerTextStyle2(),
+                                  ),
+                                  const Text( ""//reqQty,
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 2,
+                              ),
+
+                              const SizedBox(
+                                height: 2,
+                              ),
+                              Text(
+                                "Rate:",
+                                style: containerTextStyle2(),
+                              ),
+                              const SizedBox(
+                                height: 2,
+                              ),
+                              Text(
+                                "Amount:",
+                                style: containerTextStyle2(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4,top: 15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: <Widget>[
+                              const SizedBox(
+                                height: 2,
+                              ),
+                              Text(reqQty.text,
+                              style: containerTextStyle2(),
+                              ),
+                              const SizedBox(
+                                height: 2,
+                              ),
+                              Text(selectItemCurrentStatus.dblQty,
+                              style: containerTextStyle2(),
+                              ),
+                              const SizedBox(
+                                height: 2,
+                              ),
+                              Text(selectItemCurrentStatus.dblQty,
+                              style: containerTextStyle2(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50,top: 15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                            children: <Widget>[
+                          Image.asset(icon15),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ):const SizedBox(),
             //============================================================ popup container
 
 //=============================================================================
