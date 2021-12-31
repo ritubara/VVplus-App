@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +10,7 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdo
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/domain/common/common_text.dart';
 import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
@@ -25,6 +28,7 @@ import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:http/http.dart' as http;
 
 class DailyManpowerBody extends StatefulWidget {
   const DailyManpowerBody({Key key}) : super(key: key);
@@ -101,6 +105,15 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
 
   Future<dynamic> sendData(String intendDate, String partyNameSubCode, String costCenterSubCode, String resourceTypeSubCode, String reqQty, String remarks) async{
     try {
+      await http.post(Uri.parse(ApiService.mockDataPostDailyManPowerURL),
+          body: json.encode({
+            "IntendDate": intendDate,
+            "PartyNameSubCode": partyNameSubCode,
+            "CostCenterSubCode": costCenterSubCode,
+            "ResourceTypeSubCode": resourceTypeSubCode,
+            "ReqQty": reqQty,
+            "Remarks": remarks
+          }));
       Scaffold.of(context).showSnackBar(snackBar(sendDataText));
     } on SocketException {
       Scaffold.of(context).showSnackBar(snackBar(socketExceptionText));
