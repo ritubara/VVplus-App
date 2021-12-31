@@ -302,10 +302,10 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField1,
+                stream: bloc.outTextField1,
                 builder: (context, snapshot) => TextFormField(
                   controller: _qty,
-                  onChanged: bloc.intextField1,
+                  onChanged: bloc.inTextField1,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: primaryColor8,
@@ -328,10 +328,10 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
             child: SizedBox(
               width: 320,
               child: StreamBuilder<String>(
-                stream: bloc.outtextField2,
+                stream: bloc.outTextField2,
                 builder: (context, snapshot) => TextFormField(
                   controller: _remarks,
-                  onChanged: bloc.intextField2,
+                  onChanged: bloc.inTextField2,
                   decoration: InputDecoration(
                       filled: true,
                       fillColor: primaryColor8,

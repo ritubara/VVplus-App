@@ -7,25 +7,25 @@ import 'package:vvplus_app/domain/value_objects/Validators/text_field_validators
 
 class DailyManPowerBloc{
   // Declare streams
-  final _dropDownField1 = BehaviorSubject<String>.seeded("Item list 1");
-  final _dropDownField2 = BehaviorSubject<String>.seeded("Item list 1");
-  final _dropDownField3 = BehaviorSubject<String>.seeded("Item list 1");
-  final _textController = BehaviorSubject<String>();
-  final _textController1 = BehaviorSubject<String>();
+  final _partyNameDropDownField = BehaviorSubject<String>.seeded("Item list 1");
+  final _phaseDropDownField = BehaviorSubject<String>.seeded("Item list 1");
+  final _resourceTypeDropDownField = BehaviorSubject<String>.seeded("Item list 1");
+  final _qtyTextController = BehaviorSubject<String>();
+  final _remarksTextController = BehaviorSubject<String>();
 
   // set Data
 
-  Function(String) get inDropField1 => _dropDownField1.sink.add;
-  Function(String) get inDropField2 => _dropDownField2.sink.add;
-  Function(String) get inDropField3 => _dropDownField3.sink.add;
-  Function(String) get intextField1 => _textController.sink.add;
-  Function(String) get intextField2 => _textController1.sink.add;
+  Function(String) get inDropField1 => _partyNameDropDownField.sink.add;
+  Function(String) get inDropField2 => _phaseDropDownField.sink.add;
+  Function(String) get inDropField3 => _resourceTypeDropDownField.sink.add;
+  Function(String) get inTextField1 => _qtyTextController.sink.add;
+  Function(String) get inTextField2 => _remarksTextController.sink.add;
 
-  Stream<String> get outDropField1  => _dropDownField1.stream;
-  Stream<String> get outDropField2  => _dropDownField2.stream;
-  Stream<String> get outDropField3  => _dropDownField3.stream;
-  Stream<String> get outtextField1 => _textController.stream.transform(textFieldValidator);
-  Stream<String> get outtextField2 => _textController1.stream.transform(textFieldValidator);
+  Stream<String> get outDropField1  => _partyNameDropDownField.stream;
+  Stream<String> get outDropField2  => _phaseDropDownField.stream;
+  Stream<String> get outDropField3  => _resourceTypeDropDownField.stream;
+  Stream<String> get outTextField1 => _qtyTextController.stream.transform(textFieldValidator);
+  Stream<String> get outTextField2 => _remarksTextController.stream.transform(textFieldValidator);
 
 
   List<String> names = [
@@ -36,14 +36,14 @@ class DailyManPowerBloc{
   ];
 
   dispose(){
-    _dropDownField1.close();
-    _dropDownField2.close();
-    _dropDownField3.close();
-    _textController.close();
-    _textController1.close();
+    _partyNameDropDownField.close();
+    _phaseDropDownField.close();
+    _resourceTypeDropDownField.close();
+    _qtyTextController.close();
+    _remarksTextController.close();
   }
 
-  //Functiions
+  //function
   submitProduct(){
     //print('Product Submitted Name: ${_textController.value}');
   }
