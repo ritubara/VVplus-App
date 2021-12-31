@@ -67,6 +67,8 @@ dependencies:
   get_it: ^3.0.3
   transparent_image: ^2.0.0
   firebase_app_check: any
+  fluttertoast: ^8.0.8
+  connectivity: ^3.0.6
 
 
 

@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use, avoid_print
 
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,8 +8,7 @@ import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/department_name_dropdo
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/item_cost_center_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/Dropdown_Bloc/voucher_type_dropdown_bloc.dart';
 import 'package:vvplus_app/Application/Bloc/staff%20bloc/Contractors_page_bloc/daily_manpower_page_bloc.dart';
-import 'package:vvplus_app/data_source/Post_Data/Contractor_Page/daily_man_power_post_data.dart';
-import 'package:vvplus_app/data_source/api/api_services.dart';
+import 'package:vvplus_app/domain/common/common_text.dart';
 import 'package:vvplus_app/domain/common/snackbar_widget.dart';
 import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
@@ -24,7 +22,9 @@ import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
-import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:connectivity/connectivity.dart';
 
 class DailyManpowerBody extends StatefulWidget {
   const DailyManpowerBody({Key key}) : super(key: key);
@@ -45,6 +45,9 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
   VoucherType selectVoucherType;
   DepartmentName selectDepartmentName;
 
+  var subscription;
+  var connectionStatus;
+
   void onDataChange1(VoucherType state) {
     setState(() {
       selectVoucherType = state;
@@ -62,6 +65,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
   }
   @override
   void dispose() {
+    subscription.cancel();
     super.dispose();
   }
   @override
@@ -70,12 +74,66 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
     departmentNameDropdownBloc = DepartmentNameDropdownBloc();
     itemCostCenterDropdownBloc = ItemCostCenterDropdownBloc();
     voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() => connectionStatus = result );
+    });
+    checkInternetConnectivity();
     super.initState();
   }
   void clearData(){
     dateInput.clear();
     _qty.clear();
     _remarks.clear();
+  }
+  verifyDetail(){
+    if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
+      if(dateInput.text!=null && selectDepartmentName!=null && selectItemCostCenter!=null && selectVoucherType!=null && _qty.text!=null && _remarks.text!=null){
+        sendData(dateInput.text,selectDepartmentName.strSubCode,selectItemCostCenter.strSubCode,selectVoucherType.strSubCode,_qty.text,_remarks.text);
+      }
+      else{
+        Scaffold.of(context).showSnackBar(snackBar("Enter All Details"));
+      }
+    }
+    else{
+      Scaffold.of(context).showSnackBar(snackBar("Check Internet Connection"));
+    }
+    }
+
+  Future<dynamic> sendData(String intendDate, String partyNameSubCode, String costCenterSubCode, String resourceTypeSubCode, String reqQty, String remarks) async{
+    try {
+      Scaffold.of(context).showSnackBar(snackBar(sendDataText));
+    } on SocketException {
+      Scaffold.of(context).showSnackBar(snackBar(socketExceptionText));
+    } on HttpException {
+      Scaffold.of(context).showSnackBar(snackBar(httpExceptionText));
+    } on FormatException {
+      Scaffold.of(context).showSnackBar(snackBar(formatExceptionText));
+    }
+  }
+
+  checkInternetConnectivity() {
+    if (connectionStatus == ConnectivityResult.none) {
+      return Fluttertoast.showToast(
+          msg: internetErrorText,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }
+    else {
+      return Fluttertoast.showToast(
+          msg: internetSuccessText,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    }
   }
 
   @override
@@ -291,8 +349,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
           Padding(
               padding: padding4,
               child: roundedButtonHome2("Submit",(){
-                DailyManPowerPostData().sendData(dateInput.text,selectDepartmentName.strSubCode,selectItemCostCenter.strSubCode,selectVoucherType.strSubCode,_qty.text,_remarks.text);
-                Scaffold.of(context).showSnackBar(snackBar("Data send successfully"));
+                verifyDetail();
                 },roundedButtonHomeColor1)),
         ],
       ),
