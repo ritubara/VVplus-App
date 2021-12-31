@@ -40,8 +40,8 @@ triggerMode: RefreshIndicatorTriggerMode.onEdge,
 
     verifyDetail(){
     if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
-      if(dateInput.text!=null && selectDepartmentName!=null && selectItemCostCenter!=null && selectVoucherType!=null && _qty.text!=null && _remarks.text!=null){
-        sendData(dateInput.text,selectDepartmentName.strSubCode,selectItemCostCenter.strSubCode,selectVoucherType.strSubCode,_qty.text,_remarks.text);
+      if(){
+        sendData();
       }
       else{
         Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
@@ -52,7 +52,7 @@ triggerMode: RefreshIndicatorTriggerMode.onEdge,
     }
   }
 
-  Future<dynamic> sendData(String intendDate, String partyNameSubCode, String costCenterSubCode, String resourceTypeSubCode, String reqQty, String remarks) async{
+  Future<dynamic> sendData() async{
     try {
       await http.post(Uri.parse(ApiService.mockDataPostDailyManPowerURL),
           body: json.encode({
@@ -97,6 +97,7 @@ triggerMode: RefreshIndicatorTriggerMode.onEdge,
       );
     }
   }
+
 
 
 
