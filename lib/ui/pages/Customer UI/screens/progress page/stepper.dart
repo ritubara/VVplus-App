@@ -114,40 +114,44 @@ class StepperBodyState extends State<StepperBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-                Theme(
-                  data: ThemeData(
-                      accentColor: stepperColor1,
-                      primarySwatch: stepperColor1,
-                      colorScheme: const ColorScheme.light(
-                        primary: stepperColor,
+    return SingleChildScrollView(
+      physics: const ScrollPhysics(),
+      child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Theme(
+                    data: ThemeData(
+                        accentColor: stepperColor1,
+                        primarySwatch: stepperColor1,
+                        colorScheme: const ColorScheme.light(
+                          primary: stepperColor,
 
-                      )
+                        )
+                    ),
+                    child: StreamBuilder<int>(
+                      stream: _stepperBloc.getStep,
+                      initialData: 0,
+                      builder: (context, snapshot) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: Stepper(
+                            physics: const NeverScrollableScrollPhysics(),
+                            currentStep: snapshot.data,
+                            steps: steps,
+                            type: StepperType.vertical,
+                            onStepTapped: (step) {_stepperBloc.goTo(step);},
+                            onStepContinue: () {_stepperBloc.next(steps.length);},
+                            onStepCancel: () {_stepperBloc.cancel;},
+                          ),
+                        );
+                      }
+                    ),
                   ),
-                  child: StreamBuilder<int>(
-                    stream: _stepperBloc.getStep,
-                    initialData: 0,
-                    builder: (context, snapshot) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Stepper(
-                          currentStep: snapshot.data,
-                          steps: steps,
-                          type: StepperType.vertical,
-                          onStepTapped: (step) {_stepperBloc.goTo(step);},
-                          onStepContinue: () {_stepperBloc.next(steps.length);},
-                          onStepCancel: () {_stepperBloc.cancel;},
-                        ),
-                      );
-                    }
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          );
+    );
         }
   }
