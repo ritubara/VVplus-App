@@ -123,7 +123,7 @@ Run this command
 
 # Pages Images
 
-## Customer Facing
+## Customer UI Images
 - Login Page  
 <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/Login_Page.png" width=200 />
 
@@ -152,7 +152,7 @@ Run this command
 - Technical Specs   
 <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/c65f978be7b761cb6a5be4ba425053db10c8e939/assets/Screenshots/technical%20specs(2).JPG" width=200 />
 
-# Staff Screenshots
+# Staff UI Images
 
 
 - Staff Home Page
