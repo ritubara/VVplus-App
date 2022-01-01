@@ -453,7 +453,8 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
               padding: const EdgeInsets.all(10),
               child: Container(
                 height: 378,
-                width: SizeConfig.getWidth(context),
+                width: 392,
+                //width: SizeConfig.getWidth(context),
                 decoration: BoxDecoration(
                   color: storeContainerColor,
                   borderRadius: BorderRadius.circular(10),

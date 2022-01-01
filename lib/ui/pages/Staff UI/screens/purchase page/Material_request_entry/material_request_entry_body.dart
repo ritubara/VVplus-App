@@ -42,6 +42,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
   bool pressed = false;
   var subscription;
   var connectionStatus;
+  double  value1 = 0,value2 = 0;
 
   void clearData(){
     reqQty.clear();
@@ -71,8 +72,13 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
       Item = dropdownValue ;
     });
   }
-  _calculation() {
-    _amount = double.parse(reqQty.text) * double.parse(reqQty.text);
+  void _calculation() {
+    setState(() {
+      value1 = double.parse(reqQty.text);
+      value2 = double.parse(reqQty.text);
+      _amount = value1+value2;
+    });
+
 
   }
 
@@ -277,7 +283,8 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
               padding: const EdgeInsets.all(10),
               child: Container(
                 height: 378,
-                width: SizeConfig.getWidth(context),
+                width: 392,
+                //width: SizeConfig.getWidth(context),
                 decoration: BoxDecoration(
                   color: storeContainerColor,
                   borderRadius: BorderRadius.circular(10),
@@ -372,7 +379,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                       children: [
                         formsHeadText("Rate"),
                         const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
-                        formsHeadText("Amount:"),
+                        formsHeadText("Amount: $_amount"),
                         Text(_amount.toString()),
                       ],
                     ),
