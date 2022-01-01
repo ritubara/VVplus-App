@@ -65,6 +65,14 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
 
   @override
   void initState() {
+    reqQty = TextEditingController();
+    reqQty.addListener(() {
+      if (isActive = reqQty.text.isNotEmpty) {
+        isActive = true;
+      }
+      setState(() => isActive = isActive);
+    });
+
     voucherTypeDropdownBloc1 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc2 = VoucherTypeDropdownBloc();
     voucherTypeDropdownBloc3 = VoucherTypeDropdownBloc();
@@ -581,7 +589,7 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                             builder: (context, snapshot) {
                               return RoundedButtonInput(
                                 text: "Add Item to List",
-                                press: selectItemCurrentStatus!=null
+                                press: (selectItemCurrentStatus !=null)&&(isActive)
                                     ? () {
                                   setState(() {
                                     pressed = true;

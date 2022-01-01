@@ -485,7 +485,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                               return*/
                         RoundedButtonInput(
                           text: "Add Item to List",
-                          press: selectItemCurrentStatus!=null ? () {
+                          press: (selectItemCurrentStatus !=null)&&(isActive) ? () {
                                   setState(() {
                                      pressed = true;
                                   });
