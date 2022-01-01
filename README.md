@@ -118,6 +118,9 @@ Run this command
 
 
 
+### In Material Req. Approval Page the approve, wait, deny button will not post data to server when item is selected.
+
+<img src="https://github.com/TechnocultureResearch/VVplus-App/blob/c22f5c50006599bc241182466529a7b60132bdb7/assets/Issues%20or%20Errors%20Images/material_req_approval_button_problem.png" width=200 />
 
 
 
