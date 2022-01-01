@@ -3,7 +3,76 @@
 # Introduction
 A cross platform app for VV+ using Flutter.
 
-# Pages
+## Features
+- Signin/signup using mobile number
+- forms page with submit button
+- fetching data from api
+- get and post data in REST api
+
+
+## Additional Dependencies Required
+
+  - carousel_slider: ^2.3.1
+  - dotted_border: ^2.0.0+1
+  - readmore: ^2.1.0
+  - country_code_picker: ^2.0.2
+  - intl: ^0.17.0
+  - flutter_bloc: ^7.3.2
+  - bloc: ^7.2.1
+  - formz: ^0.4.1
+  - equatable: ^2.0.3
+  - rxdart: ^0.27.2
+  - http: ^0.13.4
+  - sqflite: ^2.0.0+4
+  - path_provider:
+  - meta: ^1.7.0
+  - flutter_spinkit: ^4.0.0
+  - dio: ^4.0.3
+  - dropdown_search: ^2.0.1
+  - search_choices: ^2.0.14
+ -  xml2json: ^5.3.1
+  - xml: ^5.3.1
+  - shared_preferences: ^2.0.9
+  - firebase_auth: ^3.3.0
+  - firebase_core: ^1.10.2
+  - cloud_firestore: ^3.1.1
+  - firebase_database: ^7.0.0
+  - firebase_storage: ^10.2.4
+  - firebase_analytics: ^9.0.4
+  - file_picker: ^4.3.0
+  - image_picker: ^0.8.4+4
+  - multi_image_picker: ^4.8.1
+  - get_it: ^3.0.3
+  - transparent_image: ^2.0.0
+  - firebase_app_check: any
+  - fluttertoast: ^8.0.8
+  - connectivity: ^3.0.6
+
+Add the above lines in your pubspec.yaml file under dependencies section and run command :
+- flutter pub get
+
+## Deployment
+
+```
+To deploy this project
+
+Clone this repo
+
+Run this command
+
+  flutter pub get
+Integrate your project with Firebase
+
+Create a AVD through Android Studio or use a physical mobile through usb debbuging
+
+Run this command
+
+- flutter run
+```
+
+# Issue or Errors
+
+# Pages Images
 
 ## Customer Facing
 - Login Page  
@@ -156,7 +225,11 @@ A cross platform app for VV+ using Flutter.
 <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/staff_home_contractors_page.png" width=200 />
 
 
+## Documentation
 
+- Flutter
+- Firebase
+- Rest API
 
 # Prerequisites
 
