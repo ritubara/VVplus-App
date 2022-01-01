@@ -414,7 +414,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                         ),
                                RoundedButtonInput(
                                 text: "Add Item to List",
-                                press: selectItemCurrentStatus!=null
+                                press: (selectItemCurrentStatus !=null)&&(isActive)
                                     ? () {
                                   setState(() {
                                     pressed = true;
