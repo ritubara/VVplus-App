@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use
+// ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use, prefer_null_aware_operators
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -170,32 +170,33 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryDepositBody> {
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Bank:"),
+                  formsDetailText("Bank: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Name of Customer:"),
+                  formsDetailText("Name of Customer: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Cheque Date:"),
+                  formsDetailText("Cheque Date: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Bank:"),
+                  formsDetailText("Bank: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Amount:"),
+                  formsDetailText("Amount: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Size:"),
+                  formsDetailText("Size: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsHeadText("Desposit Date"),
+                  formsHeadText("Desposit Date ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
+                  Padding(padding: paddingForms),
                   Container(
                     padding: dateFieldPadding,
                     height: dateFieldHeight,

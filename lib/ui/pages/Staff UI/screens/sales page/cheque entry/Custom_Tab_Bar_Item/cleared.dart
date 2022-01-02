@@ -173,32 +173,33 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Bank:"),
+                  formsDetailText("Bank: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Name of Customer:"),
+                  formsDetailText("Name of Customer: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Cheque Date:"),
+                  formsDetailText("Cheque Date: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Bank:"),
+                  formsDetailText("Bank: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Amount:"),
+                  formsDetailText("Amount: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Size:"),
+                  formsDetailText("Size: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
 
-                  formsHeadText("Cleared Date"),
+                  formsHeadText("Cleared Date: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
+                  Padding(padding: paddingForms),
                   Container(
                     padding: dateFieldPadding,
                     height: dateFieldHeight,
