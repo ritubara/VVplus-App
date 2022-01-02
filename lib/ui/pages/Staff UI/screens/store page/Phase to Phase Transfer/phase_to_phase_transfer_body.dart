@@ -40,6 +40,7 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
   TextEditingController dateinput = TextEditingController();
   TextEditingController remarks = TextEditingController();
   TextEditingController reqQty = TextEditingController();
+  final phaseToPhaseTransferFormKey = GlobalKey<FormState>();
 
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc2;
@@ -136,7 +137,7 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
   }
   verifyDetail(){
     if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
-      if(selectVoucherType1!=null && dateinput.text!=null && selectVoucherType2!=null && selectVoucherType3!=null && selectItemCostCenter1!=null && selectItemCostCenter2!=null && selectItemCostCenter3!=null && selectItemCurrentStatus!=null && reqQty.text!=null && remarks.text!=null){
+      if(selectVoucherType1!=null && selectVoucherType2!=null && selectVoucherType3!=null && selectItemCostCenter1!=null && selectItemCostCenter2!=null && selectItemCostCenter3!=null && selectItemCurrentStatus!=null && phaseToPhaseTransferFormKey.currentState.validate()){
         sendData();
       }
       else{
@@ -184,69 +185,79 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
       strokeWidth: 5,
       onRefresh: _refresh,
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: paddingForms2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  RaisedButton(
-                    onPressed: () {
-                      dateinput.clear();
-                      remarks.clear();
-                    },
-                    elevation: 0.0,
-                    color: Colors.white,
-                    child: raisedButtonText("Clear all"),
-                  ),
-                ],
-              ),
-            ),
-            formsHeadText("Voucher Type"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<VoucherType>>(
-                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<VoucherType>(
-                          stream: voucherTypeDropdownBloc1.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<VoucherType>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectVoucherType1,
-                              displayClearIcon: false,
-                              onChanged: onDataChange1,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                return DropdownMenuItem<VoucherType>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
+        child: Form(
+          key: phaseToPhaseTransferFormKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: paddingForms2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    RaisedButton(
+                      onPressed: () {
+                        dateinput.clear();
+                        remarks.clear();
+                        reqQty.clear();
+                      },
+                      elevation: 0.0,
+                      color: Colors.white,
+                      child: raisedButtonText("Clear all"),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            sizedbox1,
-            formsHeadText("Date"),
-            Container(
-              padding: dateFieldPadding,
-              height: dateFieldHeight,
-              child: Center(
+              formsHeadText("Voucher Type"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<VoucherType>>(
+                      future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<VoucherType>(
+                            stream: voucherTypeDropdownBloc1.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<VoucherType>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectVoucherType1!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectVoucherType1,
+                                displayClearIcon: false,
+                                onChanged: onDataChange1,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
+              sizedbox1,
+              formsHeadText("Date"),
+              Container(
+                padding: dateFieldPadding,
+                height: dateFieldHeight,
                 child: TextFormField(
+                  validator: (val){
+                    if(val.isEmpty) {
+                      return 'Enter Detail';
+                    }
+                    if(val != dateinput.text) {
+                      return 'Enter Correct Detail';
+                    }
+                    return null;
+                  },
                   controller: dateinput,
                   decoration: dateFieldDecoration(),
                   readOnly: true,
@@ -257,7 +268,7 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                         lastDate: DateTime(2101)
                     );
                     if (pickedDate != null) {
-                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                       setState(() {
                         dateinput.text = formattedDate;
                       });
@@ -266,393 +277,399 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                   },
                 ),
               ),
-            ),
-            sizedbox1,
-            formsHeadText("Issue To Which Staff"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<VoucherType>>(
-                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<VoucherType>(
-                          stream: voucherTypeDropdownBloc1.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<VoucherType>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectVoucherType2,
-                              displayClearIcon: false,
-                              onChanged: onDataChange2,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                return DropdownMenuItem<VoucherType>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("From Which Phase"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<VoucherType>>(
-                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<VoucherType>(
-                          stream: voucherTypeDropdownBloc1.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<VoucherType>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectVoucherType3,
-                              displayClearIcon: false,
-                              onChanged: onDataChange3,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                return DropdownMenuItem<VoucherType>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("Location [From]"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<ItemCostCenter>>(
-                    future: itemCostCenterDropdownBloc1.itemCostCenterData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<ItemCostCenter>(
-                          stream: itemCostCenterDropdownBloc1.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<ItemCostCenter>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectItemCostCenter1,
-                              displayClearIcon: false,
-                              onChanged: onDataChange4,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                                return DropdownMenuItem<ItemCostCenter>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("To Phase"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<ItemCostCenter>>(
-                    future: itemCostCenterDropdownBloc2.itemCostCenterData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<ItemCostCenter>(
-                          stream: itemCostCenterDropdownBloc2.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<ItemCostCenter>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectItemCostCenter2,
-                              displayClearIcon: false,
-                              onChanged: onDataChange5,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                                return DropdownMenuItem<ItemCostCenter>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("Location [To]"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<ItemCostCenter>>(
-                    future: itemCostCenterDropdownBloc3.itemCostCenterData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<ItemCostCenter>(
-                          stream: itemCostCenterDropdownBloc3.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<ItemCostCenter>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectItemCostCenter3,
-                              displayClearIcon: false,
-                              onChanged: onDataChange6,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                                return DropdownMenuItem<ItemCostCenter>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            //--------------------------------------------------------
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Container(
-                height: 378,
-                width: 392,
-                //width: SizeConfig.getWidth(context),
-                decoration: BoxDecoration(
-                  color: storeContainerColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(padding: EdgeInsets.all(10)),
-                    formsHeadText("Item "),
-                    Padding(
-                      padding: padding1,
-                      child: Container(
-                        height: 50, width: 343,
-                        decoration: decorationForms(),
-                        child: FutureBuilder<List<ItemCurrentStatus>>(
-                            future: dropdownBlocItemCurrentStatus.itemCurrentStatusDropdowndata,
-                            builder: (context, snapshot) {
-                              return StreamBuilder<ItemCurrentStatus>(
-                                  stream: dropdownBlocItemCurrentStatus.selectedState,
-                                  builder: (context, item) {
-                                    return SearchChoices<ItemCurrentStatus>.single(
-                                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                                      underline: "",
-                                      padding: 1,
-                                      isExpanded: true,
-                                      hint: "Search here",
-                                      value: selectItemCurrentStatus,
-                                      displayClearIcon: false,
-                                      onChanged: onDataChange7,
-                                      items: snapshot?.data
-                                          ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
-                                        return DropdownMenuItem<ItemCurrentStatus>(
-                                          value: e,
-                                          child: Text(e.strItemName),
-                                        );
-                                      })?.toList() ??[],
-                                    );
-                                  }
+
+              formsHeadText("Issue To Which Staff"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<VoucherType>>(
+                      future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<VoucherType>(
+                            stream: voucherTypeDropdownBloc1.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<VoucherType>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectVoucherType2!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectVoucherType2,
+                                displayClearIcon: false,
+                                onChanged: onDataChange2,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
                               );
                             }
-                        ),
-                      ),
-                    ),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                    formsHeadText("Request Qty. "),
-                    Row(
-                      children: [
-
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 35),
-
-                          child: Container(
-                            height: 50,
-                            padding: padding1,
-                            decoration: decoration1(),
-
-                            child: SizedBox(
-                              width: 130,
-
-                              child: StreamBuilder<String>(
-                                  stream: bloc.requestQty,
-                                  builder: (context, snapshot) {
-                                    return TextFormField(
-                                      // initialValue: "no",
-                                      controller: reqQty,
-                                      decoration: InputDecoration(
-                                        errorText: snapshot.error,
-                                      ),
-                                      onChanged: bloc.changerequestQty,
-                                      keyboardType: TextInputType.number,
-                                      //onSaved: selectItemCurrentStatus.strItemName,
-
-                                      style: simpleTextStyle7(),
-                                    );
-                                  }
-                              ),
-                            ),
-                          ),
-                        ),
-                        selectItemCurrentStatus!=null ? Container(
-                            height: 50, padding: padding1, decoration: decoration1(),
-                            child: Center(
-                                child: Text(selectItemCurrentStatus.strUnit))):
-                        Container(
-                            height: 50, padding: padding1, decoration: decoration1(),
-                            child: const Center(
-                                child: Text("No"))),
-                      ],
-                    ),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                    Row(
-                      children: [
-                        formsHeadText("Rate"),
-                        const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
-                        formsHeadText("Amount:"),
-                        Text(_amount.toString()),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        selectItemCurrentStatus!=null ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: Container(
-                              height: 50, padding: padding1, decoration: decoration1(),
-                              child: Center(
-                                  child: Text(selectItemCurrentStatus.dblQty))),
-                        ):
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: Container(
-                              height: 50, padding: padding1, decoration: decoration1(),
-                              child: const Center(
-                                  child: Text("No"))),
-                        ),
-                      ],
-                    ),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-
-                    Row(
-                      children: [
-                        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                        RaisedButton(
-                          onPressed: () {},
-                          elevation: 0.0,
-                          color: storeContainerColor,
-                          child: raisedButtonText("Clear This Item"),
-
-                        ),
-
-
-                        StreamBuilder<bool>(
-                            stream: bloc.submitCheck,
-                            builder: (context, snapshot) {
-                              return RoundedButtonInput(
-                                text: "Add Item to List",
-                                press: (selectItemCurrentStatus !=null)&&(isActive)
-                                    ? () {
-                                  setState(() {
-                                    pressed = true;
-                                  });
-                                } : null,
-                                fontsize1: 12,
-                                size1: 0.5,
-                                horizontal1: 30,
-                                vertical1: 10,
-                                color1: Colors.orange,
-                                textColor1: textColor1,
-                              );
-                            }
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-            //--------------------------------------------------------
-
-            pressed? AddItemContainer(
-              itemNameText: selectItemCurrentStatus.strItemName,
-              orderQtyText: reqQty.text,
-              rateText: selectItemCurrentStatus.dblQty,
-              amountText: selectItemCurrentStatus.dblQty,
-            ) : const SizedBox(),
-
-            sizedbox1,
-            formsHeadText("Total Amount:"),
-            sizedbox1,
-            formsHeadText("Remarks"),
-            Container(
-              height: 50,
-              padding: padding1,
-              decoration: decoration1(),
-              child: SizedBox(
-                width: 320,
-                child: StreamBuilder<String>(
-                  stream: bloc.outtextField,
-                  builder: (context, snapshot) => TextFormField(
-                    controller: remarks,
-                    onChanged: bloc.intextField,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: primaryColor8,
-                        enabledBorder: textFieldBorder(),
-                        focusedBorder: textFieldBorder(),
-                        errorText: snapshot.error
-                    ),
-                    keyboardType: TextInputType.text,
-                    style: simpleTextStyle7(),
+                        );
+                      }
                   ),
                 ),
               ),
-            ),
-            sizedbox1,
-            Padding(
-                padding: padding4,
-                child: roundedButtonHome2("Submit",(){verifyDetail();},roundedButtonHomeColor1)),
-          ],
+              sizedbox1,
+              formsHeadText("From Which Phase"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<VoucherType>>(
+                      future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<VoucherType>(
+                            stream: voucherTypeDropdownBloc1.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<VoucherType>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size: 30,),
+                                padding: selectVoucherType3!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectVoucherType3,
+                                displayClearIcon: false,
+                                onChanged: onDataChange3,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
+              sizedbox1,
+              formsHeadText("Location [From]"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<ItemCostCenter>>(
+                      future: itemCostCenterDropdownBloc1.itemCostCenterData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<ItemCostCenter>(
+                            stream: itemCostCenterDropdownBloc1.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<ItemCostCenter>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectItemCostCenter1!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectItemCostCenter1,
+                                displayClearIcon: false,
+                                onChanged: onDataChange4,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                  return DropdownMenuItem<ItemCostCenter>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
+              sizedbox1,
+              formsHeadText("To Phase"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<ItemCostCenter>>(
+                      future: itemCostCenterDropdownBloc2.itemCostCenterData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<ItemCostCenter>(
+                            stream: itemCostCenterDropdownBloc2.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<ItemCostCenter>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectItemCostCenter2!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectItemCostCenter2,
+                                displayClearIcon: false,
+                                onChanged: onDataChange5,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                  return DropdownMenuItem<ItemCostCenter>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
+              sizedbox1,
+              formsHeadText("Location [To]"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<ItemCostCenter>>(
+                      future: itemCostCenterDropdownBloc3.itemCostCenterData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<ItemCostCenter>(
+                            stream: itemCostCenterDropdownBloc3.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<ItemCostCenter>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectItemCostCenter3!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectItemCostCenter3,
+                                displayClearIcon: false,
+                                onChanged: onDataChange6,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                  return DropdownMenuItem<ItemCostCenter>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
+              sizedbox1,
+              //--------------------------------------------------------
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Container(
+                  height: 378,
+                  width: 392,
+                  //width: SizeConfig.getWidth(context),
+                  decoration: BoxDecoration(
+                    color: storeContainerColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(padding: EdgeInsets.all(10)),
+                      formsHeadText("Item "),
+                      Padding(
+                        padding: padding1,
+                        child: Container(
+                          height: 52, width: 343,
+                          decoration: decorationForms(),
+                          child: FutureBuilder<List<ItemCurrentStatus>>(
+                              future: dropdownBlocItemCurrentStatus.itemCurrentStatusDropdowndata,
+                              builder: (context, snapshot) {
+                                return StreamBuilder<ItemCurrentStatus>(
+                                    stream: dropdownBlocItemCurrentStatus.selectedState,
+                                    builder: (context, item) {
+                                      return SearchChoices<ItemCurrentStatus>.single(
+                                        icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                        padding: selectItemCurrentStatus!=null ? 2 : 11,
+                                        isExpanded: true,
+                                        hint: "Search here",
+                                        value: selectItemCurrentStatus,
+                                        displayClearIcon: false,
+                                        onChanged: onDataChange7,
+                                        items: snapshot?.data
+                                            ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
+                                          return DropdownMenuItem<ItemCurrentStatus>(
+                                            value: e,
+                                            child: Text(e.strItemName),
+                                          );
+                                        })?.toList() ??[],
+                                      );
+                                    }
+                                );
+                              }
+                          ),
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                      formsHeadText("Request Qty. "),
+                      Row(
+                        children: [
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 35),
+
+                            child: Container(
+                              height: 50,
+                              padding: padding1,
+                              decoration: decoration1(),
+
+                              child: SizedBox(
+                                width: 130,
+
+                                child: StreamBuilder<String>(
+                                    stream: bloc.requestQty,
+                                    builder: (context, snapshot) {
+                                      return TextFormField(
+                                        // initialValue: "no",
+                                        controller: reqQty,
+                                        decoration: InputDecoration(
+                                          errorText: snapshot.error,
+                                        ),
+                                        onChanged: bloc.changerequestQty,
+                                        keyboardType: TextInputType.number,
+                                        //onSaved: selectItemCurrentStatus.strItemName,
+
+                                        style: simpleTextStyle7(),
+                                      );
+                                    }
+                                ),
+                              ),
+                            ),
+                          ),
+                          selectItemCurrentStatus!=null ? Container(
+                              height: 50, padding: padding1, decoration: decoration1(),
+                              child: Center(
+                                  child: Text(selectItemCurrentStatus.strUnit))):
+                          Container(
+                              height: 50, padding: padding1, decoration: decoration1(),
+                              child: const Center(
+                                  child: Text("No"))),
+                        ],
+                      ),
+                      const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                      Row(
+                        children: [
+                          formsHeadText("Rate"),
+                          const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
+                          formsHeadText("Amount:"),
+                          Text(_amount.toString()),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          selectItemCurrentStatus!=null ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Container(
+                                height: 50, padding: padding1, decoration: decoration1(),
+                                child: Center(
+                                    child: Text(selectItemCurrentStatus.dblQty))),
+                          ):
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Container(
+                                height: 50, padding: padding1, decoration: decoration1(),
+                                child: const Center(
+                                    child: Text("No"))),
+                          ),
+                        ],
+                      ),
+                      const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+                      Row(
+                        children: [
+                          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                          RaisedButton(
+                            onPressed: () {},
+                            elevation: 0.0,
+                            color: storeContainerColor,
+                            child: raisedButtonText("Clear This Item"),
+
+                          ),
+
+
+                          StreamBuilder<bool>(
+                              stream: bloc.submitCheck,
+                              builder: (context, snapshot) {
+                                return RoundedButtonInput(
+                                  text: "Add Item to List",
+                                  press: (selectItemCurrentStatus !=null)&&(isActive)
+                                      ? () {
+                                    setState(() {
+                                      pressed = true;
+                                    });
+                                  } : null,
+                                  fontsize1: 12,
+                                  size1: 0.5,
+                                  horizontal1: 30,
+                                  vertical1: 10,
+                                  color1: Colors.orange,
+                                  textColor1: textColor1,
+                                );
+                              }
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              //--------------------------------------------------------
+
+              pressed? AddItemContainer(
+                itemNameText: selectItemCurrentStatus.strItemName,
+                orderQtyText: reqQty.text,
+                rateText: selectItemCurrentStatus.dblQty,
+                amountText: selectItemCurrentStatus.dblQty,
+              ) : const SizedBox(),
+
+              sizedbox1,
+              formsHeadText("Total Amount:"),
+              sizedbox1,
+              formsHeadText("Remarks"),
+              Container(
+                height: 70,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField,
+                    builder: (context, snapshot) => TextFormField(
+                      validator: (val) {
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != remarks.text) {
+                          return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                              : "Enter valid detail";
+                        }
+                        return null;
+                      },
+                      controller: remarks,
+                      onChanged: bloc.intextField,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          isDense: true,
+                          errorBorder: textFieldBorder(),
+                          errorText: snapshot.error
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
+                    ),
+                  ),
+                ),
+              ),
+              sizedbox1,
+              Padding(
+                  padding: padding4,
+                  child: roundedButtonHome2("Submit",(){verifyDetail();},roundedButtonHomeColor1)),
+            ],
+          ),
         ),
       ),
     );
