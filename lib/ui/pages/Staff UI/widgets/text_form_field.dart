@@ -13,14 +13,14 @@ import 'package:vvplus_app/ui/widgets/constants/size.dart';
 
 // date text form field
 var dateFieldPadding = const EdgeInsets.symmetric(horizontal: 35);
-double dateFieldHeight = 48;
+double dateFieldHeight = 72;
 InputDecoration dateFieldDecoration(){
   return const InputDecoration(
     filled: true,
     fillColor: primaryColor8,
     focusColor: boxDecorationColor2,
     suffixIcon: Icon(Icons.calendar_today, color: iconColor1,),
-    //hintText: "Enter Date",
+    hintText: "Enter Date",
     enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         borderSide: BorderSide(color: primaryColor9)
@@ -29,6 +29,12 @@ InputDecoration dateFieldDecoration(){
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
         borderSide: BorderSide(color: primaryColor9)
     ),
+    errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        borderSide: BorderSide(color: primaryColor9)
+    ),
+    isDense: true,
+    //errorStyle: TextStyle(height: 0),
     //prefixIcon: Icon(Icons.calendar_today),
     //labelText: "Enter Date"
   );

@@ -39,6 +39,7 @@ class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
   TextEditingController dateinput1 = TextEditingController();
   TextEditingController dateinput2 = TextEditingController();
   TextEditingController dateinput3 = TextEditingController();
+  final discountApprovalFormKey = GlobalKey<FormState>();
   DepartmentNameDropdownBloc departmentNameDropdownBloc;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc2;
@@ -99,7 +100,7 @@ class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
   }
   verifyDetail(){
     if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
-      if(selectVoucherType1!=null && selectDepartmentName!=null && selectVoucherType2!=null && selectIndentorName!=null && dateinput.text!=null && dateinput1.text!=null && dateinput2.text!=null && dateinput3.text!=null){
+      if(selectVoucherType1!=null && selectDepartmentName!=null && selectIndentorName!=null && selectVoucherType2!=null && discountApprovalFormKey.currentState.validate()){
         sendData();
       }
       else{
@@ -144,30 +145,43 @@ class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
       strokeWidth: 5,
       onRefresh: _refresh,
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: paddingForms2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  RaisedButton(
-                    onPressed: () {},
-                    elevation: 0.0,
-                    color: Colors.white,
-                    child: raisedButtonText("Clear all"),
-                  ),
-                ],
+        child: Form(
+          key: discountApprovalFormKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: paddingForms2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    RaisedButton(
+                      onPressed: () {dateinput.clear();
+                      dateinput1.clear();
+                      dateinput2.clear();
+                      dateinput3.clear();},
+                      elevation: 0.0,
+                      color: Colors.white,
+                      child: raisedButtonText("Clear all"),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            formsHeadText("Date"),
-            Container(
-              padding: dateFieldPadding,
-              height: dateFieldHeight,
-              child: Center(
+              formsHeadText("Date"),
+              Container(
+                padding: dateFieldPadding,
+                height: dateFieldHeight,
                 child: TextFormField(
+                  validator: (val){
+                    if(val.isEmpty) {
+                      return 'Enter Detail';
+                    }
+                    if(val != dateinput.text) {
+                      return 'Enter Correct Detail';
+                    }
+                    return null;
+                  },
                   controller: dateinput,
                   decoration: dateFieldDecoration(),
                   readOnly: true,
@@ -178,7 +192,7 @@ class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
                         lastDate: DateTime(2101)
                     );
                     if (pickedDate != null) {
-                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                       setState(() {
                         dateinput.text = formattedDate;
                       });
@@ -187,235 +201,258 @@ class MyDiscountApprovalBody extends State<DiscountApprovalBody> {
                   },
                 ),
               ),
-            ),
-            sizedbox1,
-            formsHeadText("Branch and Phase"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<VoucherType>>(
-                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<VoucherType>(
-                          stream: voucherTypeDropdownBloc1.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<VoucherType>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectVoucherType1,
-                              displayClearIcon: false,
-                              onChanged: onDataChange2,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                return DropdownMenuItem<VoucherType>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("Requested By"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<DepartmentName>>(
-                    future: departmentNameDropdownBloc.departmentNameData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<DepartmentName>(
-                          stream: departmentNameDropdownBloc.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<DepartmentName>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectDepartmentName,
-                              displayClearIcon: false,
-                              onChanged: onDataChange1,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<DepartmentName>>((e) {
-                                return DropdownMenuItem<DepartmentName>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("Reason for Discount"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<VoucherType>>(
-                    future: voucherTypeDropdownBloc2.voucherTypeDropdownData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<VoucherType>(
-                          stream: voucherTypeDropdownBloc2.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<VoucherType>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectVoucherType2,
-                              displayClearIcon: false,
-                              onChanged: onDataChange3,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                return DropdownMenuItem<VoucherType>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("Remarks"),
-            Container(
-              height: 50,
-              padding: padding1,
-              decoration: decoration1(),
-              child: SizedBox(
-                width: 320,
-                child: StreamBuilder<String>(
-                  stream: bloc.outtextField1,
-                  builder: (context, snapshot) => TextFormField(
-                    controller: dateinput1,
-                    onChanged: bloc.intextField1,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: primaryColor8,
-                        enabledBorder: textFieldBorder(),
-                        focusedBorder: textFieldBorder(),
-                        errorText: snapshot.error
-                    ),
-                    keyboardType: TextInputType.text,
-                    style: simpleTextStyle7(),
+
+              formsHeadText("Branch and Phase"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<VoucherType>>(
+                      future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<VoucherType>(
+                            stream: voucherTypeDropdownBloc1.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<VoucherType>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectVoucherType1!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectVoucherType1,
+                                displayClearIcon: false,
+                                onChanged: onDataChange2,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
                   ),
                 ),
               ),
-            ),
-            sizedbox1,
-            formsHeadText("Customer Name"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<IndentorName>>(
-                    future: indentorNameDropdownBloc.indentorNameDropdownData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<IndentorName>(
-                          stream: indentorNameDropdownBloc.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<IndentorName>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectIndentorName,
-                              displayClearIcon: false,
-                              onChanged: onDataChange4,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<IndentorName>>((e) {
-                                return DropdownMenuItem<IndentorName>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("Customer Contact No."),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 35),
-              color: primaryColor3,
-              height: 51.0,
-              child: TextFormField(
-                controller: dateinput2,
-                keyboardType: TextInputType.phone,
-                style:const TextStyle(
-                  color: textColor4,
-                  decorationColor: decorationColor1,
-                ),
-                decoration: InputDecoration(
-                  contentPadding: phoneTextFieldPadding,
-                  //prefixIcon: phoneTextFieldPicker(),
-                  focusColor: textColor4,
-                  enabledBorder: outlineBorder(),
-                  focusedBorder: outlineBorder(),//floatingLabelBehavior: FloatingLabelBehavior.never,
-                  prefix: Padding(padding: phoneTextFieldPadding1),
-                  hintText: "Enter Mobile Number",
-                  hintStyle: const TextStyle(color: primaryColor2,),
-                ),
-              ),
-            ),
-            sizedbox1,
-            formsHeadText("For Unit No.:"),
-            sizedbox1,
-            formsHeadText("Percentage Discount"),
-            Container(
-              height: 50,
-              padding: padding1,
-              decoration: decoration1(),
-              child: SizedBox(
-                width: 320,
-                child: StreamBuilder<String>(
-                  stream: bloc.outtextField2,
-                  builder: (context, snapshot) => TextFormField(
-                    controller: dateinput3,
-                    onChanged: bloc.intextField2,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: primaryColor8,
-                        enabledBorder: textFieldBorder(),
-                        focusedBorder: textFieldBorder(),
-                        errorText: snapshot.error
-                    ),
-                    keyboardType: TextInputType.text,
-                    style: simpleTextStyle7(),
+              sizedbox1,
+              formsHeadText("Requested By"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<DepartmentName>>(
+                      future: departmentNameDropdownBloc.departmentNameData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<DepartmentName>(
+                            stream: departmentNameDropdownBloc.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<DepartmentName>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectDepartmentName!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectDepartmentName,
+                                displayClearIcon: false,
+                                onChanged: onDataChange1,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                                  return DropdownMenuItem<DepartmentName>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
                   ),
                 ),
               ),
-            ),
-            sizedbox1,
-            Padding(
-                padding: padding4,
-                child: roundedButtonHome2("Submit",(){ verifyDetail();},roundedButtonHomeColor1)),
-          ],
+              sizedbox1,
+              formsHeadText("Reason for Discount"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<VoucherType>>(
+                      future: voucherTypeDropdownBloc2.voucherTypeDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<VoucherType>(
+                            stream: voucherTypeDropdownBloc2.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<VoucherType>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectVoucherType2!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectVoucherType2,
+                                displayClearIcon: false,
+                                onChanged: onDataChange3,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
+              sizedbox1,
+              formsHeadText("Remarks"),
+              Container(
+                height: 70,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField1,
+                    builder: (context, snapshot) => TextFormField(
+                      validator: (val) {
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != dateinput1.text) {
+                          return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                              : "Enter valid detail";
+                        }
+                        return null;
+                      },
+                      controller: dateinput1,
+                      onChanged: bloc.intextField1,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          isDense: true,
+                          errorBorder: textFieldBorder(),
+                          errorText: snapshot.error
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
+                    ),
+                  ),
+                ),
+              ),
+              formsHeadText("Customer Name"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<IndentorName>>(
+                      future: indentorNameDropdownBloc.indentorNameDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<IndentorName>(
+                            stream: indentorNameDropdownBloc.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<IndentorName>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectIndentorName!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectIndentorName,
+                                displayClearIcon: false,
+                                onChanged: onDataChange4,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<IndentorName>>((e) {
+                                  return DropdownMenuItem<IndentorName>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
+              sizedbox1,
+              formsHeadText("Customer Contact No."),
+              Container(
+                height: 70,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: TextFormField(
+                      validator: (val) {
+                          return RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)',).hasMatch(val) ? null
+                              : "Enter valid mobile number";
+                      },
+                      controller: dateinput2,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          isDense: true,
+                          hintText: "+91",
+                          errorBorder: textFieldBorder(),
+
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
+                    ),
+                  ),
+                ),
+
+              formsHeadText("For Unit No.:"),
+              sizedbox1,
+              formsHeadText("Percentage Discount"),
+              Container(
+                height: 70,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField2,
+                    builder: (context, snapshot) => TextFormField(
+                      validator: (val) {
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != dateinput3.text) {
+                          return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                              : "Enter valid detail";
+                        }
+                        return null;
+                      },
+                      controller: dateinput3,
+                      onChanged: bloc.intextField2,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          isDense: true,
+                          errorBorder: textFieldBorder(),
+                          errorText: snapshot.error
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
+                    ),
+                  ),
+                ),
+              ),
+              sizedbox1,
+              Padding(
+                  padding: padding4,
+                  child: roundedButtonHome2("Submit",(){ verifyDetail();},roundedButtonHomeColor1)),
+            ],
+          ),
         ),
       ),
     );

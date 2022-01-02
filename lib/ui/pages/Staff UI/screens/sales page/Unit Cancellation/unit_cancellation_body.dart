@@ -40,6 +40,7 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
   DepartmentNameDropdownBloc departmentNameDropdownBloc;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc1;
   VoucherTypeDropdownBloc voucherTypeDropdownBloc2;
+  final unitCancellationFormKey = GlobalKey<FormState>();
 
   DepartmentName selectDepartmentName;
   VoucherType selectVoucherType1;
@@ -88,7 +89,7 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
   }
   verifyDetail(){
     if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
-      if(dateinput.text!=null && selectDepartmentName!=null && selectVoucherType1!=null && dueDate.text!=null && baseAmount.text!=null && remarks.text!=null){
+      if(selectDepartmentName!=null && selectVoucherType1!=null && unitCancellationFormKey.currentState.validate()){
         sendData();
       }
       else{
@@ -131,30 +132,43 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
       strokeWidth: 5,
       onRefresh: _refresh,
       child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: paddingForms2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  RaisedButton(
-                    onPressed: () {},
-                    elevation: 0.0,
-                    color: Colors.white,
-                    child: raisedButtonText("Clear all"),
-                  ),
-                ],
+        child: Form(
+          key: unitCancellationFormKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: paddingForms2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    RaisedButton(
+                      onPressed: () {dateinput.clear();
+                      dueDate.clear();
+                      baseAmount.clear();
+                      remarks.clear();},
+                      elevation: 0.0,
+                      color: Colors.white,
+                      child: raisedButtonText("Clear all"),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            formsHeadText("Cancellation Date"),
-            Container(
-              padding: dateFieldPadding,
-              height: dateFieldHeight,
-              child: Center(
+              formsHeadText("Cancellation Date"),
+              Container(
+                padding: dateFieldPadding,
+                height: dateFieldHeight,
                 child: TextFormField(
+                  validator: (val){
+                    if(val.isEmpty) {
+                      return 'Enter Detail';
+                    }
+                    if(val != dateinput.text) {
+                      return 'Enter Correct Detail';
+                    }
+                    return null;
+                  },
                   controller: dateinput,
                   decoration: dateFieldDecoration(),
                   readOnly: true,
@@ -165,7 +179,7 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
                         lastDate: DateTime(2101)
                     );
                     if (pickedDate != null) {
-                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                       setState(() {
                         dateinput.text = formattedDate;
                       });
@@ -174,87 +188,92 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
                   },
                 ),
               ),
-            ),
-            sizedbox1,
-            formsHeadText("Booking Id"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<DepartmentName>>(
-                    future: departmentNameDropdownBloc.departmentNameData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<DepartmentName>(
-                          stream: departmentNameDropdownBloc.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<DepartmentName>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectDepartmentName,
-                              displayClearIcon: false,
-                              onChanged: onDataChange1,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<DepartmentName>>((e) {
-                                return DropdownMenuItem<DepartmentName>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
+              formsHeadText("Booking Id"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<DepartmentName>>(
+                      future: departmentNameDropdownBloc.departmentNameData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<DepartmentName>(
+                            stream: departmentNameDropdownBloc.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<DepartmentName>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectDepartmentName!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectDepartmentName,
+                                displayClearIcon: false,
+                                onChanged: onDataChange1,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                                  return DropdownMenuItem<DepartmentName>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
                 ),
               ),
-            ),
-            const UnitCancellationContainerData(),
-            sizedbox1,
-            formsHeadText("Change Applicable"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<VoucherType>>(
-                    future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<VoucherType>(
-                          stream: voucherTypeDropdownBloc1.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<VoucherType>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectVoucherType1,
-                              displayClearIcon: false,
-                              onChanged: onDataChange2,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                return DropdownMenuItem<VoucherType>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
+              const UnitCancellationContainerData(),
+              sizedbox1,
+              formsHeadText("Change Applicable"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<VoucherType>>(
+                      future: voucherTypeDropdownBloc1.voucherTypeDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<VoucherType>(
+                            stream: voucherTypeDropdownBloc1.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<VoucherType>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                underline: "",
+                                padding: selectVoucherType1!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectVoucherType1,
+                                displayClearIcon: false,
+                                onChanged: onDataChange2,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                  return DropdownMenuItem<VoucherType>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
                 ),
               ),
-            ),
-            sizedbox1,
-            formsHeadText("Due Date"),
-            Container(
-              padding: dateFieldPadding,
-              height: dateFieldHeight,
-              child: Center(
+              sizedbox1,
+              formsHeadText("Due Date"),
+              Container(
+                padding: dateFieldPadding,
+                height: dateFieldHeight,
                 child: TextFormField(
+                  validator: (val){
+                    if(val.isEmpty) {
+                      return 'Enter Detail';
+                    }
+                    if(val != dueDate.text) {
+                      return 'Enter Correct Detail';
+                    }
+                    return null;
+                  },
                   controller: dueDate,
                   decoration: dateFieldDecoration(),
                   readOnly: true,
@@ -265,7 +284,7 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
                         lastDate: DateTime(2101)
                     );
                     if (pickedDate != null) {
-                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                      String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                       setState(() {
                         dueDate.text = formattedDate;
                       });
@@ -274,66 +293,90 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
                   },
                 ),
               ),
-            ),
-            sizedbox1,
-            formsHeadText("Base Amount (deduction amount)"),
-            Container(
-              height: 50,
-              padding: padding1,
-              decoration: decoration1(),
-              child: SizedBox(
-                width: 320,
-                child: StreamBuilder<String>(
-                  stream: bloc.outtextField1,
-                  builder: (context, snapshot) => TextFormField(
-                    controller: baseAmount,
-                    onChanged: bloc.intextField1,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: primaryColor8,
-                        enabledBorder: textFieldBorder(),
-                        focusedBorder: textFieldBorder(),
-                        errorText: snapshot.error
+              formsHeadText("Base Amount (deduction amount)"),
+              Container(
+                height: 70,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField1,
+                    builder: (context, snapshot) => TextFormField(
+                      validator: (val) {
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != baseAmount.text) {
+                          return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                              : "Enter valid detail";
+                        }
+                        return null;
+                      },
+                      controller: baseAmount,
+                      onChanged: bloc.intextField1,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          errorText: snapshot.error,
+                        isDense: true,
+                        errorBorder: textFieldBorder(),
+
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
                     ),
-                    keyboardType: TextInputType.text,
-                    style: simpleTextStyle7(),
                   ),
                 ),
               ),
-            ),
-            sizedbox1,
-            formsHeadText("Tax:"),
-            sizedbox1,
-            formsHeadText("Remarks"),
-            Container(
-              height: 50,
-              padding: padding1,
-              decoration: decoration1(),
-              child: SizedBox(
-                width: 320,
-                child: StreamBuilder<String>(
-                  stream: bloc.outtextField2,
-                  builder: (context, snapshot) => TextFormField(
-                    controller: remarks,
-                    onChanged: bloc.intextField2,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: primaryColor8,
-                        enabledBorder: textFieldBorder(),
-                        focusedBorder: textFieldBorder(),
-                        errorText: snapshot.error
+              sizedbox1,
+              formsHeadText("Tax:"),
+              sizedbox1,
+              formsHeadText("Remarks"),
+              Container(
+                height: 70,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField2,
+                    builder: (context, snapshot) => TextFormField(
+                      validator: (val) {
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != remarks.text) {
+                          return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                              : "Enter valid detail";
+                        }
+                        return null;
+                      },
+                      controller: remarks,
+                      onChanged: bloc.intextField2,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          isDense: true,
+                          errorBorder: textFieldBorder(),
+                          errorText: snapshot.error
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
                     ),
-                    keyboardType: TextInputType.text,
-                    style: simpleTextStyle7(),
                   ),
                 ),
               ),
-            ),
-            sizedbox1,
-            Padding(
-                padding: padding4,
-                child: roundedButtonHome2("Submit",(){verifyDetail();},roundedButtonHomeColor1)),
-          ],
+              sizedbox1,
+              Padding(
+                  padding: padding4,
+                  child: roundedButtonHome2("Submit",(){verifyDetail();},roundedButtonHomeColor1)),
+            ],
+          ),
         ),
       ),
     );

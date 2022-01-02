@@ -29,6 +29,8 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
   TextEditingController clearedDateInput = TextEditingController();
   VoucherTypeDropdownBloc voucherTypeDropdownBloc;
   VoucherType selectVoucherType;
+  final clearedFormKey = GlobalKey<FormState>();
+
 
   void onDataChange(VoucherType state) {
     setState(() {
@@ -54,8 +56,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
     });
   }
   verifyDetail() {
-    if (depositUpToDateInput.text != null && selectVoucherType != null &&
-        clearedDateInput.text != null) {
+    if (selectVoucherType != null && clearedFormKey.currentState.validate()) {
       sendData();
     }
     else {
@@ -89,21 +90,31 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
       strokeWidth: 5,
       onRefresh: _refresh,
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
+        child: Form(
+          key: clearedFormKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
 
-                formsHeadText("Deposit Up To"),
+                  formsHeadText("Deposit Up To"),
 
-                Container(
-                  padding: dateFieldPadding,
-                  height: dateFieldHeight,
-                  child: Center(
+                  Container(
+                    padding: dateFieldPadding,
+                    height: dateFieldHeight,
                     child: TextFormField(
+                      validator: (val){
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != depositUpToDateInput.text) {
+                          return 'Enter Correct Detail';
+                        }
+                        return null;
+                      },
                       controller: depositUpToDateInput,
                       decoration: dateFieldDecoration(),
                       readOnly: true,
@@ -114,7 +125,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
                             lastDate: DateTime(2101)
                         );
                         if (pickedDate != null) {
-                          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                          String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                           setState(() {
                             depositUpToDateInput.text = formattedDate;
                           });
@@ -123,80 +134,84 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
                       },
                     ),
                   ),
-                ),
 
-                Padding(padding: paddingForms),
+                  formsHeadText("Choose Cheque"),
 
-                formsHeadText("Choose Cheque"),
-
-                Padding(
-                  padding: padding1,
-                  child: Container(
-                    height: 50, width: 343,
-                    decoration: decorationForms(),
-                    child: FutureBuilder<List<VoucherType>>(
-                        future: voucherTypeDropdownBloc.voucherTypeDropdownData,
-                        builder: (context, snapshot) {
-                          return StreamBuilder<VoucherType>(
-                              stream: voucherTypeDropdownBloc.selectedState,
-                              builder: (context, item) {
-                                return SearchChoices<VoucherType>.single(
-                                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                                  underline: "",
-                                  padding: 1,
-                                  isExpanded: true,
-                                  hint: "Search here",
-                                  value: selectVoucherType,
-                                  displayClearIcon: false,
-                                  onChanged: onDataChange,
-                                  items: snapshot?.data
-                                      ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                    return DropdownMenuItem<VoucherType>(
-                                      value: e,
-                                      child: Text(e.strName),
-                                    );
-                                  })?.toList() ??[],
-                                );
-                              }
-                          );
-                        }
+                  Padding(
+                    padding: padding1,
+                    child: Container(
+                      height: 52, width: 343,
+                      decoration: decorationForms(),
+                      child: FutureBuilder<List<VoucherType>>(
+                          future: voucherTypeDropdownBloc.voucherTypeDropdownData,
+                          builder: (context, snapshot) {
+                            return StreamBuilder<VoucherType>(
+                                stream: voucherTypeDropdownBloc.selectedState,
+                                builder: (context, item) {
+                                  return SearchChoices<VoucherType>.single(
+                                    icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                    padding: selectVoucherType!=null ? 2 : 11,
+                                    isExpanded: true,
+                                    hint: "Search here",
+                                    value: selectVoucherType,
+                                    displayClearIcon: false,
+                                    onChanged: onDataChange,
+                                    items: snapshot?.data
+                                        ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                      return DropdownMenuItem<VoucherType>(
+                                        value: e,
+                                        child: Text(e.strName),
+                                      );
+                                    })?.toList() ??[],
+                                  );
+                                }
+                            );
+                          }
+                      ),
                     ),
                   ),
-                ),
 
-                Padding(padding: paddingForms),
+                  Padding(padding: paddingForms),
 
-                formsDetailText("Bank:"),
+                  formsDetailText("Bank:"),
 
-                Padding(padding: paddingForms),
+                  Padding(padding: paddingForms),
 
-                formsDetailText("Name of Customer:"),
+                  formsDetailText("Name of Customer:"),
 
-                Padding(padding: paddingForms),
+                  Padding(padding: paddingForms),
 
-                formsDetailText("Cheque Date:"),
+                  formsDetailText("Cheque Date:"),
 
-                Padding(padding: paddingForms),
+                  Padding(padding: paddingForms),
 
-                formsDetailText("Bank:"),
+                  formsDetailText("Bank:"),
 
-                Padding(padding: paddingForms),
+                  Padding(padding: paddingForms),
 
-                formsDetailText("Amount:"),
+                  formsDetailText("Amount:"),
 
-                Padding(padding: paddingForms),
+                  Padding(padding: paddingForms),
 
-                formsDetailText("Size:"),
+                  formsDetailText("Size:"),
 
-                Padding(padding: paddingForms),
+                  Padding(padding: paddingForms),
 
-                formsHeadText("Cleared Date"),
+                  formsHeadText("Cleared Date"),
 
-                Container(
-                  padding: dateFieldPadding,
-                  height: dateFieldHeight,
-                  child: Center(
+                  Container(
+                    padding: dateFieldPadding,
+                    height: dateFieldHeight,
                     child: TextFormField(
+                      validator: (val){
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != clearedDateInput.text) {
+                          return 'Enter Correct Detail';
+                        }
+                        return null;
+                      },
                       controller: clearedDateInput,
                       decoration: dateFieldDecoration(),
                       readOnly: true,
@@ -207,7 +222,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
                             lastDate: DateTime(2101)
                         );
                         if (pickedDate != null) {
-                          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                          String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                           setState(() {
                             clearedDateInput.text = formattedDate;
                           });
@@ -216,15 +231,15 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
                       },
                     ),
                   ),
-                ),
 
-                Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 40),
-                    child: roundedButtonHome("Submit", () {verifyDetail();})),
-              ],
-            ),
-          ],
+                  Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 40),
+                      child: roundedButtonHome("Submit", () {verifyDetail();})),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

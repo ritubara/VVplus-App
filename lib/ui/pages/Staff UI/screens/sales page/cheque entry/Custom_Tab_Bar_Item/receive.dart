@@ -44,6 +44,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
   ItemCostCenter selectItemCostCenter;
   VoucherType selectVoucherType;
   DepartmentName selectDepartmentName;
+  final receiveFormKey = GlobalKey<FormState>();
 
   void onDataChange1(DepartmentName state) {
     setState(() {
@@ -80,7 +81,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
     });
   }
   verifyDetail(){
-      if(voucherTypeInput.text!=null && chequeReceivingDateInput.text!=null && selectVoucherType!=null && selectDepartmentName!=null && selectItemCostCenter!=null && chequeNoInput.text!=null && amountInput.text!=null){
+      if(selectVoucherType!=null && selectDepartmentName!=null && selectItemCostCenter!=null && receiveFormKey.currentState.validate()){
         sendData();
       }
       else{
@@ -119,50 +120,70 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
       strokeWidth: 5,
       onRefresh: _refresh,
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
+        child: Form(
+          key: receiveFormKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
 
-                formsHeadText("Voucher Type"),
+                  formsHeadText("Voucher Type"),
 
-                Container(
-                  height: 50,
-                  padding: padding1,
-                  decoration: decoration1(),
-                  child: SizedBox(
-                    width: 320,
-                    child: StreamBuilder<String>(
-                      stream: bloc.outtextField1,
-                      builder: (context, snapshot) => TextFormField(
-                        controller: voucherTypeInput,
-                        onChanged: bloc.intextField1,
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: primaryColor8,
-                            enabledBorder: textFieldBorder(),
-                            focusedBorder: textFieldBorder(),
-                            errorText: snapshot.error
+                  Container(
+                    height: 70,
+                    padding: padding1,
+                    decoration: decoration1(),
+                    child: SizedBox(
+                      width: 320,
+                      child: StreamBuilder<String>(
+                        stream: bloc.outtextField1,
+                        builder: (context, snapshot) => TextFormField(
+                          validator: (val) {
+                            if(val.isEmpty) {
+                              return 'Enter Detail';
+                            }
+                            if(val != voucherTypeInput.text) {
+                              return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                                  : "Enter valid detail";
+                            }
+                            return null;
+                          },
+                          controller: voucherTypeInput,
+                          onChanged: bloc.intextField1,
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: primaryColor8,
+                              enabledBorder: textFieldBorder(),
+                              focusedBorder: textFieldBorder(),
+                              isDense: true,
+                              errorBorder: textFieldBorder(),
+                              errorText: snapshot.error
+                          ),
+                          keyboardType: TextInputType.text,
+                          style: simpleTextStyle7(),
                         ),
-                        keyboardType: TextInputType.text,
-                        style: simpleTextStyle7(),
                       ),
                     ),
                   ),
-                ),
 
-                Padding(padding: paddingForms),
+                  formsHeadText("Cheque Receiving Date"),
 
-                formsHeadText("Cheque Receiving Date"),
-
-                Container(
-                  padding: dateFieldPadding,
-                  height: dateFieldHeight,
-                  child: Center(
+                  Container(
+                    padding: dateFieldPadding,
+                    height: dateFieldHeight,
                     child: TextFormField(
+                      validator: (val){
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != chequeReceivingDateInput.text) {
+                          return 'Enter Correct Detail';
+                        }
+                        return null;
+                      },
                       controller: chequeReceivingDateInput,
                       decoration: dateFieldDecoration(),
                       readOnly: true,
@@ -173,7 +194,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
                             lastDate: DateTime(2101)
                         );
                         if (pickedDate != null) {
-                          String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                          String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
                           setState(() {
                             chequeReceivingDateInput.text = formattedDate;
                           });
@@ -182,198 +203,217 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
                       },
                     ),
                   ),
-                ),
 
-                Padding(padding: paddingForms),
+                  formsHeadText("Payment Type"),
 
-                formsHeadText("Payment Type"),
-
-                Padding(
-                  padding: padding1,
-                  child: Container(
-                    height: 50, width: 343,
-                    decoration: decorationForms(),
-                    child: FutureBuilder<List<VoucherType>>(
-                        future: voucherTypeDropdownBloc.voucherTypeDropdownData,
-                        builder: (context, snapshot) {
-                          return StreamBuilder<VoucherType>(
-                              stream: voucherTypeDropdownBloc.selectedState,
-                              builder: (context, item) {
-                                return SearchChoices<VoucherType>.single(
-                                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                                  underline: "",
-                                  padding: 1,
-                                  isExpanded: true,
-                                  hint: "Search here",
-                                  value: selectVoucherType,
-                                  displayClearIcon: false,
-                                  onChanged: onDataChange2,
-                                  items: snapshot?.data
-                                      ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                    return DropdownMenuItem<VoucherType>(
-                                      value: e,
-                                      child: Text(e.strName),
-                                    );
-                                  })?.toList() ??[],
-                                );
-                              }
-                          );
-                        }
-                    ),
-                  ),
-                ),
-
-                Padding(padding: paddingForms),
-
-                formsHeadText("Credit Account (customer name)"),
-
-                Padding(
-                  padding: padding1,
-                  child: Container(
-                    height: 50, width: 343,
-                    decoration: decorationForms(),
-                    child: FutureBuilder<List<DepartmentName>>(
-                        future: departmentNameDropdownBloc.departmentNameData,
-                        builder: (context, snapshot) {
-                          return StreamBuilder<DepartmentName>(
-                              stream: departmentNameDropdownBloc.selectedState,
-                              builder: (context, item) {
-                                return SearchChoices<DepartmentName>.single(
-                                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                                  underline: "",
-                                  padding: 1,
-                                  isExpanded: true,
-                                  hint: "Search here",
-                                  value: selectDepartmentName,
-                                  displayClearIcon: false,
-                                  onChanged: onDataChange1,
-                                  items: snapshot?.data
-                                      ?.map<DropdownMenuItem<DepartmentName>>((e) {
-                                    return DropdownMenuItem<DepartmentName>(
-                                      value: e,
-                                      child: Text(e.strName),
-                                    );
-                                  })?.toList() ??[],
-                                );
-                              }
-                          );
-                        }
-                    ),
-                  ),
-                ),
-
-                Padding(padding: paddingForms),
-
-                formsHeadText("Debit Account (company):"),
-
-                Padding(padding: paddingForms),
-
-                formsHeadText("Drawn Bank"),
-
-                Padding(
-                  padding: padding1,
-                  child: Container(
-                    height: 50, width: 343,
-                    decoration: decorationForms(),
-                    child: FutureBuilder<List<ItemCostCenter>>(
-                        future: itemCostCenterDropdownBloc.itemCostCenterData,
-                        builder: (context, snapshot) {
-                          return StreamBuilder<ItemCostCenter>(
-                              stream: itemCostCenterDropdownBloc.selectedState,
-                              builder: (context, item) {
-                                return SearchChoices<ItemCostCenter>.single(
-                                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                                  underline: "",
-                                  padding: 1,
-                                  isExpanded: true,
-                                  hint: "Search here",
-                                  value: selectItemCostCenter,
-                                  displayClearIcon: false,
-                                  onChanged: onDataChange3,
-                                  items: snapshot?.data
-                                      ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                                    return DropdownMenuItem<ItemCostCenter>(
-                                      value: e,
-                                      child: Text(e.strName),
-                                    );
-                                  })?.toList() ??[],
-                                );
-                              }
-                          );
-                        }
-                    ),
-                  ),
-                ),
-
-                Padding(padding: paddingForms),
-
-                formsHeadText("Customer Info:"),
-
-                Padding(padding: paddingForms),
-
-                formsHeadText("Cheque No."),
-
-                Container(
-                  height: 50,
-                  padding: padding1,
-                  decoration: decoration1(),
-                  child: SizedBox(
-                    width: 320,
-                    child: StreamBuilder<String>(
-                      stream: bloc.outtextField2,
-                      builder: (context, snapshot) => TextFormField(
-                        controller: chequeNoInput,
-                        onChanged: bloc.intextField2,
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: primaryColor8,
-                            enabledBorder: textFieldBorder(),
-                            focusedBorder: textFieldBorder(),
-                            errorText: snapshot.error
-                        ),
-                        keyboardType: TextInputType.text,
-                        style: simpleTextStyle7(),
+                  Padding(
+                    padding: padding1,
+                    child: Container(
+                      height: 52, width: 343,
+                      decoration: decorationForms(),
+                      child: FutureBuilder<List<VoucherType>>(
+                          future: voucherTypeDropdownBloc.voucherTypeDropdownData,
+                          builder: (context, snapshot) {
+                            return StreamBuilder<VoucherType>(
+                                stream: voucherTypeDropdownBloc.selectedState,
+                                builder: (context, item) {
+                                  return SearchChoices<VoucherType>.single(
+                                    icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                    padding: selectVoucherType!=null ? 2 : 11,
+                                    isExpanded: true,
+                                    hint: "Search here",
+                                    value: selectVoucherType,
+                                    displayClearIcon: false,
+                                    onChanged: onDataChange2,
+                                    items: snapshot?.data
+                                        ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                      return DropdownMenuItem<VoucherType>(
+                                        value: e,
+                                        child: Text(e.strName),
+                                      );
+                                    })?.toList() ??[],
+                                  );
+                                }
+                            );
+                          }
                       ),
                     ),
                   ),
-                ),
 
-                Padding(padding: paddingForms),
+                  Padding(padding: paddingForms),
 
-                formsHeadText("Amount"),
+                  formsHeadText("Credit Account (customer name)"),
 
-                Container(
-                  height: 50,
-                  padding: padding1,
-                  decoration: decoration1(),
-                  child: SizedBox(
-                    width: 320,
-                    child: StreamBuilder<String>(
-                      stream: bloc.outtextField3,
-                      builder: (context, snapshot) => TextFormField(
-                        controller: amountInput,
-                        onChanged: bloc.intextField3,
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: primaryColor8,
-                            enabledBorder: textFieldBorder(),
-                            focusedBorder: textFieldBorder(),
-                            errorText: snapshot.error
-                        ),
-                        keyboardType: TextInputType.text,
-                        style: simpleTextStyle7(),
+                  Padding(
+                    padding: padding1,
+                    child: Container(
+                      height: 52, width: 343,
+                      decoration: decorationForms(),
+                      child: FutureBuilder<List<DepartmentName>>(
+                          future: departmentNameDropdownBloc.departmentNameData,
+                          builder: (context, snapshot) {
+                            return StreamBuilder<DepartmentName>(
+                                stream: departmentNameDropdownBloc.selectedState,
+                                builder: (context, item) {
+                                  return SearchChoices<DepartmentName>.single(
+                                    icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                    padding: selectDepartmentName!=null ? 2 : 11,
+                                    isExpanded: true,
+                                    hint: "Search here",
+                                    value: selectDepartmentName,
+                                    displayClearIcon: false,
+                                    onChanged: onDataChange1,
+                                    items: snapshot?.data
+                                        ?.map<DropdownMenuItem<DepartmentName>>((e) {
+                                      return DropdownMenuItem<DepartmentName>(
+                                        value: e,
+                                        child: Text(e.strName),
+                                      );
+                                    })?.toList() ??[],
+                                  );
+                                }
+                            );
+                          }
                       ),
                     ),
                   ),
-                ),
 
-                Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 40),
-                    child: roundedButtonHome("Submit", () {verifyDetail();})),
-              ],
-            ),
-          ],
+                  Padding(padding: paddingForms),
+
+                  formsHeadText("Debit Account (company):"),
+
+                  Padding(padding: paddingForms),
+
+                  formsHeadText("Drawn Bank"),
+
+                  Padding(
+                    padding: padding1,
+                    child: Container(
+                      height: 52, width: 343,
+                      decoration: decorationForms(),
+                      child: FutureBuilder<List<ItemCostCenter>>(
+                          future: itemCostCenterDropdownBloc.itemCostCenterData,
+                          builder: (context, snapshot) {
+                            return StreamBuilder<ItemCostCenter>(
+                                stream: itemCostCenterDropdownBloc.selectedState,
+                                builder: (context, item) {
+                                  return SearchChoices<ItemCostCenter>.single(
+                                    icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                    padding: selectItemCostCenter!=null ? 2 : 11,
+                                    isExpanded: true,
+                                    hint: "Search here",
+                                    value: selectItemCostCenter,
+                                    displayClearIcon: false,
+                                    onChanged: onDataChange3,
+                                    items: snapshot?.data
+                                        ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                      return DropdownMenuItem<ItemCostCenter>(
+                                        value: e,
+                                        child: Text(e.strName),
+                                      );
+                                    })?.toList() ??[],
+                                  );
+                                }
+                            );
+                          }
+                      ),
+                    ),
+                  ),
+
+                  Padding(padding: paddingForms),
+
+                  formsHeadText("Customer Info:"),
+
+                  Padding(padding: paddingForms),
+
+                  formsHeadText("Cheque No."),
+
+                  Container(
+                    height: 70,
+                    padding: padding1,
+                    decoration: decoration1(),
+                    child: SizedBox(
+                      width: 320,
+                      child: StreamBuilder<String>(
+                        stream: bloc.outtextField2,
+                        builder: (context, snapshot) => TextFormField(
+                          validator: (val) {
+                            if(val.isEmpty) {
+                              return 'Enter Detail';
+                            }
+                            if(val != chequeNoInput.text) {
+                              return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                                  : "Enter valid detail";
+                            }
+                            return null;
+                          },
+                          controller: chequeNoInput,
+                          onChanged: bloc.intextField2,
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: primaryColor8,
+                              enabledBorder: textFieldBorder(),
+                              focusedBorder: textFieldBorder(),
+                              isDense: true,
+                              errorBorder: textFieldBorder(),
+                              errorText: snapshot.error
+                          ),
+                          keyboardType: TextInputType.text,
+                          style: simpleTextStyle7(),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Padding(padding: paddingForms),
+
+                  formsHeadText("Amount"),
+
+                  Container(
+                    height: 70,
+                    padding: padding1,
+                    decoration: decoration1(),
+                    child: SizedBox(
+                      width: 320,
+                      child: StreamBuilder<String>(
+                        stream: bloc.outtextField3,
+                        builder: (context, snapshot) => TextFormField(
+                          validator: (val) {
+                            if(val.isEmpty) {
+                              return 'Enter Detail';
+                            }
+                            if(val != amountInput.text) {
+                              return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                                  : "Enter valid detail";
+                            }
+                            return null;
+                          },
+                          controller: amountInput,
+                          onChanged: bloc.intextField3,
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: primaryColor8,
+                              enabledBorder: textFieldBorder(),
+                              focusedBorder: textFieldBorder(),
+                              isDense: true,
+                              errorBorder: textFieldBorder(),
+                              errorText: snapshot.error
+                          ),
+                          keyboardType: TextInputType.text,
+                          style: simpleTextStyle7(),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 40),
+                      child: roundedButtonHome("Submit", () {verifyDetail();})),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

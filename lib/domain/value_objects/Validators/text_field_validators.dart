@@ -5,12 +5,12 @@ mixin TextValidators{
   var textFieldValidator = StreamTransformer<String, String>.fromHandlers(
 
       handleData: (textField, sink) {
-        bool phoneValid = RegExp(r'^[a-zA-Z0-9._]+$').hasMatch(textField);
+        bool phoneValid = RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(textField);
         if (phoneValid) {
           sink.add(textField);
         }
         else {
-          sink.addError("Field is not valid");
+          sink.addError("Enter valid detail");
         }
       }
   );
@@ -40,7 +40,7 @@ final validateRateField = StreamTransformer<String,double>.fromHandlers(
 final textFieldValidator = StreamTransformer<String, String>.fromHandlers(
 
     handleData: (textField, sink) {
-      bool phoneValid = RegExp(r'^[a-zA-Z0-9._]+$').hasMatch(textField);
+      bool phoneValid = RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(textField);
       if (phoneValid) {
         sink.add(textField);
       }
