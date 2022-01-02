@@ -56,6 +56,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
   TextEditingController rate = TextEditingController();
   TextEditingController costCenter = TextEditingController();
   TextEditingController remarks = TextEditingController();
+  final materialRequestEntryFormKey = GlobalKey<FormState>();
 
   String dropdownValue = 'Choose an option';
   IndentorNameDropdownBloc dropdownBlocIndentorName;
@@ -105,7 +106,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
   }
   verifyDetail(){
     if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
-      if(selectIndentName!=null && intendDateInput.text!=null && selectItemCurrentStatus!=null && reqQty.text!=null && selectItemCostCenter!=null && reqDateInput.text!=null && remarks.text!=null){
+      if(selectIndentName!=null && selectItemCurrentStatus!=null && selectItemCostCenter!=null && materialRequestEntryFormKey.currentState.validate()){
         sendData();
       }
       else{
@@ -196,68 +197,77 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
       strokeWidth: 5,
       onRefresh: _refresh,
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: paddingForms,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  RaisedButton(
-                    onPressed: () {onClear();},
-                    elevation: 0.0,
-                    color: Colors.white,
-                    child: raisedButtonText("Clear all"),
-                  ),
-                ],
-              ),
-            ),
-
-            formsHeadText("Indent Type"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<IndentorName>>(
-                    future: dropdownBlocIndentorName.indentorNameDropdownData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<IndentorName>(
-                          stream: dropdownBlocIndentorName.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<IndentorName>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectIndentName,
-                              displayClearIcon: false,
-                              onChanged: onDataChange1,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<IndentorName>>((e) {
-                                return DropdownMenuItem<IndentorName>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
+        child: Form(
+          key: materialRequestEntryFormKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: paddingForms,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    RaisedButton(
+                      onPressed: () {onClear();},
+                      elevation: 0.0,
+                      color: Colors.white,
+                      child: raisedButtonText("Clear all"),
+                    ),
+                  ],
                 ),
               ),
-            ),
 
-            const Padding(padding: EdgeInsets.all(10)),
+              formsHeadText("Indent Type"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<IndentorName>>(
+                      future: dropdownBlocIndentorName.indentorNameDropdownData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<IndentorName>(
+                            stream: dropdownBlocIndentorName.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<IndentorName>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectIndentName!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectIndentName,
+                                displayClearIcon: false,
+                                onChanged: onDataChange1,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<IndentorName>>((e) {
+                                  return DropdownMenuItem<IndentorName>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
+                ),
+              ),
 
-            formsHeadText("Indent Date"),
-            Container(
-              padding: dateFieldPadding,
-              height: dateFieldHeight,
-              child: Center(
+              const Padding(padding: EdgeInsets.all(10)),
+
+              formsHeadText("Indent Date"),
+              Container(
+                padding: dateFieldPadding,
+                height: dateFieldHeight,
                 child: TextFormField(
+                  validator: (val){
+                    if(val.isEmpty) {
+                      return 'Enter Detail';
+                    }
+                    if(val != intendDateInput.text) {
+                      return 'Enter Correct Detail';
+                    }
+                    return null;
+                  },
                   controller: intendDateInput,
                   decoration: dateFieldDecoration(),
                   readOnly: true,
@@ -276,224 +286,229 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                   },
                 ),
               ),
-            ),
 
-            //============================================================ FormsContainer
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Container(
-                height: 378,
-                width: 392,
-                //width: SizeConfig.getWidth(context),
-                decoration: BoxDecoration(
-                  color: storeContainerColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(padding: EdgeInsets.all(10)),
-                    formsHeadText("Item "),
-                    Padding(
-                      padding: padding1,
-                      child: Container(
-                        height: 50, width: 343,
-                        decoration: decorationForms(),
-                        child: FutureBuilder<List<ItemCurrentStatus>>(
-                            future: dropdownBlocItemCurrentStatus.itemCurrentStatusDropdowndata,
-                            builder: (context, snapshot) {
-                              return StreamBuilder<ItemCurrentStatus>(
-                                  stream: dropdownBlocItemCurrentStatus.selectedState,
-                                  builder: (context, item) {
-                                    return SearchChoices<ItemCurrentStatus>.single(
-                                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                                      underline: "",
-                                      padding: 1,
-                                      isExpanded: true,
-                                      hint: "Search here",
-                                      value: selectItemCurrentStatus,
-                                      displayClearIcon: false,
-                                      onChanged: onDataChange2,
-                                      items: snapshot?.data
-                                          ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
-                                        return DropdownMenuItem<ItemCurrentStatus>(
-                                          value: e,
-                                          child: Text(e.strItemName),
-                                        );
-                                      })?.toList() ??[],
-                                    );
-                                  }
-                              );
-                            }
+              //============================================================ FormsContainer
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Container(
+                  height: 378,
+                  width: 392,
+                  //width: SizeConfig.getWidth(context),
+                  decoration: BoxDecoration(
+                    color: storeContainerColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(padding: EdgeInsets.all(10)),
+                      formsHeadText("Item "),
+                      Padding(
+                        padding: padding1,
+                        child: Container(
+                          height: 52, width: 343,
+                          decoration: decorationForms(),
+                          child: FutureBuilder<List<ItemCurrentStatus>>(
+                              future: dropdownBlocItemCurrentStatus.itemCurrentStatusDropdowndata,
+                              builder: (context, snapshot) {
+                                return StreamBuilder<ItemCurrentStatus>(
+                                    stream: dropdownBlocItemCurrentStatus.selectedState,
+                                    builder: (context, item) {
+                                      return SearchChoices<ItemCurrentStatus>.single(
+                                        icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                        padding: selectItemCurrentStatus!=null ? 2 : 11,
+                                        isExpanded: true,
+                                        hint: "Search here",
+                                        value: selectItemCurrentStatus,
+                                        displayClearIcon: false,
+                                        onChanged: onDataChange2,
+                                        items: snapshot?.data
+                                            ?.map<DropdownMenuItem<ItemCurrentStatus>>((e) {
+                                          return DropdownMenuItem<ItemCurrentStatus>(
+                                            value: e,
+                                            child: Text(e.strItemName),
+                                          );
+                                        })?.toList() ??[],
+                                      );
+                                    }
+                                );
+                              }
+                          ),
                         ),
                       ),
-                    ),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                    formsHeadText("Request Qty. "),
-                    Row(
-                      children: [
+                      const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                      formsHeadText("Request Qty. "),
+                      Row(
+                        children: [
 
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 35),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 35),
 
-                          child: Container(
-                            height: 50,
-                            padding: padding1,
-                            decoration: decoration1(),
+                            child: Container(
+                              height: 50,
+                              padding: padding1,
+                              decoration: decoration1(),
 
-                            child: SizedBox(
-                              width: 130,
+                              child: SizedBox(
+                                width: 130,
 
-                              child: StreamBuilder<String>(
-                                  stream: bloc.requestQty,
-                                  builder: (context, snapshot) {
-                                    return TextFormField(
-                                      // initialValue: "no",
-                                      controller: reqQty,
-                                      decoration: InputDecoration(
-                                        errorText: snapshot.error,
-                                      ),
-                                      onChanged: bloc.changerequestQty,
-                                      keyboardType: TextInputType.number,
-                                      //onSaved: selectItemCurrentStatus.strItemName,
+                                child: StreamBuilder<String>(
+                                    stream: bloc.requestQty,
+                                    builder: (context, snapshot) {
+                                      return TextFormField(
+                                        // initialValue: "no",
+                                        controller: reqQty,
+                                        decoration: InputDecoration(
+                                          errorText: snapshot.error,
+                                        ),
+                                        onChanged: bloc.changerequestQty,
+                                        keyboardType: TextInputType.number,
+                                        //onSaved: selectItemCurrentStatus.strItemName,
 
-                                      style: simpleTextStyle7(),
-                                    );
-                                  }
+                                        style: simpleTextStyle7(),
+                                      );
+                                    }
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        selectItemCurrentStatus!=null ? Container(
-                            height: 50, padding: padding1, decoration: decoration1(),
-                            child: Center(
-                                child: Text(selectItemCurrentStatus.strUnit))):
-                        Container(
-                            height: 50, padding: padding1, decoration: decoration1(),
-                            child: const Center(
-                                child: Text("No"))),
-                      ],
-                    ),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                    Row(
-                      children: [
-                        formsHeadText("Rate"),
-                        const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
-                        formsHeadText("Amount: $_amount"),
-                        Text(_amount.toString()),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        selectItemCurrentStatus!=null ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: SizedBox(
-                            width: 160,
-                            child: Container(
-                                height: 50, padding: padding1, decoration: decoration1(),
-                                child: Center(
-                                    child: Text(selectItemCurrentStatus.dblQty))),
+                          selectItemCurrentStatus!=null ? Container(
+                              height: 50, padding: padding1, decoration: decoration1(),
+                              child: Center(
+                                  child: Text(selectItemCurrentStatus.strUnit))):
+                          Container(
+                              height: 50, padding: padding1, decoration: decoration1(),
+                              child: const Center(
+                                  child: Text("No"))),
+                        ],
+                      ),
+                      const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                      Row(
+                        children: [
+                          formsHeadText("Rate"),
+                          const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
+                          formsHeadText("Amount: $_amount"),
+                          Text(_amount.toString()),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          selectItemCurrentStatus!=null ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: SizedBox(
+                              width: 160,
+                              child: Container(
+                                  height: 50, padding: padding1, decoration: decoration1(),
+                                  child: Center(
+                                      child: Text(selectItemCurrentStatus.dblQty))),
+                            ),
+                          ):
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: SizedBox(
+                              width: 160,
+                              child: Container(
+                                  height: 50, padding: padding1, decoration: decoration1(),
+                                  child: const Center(
+                                      child: Text("No"))),
+                            ),
                           ),
-                        ):
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: SizedBox(
-                            width: 160,
-                            child: Container(
-                                height: 50, padding: padding1, decoration: decoration1(),
-                                child: const Center(
-                                    child: Text("No"))),
+                        ],
+                      ),
+                      const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+
+                      Row(
+                        children: [
+                          const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
+                          RaisedButton(
+                            onPressed: () {reqQty.clear();},
+                            elevation: 0.0,
+                            color: storeContainerColor,
+                            child: raisedButtonText("Clear This Item"),
+
                           ),
-                        ),
-                      ],
-                    ),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-
-                    Row(
-                      children: [
-                        const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-                        RaisedButton(
-                          onPressed: () {reqQty.clear();},
-                          elevation: 0.0,
-                          color: storeContainerColor,
-                          child: raisedButtonText("Clear This Item"),
-
-                        ),
-                               RoundedButtonInput(
-                                text: "Add Item to List",
-                                press: (selectItemCurrentStatus !=null)&&(isActive)
-                                    ? () {
-                                  setState(() {
-                                    pressed = true;
-                                  });
-                                } : null,
-                                fontsize1: 12,
-                                size1: 0.5,
-                                horizontal1: 30,
-                                vertical1: 10,
-                                color1: Colors.orange,
-                                textColor1: textColor1,
-                              ),
-                      ],
-                    )
-                  ],
+                                 RoundedButtonInput(
+                                  text: "Add Item to List",
+                                  press: (selectItemCurrentStatus !=null)&&(isActive)
+                                      ? () {
+                                    setState(() {
+                                      pressed = true;
+                                    });
+                                  } : null,
+                                  fontsize1: 12,
+                                  size1: 0.5,
+                                  horizontal1: 30,
+                                  vertical1: 10,
+                                  color1: Colors.orange,
+                                  textColor1: textColor1,
+                                ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-            pressed? AddItemContainer(
-              itemNameText: selectItemCurrentStatus.strItemName,
-              orderQtyText: reqQty.text,
-              rateText: selectItemCurrentStatus.dblQty,
-              amountText: selectItemCurrentStatus.dblQty,
-            ) : const SizedBox(),
-            //============================================================ popup container
+              pressed? AddItemContainer(
+                itemNameText: selectItemCurrentStatus.strItemName,
+                orderQtyText: reqQty.text,
+                rateText: selectItemCurrentStatus.dblQty,
+                amountText: selectItemCurrentStatus.dblQty,
+              ) : const SizedBox(),
+              //============================================================ popup container
 
 //=============================================================================
-            const Padding(padding: EdgeInsets.all(10)),
+              const Padding(padding: EdgeInsets.all(10)),
 
-            formsHeadText("Choose Phase (Cost Center)"),
-            Padding(
-              padding: padding1,
-              child: Container(
-                height: 50, width: 343,
-                decoration: decorationForms(),
-                child: FutureBuilder<List<ItemCostCenter>>(
-                    future: dropdownBlocItemCostCenter.itemCostCenterData,
-                    builder: (context, snapshot) {
-                      return StreamBuilder<ItemCostCenter>(
-                          stream: dropdownBlocItemCostCenter.selectedState,
-                          builder: (context, item) {
-                            return SearchChoices<ItemCostCenter>.single(
-                              icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                              underline: "",
-                              padding: 1,
-                              isExpanded: true,
-                              hint: "Search here",
-                              value: selectItemCostCenter,
-                              displayClearIcon: false,
-                              onChanged: onDataChange3,
-                              items: snapshot?.data
-                                  ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
-                                return DropdownMenuItem<ItemCostCenter>(
-                                  value: e,
-                                  child: Text(e.strName),
-                                );
-                              })?.toList() ??[],
-                            );
-                          }
-                      );
-                    }
+              formsHeadText("Choose Phase (Cost Center)"),
+              Padding(
+                padding: padding1,
+                child: Container(
+                  height: 52, width: 343,
+                  decoration: decorationForms(),
+                  child: FutureBuilder<List<ItemCostCenter>>(
+                      future: dropdownBlocItemCostCenter.itemCostCenterData,
+                      builder: (context, snapshot) {
+                        return StreamBuilder<ItemCostCenter>(
+                            stream: dropdownBlocItemCostCenter.selectedState,
+                            builder: (context, item) {
+                              return SearchChoices<ItemCostCenter>.single(
+                                icon: const Icon(Icons.keyboard_arrow_down_sharp,size:30),
+                                padding: selectItemCostCenter!=null ? 2 : 11,
+                                isExpanded: true,
+                                hint: "Search here",
+                                value: selectItemCostCenter,
+                                displayClearIcon: false,
+                                onChanged: onDataChange3,
+                                items: snapshot?.data
+                                    ?.map<DropdownMenuItem<ItemCostCenter>>((e) {
+                                  return DropdownMenuItem<ItemCostCenter>(
+                                    value: e,
+                                    child: Text(e.strName),
+                                  );
+                                })?.toList() ??[],
+                              );
+                            }
+                        );
+                      }
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 15),
-            formsHeadText("Req. Date"),
-            Container(
-              padding: dateFieldPadding,
-              height: dateFieldHeight,
-              child: Center(
+              const SizedBox(height: 15),
+              formsHeadText("Req. Date"),
+              Container(
+                padding: dateFieldPadding,
+                height: dateFieldHeight,
                 child: TextFormField(
+                  validator: (val){
+                    if(val.isEmpty) {
+                      return 'Enter Detail';
+                    }
+                    if(val != reqDateInput.text) {
+                      return 'Enter Correct Detail';
+                    }
+                    return null;
+                  },
                   controller: reqDateInput,
                   decoration: dateFieldDecoration(),
                   readOnly: true,
@@ -513,40 +528,51 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                   },
                 ),
               ),
-            ),
-            const SizedBox(height: 15),
-            formsHeadText("Remarks"),
-            Container(
-              height: 50,
-              padding: padding1,
-              decoration: decoration1(),
-              child: SizedBox(
-                width: 320,
-                child: StreamBuilder<String>(
-                  stream: bloc.outtextField,
-                  builder: (context, snapshot) => TextFormField(
-                    controller: remarks,
-                    onChanged: bloc.intextField,
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: primaryColor8,
-                        enabledBorder: textFieldBorder(),
-                        focusedBorder: textFieldBorder(),
-                        errorText: snapshot.error
+              formsHeadText("Remarks"),
+              Container(
+                height: 70,
+                padding: padding1,
+                decoration: decoration1(),
+                child: SizedBox(
+                  width: 320,
+                  child: StreamBuilder<String>(
+                    stream: bloc.outtextField,
+                    builder: (context, snapshot) => TextFormField(
+                      validator: (val) {
+                        if(val.isEmpty) {
+                          return 'Enter Detail';
+                        }
+                        if(val != remarks.text) {
+                          return RegExp(r'^[a-zA-Z0-9._ ]+$').hasMatch(val) ? null
+                              : "Enter valid detail";
+                        }
+                        return null;
+                      },
+                      controller: remarks,
+                      onChanged: bloc.intextField,
+                      decoration: InputDecoration(
+                          filled: true,
+                          fillColor: primaryColor8,
+                          enabledBorder: textFieldBorder(),
+                          focusedBorder: textFieldBorder(),
+                          isDense: true,
+                          errorBorder: textFieldBorder(),
+                          errorText: snapshot.error
+                      ),
+                      keyboardType: TextInputType.text,
+                      style: simpleTextStyle7(),
                     ),
-                    keyboardType: TextInputType.text,
-                    style: simpleTextStyle7(),
                   ),
                 ),
               ),
-            ),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
-                child: roundedButtonHome(
-                    "Submit",
-                        (){verifyDetail();})
-            ),
-          ],
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 10),
+                  child: roundedButtonHome(
+                      "Submit",
+                          (){verifyDetail();})
+              ),
+            ],
+          ),
         ),
       ),
     );
