@@ -29,8 +29,6 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
   TextEditingController clearedDateInput = TextEditingController();
   VoucherTypeDropdownBloc voucherTypeDropdownBloc;
   VoucherType selectVoucherType;
-  var subscription;
-  var connectionStatus;
 
   void onDataChange(VoucherType state) {
     setState(() {
@@ -42,14 +40,10 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
     depositUpToDateInput.text = "";
     clearedDateInput.text = "";
     voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      setState(() => connectionStatus = result );
-    });
     super.initState();
   }
   @override
   void dispose() {
-    subscription.cancel();
     super.dispose();
   }
 
@@ -59,17 +53,13 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryClearedBody> {
       });
     });
   }
-  verifyDetail(){
-    if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
-      if(depositUpToDateInput.text!=null && selectVoucherType!=null && clearedDateInput.text!=null){
-        sendData();
-      }
-      else{
-        Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
-      }
+  verifyDetail() {
+    if (depositUpToDateInput.text != null && selectVoucherType != null &&
+        clearedDateInput.text != null) {
+      sendData();
     }
-    else{
-      Scaffold.of(context).showSnackBar(snackBar(internetFailedConnectionText));
+    else {
+      Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
     }
   }
 

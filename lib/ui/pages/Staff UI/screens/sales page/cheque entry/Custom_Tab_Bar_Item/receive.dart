@@ -44,8 +44,6 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
   ItemCostCenter selectItemCostCenter;
   VoucherType selectVoucherType;
   DepartmentName selectDepartmentName;
-  var subscription;
-  var connectionStatus;
 
   void onDataChange1(DepartmentName state) {
     setState(() {
@@ -68,14 +66,10 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
     departmentNameDropdownBloc = DepartmentNameDropdownBloc();
     voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
     itemCostCenterDropdownBloc = ItemCostCenterDropdownBloc();
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      setState(() => connectionStatus = result );
-    });
     super.initState();
   }
   @override
   void dispose() {
-    subscription.cancel();
     super.dispose();
   }
 
@@ -86,17 +80,12 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
     });
   }
   verifyDetail(){
-    if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
       if(voucherTypeInput.text!=null && chequeReceivingDateInput.text!=null && selectVoucherType!=null && selectDepartmentName!=null && selectItemCostCenter!=null && chequeNoInput.text!=null && amountInput.text!=null){
         sendData();
       }
       else{
         Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
       }
-    }
-    else{
-      Scaffold.of(context).showSnackBar(snackBar(internetFailedConnectionText));
-    }
   }
 
   Future<dynamic> sendData() async{

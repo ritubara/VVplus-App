@@ -81,7 +81,7 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
     super.initState();
   }
   void clearData(){
-  reqQty.clear();
+    reqQty.clear();
   }
 
   @override
@@ -470,26 +470,26 @@ class MyStockReceiveEntryBody extends State<StockReceiveEntryBody> {
                         ),
 
 
-                       // StreamBuilder<bool>(
-                           // stream: bloc.submitCheck,
-                         //   builder: (context, snapshot) {
-          //                    return
-                                RoundedButtonInput(
-                                text: "Add Item to List",
-                                press: (selectItemCurrentStatus !=null)&&(isActive)? (){
-                                  setState(() {
-                                    pressed = true;
-                                  });
-                                  clearData();
-                                } :null,
-                                fontsize1: 12,
-                                size1: 0.5,
-                                horizontal1: 30,
-                                vertical1: 10,
-                                color1: Colors.orange,
-                                textColor1: textColor1,
-                              ),
-                          //  }
+                        // StreamBuilder<bool>(
+                        // stream: bloc.submitCheck,
+                        //   builder: (context, snapshot) {
+                        //                    return
+                        RoundedButtonInput(
+                          text: "Add Item to List",
+                          press: (selectItemCurrentStatus !=null)&&(isActive)? (){
+                            setState(() {
+                              pressed = true;
+                            });
+                            clearData();
+                          } :null,
+                          fontsize1: 12,
+                          size1: 0.5,
+                          horizontal1: 30,
+                          vertical1: 10,
+                          color1: Colors.orange,
+                          textColor1: textColor1,
+                        ),
+                        //  }
                         //),
                       ],
                     )

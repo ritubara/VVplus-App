@@ -29,8 +29,6 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryDepositBody> {
   TextEditingController depositDateInput = TextEditingController();
   VoucherTypeDropdownBloc voucherTypeDropdownBloc;
   VoucherType selectVoucherType;
-  var subscription;
-  var connectionStatus;
 
   void onDataChange(VoucherType state) {
     setState(() {
@@ -42,14 +40,10 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryDepositBody> {
     chequeUpToDateInput.text = "";
     depositDateInput.text = "";
     voucherTypeDropdownBloc = VoucherTypeDropdownBloc();
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      setState(() => connectionStatus = result );
-    });
     super.initState();
   }
   @override
   void dispose() {
-    subscription.cancel();
     super.dispose();
   }
   Future<void> _refresh() async{
@@ -60,17 +54,12 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryDepositBody> {
   }
 
   verifyDetail(){
-    if(connectionStatus == ConnectivityResult.wifi || connectionStatus == ConnectivityResult.mobile){
       if(chequeUpToDateInput.text!=null && selectVoucherType!=null && depositDateInput.text!=null){
         sendData();
       }
       else{
         Scaffold.of(context).showSnackBar(snackBar(incorrectDetailText));
       }
-    }
-    else{
-      Scaffold.of(context).showSnackBar(snackBar(internetFailedConnectionText));
-    }
   }
 
   Future<dynamic> sendData() async{

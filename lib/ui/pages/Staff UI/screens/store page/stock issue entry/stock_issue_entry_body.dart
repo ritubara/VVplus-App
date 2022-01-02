@@ -210,12 +210,12 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                               displayClearIcon: false,
                               onChanged: onDataChange1,
                               items: snapshot?.data
-                                      ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                    return DropdownMenuItem<VoucherType>(
-                                      value: e,
-                                      child: Text(e.strName),
-                                    );
-                                  })?.toList() ??
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??
                                   [],
                             );
                           });
@@ -246,12 +246,12 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                               displayClearIcon: false,
                               onChanged: onDataChange2,
                               items: snapshot?.data
-                                      ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                    return DropdownMenuItem<VoucherType>(
-                                      value: e,
-                                      child: Text(e.strName),
-                                    );
-                                  })?.toList() ??
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??
                                   [],
                             );
                           });
@@ -282,12 +282,12 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                               displayClearIcon: false,
                               onChanged: onDataChange3,
                               items: snapshot?.data
-                                      ?.map<DropdownMenuItem<VoucherType>>((e) {
-                                    return DropdownMenuItem<VoucherType>(
-                                      value: e,
-                                      child: Text(e.strName),
-                                    );
-                                  })?.toList() ??
+                                  ?.map<DropdownMenuItem<VoucherType>>((e) {
+                                return DropdownMenuItem<VoucherType>(
+                                  value: e,
+                                  child: Text(e.strName),
+                                );
+                              })?.toList() ??
                                   [],
                             );
                           });
@@ -318,8 +318,8 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                               displayClearIcon: false,
                               onChanged: onDataChange4,
                               items: snapshot?.data
-                                      ?.map<DropdownMenuItem<ItemCostCenter>>(
-                                          (e) {
+                                  ?.map<DropdownMenuItem<ItemCostCenter>>(
+                                      (e) {
                                     return DropdownMenuItem<ItemCostCenter>(
                                       value: e,
                                       child: Text(e.strName),
@@ -360,7 +360,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                             builder: (context, snapshot) {
                               return StreamBuilder<ItemCurrentStatus>(
                                   stream:
-                                      dropdownBlocItemCurrentStatus.selectedState,
+                                  dropdownBlocItemCurrentStatus.selectedState,
                                   builder: (context, item) {
                                     return SearchChoices<
                                         ItemCurrentStatus>.single(
@@ -374,14 +374,14 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                                       displayClearIcon: false,
                                       onChanged: onDataChange5,
                                       items: snapshot?.data?.map<
-                                              DropdownMenuItem<
-                                                  ItemCurrentStatus>>((e) {
-                                            return DropdownMenuItem<
-                                                ItemCurrentStatus>(
-                                              value: e,
-                                              child: Text(e.strItemName),
-                                            );
-                                          })?.toList() ??
+                                          DropdownMenuItem<
+                                              ItemCurrentStatus>>((e) {
+                                        return DropdownMenuItem<
+                                            ItemCurrentStatus>(
+                                          value: e,
+                                          child: Text(e.strItemName),
+                                        );
+                                      })?.toList() ??
                                           [],
                                     );
                                   });
@@ -421,16 +421,16 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                         ),
                         selectItemCurrentStatus != null
                             ? Container(
-                                height: 50,
-                                padding: padding1,
-                                decoration: decoration1(),
-                                child: Center(
-                                    child: Text(selectItemCurrentStatus.strUnit)))
+                            height: 50,
+                            padding: padding1,
+                            decoration: decoration1(),
+                            child: Center(
+                                child: Text(selectItemCurrentStatus.strUnit)))
                             : Container(
-                                height: 50,
-                                padding: padding1,
-                                decoration: decoration1(),
-                                child: const Center(child: Text("No"))),
+                            height: 50,
+                            padding: padding1,
+                            decoration: decoration1(),
+                            child: const Center(child: Text("No"))),
                       ],
                     ),
                     const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -447,25 +447,25 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                       children: [
                         selectItemCurrentStatus != null
                             ? Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 40),
-                                child: Container(
-                                    height: 50,
-                                    padding: padding1,
-                                    decoration: decoration1(),
-                                    child: Center(
-                                        child: Text(
-                                            selectItemCurrentStatus.dblQty))),
-                              )
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 40),
+                          child: Container(
+                              height: 50,
+                              padding: padding1,
+                              decoration: decoration1(),
+                              child: Center(
+                                  child: Text(
+                                      selectItemCurrentStatus.dblQty))),
+                        )
                             : Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 40),
-                                child: Container(
-                                    height: 50,
-                                    padding: padding1,
-                                    decoration: decoration1(),
-                                    child: const Center(child: Text("No"))),
-                              ),
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 40),
+                          child: Container(
+                              height: 50,
+                              padding: padding1,
+                              decoration: decoration1(),
+                              child: const Center(child: Text("No"))),
+                        ),
                       ],
                     ),
                     const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -487,11 +487,11 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                         RoundedButtonInput(
                           text: "Add Item to List",
                           press: (selectItemCurrentStatus !=null)&&(isActive) ? () {
-                                  setState(() {
-                                     pressed = true;
-                                  });
-                                  //clearData();
-                                }
+                            setState(() {
+                              pressed = true;
+                            });
+                            //clearData();
+                          }
                               : null,
                           /*press: !snapshot.hasData ? null: (){
                                 } ,*/
@@ -524,9 +524,9 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
             Padding(
                 padding: padding4,
                 child:
-                    roundedButtonHome2("Submit", () {
-                      verifyDetail();
-                    }, roundedButtonHomeColor1)),
+                roundedButtonHome2("Submit", () {
+                  verifyDetail();
+                }, roundedButtonHomeColor1)),
           ],
         ),
       ),

@@ -183,6 +183,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.3.0"
+  find_dropdown:
+    dependency: "direct main"
+    description:
+      name: find_dropdown
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   firebase_analytics:
     dependency: "direct main"
     description:
@@ -568,7 +575,14 @@ packages:
       name: search_choices
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.14"
+    version: "2.0.16"
+  select_dialog:
+    dependency: transitive
+    description:
+      name: select_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   shared_preferences:
     dependency: "direct main"
     description:
