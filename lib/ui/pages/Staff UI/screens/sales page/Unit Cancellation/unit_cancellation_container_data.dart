@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:vvplus_app/data_source/api/api_services.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'dart:convert';
@@ -18,7 +19,7 @@ class _UnitCancellationContainerDataState extends State<UnitCancellationContaine
   fetchData1() async {
 
     http.Response response =
-    await http.get(Uri.parse('https://vv-plus-app-default-rtdb.firebaseio.com/PostItemDetails.json'));
+    await http.get(Uri.parse(ApiService.mockDataPostItemDetail));
     setState(() {
       data = json.decode(response.body);
     });
@@ -43,10 +44,10 @@ class _UnitCancellationContainerDataState extends State<UnitCancellationContaine
           return GestureDetector(
             onTap: (){print("no");},
             child: Padding(
-              padding: const EdgeInsets.only(top: 32, left: 15),
+              padding: const EdgeInsets.only(top: 32, left: 11,right: 10),
               child: Container(
                 alignment: Alignment.center,
-                height: 134,
+                height: 150,
                 width: SizeConfig.getWidth(context) * .93,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
