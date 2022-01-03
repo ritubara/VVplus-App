@@ -59,82 +59,85 @@ class _InformationBoxContainer1State extends State<InformationBoxContainer1> {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 16, top: 10),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Ball Valve UPVC\n1’’x1/2’’",
-                    style: containerTextStyle1(),
-                  ),
-                  const SizedBox(height: 13,),
-                  Row(
-                    //mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        "Order Qty.:",
-                        style: containerTextStyle2(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 40),
-                        child: Text(
-                          "20 Pc",
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 16, top: 10),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Ball Valve UPVC\n1’’x1/2’’",
+                      style: containerTextStyle1(),
+                    ),
+                    const SizedBox(height: 13,),
+                    Row(
+                      //mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Order Qty.:",
                           style: containerTextStyle2(),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 50, top: 13),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Dept: Store",
-                            style: containerTextStyle3(),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Text(
+                            "20 Pc",
+                            style: containerTextStyle2(),
                           ),
-                          Padding(
-                              padding: const EdgeInsets.only(left: 100),
-                              child: Image.asset(icon15)),
-                        ],
-                      ),
-
-                      const SizedBox(height: 2,),
-                      Text(
-                        "Req Date: 27 Sept, 2021",
-                        style: containerTextStyle2(),
-                      ),
-                      const SizedBox(height: 2,),
-                      Text(
-                        "Req Date: 27 Sept, 2021",
-                        style: containerTextStyle2(),
-                      ),
-                      const SizedBox(height: 2,),
-                      Text(
-                        "Indent No.: 203",
-                        style: containerTextStyle2(),
-                      ),
-                    ],
-                  ),
-                ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(left: 50, top: 13),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Dept: Store",
+                              style: containerTextStyle3(),
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.only(left: 100),
+                                child: Image.asset(icon15)),
+                          ],
+                        ),
+
+                        const SizedBox(height: 2,),
+                        Text(
+                          "Req Date: 27 Sept, 2021",
+                          style: containerTextStyle2(),
+                        ),
+                        const SizedBox(height: 2,),
+                        Text(
+                          "Req Date: 27 Sept, 2021",
+                          style: containerTextStyle2(),
+                        ),
+                        const SizedBox(height: 2,),
+                        Text(
+                          "Indent No.: 203",
+                          style: containerTextStyle2(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
