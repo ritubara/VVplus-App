@@ -378,7 +378,6 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
                 ),
               ),
               //sizedbox1,
-              ItemCostCenterDropdown11(),
               Padding(
                   padding: padding4,
                   child: roundedButtonHome2("Submit",(){
