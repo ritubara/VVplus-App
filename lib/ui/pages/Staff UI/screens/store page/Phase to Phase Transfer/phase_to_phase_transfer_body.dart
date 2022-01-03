@@ -458,8 +458,7 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                 padding: const EdgeInsets.all(10),
                 child: Container(
                   height: 378,
-                  width: 392,
-                  //width: SizeConfig.getWidth(context),
+                  width: SizeConfig.getWidth(context),
                   decoration: BoxDecoration(
                     color: storeContainerColor,
                     borderRadius: BorderRadius.circular(10),
@@ -538,14 +537,20 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                               ),
                             ),
                           ),
-                          selectItemCurrentStatus!=null ? Container(
-                              height: 50, padding: padding1, decoration: decoration1(),
-                              child: Center(
-                                  child: Text(selectItemCurrentStatus.strUnit))):
-                          Container(
-                              height: 50, padding: padding1, decoration: decoration1(),
-                              child: const Center(
-                                  child: Text("No"))),
+                          selectItemCurrentStatus!=null ? SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Container(
+                                height: 50, padding: padding1, decoration: decoration1(),
+                                child: Center(
+                                    child: Text(selectItemCurrentStatus.strUnit))),
+                          ):
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Container(
+                                height: 50, padding: padding1, decoration: decoration1(),
+                                child: const Center(
+                                    child: Text("No"))),
+                          ),
                         ],
                       ),
                       const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -561,17 +566,23 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                         children: [
                           selectItemCurrentStatus!=null ? Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: Container(
-                                height: 50, padding: padding1, decoration: decoration1(),
-                                child: Center(
-                                    child: Text(selectItemCurrentStatus.dblQty))),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                  height: 50, padding: padding1, decoration: decoration1(),
+                                  child: Center(
+                                      child: Text(selectItemCurrentStatus.dblQty))),
+                            ),
                           ):
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: Container(
-                                height: 50, padding: padding1, decoration: decoration1(),
-                                child: const Center(
-                                    child: Text("No"))),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Container(
+                                  height: 50, padding: padding1, decoration: decoration1(),
+                                  child: const Center(
+                                      child: Text("No"))),
+                            ),
                           ),
                         ],
                       ),
