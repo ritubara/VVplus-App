@@ -18,6 +18,7 @@ import 'package:vvplus_app/infrastructure/Models/item_cost_center_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/Dropdown/material_request_entry_data_dropdown.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -377,6 +378,7 @@ class MyDailyManpowerBody extends State<DailyManpowerBody> {
                 ),
               ),
               //sizedbox1,
+              ItemCostCenterDropdown11(),
               Padding(
                   padding: padding4,
                   child: roundedButtonHome2("Submit",(){
