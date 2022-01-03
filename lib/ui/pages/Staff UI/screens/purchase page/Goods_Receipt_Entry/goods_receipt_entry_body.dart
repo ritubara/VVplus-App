@@ -455,7 +455,17 @@ class MyGoodsRecepitEntryBody extends State<GoodsRecepitEntryBody> {
                 ),
               ),
               sizedbox1,
-              const GoodsReceiptEntryContainerData(),
+              selectVoucherType3!=null ?
+              InformationBoxContainer6(
+                text1: selectVoucherType3.strName,
+                text2: selectVoucherType3.strSubCode,
+                text3: selectVoucherType3.strSubCode,
+                text4: selectVoucherType3.strSubCode,
+                text5: selectVoucherType3.strSubCode,
+                text6: selectVoucherType3.strSubCode,
+                text7: selectVoucherType3.strSubCode,
+                text8: selectVoucherType3.strSubCode,
+              ) : const SizedBox(),
               sizedbox1,
               formsHeadText("Total Bill Value :"),
               sizedbox1,

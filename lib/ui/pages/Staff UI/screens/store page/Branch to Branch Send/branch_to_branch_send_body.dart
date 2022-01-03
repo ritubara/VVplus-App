@@ -552,6 +552,17 @@ class MyBranchtoBranchSendBody extends State<BranchtoBranchSendBody> {
                   ),
                 ),
               ),
+              selectIndentorName!=null ?
+              InformationBoxContainer6(
+                text1: selectIndentorName.strName,
+                text2: selectIndentorName.strSubCode,
+                text3: selectIndentorName.strSubCode,
+                text4: selectIndentorName.strSubCode,
+                text5: selectIndentorName.strSubCode,
+                text6: selectIndentorName.strSubCode,
+                text7: selectIndentorName.strSubCode,
+                //text8: selectIndentorName.strSubCode,
+              ) : const SizedBox(),
               sizedbox1,
               Padding(
                   padding: padding4,
