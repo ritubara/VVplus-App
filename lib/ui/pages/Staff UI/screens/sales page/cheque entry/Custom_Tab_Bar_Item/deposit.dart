@@ -190,13 +190,14 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryDepositBody> {
 
                   Padding(padding: paddingForms),
 
-                  formsDetailText("Size: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
+                  formsDetailText("Site: ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
                   Padding(padding: paddingForms),
+
 
                   formsHeadText("Desposit Date ${selectVoucherType!=null ? selectVoucherType.strSubCode : ""}"),
 
-                  Padding(padding: paddingForms),
+
                   Container(
                     padding: dateFieldPadding,
                     height: dateFieldHeight,
@@ -233,7 +234,8 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryDepositBody> {
                   Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 20, horizontal: 40),
-                      child: roundedButtonHome("Submit", () {verifyDetail();})),
+                      child: roundedButtonHome("Submit", () {verifyDetail();})
+                  ),
                 ],
               ),
             ],
