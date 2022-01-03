@@ -36,116 +36,119 @@ class AddItemContainer extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 16, top: 10),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(itemNameText,
-                    style: containerTextStyle1(),
-                  ),
-                  const SizedBox(
-                    height: 3,
-                  ),
-                ],
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 16, top: 10),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(itemNameText,
+                      style: containerTextStyle1(),
+                    ),
+                    const SizedBox(
+                      height: 3,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 40, top: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Order Qty.:",
-                            style: containerTextStyle2(),
-                          ),
-                          const Text( ""//reqQty,
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
+              Padding(
+                padding: const EdgeInsets.only(left: 40, top: 16),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Order Qty.:",
+                              style: containerTextStyle2(),
+                            ),
+                            const Text( ""//reqQty,
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
 
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        "Rate:",
-                        style: containerTextStyle2(),
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Text(
-                        "Amount:",
-                        style: containerTextStyle2(),
-                      ),
-                    ],
-                  ),
-                ],
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          "Rate:",
+                          style: containerTextStyle2(),
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          "Amount:",
+                          style: containerTextStyle2(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 4,top: 15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Text(orderQtyText,
-                        style: containerTextStyle2(),
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Text(rateText,
-                        style: containerTextStyle2(),
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Text(amountText,
-                        style: containerTextStyle2(),
-                      ),
-                    ],
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 4,top: 15),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        Text(orderQtyText,
+                          style: containerTextStyle2(),
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        Text(rateText,
+                          style: containerTextStyle2(),
+                        ),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        Text(amountText,
+                          style: containerTextStyle2(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 50,top: 15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Image.asset(icon15),
-                    ],
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 50,top: 15),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Image.asset(icon15),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
