@@ -77,15 +77,6 @@ Run this command
 
 ## Staff UI
 
-#### Item Container
-
-- there is an error of auto size when fetch data in text field
-- size of container is not comfortable for all devices
-
-<img src="https://github.com/TechnocultureResearch/VVplus-App/blob/9cab3676f5553c691b392f0f66fbf41f06690e6d/assets/Issues%20or%20Errors%20Images/item_container.png" width=200 />
-
-
-
 
 ### popoup container is not editable
 
