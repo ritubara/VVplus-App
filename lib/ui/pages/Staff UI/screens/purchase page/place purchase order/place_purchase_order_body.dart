@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, deprecated_member_use
 
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:search_choices/search_choices.dart';
@@ -310,10 +311,20 @@ class MyPlacePurchaseOrderBody extends State<PlacePurchaseOrderBody> {
                   },
                 ),
               ),
-              //const InformationBoxContainer2(),
-              const PlacePurchaseOrderContainerData(),
+              selectIndentName!=null ?
+              InformationBoxContainer2(
+                text1: selectIndentName.strName,
+                text2: selectIndentName.strSubCode,
+                text3: selectIndentName.strSubCode,
+                text4: selectIndentName.strSubCode,
+                text5: selectIndentName.strSubCode,
+                text6: selectIndentName.strSubCode,
+                text7: selectIndentName.strSubCode,
+                text8: selectIndentName.strSubCode,
+              ) : const SizedBox(),
 
-              sizedbox1,
+              selectIndentName!=null ? sizedbox1 : const SizedBox(),
+
               formsHeadText("Remarks:"),
               Container(
                 height: 70,

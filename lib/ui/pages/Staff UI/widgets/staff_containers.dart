@@ -166,11 +166,11 @@ class InformationBoxContainer2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 32),
+      padding: const EdgeInsets.only(top: 32, left: 11),
       child: Container(
-        alignment: Alignment.center,
-        height: 108,
-        width: SizeConfig.getWidth(context),
+        //alignment: Alignment.center,
+        height: SizeConfig.getHeight(context) * .167,
+        width: SizeConfig.getWidth(context) * .95,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
           color: primaryColor3,
@@ -194,80 +194,56 @@ class InformationBoxContainer2 extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "$text1",
+                      "Name: $text1",
                       style: containerTextStyle1(),
                     ),
-                    const SizedBox(height: 13,),
-                    Text(
-                      "GHSN/SAC: $text2",
-                      style: containerTextStyle4(),
-                    ),
-                    const SizedBox(height: 2,),
-                    Text(
-                      "Order no.: $text3",
-                      style: containerTextStyle3(),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30, top: 13),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Order Qty.:\nReceive Qty.:\nRate:\nAmount:",
-                            style: containerTextStyle2(),
-                          ),
-                          Text(
-                            "Remarks: $text8",
-                            style: containerTextStyle4(),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 26, top: 15),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              Text(
-                                "$text4\n$text5\n$text6\n$text7",
-                                style: containerTextStyle2(),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 26, top: 10),
-                      child: Row(
-                        children: [
-                          Column(
-                            children: [
-                              Image.asset(icon15),
-                              const SizedBox(height: 15.5,),
-                              Text(
-                                "Edit",
-                                style: containerTextStyle5(),
-                              ),
-                              const SizedBox(height: 7,),
-                              Text(
-                                "Inc.Tax",
-                                style: containerTextStyle3(),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                    const SizedBox(height: 8,),
+                    Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "GHSN/SAC: $text2",
+                              style: containerTextStyle4(),
+                            ),
+                            const SizedBox(height: 2,),
+                            Text(
+                              "Order no.: $text3",
+                              style: containerTextStyle3(),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 25,),
+                        Text(
+                          "Order Qty.:\nReceive Qty.:\nRate:\nAmount:\nRemarks:",
+                          style: containerTextStyle2(),
+                        ),
+                        const SizedBox(width: 10,),
+                        Text(
+                          "$text4\n$text5\n$text6\n$text7\n$text8",
+                          style: containerTextStyle2(),
+                        ),
+                        const SizedBox(width: 24,),
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                Image.asset(icon15),
+                                const SizedBox(height: 12.5,),
+                                Text(
+                                  "Edit",
+                                  style: containerTextStyle5(),
+                                ),
+                                const SizedBox(height: 7,),
+                                Text(
+                                  "Inc.Tax",
+                                  style: containerTextStyle3(),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
