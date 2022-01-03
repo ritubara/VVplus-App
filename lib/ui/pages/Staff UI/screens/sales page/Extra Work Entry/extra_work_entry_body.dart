@@ -14,7 +14,6 @@ import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Extra%20Work%20Entry/extra_work_entry_container_data.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -219,7 +218,7 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
                                     ?.map<DropdownMenuItem<DepartmentName>>((e) {
                                   return DropdownMenuItem<DepartmentName>(
                                     value: e,
-                                    child: Text(e.strName),
+                                    child: Text(e.strSubCode),
                                   );
                                 })?.toList() ??[],
                               );
@@ -229,7 +228,17 @@ class MyExtraWorkEntryBody extends State<ExtraWorkEntryBody> {
                   ),
                 ),
               ),
-              const ExtraWorkEntryContainerData(),
+              selectDepartmentName!=null ?
+              InformationBoxContainer3(
+                text1: selectDepartmentName.strSubCode,
+                text2: selectDepartmentName.strSubCode,
+                text3: selectDepartmentName.strSubCode,
+                text4: selectDepartmentName.strSubCode,
+                text5: selectDepartmentName.strSubCode,
+                text6: selectDepartmentName.strSubCode,
+                text7: selectDepartmentName.strSubCode,
+                text8: selectDepartmentName.strName,
+              ) : const SizedBox(),
               sizedbox1,
               formsHeadText("Stage (purpose? extra work? extra land?)"),
               Padding(

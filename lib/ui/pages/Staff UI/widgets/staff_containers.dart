@@ -265,22 +265,34 @@ class _InformationBoxContainer2State extends State<InformationBoxContainer2> {
   }
 }
 
-class InformationBoxContainer3 extends StatefulWidget {
-  const InformationBoxContainer3({Key key}) : super(key: key);
+class InformationBoxContainer3 extends StatelessWidget {
 
-  @override
-  _InformationBoxContainer3State createState() =>
-      _InformationBoxContainer3State();
-}
-
-class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
+  final String text1;
+  final String text2;
+  final String text3;
+  final String text4;
+  final String text5;
+  final String text6;
+  final String text7;
+  final String text8;
+  const InformationBoxContainer3({
+    Key key,
+    this.text1,
+    this.text2,
+    this.text3,
+    this.text4,
+    this.text5,
+    this.text6,
+    this.text7,
+    this.text8
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 32, left: 11),
       child: Container(
-        alignment: Alignment.center,
-        height: 134,
+        //alignment: Alignment.center,
+        height: SizeConfig.getHeight(context) * .18,
         width: SizeConfig.getWidth(context) * .95,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
@@ -293,46 +305,49 @@ class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 16, top: 10),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Name: Chandra Shekhar",
-                    style: containerTextStyle6(),
-                  ),
-                  const SizedBox(height: 16,),
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            "Booking ID: 229/\nUBOOK/PN/12",
-                            style: containerTextStyle3(),
-                          ),
-                          const SizedBox(height: 8,),
-                          Text(
-                            "Unit: GA-105(C),\nPH-06",
-                            style: containerTextStyle3(),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 41,),
-                      Text(
-                        "Booking Date:   22/Sept/2012\nUnit Category:  Appt 2Bhk(661sqft)\nFloor:                  First FloorProject\nName:   AIIMS-01(06)/C/GA/66Tax\nStructure:   GST 01 PER",
-                        style: containerTextStyle2(),
-                      ),
-                    ],
-                  ),
-                ],
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 16, top: 10),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Name: $text8",
+                      style: containerTextStyle6(),
+                    ),
+                    const SizedBox(height: 16,),
+                    Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "Booking ID: $text1",
+                              style: containerTextStyle3(),
+                            ),
+                            const SizedBox(height: 8,),
+                            Text(
+                              "Unit: $text2",
+                              style: containerTextStyle3(),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 41,),
+                        Text(
+                          "Booking Date: $text3\nUnit Category: $text4\nFloor: $text5\nName: $text6\nStructure: $text7",
+                          style: containerTextStyle2(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -340,22 +355,35 @@ class _InformationBoxContainer3State extends State<InformationBoxContainer3> {
 }
 
 
-class InformationBoxContainer4 extends StatefulWidget {
-  const InformationBoxContainer4({Key key}) : super(key: key);
-
-  @override
-  _InformationBoxContainer4State createState() =>
-      _InformationBoxContainer4State();
-}
-
-class _InformationBoxContainer4State extends State<InformationBoxContainer4> {
+class InformationBoxContainer4 extends StatelessWidget {
+  final String text1;
+  final String text2;
+  final String text3;
+  final String text4;
+  final String text5;
+  final String text6;
+  final String text7;
+  final String text8;
+  final String text9;
+  const InformationBoxContainer4({
+    Key key,
+    this.text1,
+    this.text2,
+    this.text3,
+    this.text4,
+    this.text5,
+    this.text6,
+    this.text7,
+    this.text8,
+    this.text9
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 32, left: 15),
       child: Container(
         alignment: Alignment.center,
-        height: 134,
+        height: SizeConfig.getHeight(context) * .20,
         width: SizeConfig.getWidth(context) * .93,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
@@ -368,46 +396,49 @@ class _InformationBoxContainer4State extends State<InformationBoxContainer4> {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 16, top: 10),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Name: Tripurari Jha ",
-                    style: containerTextStyle6(),
-                  ),
-                  const SizedBox(height: 16,),
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            "Booking ID: 101/\nUBOOK/PN/13",
-                            style: containerTextStyle3(),
-                          ),
-                          const SizedBox(height: 8,),
-                          Text(
-                            "Unit: AD-202(D),\nPH-03",
-                            style: containerTextStyle3(),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 35,),
-                      Text(
-                        "Booking Date:    06/Nov/2013\nUnit Category:   Appt 2Bhk(750sqft)\nFloor:                   Second Floor\nPhase:                 Patna PH-03/RR\nUnit Area:           1150\nNet Unit Cost:    16,37,000",
-                        style: containerTextStyle2(),
-                      ),
-                    ],
-                  ),
-                ],
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 16, top: 10),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Name: $text1",
+                      style: containerTextStyle6(),
+                    ),
+                    const SizedBox(height: 16,),
+                    Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "Booking ID: $text2",
+                              style: containerTextStyle3(),
+                            ),
+                            const SizedBox(height: 8,),
+                            Text(
+                              "Unit: $text3",
+                              style: containerTextStyle3(),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 35,),
+                        Text(
+                          "Booking Date: $text4\nUnit Category: $text5\nFloor: $text6\nPhase: $text7\nUnit Area: $text8\nNet Unit Cost: $text9",
+                          style: containerTextStyle2(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

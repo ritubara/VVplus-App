@@ -13,7 +13,6 @@ import 'package:vvplus_app/infrastructure/Models/department_name_model.dart';
 import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/decoration_widget.dart';
 import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/Unit%20Cancellation/unit_cancellation_container_data.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
@@ -212,7 +211,7 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
                                     ?.map<DropdownMenuItem<DepartmentName>>((e) {
                                   return DropdownMenuItem<DepartmentName>(
                                     value: e,
-                                    child: Text(e.strName),
+                                    child: Text(e.strSubCode),
                                   );
                                 })?.toList() ??[],
                               );
@@ -222,7 +221,19 @@ class MyUnitCancellationBody extends State<UnitCancellationBody> {
                   ),
                 ),
               ),
-              const UnitCancellationContainerData(),
+
+              selectDepartmentName!=null ?
+              InformationBoxContainer4(
+                text1: selectDepartmentName.strName,
+                text2: selectDepartmentName.strSubCode,
+                text3: selectDepartmentName.strSubCode,
+                text4: selectDepartmentName.strSubCode,
+                text5: selectDepartmentName.strSubCode,
+                text6: selectDepartmentName.strSubCode,
+                text7: selectDepartmentName.strSubCode,
+                text8: selectDepartmentName.strSubCode,
+                text9: selectDepartmentName.strSubCode,
+              ) : const SizedBox(),
               sizedbox1,
               formsHeadText("Change Applicable"),
               Padding(
