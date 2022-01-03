@@ -295,7 +295,7 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                     padding: padding1,
                     child: Center(
                       child: Container(
-                        height: 50,
+                        height: 52,
                         decoration: decoration3(),
                         child: StreamBuilder(
                             stream: bloc.outDropField1,
@@ -305,8 +305,8 @@ class _NewComplaintPageBodyState extends State<NewComplaintPageBody>{
                                 iconSize: 30,
                                 iconEnabledColor: textColor3,
                                 style: const TextStyle(color: primaryColor2,fontSize: 20),
-                                underline: "",
-                                padding: 1,
+                                padding: 10,
+                                displayClearIcon: false,
                                 isExpanded: true,
                                 hint: const Text(text22),
                                 value: snapshot.data,
