@@ -3,7 +3,7 @@ import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20ent
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/Custom_Tab_Bar_Item/deposit.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/Custom_Tab_Bar_Item/receive.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/screens/sales%20page/cheque%20entry/custom_tab_bar.dart';
-import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
+import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 
 class ChequeEntryBody extends StatefulWidget {
   const ChequeEntryBody({Key key}) : super(key: key);
@@ -45,7 +45,24 @@ class _ChequeEntryBody extends State<ChequeEntryBody> {
                 height: 1000,
                 child: Stack(
                   children: [
-                    clearButton(),
+                    //clearButton(),
+                Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    // ignore: deprecated_member_use
+                    RaisedButton(
+                      onPressed: () {
+
+                      },
+                      elevation: 0.0,
+                      color: Colors.white,
+                      child: raisedButtonText("Clear all"),
+                    ),
+                  ],
+                ),
+              ),
                     const TabBarView(children: [
 
                       ChequeEntryReceiveBody(),
