@@ -444,7 +444,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                             SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child:Text("$StringAmount",
-                                  style: containerTextStyle2(),),
+                                  style: containerTextStyle1(),),
                             ),
                           ],
                         ),
