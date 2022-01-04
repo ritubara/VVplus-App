@@ -465,6 +465,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                                     press: (
                                         selectItemCurrentStatus !=null)&&(isActive)
                                         ? () {
+                                      _calculation();
                                       setState(() {
                                         pressed = true;
                                       });
