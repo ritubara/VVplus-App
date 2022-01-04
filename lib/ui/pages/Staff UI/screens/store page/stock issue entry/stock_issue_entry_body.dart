@@ -18,6 +18,7 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/add_item_container.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
@@ -54,12 +55,24 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
   double _amount;
   var subscription;
   var connectionStatus;
+  String StringAmount;
+
   void clearData(){
     reqQty.clear();
   }
 
+  _calculation() {
+    setState(() {
+      //value1 = double.parse(reqQty.text);
+      _amount = (double.parse(reqQty.text)*double.parse(selectItemCurrentStatus.dblQty));
+      StringAmount= _amount.toStringAsFixed(3);
+    },);
+    print(_amount);
+  }
+
   @override
   void initState() {
+    _amount = 0;
     super.initState();
     reqQty = TextEditingController();
     reqQty.addListener(() {
@@ -403,6 +416,9 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                                       stream: bloc.requestQty,
                                       builder: (context, snapshot) {
                                         return TextFormField(
+                                          onEditingComplete: (){
+                                            _calculation();
+                                          },
                                           // initialValue: "no",
                                           controller: reqQty,
                                           decoration: InputDecoration(
@@ -445,7 +461,6 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                             const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 30)),
                             formsHeadText("Amount:"),
-                            Text(_amount.toString()),
                           ],
                         ),
                         Row(
@@ -477,6 +492,11 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                                     child: const Center(child: Text("No"))),
                               ),
                             ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child:Text("$StringAmount",
+                                style: containerTextStyle1(),),
+                            ),
                           ],
                         ),
                         const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -498,6 +518,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                             RoundedButtonInput(
                               text: "Add Item to List",
                               press: (selectItemCurrentStatus !=null)&&(isActive) ? () {
+                                _calculation();
                                 setState(() {
                                   pressed = true;
                                 });
@@ -527,7 +548,7 @@ class MyStockIssueEntryBody extends State<StockIssueEntryBody> {
                 itemNameText: selectItemCurrentStatus.strItemName,
                 orderQtyText: reqQty.text,
                 rateText: selectItemCurrentStatus.dblQty,
-                amountText: selectItemCurrentStatus.dblQty,
+                amountText: StringAmount.toString(),
               ) : const SizedBox(),
 
               sizedbox1,

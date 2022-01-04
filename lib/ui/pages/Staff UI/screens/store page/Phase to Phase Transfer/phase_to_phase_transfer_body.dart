@@ -19,6 +19,7 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/add_item_container.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
@@ -62,11 +63,22 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
   var connectionStatus;
 
   double _amount;
+  String StringAmount;
   bool isActive = false;
   bool pressed = false;
 
+  _calculation() {
+    setState(() {
+      //value1 = double.parse(reqQty.text);
+      _amount = (double.parse(reqQty.text)*double.parse(selectItemCurrentStatus.dblQty));
+      StringAmount= _amount.toStringAsFixed(3);
+    },);
+    print(_amount);
+  }
+
   @override
   void initState() {
+    _amount = 0;
     reqQty = TextEditingController();
     reqQty.addListener(() {
       if (isActive = reqQty.text.isNotEmpty) {
@@ -524,6 +536,9 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                                       stream: bloc.requestQty,
                                       builder: (context, snapshot) {
                                         return TextFormField(
+                                          onEditingComplete: (){
+                                            _calculation();
+                                          },
                                           // initialValue: "no",
                                           controller: reqQty,
                                           decoration: InputDecoration(
@@ -562,7 +577,6 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                             formsHeadText("Rate"),
                             const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
                             formsHeadText("Amount:"),
-                            Text(_amount.toString()),
                           ],
                         ),
                         Row(
@@ -587,6 +601,11 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                                         child: Text("No"))),
                               ),
                             ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child:Text("$StringAmount",
+                                style: containerTextStyle1(),),
+                            ),
                           ],
                         ),
                         const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -610,6 +629,7 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                                     text: "Add Item to List",
                                     press: (selectItemCurrentStatus !=null)&&(isActive)
                                         ? () {
+                                      _calculation();
                                       setState(() {
                                         pressed = true;
                                       });
@@ -636,7 +656,7 @@ class MyPhaseToPhaseTransferBody extends State<PhaseToPhaseTransferBody> {
                 itemNameText: selectItemCurrentStatus.strItemName,
                 orderQtyText: reqQty.text,
                 rateText: selectItemCurrentStatus.dblQty,
-                amountText: selectItemCurrentStatus.dblQty,
+                amountText:StringAmount.toString(),
               ) : const SizedBox(),
 
               sizedbox1,
