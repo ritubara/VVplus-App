@@ -19,6 +19,7 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/add_item_container.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
+import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_text_style.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
@@ -40,9 +41,13 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
 
   bool isActive = false;
   bool pressed = false;
+  bool showAmount = false;
   var subscription;
   var connectionStatus;
-  double  value1 = 0,value2 = 0;
+  double  value1 = 0,value2 = 46.599;
+  double _amount;
+  String StringAmount;
+
 
   void clearData(){
     reqQty.clear();
@@ -52,17 +57,18 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
   TextEditingController reqDateInput = TextEditingController();
   TextEditingController indentType = TextEditingController();
   TextEditingController item = TextEditingController();
-  TextEditingController reqQty = TextEditingController();
+  TextEditingController reqQty = TextEditingController(text:'0');
   TextEditingController rate = TextEditingController();
   TextEditingController costCenter = TextEditingController();
   TextEditingController remarks = TextEditingController();
+
   final materialRequestEntryFormKey = GlobalKey<FormState>();
 
   String dropdownValue = 'Choose an option';
   IndentorNameDropdownBloc dropdownBlocIndentorName;
   ItemCurrentStatusDropdownBloc dropdownBlocItemCurrentStatus;
   ItemCostCenterDropdownBloc dropdownBlocItemCostCenter;
-  double _amount;
+
 
   String Item = "";
   String Qty = "";
@@ -73,18 +79,18 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
       Item = dropdownValue ;
     });
   }
-  void _calculation() {
+    _calculation() {
     setState(() {
-      value1 = double.parse(reqQty.text);
-      value2 = double.parse(reqQty.text);
-      _amount = value1+value2;
-    });
-
-
+      //value1 = double.parse(reqQty.text);
+      _amount = (double.parse(reqQty.text)*double.parse(selectItemCurrentStatus.dblQty));
+      StringAmount= _amount.toStringAsFixed(3);
+    },);
+    print(_amount);
   }
 
   @override
   void initState() {
+    _amount = 0;
     super.initState();
     reqQty = TextEditingController();
     reqQty.addListener(() {
@@ -190,6 +196,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
   @override
   Widget build(BuildContext context) {
     final bloc = MaterialRequestEntryProvider.of(context);
+    //_calculation();
     return RefreshIndicator(
       triggerMode: RefreshIndicatorTriggerMode.onEdge,
       edgeOffset: 20,
@@ -350,6 +357,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                                 padding: padding1,
                                 decoration: decoration1(),
 
+
                                 child: SizedBox(
                                   width: 130,
 
@@ -357,6 +365,9 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                                       stream: bloc.requestQty,
                                       builder: (context, snapshot) {
                                         return TextFormField(
+                                          onEditingComplete: (){
+                                            _calculation();
+                                          },
                                           // initialValue: "no",
                                           controller: reqQty,
                                           decoration: InputDecoration(
@@ -364,6 +375,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                                           ),
                                           onChanged: bloc.changerequestQty,
                                           keyboardType: TextInputType.number,
+
                                           //onSaved: selectItemCurrentStatus.strItemName,
 
                                           style: simpleTextStyle7(),
@@ -394,8 +406,11 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                           children: [
                             formsHeadText("Rate"),
                             const Padding(padding: EdgeInsets.symmetric(horizontal: 30)),
-                            formsHeadText("Amount: $_amount"),
-                            Text(_amount.toString()),
+                            GestureDetector(
+                              onTap: (){},
+                              child: formsHeadText("Amount: "),  ),
+
+                            //Text(_amount.toString()),
                           ],
                         ),
                         Row(
@@ -426,6 +441,11 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                                 ),
                               ),
                             ),
+                            SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child:Text("$StringAmount",
+                                  style: containerTextStyle2(),),
+                            ),
                           ],
                         ),
                         const Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -442,7 +462,8 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                             ),
                                    RoundedButtonInput(
                                     text: "Add Item to List",
-                                    press: (selectItemCurrentStatus !=null)&&(isActive)
+                                    press: (
+                                        selectItemCurrentStatus !=null)&&(isActive)
                                         ? () {
                                       setState(() {
                                         pressed = true;
@@ -467,7 +488,7 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
                 itemNameText: selectItemCurrentStatus.strItemName,
                 orderQtyText: reqQty.text,
                 rateText: selectItemCurrentStatus.dblQty,
-                amountText: selectItemCurrentStatus.dblQty,
+                amountText: StringAmount.toString(),
               ) : const SizedBox(),
               //============================================================ popup container
 
@@ -590,5 +611,6 @@ class MyMaterialEntryBody extends State<MaterialEntryBody> {
         ),
       ),
     );
+
   }
 }
