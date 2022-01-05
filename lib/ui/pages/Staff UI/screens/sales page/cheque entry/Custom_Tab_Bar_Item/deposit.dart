@@ -10,6 +10,7 @@ import 'package:vvplus_app/infrastructure/Models/voucher_type_model.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
+import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
 import 'package:connectivity/connectivity.dart';
@@ -97,7 +98,22 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryDepositBody> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                    children:[
+                      RaisedButton(
+                      onPressed: () {
+                        depositDateInput.clear();
+                        chequeUpToDateInput.clear();
+
+                      },
+                      elevation: 0.0,
+                      color: Colors.white,
+                      child: raisedButtonText("Clear all"),
+                    ),
+                    ]
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 45)),
                   formsHeadText("Cheque Up To"),
                   Container(
                     padding: dateFieldPadding,

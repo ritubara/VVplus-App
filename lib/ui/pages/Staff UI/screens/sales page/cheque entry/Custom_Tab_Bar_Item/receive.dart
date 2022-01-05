@@ -17,6 +17,7 @@ import 'package:vvplus_app/ui/pages/Customer%20UI/widgets/text_style_widget.dart
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/form_text.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/staff_containers.dart';
 import 'package:vvplus_app/ui/pages/Staff%20UI/widgets/text_form_field.dart';
+import 'package:vvplus_app/ui/widgets/Utilities/raisedbutton_text.dart';
 import 'package:vvplus_app/ui/widgets/Utilities/rounded_button.dart';
 import 'package:vvplus_app/ui/widgets/constants/colors.dart';
 import 'package:vvplus_app/ui/widgets/constants/size.dart';
@@ -128,7 +129,21 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const Padding(padding: EdgeInsets.symmetric(vertical: 70)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children:[
+                      RaisedButton(
+                        onPressed: () {
+                          chequeReceivingDateInput.clear();
+                        },
+                        elevation: 0.0,
+                        color: Colors.white,
+                        child: raisedButtonText("Clear all"),
+                      ),
+
+                    ]
+                  ),
+                  const Padding(padding: EdgeInsets.symmetric(vertical: 45)),
 
                   formsHeadText("Voucher Type"),
 
@@ -364,7 +379,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
                     ),
                   ),
 
-                  Padding(padding: paddingForms),
+
 
                   formsHeadText("Amount"),
 
@@ -407,7 +422,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
 
                   Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 40),
+                          vertical: 0, horizontal: 40),
                       child: roundedButtonHome("Submit", () {verifyDetail();})),
                 ],
               ),

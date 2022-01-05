@@ -42,27 +42,9 @@ class _ChequeEntryBody extends State<ChequeEntryBody> {
               length: 3,
               initialIndex: 0,
               child: SizedBox(
-                height: 1000,
                 child: Stack(
                   children: [
-                    //clearButton(),
-                Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    // ignore: deprecated_member_use
-                    RaisedButton(
-                      onPressed: () {
 
-                      },
-                      elevation: 0.0,
-                      color: Colors.white,
-                      child: raisedButtonText("Clear all"),
-                    ),
-                  ],
-                ),
-              ),
                     const TabBarView(children: [
 
                       ChequeEntryReceiveBody(),
