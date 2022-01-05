@@ -40,14 +40,15 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
   VoucherTypeDropdownBloc voucherTypeDropdownBloc;
   ItemCostCenterDropdownBloc itemCostCenterDropdownBloc;
 
+  VoucherType selectVoucherType1;
   ItemCostCenter selectItemCostCenter;
   VoucherType selectVoucherType;
   DepartmentName selectDepartmentName;
   final receiveFormKey = GlobalKey<FormState>();
 
-  void onDataChange1(DepartmentName state) {
+  void onDataChange1(VoucherType state) {
     setState(() {
-      selectDepartmentName = state;
+      selectVoucherType1 = state;
     });
   }
   void onDataChange2(VoucherType state) {
@@ -134,7 +135,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
                   Padding(
                     padding: padding1,
                     child: Container(
-                      height: 52, width: 343,
+                      height: 55, width: 343,
                       decoration: decorationForms(),
                       child: FutureBuilder<List<VoucherType>>(
                           future: voucherTypeDropdownBloc.voucherTypeDropdownData,
@@ -147,7 +148,7 @@ class _ChequeEntryReceiveBody extends State<ChequeEntryReceiveBody> {
                                     padding: selectVoucherType!=null ? 2 : 11,
                                     isExpanded: true,
                                     hint: "Search here",
-                                    value: selectVoucherType,
+                                    value: selectVoucherType1,
                                     displayClearIcon: false,
                                     onChanged: onDataChange1,
                                     items: snapshot?.data
