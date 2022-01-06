@@ -42,6 +42,7 @@ class _ChequeEntryBody extends State<ChequeEntryBody> {
               length: 3,
               initialIndex: 0,
               child: SizedBox(
+                height: 1000,
                 child: Stack(
                   children: [
 
