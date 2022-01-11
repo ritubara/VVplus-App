@@ -80,6 +80,9 @@ Run this command
 # Pages Developed
 
 ## Customer UI Images
+
+
+
 - Home page  
   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/5a9c2e3d95dafbf9ff94606f277d283d62e0b36a/assets/Screenshots/Homepage.JPG" width=200 />
 
@@ -99,6 +102,8 @@ Run this command
   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/c65f978be7b761cb6a5be4ba425053db10c8e939/assets/Screenshots/technical%20specs(2).JPG" width=200 />
 
 ## Staff UI Images
+
+
 
 - staff_home_purchase_materialRequestEntry_page
   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/staff_home_purchase_materialRequestEntry_page1.png" width=200 />
