@@ -135,9 +135,9 @@ Run this command
 
 
 -  Staff_home_sales_check entry receive_page  
-   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/c86da5889d4142ec1d203d0b9e9be650764588a2/assets/Screenshots/staff_sales_cheque%20entry%20receive.png" width=200 />
-   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/c86da5889d4142ec1d203d0b9e9be650764588a2/assets/Screenshots/staff_sales_cheque%20entry%20deposit.png" width=200 />
-   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/c86da5889d4142ec1d203d0b9e9be650764588a2/assets/Screenshots/staff_sales_cheque%20entry%20cleared.png" width=200 />
+   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/5499a67e3090fc0512af75773f6dcdb232583d39/assets/Screenshots/staff_sales_cheque%20entry%20receive.png.png" width=200 />
+   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/5499a67e3090fc0512af75773f6dcdb232583d39/assets/Screenshots/staff_sales_cheque%20entry%20deposit.png.png" width=200 />
+   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/c86da5889d4142ec1d203d0b9e9be650764588a2/assets/Screenshots/staff_sales_cheque%20entry%20cleared.png.png" width=200 />
 
 ## Documentation
 
