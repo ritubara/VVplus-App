@@ -110,8 +110,7 @@ Run this command
   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/staff_home_purchase_placePurchaseOrder_page1.png" width=200 />
   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/staff_home_purchase_placePurchaseOrder_page2.png" width=200 />
 
-
-- Store Page
+  
   
 - staff_home_store_stockReceiveEntry_page
   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/staff_home_store_stockReceiveEntry_page1.png" width=200 />
@@ -128,7 +127,7 @@ Run this command
   <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/staff_home_store_branchTobranchReceive_page2.png" width=200 />
   
 
-- Sales Page
+
 -  staff_home_sales_extraWorkEntry_page
    <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/staff_home_sales_extraWorkEntry_page1.png" width=200 />
    <img src="https://github.com/TechnocultureResearch/VVplus-App/blob/cd2e53065d03df835b43271aad4e1b51ff2dcf8b/assets/Screenshots/staff_home_sales_extraWorkEntry_page2.png" width=200 />
